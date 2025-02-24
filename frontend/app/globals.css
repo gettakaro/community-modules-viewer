@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+:root {
+  --foreground-rgb: 3, 3, 3;
+  --background-rgb: 249, 249, 249;
+}
+
+.dark {
+  --foreground-rgb: 194, 194, 194;
+  --background-rgb: 8, 8, 8;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
