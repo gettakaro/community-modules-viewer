@@ -18,9 +18,9 @@ export interface ModuleData {
 }
 
 export function getModules(): ModuleData[] {
-  const modulesDir = path.join(process.cwd(), '..', 'modules');
+  const modulesDir = path.join(process.cwd(), 'modules');
   const moduleFiles = fs.readdirSync(modulesDir);
-  
+
   return moduleFiles
     .filter(file => file.endsWith('.json'))
     .map(file => {
