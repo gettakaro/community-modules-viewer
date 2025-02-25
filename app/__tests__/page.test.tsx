@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Page from '../page';
+import fs from 'fs';
 
 // Mock react's cache function
 vi.mock('react', async () => {
@@ -12,32 +13,18 @@ vi.mock('react', async () => {
 });
 
 // Mock filesystem operations
-const mockReadFileSync = vi.fn().mockReturnValue(JSON.stringify({
-  name: 'Test Module',
-  description: 'A test module',
-  version: '1.0.0',
-  author: 'Test Author',
-  commands: []
-}));
-
 vi.mock('fs', () => ({
   default: {
-    readdirSync: () => ['test-module.json'],
-    readFileSync: mockReadFileSync
+    readdirSync: vi.fn().mockReturnValue(['test-module.json']),
+    readFileSync: vi.fn().mockReturnValue(JSON.stringify({
+      name: 'Test Module',
+      description: 'A test module',
+      version: '1.0.0',
+      author: 'Test Author',
+      commands: []
+    }))
   }
 }));
-
-// Make mock available in tests
-vi.mock('fs', async () => {
-  const actual = await vi.importActual('fs');
-  return {
-    ...actual,
-    default: {
-      readdirSync: vi.fn().mockReturnValue(['test-module.json']),
-      readFileSync: mockReadFileSync
-    }
-  };
-});
 
 describe('Page', () => {
   beforeEach(() => {
@@ -78,7 +65,7 @@ describe('Page', () => {
 
   it('handles modules with missing fields', async () => {
     // Mock module with missing fields
-    mockReadFileSync.mockReturnValueOnce(JSON.stringify({
+    vi.mocked(fs.default.readFileSync).mockReturnValueOnce(JSON.stringify({
       name: 'Minimal Module'
     }));
 
