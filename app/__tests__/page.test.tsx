@@ -2,28 +2,28 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Page from '../page';
 
-let mockModules = [{
+// Mock the modules data
+const defaultModule = {
   name: 'Test Module',
   description: 'A test module',
   version: '1.0.0',
   author: 'Test Author',
   commands: []
-}];
+};
 
+// Mock the modules utility
 vi.mock('../utils/modules', () => ({
-  getModules: () => mockModules
+  getModules: vi.fn().mockReturnValue([defaultModule])
 }));
+
+// Import the mocked module
+import { getModules } from '../utils/modules';
+const mockedGetModules = vi.mocked(getModules);
 
 describe('Page', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockModules = [{
-      name: 'Test Module',
-      description: 'A test module',
-      version: '1.0.0',
-      author: 'Test Author',
-      commands: []
-    }];
+    mockedGetModules.mockReturnValue([defaultModule]);
   });
 
   it('renders without crashing', () => {
@@ -60,9 +60,9 @@ describe('Page', () => {
 
   it('handles modules with missing fields', async () => {
     // Mock module with missing fields
-    mockModules = [{
+    mockedGetModules.mockReturnValueOnce([{
       name: 'Minimal Module'
-    }];
+    }]);
 
     render(<Page />);
     
