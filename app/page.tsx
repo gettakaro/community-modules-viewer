@@ -1,4 +1,5 @@
 import { getModules } from '../utils/modules';
+import Link from 'next/link';
 
 export default function Page() {
   const modules = getModules();
@@ -10,7 +11,11 @@ export default function Page() {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {modules.map((module) => (
-          <div key={module.name} className="group bg-placeholder dark:bg-dark-placeholder rounded-large p-6 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 cursor-pointer">
+          <Link 
+            href={`/module/${module.name}`}
+            key={module.name}
+          >
+            <div className="group bg-placeholder dark:bg-dark-placeholder rounded-large p-6 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 cursor-pointer">
             <h2 className="text-medium font-bold text-text dark:text-dark-text mb-2">
               {module.name}
             </h2>
@@ -57,6 +62,7 @@ export default function Page() {
               </div>
             )}
           </div>
+          </Link>
         ))}
       </div>
     </main>
