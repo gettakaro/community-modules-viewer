@@ -43,7 +43,7 @@ const parseModuleData = (data: any, name?: string): ModuleData => ({
 export const getModuleByName = cache(async (name: string): Promise<ModuleData | null> => {
   try {
     const modulesDir = path.join(process.cwd(), 'modules');
-    const filePath = path.join(modulesDir, `${name}.json`);
+    const filePath = path.join(modulesDir, `${name.replaceAll('%20', ' ')}.json`);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const moduleData = JSON.parse(fileContent);
     return parseModuleData(moduleData, name);
