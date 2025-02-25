@@ -11,6 +11,20 @@ vi.mock('react', async () => {
   };
 });
 
+// Mock filesystem operations
+vi.mock('fs', () => ({
+  default: {
+    readdirSync: () => ['test-module.json'],
+    readFileSync: () => JSON.stringify({
+      name: 'Test Module',
+      description: 'A test module',
+      version: '1.0.0',
+      author: 'Test Author',
+      commands: []
+    })
+  }
+}));
+
 describe('Page', () => {
   it('renders without crashing', () => {
     render(<Page />);
