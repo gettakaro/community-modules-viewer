@@ -1,5 +1,8 @@
+'use server';
+
 import fs from 'fs';
 import path from 'path';
+import { cache } from 'react';
 
 interface Command {
   function: string;
@@ -27,27 +30,29 @@ export interface ModuleData {
   config?: Record<string, ConfigProperty>;
 }
 
-export function getModuleByName(name: string): ModuleData | null {
+const parseModuleData = (data: any, name?: string): ModuleData => ({
+  name: data.name || name || '',
+  description: data.description || '',
+  version: data.version || '0.0.0',
+  author: data.author || 'Unknown',
+  commands: data.commands || [],
+  takaroVersion: data.takaroVersion || 'latest',
+  config: data.config || {},
+});
+
+export const getModuleByName = cache(async (name: string): Promise<ModuleData | null> => {
   try {
     const modulesDir = path.join(process.cwd(), 'modules');
     const filePath = path.join(modulesDir, `${name}.json`);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const moduleData = JSON.parse(fileContent);
-    return {
-      name: moduleData.name || name,
-      description: moduleData.description || '',
-      version: moduleData.version || '0.0.0',
-      author: moduleData.author || 'Unknown',
-      commands: moduleData.commands || [],
-      takaroVersion: moduleData.takaroVersion || 'latest',
-      config: moduleData.config || {},
-    };
+    return parseModuleData(moduleData, name);
   } catch (error) {
     return null;
   }
-}
+});
 
-export function getModules(): ModuleData[] {
+export const getModules = cache(async (): Promise<ModuleData[]> => {
   const modulesDir = path.join(process.cwd(), 'modules');
   const moduleFiles = fs.readdirSync(modulesDir);
 
@@ -57,14 +62,7 @@ export function getModules(): ModuleData[] {
       const filePath = path.join(modulesDir, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       const moduleData = JSON.parse(fileContent);
-      return {
-        name: moduleData.name || path.basename(file, '.json'),
-        description: moduleData.description || '',
-        version: moduleData.version || '0.0.0',
-        author: moduleData.author || 'Unknown',
-        commands: moduleData.commands || [],
-        takaroVersion: moduleData.takaroVersion || 'latest',
-        config: moduleData.config || {},
-      };
+      const name = path.basename(file, '.json');
+      return parseModuleData(moduleData, name);
     });
-}
+});

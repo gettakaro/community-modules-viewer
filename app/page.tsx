@@ -1,8 +1,8 @@
 import { getModules } from '../utils/modules';
 import Link from 'next/link';
 
-export default function Page() {
-  const modules = getModules();
+export default async function Page() {
+  const modules = await getModules();
 
   return (
     <main className="container mx-auto px-4 py-8 bg-background dark:bg-dark-background">
