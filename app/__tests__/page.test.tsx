@@ -13,17 +13,20 @@ vi.mock('react', async () => {
 });
 
 // Mock filesystem operations
+const mockFs = {
+  readdirSync: vi.fn().mockReturnValue(['test-module.json']),
+  readFileSync: vi.fn().mockReturnValue(JSON.stringify({
+    name: 'Test Module',
+    description: 'A test module',
+    version: '1.0.0',
+    author: 'Test Author',
+    commands: []
+  }))
+};
+
 vi.mock('fs', () => ({
-  default: {
-    readdirSync: vi.fn().mockReturnValue(['test-module.json']),
-    readFileSync: vi.fn().mockReturnValue(JSON.stringify({
-      name: 'Test Module',
-      description: 'A test module',
-      version: '1.0.0',
-      author: 'Test Author',
-      commands: []
-    }))
-  }
+  default: mockFs,
+  ...mockFs
 }));
 
 describe('Page', () => {
@@ -54,7 +57,7 @@ describe('Page', () => {
     // Wait for module info to appear
     const moduleName = await screen.findByText('Test Module');
     const moduleDescription = await screen.findByText('A test module');
-    const moduleVersion = await screen.findByText('1.0.0');
+    const moduleVersion = await screen.findByText('v1.0.0');
     const moduleAuthor = await screen.findByText('Test Author');
 
     expect(moduleName).toBeInTheDocument();
@@ -65,7 +68,7 @@ describe('Page', () => {
 
   it('handles modules with missing fields', async () => {
     // Mock module with missing fields
-    vi.mocked(fs.default.readFileSync).mockReturnValueOnce(JSON.stringify({
+    mockFs.readFileSync.mockReturnValueOnce(JSON.stringify({
       name: 'Minimal Module'
     }));
 
@@ -73,7 +76,7 @@ describe('Page', () => {
     
     const moduleName = await screen.findByText('Minimal Module');
     expect(moduleName).toBeInTheDocument();
-    expect(await screen.findByText('Unknown')).toBeInTheDocument(); // Default author
-    expect(await screen.findByText('0.0.0')).toBeInTheDocument(); // Default version
+    expect(await screen.findByText('by Unknown')).toBeInTheDocument(); // Default author
+    expect(await screen.findByText('v0.0.0')).toBeInTheDocument(); // Default version
   });
 });
