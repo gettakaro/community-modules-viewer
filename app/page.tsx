@@ -10,7 +10,7 @@ export default function Page() {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {modules.map((module) => (
-          <div key={module.name} className="group bg-placeholder dark:bg-dark-placeholder rounded-large p-6 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 cursor-pointer relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent hover:before:translate-x-full before:transition-transform">
+          <div key={module.name} className="group bg-placeholder dark:bg-dark-placeholder rounded-large p-6 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 cursor-pointer">
             <h2 className="text-medium font-bold text-text dark:text-dark-text mb-2">
               {module.name}
             </h2>
