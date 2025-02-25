@@ -1,5 +1,8 @@
+'use server';
+
 import fs from 'fs';
 import path from 'path';
+import { cache } from 'react';
 
 interface Command {
   function: string;
@@ -9,15 +12,47 @@ interface Command {
   arguments?: any[];
 }
 
+interface ConfigProperty {
+  title: string;
+  description?: string;
+  type: string;
+  default?: any;
+  enum?: string[];
+}
+
 export interface ModuleData {
   name: string;
   description: string;
   version: string;
   author: string;
   commands?: Command[];
+  takaroVersion?: string;
+  config?: Record<string, ConfigProperty>;
 }
 
-export function getModules(): ModuleData[] {
+const parseModuleData = (data: any, name?: string): ModuleData => ({
+  name: data.name || name || '',
+  description: data.description || '',
+  version: data.version || '0.0.0',
+  author: data.author || 'Unknown',
+  commands: data.commands || [],
+  takaroVersion: data.takaroVersion || 'latest',
+  config: data.config || {},
+});
+
+export const getModuleByName = cache(async (name: string): Promise<ModuleData | null> => {
+  try {
+    const modulesDir = path.join(process.cwd(), 'modules');
+    const filePath = path.join(modulesDir, `${name.replaceAll('%20', ' ')}.json`);
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const moduleData = JSON.parse(fileContent);
+    return parseModuleData(moduleData, name);
+  } catch (error) {
+    return null;
+  }
+});
+
+export const getModules = cache(async (): Promise<ModuleData[]> => {
   const modulesDir = path.join(process.cwd(), 'modules');
   const moduleFiles = fs.readdirSync(modulesDir);
 
@@ -27,12 +62,7 @@ export function getModules(): ModuleData[] {
       const filePath = path.join(modulesDir, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       const moduleData = JSON.parse(fileContent);
-      return {
-        name: moduleData.name || path.basename(file, '.json'),
-        description: moduleData.description || '',
-        version: moduleData.version || '0.0.0',
-        author: moduleData.author || 'Unknown',
-        commands: moduleData.commands || [],
-      };
+      const name = path.basename(file, '.json');
+      return parseModuleData(moduleData, name);
     });
-}
+});
