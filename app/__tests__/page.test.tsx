@@ -63,7 +63,7 @@ describe('Page', () => {
     const moduleName = await screen.findByText('Test Module');
     const moduleDescription = await screen.findByText('A test module');
     const moduleVersion = await screen.findByText('v1.0.0');
-    const moduleAuthor = await screen.findByText('Test Author');
+    const moduleAuthor = await screen.findByText('by Test Author');
 
     expect(moduleName).toBeInTheDocument();
     expect(moduleDescription).toBeInTheDocument();
