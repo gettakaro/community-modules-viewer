@@ -12,22 +12,27 @@ vi.mock('react', async () => {
   };
 });
 
-// Mock filesystem operations
-const mockFs = {
-  readdirSync: vi.fn().mockReturnValue(['test-module.json']),
-  readFileSync: vi.fn().mockReturnValue(JSON.stringify({
+vi.mock('fs', () => {
+  const mockReadFileSync = vi.fn().mockReturnValue(JSON.stringify({
     name: 'Test Module',
     description: 'A test module',
     version: '1.0.0',
     author: 'Test Author',
     commands: []
-  }))
-};
+  }));
 
-vi.mock('fs', () => ({
-  default: mockFs,
-  ...mockFs
-}));
+  return {
+    default: {
+      readdirSync: vi.fn().mockReturnValue(['test-module.json']),
+      readFileSync: mockReadFileSync
+    },
+    readdirSync: vi.fn().mockReturnValue(['test-module.json']),
+    readFileSync: mockReadFileSync
+  };
+});
+
+// Get the mocked fs module
+const mockedFs = vi.mocked(fs);
 
 describe('Page', () => {
   beforeEach(() => {
@@ -68,7 +73,7 @@ describe('Page', () => {
 
   it('handles modules with missing fields', async () => {
     // Mock module with missing fields
-    mockFs.readFileSync.mockReturnValueOnce(JSON.stringify({
+    mockedFs.readFileSync.mockReturnValueOnce(JSON.stringify({
       name: 'Minimal Module'
     }));
 
