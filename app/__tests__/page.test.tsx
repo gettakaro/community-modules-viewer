@@ -1,6 +1,15 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Page from '../page';
+
+// Mock react's cache function
+vi.mock('react', async () => {
+  const actual = await vi.importActual('react');
+  return {
+    ...actual,
+    cache: (fn) => fn,
+  };
+});
 
 describe('Page', () => {
   it('renders without crashing', () => {
