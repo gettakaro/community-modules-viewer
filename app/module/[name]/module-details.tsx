@@ -161,9 +161,6 @@ export function ModuleDetails({ moduleData, allModules }: { moduleData: ModuleDa
                   </option>
                 ))}
               </select>
-              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                <FiChevronDown className="h-4 w-4 text-text-alt dark:text-dark-text-alt" />
-              </div>
             </div>
           </div>
           
