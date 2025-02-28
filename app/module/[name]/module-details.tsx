@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FiTag, FiCommand, FiMessageSquare, FiClock, FiCode, FiChevronDown, FiChevronRight, FiLock, FiArrowLeft, FiSearch, FiPackage } from 'react-icons/fi';
+import { FiTag, FiCommand, FiMessageSquare, FiClock, FiCode, FiChevronDown, FiChevronRight, FiLock, FiArrowLeft, FiSearch, FiPackage, FiCopy, FiCheck } from 'react-icons/fi';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ModuleData } from '../../../utils/modules';
@@ -23,6 +23,9 @@ export function ModuleDetails({ moduleData, allModules }: { moduleData: ModuleDa
   // State for module search
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredModules, setFilteredModules] = useState(allModules);
+  
+  // State for copy confirmation
+  const [copied, setCopied] = useState(false);
   
   // Update filtered modules when search query changes
   useEffect(() => {
@@ -63,6 +66,28 @@ export function ModuleDetails({ moduleData, allModules }: { moduleData: ModuleDa
       console.error("Failed to parse config schema:", e);
     }
   }
+
+  // Function to copy module data as JSON
+  const copyModuleAsJson = () => {
+    const moduleJson = JSON.stringify(
+      {
+        name: moduleData.name,
+        description: moduleData.description,
+        version: selectedVersion
+      }, 
+      null, 
+      2
+    );
+    
+    navigator.clipboard.writeText(moduleJson)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+  };
 
   // Helper function to render code blocks with syntax highlighting
   const renderCode = (code: string) => {
@@ -143,9 +168,30 @@ export function ModuleDetails({ moduleData, allModules }: { moduleData: ModuleDa
       
       {/* Main Content */}
       <div className="flex-1 container px-4 py-8  w-10/12">
-        {/* Module Title and Version Selector */}
+        {/* Module Title, Version Selector, and Copy JSON Button */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-4 text-text dark:text-dark-text">{moduleData.name}</h1>
+          <div className="flex flex-wrap justify-between items-center mb-4">
+            <h1 className="text-3xl font-bold text-text dark:text-dark-text">{moduleData.name}</h1>
+            
+            {/* Copy JSON Button - Prominent placement */}
+            <button
+              onClick={copyModuleAsJson}
+              className="flex items-center px-4 py-2 bg-primary hover:bg-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90 text-white rounded-md transition-colors"
+              aria-label="Copy module data as JSON"
+            >
+              {copied ? (
+                <>
+                  <FiCheck className="mr-2 h-5 w-5" />
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <FiCopy className="mr-2 h-5 w-5" />
+                  <span>Copy JSON</span>
+                </>
+              )}
+            </button>
+          </div>
           
           <div className="flex flex-wrap items-center gap-4 mb-6">
             {/* Version selector */}
@@ -161,9 +207,6 @@ export function ModuleDetails({ moduleData, allModules }: { moduleData: ModuleDa
                   </option>
                 ))}
               </select>
-              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                <FiChevronDown className="h-4 w-4 text-text-alt dark:text-dark-text-alt" />
-              </div>
             </div>
           </div>
           
