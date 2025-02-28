@@ -62,7 +62,7 @@ export default function LandingPage() {
           
           <div className="flex justify-center">
             <Link 
-              href="/modules" 
+              href="/module" 
               className="bg-primary hover:bg-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90 text-white px-8 py-3 rounded-lg font-medium text-lg inline-flex items-center transition-colors"
             >
               Browse Modules
@@ -174,7 +174,7 @@ export default function LandingPage() {
             Browse our collection of modules and find the perfect additions to improve your players' experience.
           </p>
           <Link 
-            href="/modules" 
+            href="/module" 
             className="bg-primary hover:bg-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center transition-colors"
           >
             Explore All Modules
