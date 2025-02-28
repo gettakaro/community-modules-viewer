@@ -4,40 +4,65 @@ import fs from 'fs';
 import path from 'path';
 import { cache } from 'react';
 
-interface Command {
-  function: string;
-  name: string;
-  trigger: string;
-  helpText: string;
-  arguments?: any[];
-}
-
-interface ConfigProperty {
-  title: string;
-  description?: string;
-  type: string;
-  default?: any;
-  enum?: string[];
-}
-
 export interface ModuleData {
   name: string;
-  description: string;
-  version: string;
-  author: string;
+  description?: string;
+  versions: ModuleVersion[];
+}
+
+interface ModuleVersion {
+  tag: string;
+  description?: string;
+  configSchema?: string;
+  hooks?: Hook[];
   commands?: Command[];
-  takaroVersion?: string;
-  config?: Record<string, ConfigProperty>;
+  cronJobs?: CronJob[];
+  functions?: Function[];
+  permissions?: Permission[];
+}
+
+interface Hook {
+  name: string;
+  eventType: string;
+  function: string;
+}
+
+interface Command {
+  trigger: string;
+  name: string;
+  helpText?: string;
+  function: string;
+}
+
+interface CronJob {
+  name: string;
+  schedule: string;
+  function: string;
+}
+
+interface Function {
+  name: string;
+  function: string;
+}
+
+interface Permission {
+  name: string;
+  description?: string;
 }
 
 const parseModuleData = (data: any, name?: string): ModuleData => ({
   name: data.name || name || '',
   description: data.description || '',
-  version: data.version || '0.0.0',
-  author: data.author || 'Unknown',
-  commands: data.commands || [],
-  takaroVersion: data.takaroVersion || 'latest',
-  config: data.config || {},
+  versions: data.versions.map((version: any) => ({
+    tag: version.tag,
+    description: version.description || '',
+    configSchema: version.configSchema || '',
+    hooks: version.hooks || [],
+    commands: version.commands || [],
+    cronJobs: version.cronJobs || [],
+    functions: version.functions || [],
+    permissions: version.permissions || [],
+  })),
 });
 
 export const getModuleByName = cache(async (name: string): Promise<ModuleData | null> => {

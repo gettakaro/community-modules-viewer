@@ -1,37 +1,37 @@
-import { getModuleByName } from '../../../utils/modules';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import type { ModuleData } from '../../../utils/modules';
+// app/module/[name]/page.tsx
+import { getModuleByName, getModules } from '../../../utils/modules';
 import { ModuleDetails } from './module-details';
-import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-export async function generateMetadata({ params }): Promise<Metadata> {
-  const {name} = await params
-  const moduleData = await getModuleByName(name);
-  return {
-    title: moduleData ? `${moduleData.name} - Takaro Module` : 'Module Not Found',
-    description: moduleData?.description || 'Module details page'
-  };
-}
-
-export default async function Page({ params }) {
-  const {name} = await params
-  const moduleData = await getModuleByName(name);
+export default async function ModuleDetailsPage(opts: { params: Promise<{ name: string }> }) {
+  const params = await opts.params
+  const moduleData = await getModuleByName(params.name);
+  const allModules = await getModules();
   
   if (!moduleData) {
     notFound();
   }
-  
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Link
-        href="/"
-        className="inline-flex items-center text-primary dark:text-dark-primary hover:underline mb-6"
-      >
-        <span className="mr-2">←</span>
-        Back to Modules
-      </Link>
-      <ModuleDetails moduleData={moduleData} />
-    </div>
+    <main className="bg-background dark:bg-dark-background min-h-screen pb-16">
+      <ModuleDetails moduleData={moduleData} allModules={allModules} />
+    </main>
   );
+}
+
+// For dynamic metadata generation
+export async function generateMetadata(opts: { params: Promise<{ name: string }> }) {
+  const params = await opts.params
+  const moduleData = await getModuleByName(params.name);
+  
+  if (!moduleData) {
+    return {
+      title: 'Module Not Found',
+    };
+  }
+  
+  return {
+    title: `${moduleData.name} - Community Modules`,
+    description: moduleData.description || `Details for ${moduleData.name} Takaro module`,
+  };
 }
