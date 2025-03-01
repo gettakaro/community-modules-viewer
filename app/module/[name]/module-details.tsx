@@ -92,15 +92,7 @@ export function ModuleDetails({
 
   // Function to download module data as JSON file
   const downloadModuleAsJson = () => {
-    const moduleJson = JSON.stringify(
-      {
-        name: moduleData.name,
-        description: moduleData.description,
-        version: selectedVersion,
-      },
-      null,
-      2
-    );
+    const moduleJson = moduleData.rawData;
 
     // Create a Blob with the JSON data
     const blob = new Blob([moduleJson], { type: "application/json" });

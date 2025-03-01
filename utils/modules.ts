@@ -8,6 +8,7 @@ export interface ModuleData {
   name: string;
   description?: string;
   versions: ModuleVersion[];
+  rawData: string;
 }
 
 interface ModuleVersion {
@@ -51,6 +52,7 @@ interface Permission {
 }
 
 const parseModuleData = (data: any, name?: string): ModuleData => ({
+  rawData: JSON.stringify(data),
   name: data.name || name || '',
   description: data.description || '',
   versions: data.versions.map((version: any) => ({
