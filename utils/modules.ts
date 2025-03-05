@@ -47,9 +47,11 @@ interface Function {
   function: string;
 }
 
-interface Permission {
-  name: string;
+export interface Permission {
+  friendlyName: string;
+  permission: string;
   description?: string;
+  canHaveCount: boolean;
 }
 
 const parseModuleData = (data: any, name?: string): ModuleData => ({
