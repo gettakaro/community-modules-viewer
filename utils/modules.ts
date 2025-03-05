@@ -6,6 +6,7 @@ import { cache } from 'react';
 
 export interface ModuleData {
   name: string;
+  isBuiltin: boolean;
   description?: string;
   versions: ModuleVersion[];
   rawData: string;
@@ -46,14 +47,17 @@ interface Function {
   function: string;
 }
 
-interface Permission {
-  name: string;
+export interface Permission {
+  friendlyName: string;
+  permission: string;
   description?: string;
+  canHaveCount: boolean;
 }
 
 const parseModuleData = (data: any, name?: string): ModuleData => ({
   rawData: JSON.stringify(data),
   name: data.name || name || '',
+  isBuiltin: data.isBuiltin || false,
   description: data.description || '',
   versions: data.versions.map((version: any) => ({
     tag: version.tag,
@@ -67,7 +71,21 @@ const parseModuleData = (data: any, name?: string): ModuleData => ({
   })),
 });
 
+const getBuiltins = cache(async (): Promise<ModuleData[]> => {
+  const res = await fetch('https://raw.githubusercontent.com/gettakaro/takaro/refs/heads/development/packages/web-docs/docs/modules/modules.json');
+  const modules = await res.json();
+  return modules.map((mod: any) => parseModuleData({ ...mod, isBuiltin: true }));
+});
+
 export const getModuleByName = cache(async (name: string): Promise<ModuleData | null> => {
+  // Check if it's a builtin module first
+  const builtinModules = await getBuiltins();
+  const builtinModule = builtinModules.find(mod => mod.name === name);
+  if (builtinModule) {
+    return builtinModule;
+  }
+
+  // Otherwise, try and find it in the modules directory
   try {
     const modulesDir = path.join(process.cwd(), 'modules');
     const filePath = path.join(modulesDir, `${name.replaceAll('%20', ' ')}.json`);
@@ -83,7 +101,8 @@ export const getModules = cache(async (): Promise<ModuleData[]> => {
   const modulesDir = path.join(process.cwd(), 'modules');
   const moduleFiles = fs.readdirSync(modulesDir);
 
-  return moduleFiles
+  const builtinModules = await getBuiltins();
+  const community = moduleFiles
     .filter(file => file.endsWith('.json'))
     .map(file => {
       const filePath = path.join(modulesDir, file);
@@ -91,5 +110,7 @@ export const getModules = cache(async (): Promise<ModuleData[]> => {
       const moduleData = JSON.parse(fileContent);
       const name = path.basename(file, '.json');
       return parseModuleData(moduleData, name);
-    });
+    })
+
+  return [...builtinModules, ...community];
 });
