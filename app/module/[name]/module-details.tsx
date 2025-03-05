@@ -20,7 +20,7 @@ export function ModuleDetails({
 }) {
   // State for the currently selected version
   const [selectedVersionIndex, setSelectedVersionIndex] = useState(0);
-  
+
   // State for copy confirmation
   const [copied, setCopied] = useState(false);
 
@@ -70,9 +70,9 @@ export function ModuleDetails({
   return (
     <div className="flex w-full bg-background dark:bg-dark-background">
       {/* Sidebar with Module List */}
-      <ModuleSidebar 
-        allModules={allModules} 
-        currentModuleName={moduleData.name} 
+      <ModuleSidebar
+        allModules={allModules}
+        currentModuleName={moduleData.name}
       />
 
       {/* Main Content */}
@@ -84,23 +84,29 @@ export function ModuleDetails({
               {moduleData.name}
             </h1>
 
-            <button
-              onClick={downloadModuleAsJson}
-              className="flex items-center px-4 py-2 bg-primary hover:bg-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90 text-white rounded-md transition-colors"
-              aria-label="Download module data as JSON"
-            >
-              {copied ? (
-                <>
-                  <FiCheck className="mr-2 h-5 w-5" />
-                  <span>Downloaded!</span>
-                </>
-              ) : (
-                <>
-                  <FiDownload className="mr-2 h-5 w-5" />
-                  <span>Download JSON</span>
-                </>
-              )}
-            </button>
+            {moduleData.isBuiltin ? (
+              <div className="px-4 py-2 bg-primary text-white rounded-md">
+                <span>Built-in module</span>
+              </div>
+            ) : (
+              <button
+                onClick={downloadModuleAsJson}
+                className="flex items-center px-4 py-2 bg-primary hover:bg-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90 text-white rounded-md transition-colors"
+                aria-label="Download module data as JSON"
+              >
+                {copied ? (
+                  <>
+                    <FiCheck className="mr-2 h-5 w-5" />
+                    <span>Downloaded!</span>
+                  </>
+                ) : (
+                  <>
+                    <FiDownload className="mr-2 h-5 w-5" />
+                    <span>Download JSON</span>
+                  </>
+                )}
+              </button>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -161,9 +167,10 @@ export function ModuleDetails({
         )}
 
         {/* Permissions Section */}
-        {selectedVersion.permissions && selectedVersion.permissions.length > 0 && (
-          <PermissionsSection permissions={selectedVersion.permissions} />
-        )}
+        {selectedVersion.permissions &&
+          selectedVersion.permissions.length > 0 && (
+            <PermissionsSection permissions={selectedVersion.permissions} />
+          )}
       </div>
     </div>
   );
