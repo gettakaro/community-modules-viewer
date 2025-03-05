@@ -1,8 +1,7 @@
 "use client";
-
 import { FiMessageSquare } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
-import { renderCode } from "../../../utils/codeFormatter";
+import CollapsibleImplementation from "./CollapsibleImplementation";
 
 interface HooksProps {
   hooks: {
@@ -14,9 +13,9 @@ interface HooksProps {
 
 export default function HooksSection({ hooks }: HooksProps) {
   return (
-    <ExpandableSection 
-      title="Hooks" 
-      icon={FiMessageSquare} 
+    <ExpandableSection
+      title="Hooks"
+      icon={FiMessageSquare}
       itemCount={hooks.length}
     >
       <div className="space-y-6">
@@ -33,12 +32,8 @@ export default function HooksSection({ hooks }: HooksProps) {
                 {hook.eventType}
               </span>
             </div>
-            <div className="mt-3">
-              <h4 className="font-medium mb-2 text-text dark:text-dark-text">
-                Implementation:
-              </h4>
-              {renderCode(hook.function)}
-            </div>
+            
+            <CollapsibleImplementation code={hook.function} />
           </div>
         ))}
       </div>

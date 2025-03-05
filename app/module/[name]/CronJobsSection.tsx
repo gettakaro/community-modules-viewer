@@ -1,8 +1,7 @@
 "use client";
-
 import { FiClock } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
-import { renderCode } from "../../../utils/codeFormatter";
+import CollapsibleImplementation from "./CollapsibleImplementation";
 
 interface CronJobsProps {
   cronJobs: {
@@ -14,9 +13,9 @@ interface CronJobsProps {
 
 export default function CronJobsSection({ cronJobs }: CronJobsProps) {
   return (
-    <ExpandableSection 
-      title="Cron Jobs" 
-      icon={FiClock} 
+    <ExpandableSection
+      title="Cron Jobs"
+      icon={FiClock}
       itemCount={cronJobs.length}
     >
       <div className="space-y-6">
@@ -31,12 +30,8 @@ export default function CronJobsSection({ cronJobs }: CronJobsProps) {
             <div className="font-mono text-sm bg-background-alt dark:bg-dark-background-alt px-2 py-1 rounded-md inline-block mb-3 text-text-alt dark:text-dark-text-alt">
               Schedule: {cronJob.schedule}
             </div>
-            <div className="mt-3">
-              <h4 className="font-medium mb-2 text-text dark:text-dark-text">
-                Implementation:
-              </h4>
-              {renderCode(cronJob.function)}
-            </div>
+            
+            <CollapsibleImplementation code={cronJob.function} />
           </div>
         ))}
       </div>

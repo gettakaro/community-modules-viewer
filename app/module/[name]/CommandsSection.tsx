@@ -1,8 +1,7 @@
 "use client";
-
 import { FiCommand } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
-import { renderCode } from "../../../utils/codeFormatter";
+import CollapsibleImplementation from "./CollapsibleImplementation";
 
 interface CommandsProps {
   commands: {
@@ -15,9 +14,9 @@ interface CommandsProps {
 
 export default function CommandsSection({ commands }: CommandsProps) {
   return (
-    <ExpandableSection 
-      title="Commands" 
-      icon={FiCommand} 
+    <ExpandableSection
+      title="Commands"
+      icon={FiCommand}
       itemCount={commands.length}
     >
       <div className="space-y-6">
@@ -37,12 +36,8 @@ export default function CommandsSection({ commands }: CommandsProps) {
                 {command.helpText}
               </p>
             )}
-            <div className="mt-3">
-              <h4 className="font-medium mb-2 text-text dark:text-dark-text">
-                Implementation:
-              </h4>
-              {renderCode(command.function)}
-            </div>
+            
+            <CollapsibleImplementation code={command.function} />
           </div>
         ))}
       </div>

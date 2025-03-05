@@ -3,6 +3,7 @@
 import { FiCode } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
 import { renderCode } from "../../../utils/codeFormatter";
+import CollapsibleImplementation from "./CollapsibleImplementation";
 
 interface FunctionsProps {
   functions: {
@@ -27,12 +28,7 @@ export default function FunctionsSection({ functions }: FunctionsProps) {
             <div className="text-xl font-medium mb-3 text-text dark:text-dark-text">
               {func.name}
             </div>
-            <div>
-              <h4 className="font-medium mb-2 text-text dark:text-dark-text">
-                Implementation:
-              </h4>
-              {renderCode(func.function)}
-            </div>
+            <CollapsibleImplementation code={func.function} />
           </div>
         ))}
       </div>
