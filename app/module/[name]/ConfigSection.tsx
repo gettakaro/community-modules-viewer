@@ -2,6 +2,7 @@
 
 import { FiCode } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
+import Markdown from "react-markdown";
 
 interface ConfigSectionProps {
   configSchema: any;
@@ -21,9 +22,9 @@ export default function ConfigSection({ configSchema }: ConfigSectionProps) {
                 {prop.title || key}
               </div>
               {prop.description && (
-                <p className="text-text-alt dark:text-dark-text-alt mb-2">
+                <Markdown>
                   {prop.description}
-                </p>
+                </Markdown>
               )}
               <div className="flex flex-wrap gap-2">
                 <span className="bg-background-alt dark:bg-dark-background-alt px-2 py-1 rounded text-sm text-text-alt dark:text-dark-text-alt">

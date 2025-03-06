@@ -2,6 +2,7 @@
 import { FiCommand } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
 import CollapsibleImplementation from "./CollapsibleImplementation";
+import Markdown from 'react-markdown'
 
 interface CommandsProps {
   commands: {
@@ -32,9 +33,11 @@ export default function CommandsSection({ commands }: CommandsProps) {
               {command.name}
             </div>
             {command.helpText && (
-              <p className="text-text-alt dark:text-dark-text-alt mb-4">
-                {command.helpText}
-              </p>
+              <div className="text-text-alt dark:text-dark-text-alt mb-4">
+                <Markdown>
+                  {command.helpText}
+                </Markdown>
+              </div>
             )}
             
             <CollapsibleImplementation code={command.function} />
