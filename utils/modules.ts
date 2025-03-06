@@ -74,7 +74,7 @@ const parseModuleData = (data: any, name?: string): ModuleData => ({
 const getBuiltins = cache(async (): Promise<ModuleData[]> => {
   const res = await fetch('https://raw.githubusercontent.com/gettakaro/takaro/refs/heads/development/packages/web-docs/docs/modules/modules.json');
   const modules = await res.json();
-  return modules.map((mod: any) => parseModuleData({ ...mod, isBuiltin: true }));
+  return modules.map((mod: any) => parseModuleData({ ...mod, isBuiltin: true })).sort((a, b) => a.name.localeCompare(b.name));
 });
 
 export const getModuleByName = cache(async (name: string): Promise<ModuleData | null> => {
@@ -111,6 +111,7 @@ export const getModules = cache(async (): Promise<ModuleData[]> => {
       const name = path.basename(file, '.json');
       return parseModuleData(moduleData, name);
     })
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return [...builtinModules, ...community];
 });
