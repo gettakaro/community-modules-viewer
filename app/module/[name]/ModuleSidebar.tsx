@@ -1,6 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FiArrowLeft, FiArrowRight, FiSearch, FiPackage, FiChevronDown, FiChevronRight } from "react-icons/fi";
+import {
+  FiArrowLeft,
+  FiArrowRight,
+  FiSearch,
+  FiPackage,
+  FiChevronDown,
+  FiChevronRight,
+} from "react-icons/fi";
 import Link from "next/link";
 import { ModuleData } from "../../../utils/modules";
 
@@ -10,13 +17,16 @@ interface ModuleSidebarProps {
 }
 
 // Custom hook for safely working with localStorage in Next.js
-function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T) => void] {
   // State to store our value
   const [storedValue, setStoredValue] = useState<T>(initialValue);
-  
+
   // Initialize on client-side only
   const [isClient, setIsClient] = useState(false);
-  
+
   useEffect(() => {
     setIsClient(true);
     try {
@@ -28,7 +38,7 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
       console.log("Error reading localStorage:", error);
     }
   }, [key]);
-  
+
   // Return a wrapped version of useState's setter function
   const setValue = (value: T) => {
     try {
@@ -42,7 +52,7 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
       console.log("Error saving to localStorage:", error);
     }
   };
-  
+
   return [storedValue, setValue];
 }
 
@@ -52,7 +62,7 @@ export default function ModuleSidebar({
 }: ModuleSidebarProps) {
   // Client-side only indicator
   const [mounted, setMounted] = useState(false);
-  
+
   // State for module search
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredModules, setFilteredModules] = useState<{
@@ -60,15 +70,22 @@ export default function ModuleSidebar({
     community: ModuleData[];
   }>({
     builtin: [],
-    community: []
+    community: [],
   });
-  
+
   // State for sidebar collapse with safe localStorage
-  const [isCollapsed, setIsCollapsed] = useLocalStorage<boolean>("moduleSidebarCollapsed", false);
-  
+  const [isCollapsed, setIsCollapsed] = useLocalStorage<boolean>(
+    "moduleSidebarCollapsed",
+    false
+  );
+
   // State for section collapse
-  const [isBuiltinSectionCollapsed, setIsBuiltinSectionCollapsed] = useLocalStorage<boolean>("builtinSectionCollapsed", false);
-  const [isCommunityModulesSectionCollapsed, setIsCommunityModulesSectionCollapsed] = useLocalStorage<boolean>("communitySectionCollapsed", false);
+  const [isBuiltinSectionCollapsed, setIsBuiltinSectionCollapsed] =
+    useLocalStorage<boolean>("builtinSectionCollapsed", false);
+  const [
+    isCommunityModulesSectionCollapsed,
+    setIsCommunityModulesSectionCollapsed,
+  ] = useLocalStorage<boolean>("communitySectionCollapsed", false);
 
   // Set mounted to true after client-side hydration
   useEffect(() => {
@@ -83,14 +100,14 @@ export default function ModuleSidebar({
         (module.description &&
           module.description.toLowerCase().includes(searchQuery.toLowerCase()))
     );
-    
+
     // Separate built-in and community modules
-    const builtinModules = filtered.filter(module => module.isBuiltin);
-    const communityModules = filtered.filter(module => !module.isBuiltin);
-    
+    const builtinModules = filtered.filter((module) => module.isBuiltin);
+    const communityModules = filtered.filter((module) => !module.isBuiltin);
+
     setFilteredModules({
       builtin: builtinModules,
-      community: communityModules
+      community: communityModules,
     });
   }, [searchQuery, allModules]);
 
@@ -143,9 +160,7 @@ export default function ModuleSidebar({
   // Return a placeholder during server-side rendering to prevent hydration issues
   if (!mounted) {
     return (
-      <div
-        className="w-64 min-w-64 flex-shrink-0 bg-placeholder dark:bg-dark-placeholder h-screen sticky top-0 overflow-y-auto border-r border-background-alt/20 dark:border-dark-background-alt/20 p-4"
-      ></div>
+      <div className="w-64 min-w-64 flex-shrink-0 bg-placeholder dark:bg-dark-placeholder h-screen sticky top-0 overflow-y-auto border-r border-background-alt/20 dark:border-dark-background-alt/20 p-4"></div>
     );
   }
 
@@ -162,10 +177,7 @@ export default function ModuleSidebar({
         {isCollapsed ? (
           <FiArrowRight className="h-5 w-5 group-hover:transform group-hover:translate-x-1 transition-transform" />
         ) : (
-          <>
-            <FiArrowLeft className="mr-2 h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-medium">Collapse Sidebar</span>
-          </>
+          <FiArrowLeft className="mr-2 h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform" />
         )}
       </button>
 
@@ -201,7 +213,7 @@ export default function ModuleSidebar({
                 <FiChevronDown className="h-4 w-4" />
               )}
             </button>
-            
+
             {!isBuiltinSectionCollapsed && (
               <div className="space-y-1 mb-2">
                 {filteredModules.builtin.map(renderModuleItem)}
@@ -227,7 +239,7 @@ export default function ModuleSidebar({
                 <FiChevronDown className="h-4 w-4" />
               )}
             </button>
-            
+
             {!isCommunityModulesSectionCollapsed && (
               <div className="space-y-1">
                 {filteredModules.community.map(renderModuleItem)}
@@ -246,17 +258,21 @@ export default function ModuleSidebar({
           {/* Built-in Modules (icons only) */}
           <div className="w-full flex flex-col items-center">
             <div className="w-full border-b border-background-alt/20 dark:border-dark-background-alt/20 mb-2 pb-1 flex justify-center">
-              <span className="text-xs text-text-alt dark:text-dark-text-alt uppercase">Built-in</span>
+              <span className="text-xs text-text-alt dark:text-dark-text-alt uppercase">
+                Built-in
+              </span>
             </div>
             <div className="flex flex-col items-center space-y-1">
               {filteredModules.builtin.map(renderModuleIconItem)}
             </div>
           </div>
-          
+
           {/* Community Modules (icons only) */}
           <div className="w-full flex flex-col items-center">
             <div className="w-full border-b border-background-alt/20 dark:border-dark-background-alt/20 mb-2 pb-1 flex justify-center">
-              <span className="text-xs text-text-alt dark:text-dark-text-alt uppercase">Community</span>
+              <span className="text-xs text-text-alt dark:text-dark-text-alt uppercase">
+                Community
+              </span>
             </div>
             <div className="flex flex-col items-center space-y-1">
               {filteredModules.community.map(renderModuleIconItem)}

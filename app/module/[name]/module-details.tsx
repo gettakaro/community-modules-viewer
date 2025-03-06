@@ -10,7 +10,7 @@ import HooksSection from "./HooksSection";
 import CronJobsSection from "./CronJobsSection";
 import FunctionsSection from "./FunctionsSections";
 import PermissionsSection from "./PermissionsSection";
-import Markdown from "react-markdown";
+import Markdown from '../../../utils/markdown'
 
 export function ModuleDetails({
   moduleData,
