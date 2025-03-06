@@ -10,6 +10,7 @@ import HooksSection from "./HooksSection";
 import CronJobsSection from "./CronJobsSection";
 import FunctionsSection from "./FunctionsSections";
 import PermissionsSection from "./PermissionsSection";
+import Markdown from "react-markdown";
 
 export function ModuleDetails({
   moduleData,
@@ -133,11 +134,11 @@ export function ModuleDetails({
             <h2 className="text-xl font-semibold mb-3 text-text dark:text-dark-text">
               Description
             </h2>
-            <p className="text-text dark:text-dark-text">
+            <Markdown>
               {selectedVersion.description ||
                 moduleData.description ||
                 "No description available"}
-            </p>
+            </Markdown>
           </div>
         </div>
 

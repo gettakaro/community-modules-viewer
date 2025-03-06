@@ -2,6 +2,7 @@
 import { FiLock } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
 import { Permission } from "../../../utils/modules";
+import Markdown from "react-markdown";
 
 interface PermissionsProps {
   permissions: Permission[];
@@ -38,9 +39,9 @@ export default function PermissionsSection({ permissions }: PermissionsProps) {
               </div>
             </div>
             {permission.description && (
-              <p className="text-text-alt dark:text-dark-text-alt max-w-prose">
+              <Markdown>
                 {permission.description}
-              </p>
+              </Markdown>
             )}
           </div>
         ))}
