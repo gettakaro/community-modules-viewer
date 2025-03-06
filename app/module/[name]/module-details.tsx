@@ -76,109 +76,111 @@ export function ModuleDetails({
         currentModuleName={moduleData.name}
       />
 
-      {/* Main Content */}
-      <div className="flex-1 container px-4 py-8 w-10/12">
-        {/* Module Title, Version Selector, and Copy JSON Button */}
-        <div className="mb-8">
-          <div className="flex flex-wrap justify-between items-center mb-4">
-            <h1 className="text-3xl font-bold text-text dark:text-dark-text">
-              {moduleData.name}
-            </h1>
+      {/* Main Content - Modified to use flex-grow and auto width instead of fixed width */}
+      <div className="flex-grow px-4 py-8 max-w-full overflow-x-auto">
+        <div className="container mx-auto">
+          {/* Module Title, Version Selector, and Copy JSON Button */}
+          <div className="mb-8">
+            <div className="flex flex-wrap justify-between items-center mb-4">
+              <h1 className="text-3xl font-bold text-text dark:text-dark-text">
+                {moduleData.name}
+              </h1>
 
-            {moduleData.isBuiltin ? (
-              <div className="px-4 py-2 bg-primary text-white rounded-md">
-                <span>Built-in module</span>
+              {moduleData.isBuiltin ? (
+                <div className="px-4 py-2 bg-primary text-white rounded-md">
+                  <span>Built-in module</span>
+                </div>
+              ) : (
+                <button
+                  onClick={downloadModuleAsJson}
+                  className="flex items-center px-4 py-2 bg-primary hover:bg-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90 text-white rounded-md transition-colors"
+                  aria-label="Download module data as JSON"
+                >
+                  {copied ? (
+                    <>
+                      <FiCheck className="mr-2 h-5 w-5" />
+                      <span>Downloaded!</span>
+                    </>
+                  ) : (
+                    <>
+                      <FiDownload className="mr-2 h-5 w-5" />
+                      <span>Download JSON</span>
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              {/* Version selector */}
+              <div className="relative inline-block">
+                <select
+                  className="bg-placeholder dark:bg-dark-placeholder border border-background-alt/20 dark:border-dark-background-alt/20 rounded-md py-2 pl-3 pr-10 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-dark-primary text-text dark:text-dark-text"
+                  value={selectedVersionIndex}
+                  onChange={(e) =>
+                    setSelectedVersionIndex(Number(e.target.value))
+                  }
+                >
+                  {moduleData.versions.sort((a,b) => {
+                    // Sort versions by tag, 'latest' at top
+                    if (a.tag === "latest") return -1;
+                    if (b.tag === "latest") return 1;
+                    return a.tag > b.tag ? -1 : 1;
+
+                  }
+                  ).map((version, index) => (
+                    <option key={index} value={index}>
+                      Version: {version.tag || "untagged"}
+                    </option>
+                  ))}
+                </select>
               </div>
-            ) : (
-              <button
-                onClick={downloadModuleAsJson}
-                className="flex items-center px-4 py-2 bg-primary hover:bg-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90 text-white rounded-md transition-colors"
-                aria-label="Download module data as JSON"
-              >
-                {copied ? (
-                  <>
-                    <FiCheck className="mr-2 h-5 w-5" />
-                    <span>Downloaded!</span>
-                  </>
-                ) : (
-                  <>
-                    <FiDownload className="mr-2 h-5 w-5" />
-                    <span>Download JSON</span>
-                  </>
-                )}
-              </button>
-            )}
-          </div>
+            </div>
 
-          <div className="flex flex-wrap items-center gap-4 mb-6">
-            {/* Version selector */}
-            <div className="relative inline-block">
-              <select
-                className="bg-placeholder dark:bg-dark-placeholder border border-background-alt/20 dark:border-dark-background-alt/20 rounded-md py-2 pl-3 pr-10 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-dark-primary text-text dark:text-dark-text"
-                value={selectedVersionIndex}
-                onChange={(e) =>
-                  setSelectedVersionIndex(Number(e.target.value))
-                }
-              >
-                {moduleData.versions.sort((a,b) => {
-                  // Sort versions by tag, 'latest' at top
-                  if (a.tag === "latest") return -1;
-                  if (b.tag === "latest") return 1;
-                  return a.tag > b.tag ? -1 : 1;
-
-                }
-                ).map((version, index) => (
-                  <option key={index} value={index}>
-                    Version: {version.tag || "untagged"}
-                  </option>
-                ))}
-              </select>
+            {/* Module description */}
+            <div className="bg-placeholder dark:bg-dark-placeholder rounded-lg p-6 shadow-sm mb-8 border border-background-alt/20 dark:border-dark-background-alt/20">
+              <h2 className="text-xl font-semibold mb-3 text-text dark:text-dark-text">
+                Description
+              </h2>
+              <Markdown>
+                {selectedVersion.description ||
+                  moduleData.description ||
+                  "No description available"}
+              </Markdown>
             </div>
           </div>
 
-          {/* Module description */}
-          <div className="bg-placeholder dark:bg-dark-placeholder rounded-lg p-6 shadow-sm mb-8 border border-background-alt/20 dark:border-dark-background-alt/20">
-            <h2 className="text-xl font-semibold mb-3 text-text dark:text-dark-text">
-              Description
-            </h2>
-            <Markdown>
-              {selectedVersion.description ||
-                moduleData.description ||
-                "No description available"}
-            </Markdown>
-          </div>
-        </div>
-
-        {/* Config Schema Section */}
-        {configSchema && configSchema.properties && (
-          <ConfigSection configSchema={configSchema} />
-        )}
-
-        {/* Commands Section */}
-        {selectedVersion.commands && selectedVersion.commands.length > 0 && (
-          <CommandsSection commands={selectedVersion.commands} />
-        )}
-
-        {/* Hooks Section */}
-        {selectedVersion.hooks && selectedVersion.hooks.length > 0 && (
-          <HooksSection hooks={selectedVersion.hooks} />
-        )}
-
-        {/* Cron Jobs Section */}
-        {selectedVersion.cronJobs && selectedVersion.cronJobs.length > 0 && (
-          <CronJobsSection cronJobs={selectedVersion.cronJobs} />
-        )}
-
-        {/* Functions Section */}
-        {selectedVersion.functions && selectedVersion.functions.length > 0 && (
-          <FunctionsSection functions={selectedVersion.functions} />
-        )}
-
-        {/* Permissions Section */}
-        {selectedVersion.permissions &&
-          selectedVersion.permissions.length > 0 && (
-            <PermissionsSection permissions={selectedVersion.permissions} />
+          {/* Config Schema Section */}
+          {configSchema && configSchema.properties && (
+            <ConfigSection configSchema={configSchema} />
           )}
+
+          {/* Commands Section */}
+          {selectedVersion.commands && selectedVersion.commands.length > 0 && (
+            <CommandsSection commands={selectedVersion.commands} />
+          )}
+
+          {/* Hooks Section */}
+          {selectedVersion.hooks && selectedVersion.hooks.length > 0 && (
+            <HooksSection hooks={selectedVersion.hooks} />
+          )}
+
+          {/* Cron Jobs Section */}
+          {selectedVersion.cronJobs && selectedVersion.cronJobs.length > 0 && (
+            <CronJobsSection cronJobs={selectedVersion.cronJobs} />
+          )}
+
+          {/* Functions Section */}
+          {selectedVersion.functions && selectedVersion.functions.length > 0 && (
+            <FunctionsSection functions={selectedVersion.functions} />
+          )}
+
+          {/* Permissions Section */}
+          {selectedVersion.permissions &&
+            selectedVersion.permissions.length > 0 && (
+              <PermissionsSection permissions={selectedVersion.permissions} />
+            )}
+        </div>
       </div>
     </div>
   );
