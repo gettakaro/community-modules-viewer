@@ -9,10 +9,50 @@ interface ModuleSidebarProps {
   currentModuleName: string;
 }
 
+// Custom hook for safely working with localStorage in Next.js
+function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+  // State to store our value
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
+  
+  // Initialize on client-side only
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true);
+    try {
+      const item = window.localStorage.getItem(key);
+      if (item) {
+        setStoredValue(JSON.parse(item));
+      }
+    } catch (error) {
+      console.log("Error reading localStorage:", error);
+    }
+  }, [key]);
+  
+  // Return a wrapped version of useState's setter function
+  const setValue = (value: T) => {
+    try {
+      // Save state
+      setStoredValue(value);
+      // Save to localStorage if on client
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(key, JSON.stringify(value));
+      }
+    } catch (error) {
+      console.log("Error saving to localStorage:", error);
+    }
+  };
+  
+  return [storedValue, setValue];
+}
+
 export default function ModuleSidebar({
   allModules,
   currentModuleName,
 }: ModuleSidebarProps) {
+  // Client-side only indicator
+  const [mounted, setMounted] = useState(false);
+  
   // State for module search
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredModules, setFilteredModules] = useState<{
@@ -23,12 +63,17 @@ export default function ModuleSidebar({
     community: []
   });
   
-  // State for sidebar collapse
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // State for sidebar collapse with safe localStorage
+  const [isCollapsed, setIsCollapsed] = useLocalStorage<boolean>("moduleSidebarCollapsed", false);
   
   // State for section collapse
-  const [isBuiltinSectionCollapsed, setIsBuiltinSectionCollapsed] = useState(false);
-  const [isCommunityModulesSectionCollapsed, setIsCommunityModulesSectionCollapsed] = useState(false);
+  const [isBuiltinSectionCollapsed, setIsBuiltinSectionCollapsed] = useLocalStorage<boolean>("builtinSectionCollapsed", false);
+  const [isCommunityModulesSectionCollapsed, setIsCommunityModulesSectionCollapsed] = useLocalStorage<boolean>("communitySectionCollapsed", false);
+
+  // Set mounted to true after client-side hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Filter and categorize modules
   useEffect(() => {
@@ -95,6 +140,15 @@ export default function ModuleSidebar({
     </Link>
   );
 
+  // Return a placeholder during server-side rendering to prevent hydration issues
+  if (!mounted) {
+    return (
+      <div
+        className="w-64 min-w-64 flex-shrink-0 bg-placeholder dark:bg-dark-placeholder h-screen sticky top-0 overflow-y-auto border-r border-background-alt/20 dark:border-dark-background-alt/20 p-4"
+      ></div>
+    );
+  }
+
   return (
     <div
       className={`${
@@ -108,7 +162,10 @@ export default function ModuleSidebar({
         {isCollapsed ? (
           <FiArrowRight className="h-5 w-5 group-hover:transform group-hover:translate-x-1 transition-transform" />
         ) : (
-          <FiArrowLeft className="mr-2 h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform" />
+          <>
+            <FiArrowLeft className="mr-2 h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform" />
+            <span className="text-sm font-medium">Collapse Sidebar</span>
+          </>
         )}
       </button>
 
