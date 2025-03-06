@@ -3,7 +3,8 @@
     "versions": [
         {
             "tag": "latest",
-            "description": "No description",
+            "description": "# MeeBob_Donator: Premium VIP Kit System\n\nThe **MeeBob_Donator** module enhances your gaming server with a comprehensive VIP rewards system, designed to recognize and reward your most valuable players. This powerful Takaro module creates an exclusive experience by distributing customizable item packages to players with VIP status.\n\n## Key Benefits:\n- **Seamless VIP Recognition**: Automatically identifies players with VIP permissions\n- **Configurable Item Bundles**: Customize exactly what items, qualities, and quantities VIP players receive\n- **Anti-Abuse Protection**: One-time redemption system prevents multiple claims\n- **Personalized Welcome Messages**: Greet players with custom messages when they connect\n- **Easy Administration**: Simple configuration through JSON schema\n\n## Features:\n* Permission-based access control\n* One-time redemption functionality per server\n* Customizable welcome messages\n* Automated item delivery system\n* Quality and quantity settings for each item\n\nPerfect for server owners looking to monetize through donations while providing tangible in-game benefits to supporters.",
+
             "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"vipkit\":{\"title\":\"Items\",\"description\":\"VIP Items\",\"x-component\":\"item\",\"type\":\"array\",\"uniqueItems\":true,\"items\":{\"type\":\"object\",\"title\":\"Item\",\"properties\":{\"item\":{\"type\":\"string\",\"title\":\"Item\"},\"amount\":{\"type\":\"number\",\"title\":\"Amount\"},\"quality\":{\"type\":\"string\",\"title\":\"Quality\"}}}}}}",
             "uiSchema": "{}",
             "commands": [
