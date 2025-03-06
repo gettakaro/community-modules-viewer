@@ -1,0 +1,107 @@
+{
+    "name": "MAD_CPMStaffCommands",
+    "versions": [
+        {
+        "tag": "latest",
+        "description": "# MAD_CPMStaffCommands Module\n\n## Overview\nThe MAD_CPMStaffCommands module provides a comprehensive suite of administrative tools for game server moderators. This module offers essential commands to effectively manage player behavior, enforce server rules, and maintain a positive gaming environment.\n\n## Features\n- **Advanced Player Management**: Ban disruptive players, kill troublemakers, reset drone data, teleport to players for investigation, and arrest rule breakers.\n- **Secure Permission System**: All commands are restricted to users with the STAFF_COMMANDS permission to ensure only authorized staff can access these powerful tools.\n- **Two-Factor Confirmation**: Critical moderation actions include confirmation prompts to prevent accidental usage.\n- **Discord Integration**: Optional Discord notifications to keep your moderation team informed of important actions taken on the server.\n- **Streamlined Interface**: Simple command structure with clear help text for ease of use during time-sensitive moderation scenarios.\n\n## Commands\n- `/ban` - Remove problematic players from the server with customizable duration and reasoning\n- `/kill` - Eliminate a player with confirmation required to prevent misuse\n- `/rdd` - Reset drone data for players experiencing technical issues\n- `/avisit` - Teleport to players for silent observation and investigation\n- `/arrest` - Bring players to a designated location for questioning or detention\n\n## Implementation\nThis module is designed for server administrators who need reliable tools to maintain server order while ensuring proper oversight through Discord logging and permission restrictions.",
+        "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"discordChannel\":{\"title\":\"discordChannel\",\"description\":\"Sends to discord\",\"type\":\"string\"}}}",
+        "uiSchema": "{}",
+            "commands": [
+                {
+                    "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog, arguments: args } = data;\n    const { person, reasoning } = args;\n    const discordChannel = data.module.userConfig.discordChannel;\n    if (!checkPermission(pog, 'STAFF_COMMANDS')) {\n        throw new TakaroUserError('You do not have permission to use [02FEDC]Moderator[-] commmands.');\n    }\n\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `ban add \"${person}\" 1 year \"${reasoning}\" \"${person}\"`,\n    })).data.data.rawResult;\n    console.log(discordChannel)\n\n\n    if (response.includes('is not a valid entity id, player name or user id')) {\n        throw new TakaroUserError(`[02FEDC]${person}[-] is not a valid entity id, player name or user id`);\n    }\n\n    //Confirmation\n    await player.pm(`[02FEDC]${person}[-] was banned.`);\n\n    await takaro.discord.discordControllerSendMessage(discordChannel, {\n        message: `🔨 ${player.name} banned ${person} for ${reasoning}.`,\n    });\n}\n\nawait main();",
+                    "name": "ban",
+                    "trigger": "ban",
+                    "helpText": "ban name reason in quotes",
+                    "arguments": [
+                        {
+                            "name": "person",
+                            "type": "string",
+                            "defaultValue": "",
+                            "helpText": "Person being banned",
+                            "position": 0
+                        },
+                        {
+                            "name": "reasoning",
+                            "type": "string",
+                            "defaultValue": "No reason given",
+                            "helpText": "Reason they are banned",
+                            "position": 1
+                        }
+                    ]
+                },
+                {
+                    "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog, module: mod, arguments: args } = data;\n    const playerTarget = args.playerTarget;\n\n    // Check permissions first\n    if (!checkPermission(pog, 'STAFF_COMMANDS')) {\n        throw new TakaroUserError('You do not have permission to use [02FEDC]Moderator[-] commands.');\n    }\n\n    // Check if there's an existing confirmation variable\n    const confirmationKey = `kill_confirmation_${playerTarget}`;\n    const existingConfirmation = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: [confirmationKey],\n            gameServerId: [gameServerId],\n            playerId: [pog.playerId],\n            moduleId: [mod.moduleId]\n        }\n    });\n\n    // If confirmation variable exists, proceed with kill\n    if (existingConfirmation.data.data.length > 0) {\n        // Delete the confirmation variable first\n        await takaro.variable.variableControllerDelete(existingConfirmation.data.data[0].id);\n\n        // Execute the kill command\n        const response = (await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `kill \"${playerTarget}\"`,\n        })).data.data.rawResult;\n\n        if (response.includes('Targetplayer is offline')) {\n            throw new TakaroUserError(`[02FEDC]${playerTarget}[-] is not online`);\n        }\n\n        await player.pm(`You have killed [02FEDC]${playerTarget}[-].`);\n    } else {\n        // Create confirmation variable with 30 second expiry\n        const now = new Date();\n        const expiry = new Date(now.getTime() + 30 * 1000); // 30 seconds from now\n\n        await takaro.variable.variableControllerCreate({\n            key: confirmationKey,\n            value: JSON.stringify({ expiry: expiry.toISOString() }),\n            gameServerId,\n            moduleId: mod.moduleId,\n            playerId: pog.playerId\n        });\n\n        // Send confirmation message\n        await player.pm(`Are you sure you want to kill [02FEDC]${playerTarget}[-]? Run the command again within 30 seconds to confirm.`);\n    }\n}\n\nawait main();",
+                    "name": "kill",
+                    "trigger": "kill",
+                    "helpText": "kill (players name), use quotes for names with spaces",
+                    "arguments": [
+                        {
+                            "name": "playerTarget",
+                            "type": "string",
+                            "defaultValue": "",
+                            "helpText": "The player you want to kill",
+                            "position": 0
+                        }
+                    ]
+                },
+                {
+                    "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog, arguments: args } = data;\n    const playerTarget = args.playerTarget;\n\n    if (!checkPermission(pog, 'STAFF_COMMANDS')) {\n        throw new TakaroUserError('You do not have permission to use [02FEDC]Moderator[-] commmands.');\n    }\n\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `rdd \"${playerTarget}\"`,\n    })).data.data.rawResult;\n\n    if (response.includes('Targetplayer is offline')) {\n        throw new TakaroUserError(`[02FEDC]${playerTarget}[-] is not online`);\n    }\n}\n\nawait main();",
+                    "name": "rdd",
+                    "trigger": "rdd",
+                    "helpText": "No help text available",
+                    "arguments": [
+                        {
+                            "name": "playerTarget",
+                            "type": "string",
+                            "defaultValue": "",
+                            "helpText": "Person drone data is being reset for",
+                            "position": 0
+                        }
+                    ]
+                },
+                {
+                    "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog, arguments: args } = data;\n    const playerTarget = args.playerTarget;\n\n    if (!checkPermission(pog, 'STAFF_COMMANDS')) {\n        throw new TakaroUserError('You do not have permission to use [02FEDC]Moderator[-] commmands.');\n    }\n\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `teleportplayer \"${player.name}\" \"${playerTarget}\"`,\n    })).data.data.rawResult;\n\n    if (response.includes('Targetplayer is offline')) {\n        throw new TakaroUserError(`[02FEDC]${playerTarget}[-] is not online`);\n    }\n\n    // Send success message to the player\n    await player.pm(`Successfully teleported to [02FEDC]${playerTarget}[-]`);\n}\n\nawait main();",
+                    "name": "avisit",
+                    "trigger": "avisit",
+                    "helpText": "Teleport to a friend",
+                    "arguments": [
+                        {
+                            "name": "playerTarget",
+                            "type": "string",
+                            "defaultValue": "",
+                            "helpText": "Player teleporting to",
+                            "position": 0
+                        }
+                    ]
+                },
+                {
+                    "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId, player } = data;\n    const { arguments: args } = data;\n    if (!checkPermission(pog, 'STAFF_COMMANDS')) {\n        throw new TakaroUserError('You do not have permission to use [02FEDC]Moderator[-] commmands.');\n    }\n    await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `teleportplayer ${player.name} ${args.playerTarget}`,\n    });\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+                    "name": "arrest",
+                    "trigger": "arrest",
+                    "helpText": "No help text available",
+                    "arguments": [
+                        {
+                            "name": "playerTarget",
+                            "type": "string",
+                            "defaultValue": "",
+                            "helpText": "Other player's name",
+                            "position": 0
+                        }
+                    ]
+                }
+            ],
+            "hooks": [],
+            "cronJobs": [],
+            "functions": [],
+            "permissions": [
+                {
+                    "canHaveCount": false,
+                    "description": "Commands for staff to use without using Currency",
+                    "permission": "STAFF_COMMANDS",
+                    "friendlyName": "Staff Commands"
+                }
+            ]
+        }
+    ],
+    "takaroVersion": "main"
+}
