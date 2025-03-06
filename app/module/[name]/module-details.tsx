@@ -120,7 +120,14 @@ export function ModuleDetails({
                   setSelectedVersionIndex(Number(e.target.value))
                 }
               >
-                {moduleData.versions.map((version, index) => (
+                {moduleData.versions.sort((a,b) => {
+                  // Sort versions by tag, 'latest' at top
+                  if (a.tag === "latest") return -1;
+                  if (b.tag === "latest") return 1;
+                  return a.tag > b.tag ? -1 : 1;
+
+                }
+                ).map((version, index) => (
                   <option key={index} value={index}>
                     Version: {version.tag || "untagged"}
                   </option>
