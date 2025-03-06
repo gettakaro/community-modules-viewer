@@ -2,7 +2,7 @@
 import { FiLock } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
 import { Permission } from "../../../utils/modules";
-import Markdown from "react-markdown";
+import Markdown from '../../../utils/markdown'
 
 interface PermissionsProps {
   permissions: Permission[];
