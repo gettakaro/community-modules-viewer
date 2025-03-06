@@ -3,7 +3,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "No description provided.",
+      "description": "This module allows your players to use the Magic 8Ball command to ask questions and receive a random response.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"sendMessage\":{\"title\":\"sendMessage\",\"description\":\"Decide on sending it to the server globally or to the individual player\",\"default\":\"serverMessage\",\"type\":\"string\",\"enum\":[\"serverMessage\",\"playerPM\"]},\"responses\":{\"title\":\"responses\",\"description\":\"Here you can edit the responses of the 8ball command. \\n\",\"default\":[\"It is certain\",\"Without a doubt\",\"You may rely on it\",\"Most likely\",\"Yes\",\"No\",\"Signs point to yes\",\"Reply hazy, try again\",\"Ask again later\",\"Better not tell you now\",\"Cannot predict now\",\"Don't count on it\",\"My sources say no\",\"Very doubtful\",\"Outlook not so good\"],\"type\":\"array\",\"items\":{\"type\":\"string\"},\"minItems\":1,\"maxItems\":1000}}}",
       "uiSchema": "{}",
       "commands": [
