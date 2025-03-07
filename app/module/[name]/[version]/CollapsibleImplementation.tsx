@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-import { renderCode } from "../../../utils/codeFormatter";
+import { renderCode } from "../../../../utils/codeFormatter";
 
 interface CollapsibleImplementationProps {
   code: string;

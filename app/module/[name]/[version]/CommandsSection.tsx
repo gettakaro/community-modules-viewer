@@ -2,7 +2,7 @@
 import { FiCommand } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
 import CollapsibleImplementation from "./CollapsibleImplementation";
-import Markdown from '../../../utils/markdown'
+import Markdown from '../../../../utils/markdown'
 
 interface CommandsProps {
   commands: {

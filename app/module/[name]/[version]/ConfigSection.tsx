@@ -2,7 +2,7 @@
 
 import { FiCode } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
-import Markdown from '../../../utils/markdown'
+import Markdown from '../../../../utils/markdown'
 
 interface ConfigSectionProps {
   configSchema: any;
