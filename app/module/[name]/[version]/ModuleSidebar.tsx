@@ -9,11 +9,12 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import Link from "next/link";
-import { ModuleData } from "../../../utils/modules";
+import { ModuleData } from "../../../../utils/modules";
 
 interface ModuleSidebarProps {
   allModules: ModuleData[];
   currentModuleName: string;
+  currentVersion?: string;
 }
 
 // Custom hook for safely working with localStorage in Next.js
@@ -126,43 +127,52 @@ export default function ModuleSidebar({
   };
 
   // Render module list item
-  const renderModuleItem = (module: ModuleData) => (
-    <Link
-      key={module.name}
-      href={`/module/${module.name}`}
-      className={`flex items-center px-3 py-2 rounded-md text-sm ${
-        module.name === currentModuleName
-          ? "bg-primary/10 text-primary dark:bg-dark-primary/20 dark:text-dark-primary font-medium"
-          : "text-text dark:text-dark-text hover:bg-background-alt dark:hover:bg-dark-background-alt"
-      }`}
-    >
-      <FiPackage className="mr-2 h-4 w-4" />
-      <span className="truncate">{module.name}</span>
-    </Link>
-  );
+  const renderModuleItem = (module: ModuleData) => {
+    // Find the latest version or first available version for this module
+    const latestVersionIndex = module.versions.findIndex(v => v.tag === "latest");
+    const linkVersion = latestVersionIndex !== -1 
+      ? module.versions[latestVersionIndex].tag 
+      : (module.versions[0]?.tag || 'untagged');
+  
+    return (
+      <Link
+        key={module.name}
+        href={`/module/${module.name}/${linkVersion}`}
+        className={`flex items-center px-3 py-2 rounded-md text-sm ${
+          module.name === currentModuleName
+            ? "bg-primary/10 text-primary dark:bg-dark-primary/20 dark:text-dark-primary font-medium"
+            : "text-text dark:text-dark-text hover:bg-background-alt dark:hover:bg-dark-background-alt"
+        }`}
+      >
+        <FiPackage className="mr-2 h-4 w-4" />
+        <span className="truncate">{module.name}</span>
+      </Link>
+    );
+  };
 
   // Render module icon-only item (for collapsed sidebar)
-  const renderModuleIconItem = (module: ModuleData) => (
-    <Link
-      key={module.name}
-      href={`/module/${module.name}`}
-      title={module.name}
-      className={`flex items-center justify-center p-2 rounded-md ${
-        module.name === currentModuleName
-          ? "bg-primary/10 text-primary dark:bg-dark-primary/20 dark:text-dark-primary"
-          : "text-text dark:text-dark-text hover:bg-background-alt dark:hover:bg-dark-background-alt"
-      }`}
-    >
-      <FiPackage className="h-5 w-5" />
-    </Link>
-  );
-
-  // Return a placeholder during server-side rendering to prevent hydration issues
-  if (!mounted) {
+  const renderModuleIconItem = (module: ModuleData) => {
+    // Find the latest version or first available version for this module
+    const latestVersionIndex = module.versions.findIndex(v => v.tag === "latest");
+    const linkVersion = latestVersionIndex !== -1 
+      ? module.versions[latestVersionIndex].tag 
+      : (module.versions[0]?.tag || 'untagged');
+  
     return (
-      <div className="w-64 min-w-64 flex-shrink-0 bg-placeholder dark:bg-dark-placeholder h-screen sticky top-0 overflow-y-auto border-r border-background-alt/20 dark:border-dark-background-alt/20 p-4"></div>
+      <Link
+        key={module.name}
+        href={`/module/${module.name}/${linkVersion}`}
+        title={module.name}
+        className={`flex items-center justify-center p-2 rounded-md ${
+          module.name === currentModuleName
+            ? "bg-primary/10 text-primary dark:bg-dark-primary/20 dark:text-dark-primary"
+            : "text-text dark:text-dark-text hover:bg-background-alt dark:hover:bg-dark-background-alt"
+        }`}
+      >
+        <FiPackage className="h-5 w-5" />
+      </Link>
     );
-  }
+  };
 
   return (
     <div

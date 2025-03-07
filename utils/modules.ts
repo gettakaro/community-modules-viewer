@@ -54,6 +54,15 @@ export interface Permission {
   canHaveCount: boolean;
 }
 
+interface WithName {
+  name: string;
+}
+
+function sortByName(a: WithName, b: WithName) {
+  if (!a.name || !b.name) return 0;
+  return a.name.localeCompare(b.name);
+}
+
 const parseModuleData = (data: any, name?: string): ModuleData => ({
   rawData: JSON.stringify(data),
   name: data.name || name || '',
@@ -63,12 +72,17 @@ const parseModuleData = (data: any, name?: string): ModuleData => ({
     tag: version.tag,
     description: version.description || '',
     configSchema: version.configSchema || '',
-    hooks: version.hooks || [],
-    commands: version.commands || [],
-    cronJobs: version.cronJobs || [],
-    functions: version.functions || [],
-    permissions: version.permissions || [],
-  })),
+    hooks: (version.hooks || []).sort(sortByName),
+    commands: (version.commands || []).sort(sortByName),
+    cronJobs: (version.cronJobs || []).sort(sortByName),
+    functions: (version.functions || []).sort(sortByName),
+    permissions: (version.permissions || []).sort(sortByName),
+  })).sort((a, b) => {
+    // Sort versions by tag, 'latest' at top
+    if (a.tag === "latest") return -1;
+    if (b.tag === "latest") return 1;
+    return a.tag > b.tag ? -1 : 1;
+  }),
 });
 
 const getBuiltins = cache(async (): Promise<ModuleData[]> => {

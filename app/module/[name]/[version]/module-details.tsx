@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { FiDownload, FiCheck } from "react-icons/fi";
-import { ModuleData } from "../../../utils/modules";
+import { ModuleData } from "../../../../utils/modules";
 import ModuleSidebar from "./ModuleSidebar";
 import ConfigSection from "./ConfigSection";
 import CommandsSection from "./CommandsSection";
@@ -10,23 +11,42 @@ import HooksSection from "./HooksSection";
 import CronJobsSection from "./CronJobsSection";
 import FunctionsSection from "./FunctionsSections";
 import PermissionsSection from "./PermissionsSection";
-import Markdown from '../../../utils/markdown'
+import Markdown from '../../../../utils/markdown';
+
+interface ModuleDetailsProps {
+  moduleData: ModuleData;
+  allModules: ModuleData[];
+  initialVersionIndex?: number;
+}
 
 export function ModuleDetails({
   moduleData,
   allModules,
-}: {
-  moduleData: ModuleData;
-  allModules: ModuleData[];
-}) {
+  initialVersionIndex = 0,
+}: ModuleDetailsProps) {
+  const router = useRouter();
+  
   // State for the currently selected version
-  const [selectedVersionIndex, setSelectedVersionIndex] = useState(0);
+  const [selectedVersionIndex, setSelectedVersionIndex] = useState(initialVersionIndex);
 
   // State for copy confirmation
   const [copied, setCopied] = useState(false);
 
   // Get the currently selected version
   const selectedVersion = moduleData.versions[selectedVersionIndex];
+  // Handle version change
+  useEffect(() => {
+    // Only navigate if the selected version is different from the current URL
+    if (selectedVersion && selectedVersion.tag) {
+      const currentUrlPath = window.location.pathname;
+      const targetPath = `/module/${moduleData.name}/${selectedVersion.tag}`;
+      
+      // Only push to history if we're actually changing versions
+      if (currentUrlPath !== targetPath) {
+        router.push(targetPath);
+      }
+    }
+  }, [selectedVersionIndex, moduleData.name, router, selectedVersion]);
 
   // Parse config schema if it exists
   let configSchema = null;
@@ -74,9 +94,10 @@ export function ModuleDetails({
       <ModuleSidebar
         allModules={allModules}
         currentModuleName={moduleData.name}
+        currentVersion={selectedVersion.tag}
       />
 
-      {/* Main Content - Modified to use flex-grow and auto width instead of fixed width */}
+      {/* Main Content */}
       <div className="flex-grow px-4 py-8 max-w-full overflow-x-auto">
         <div className="container mx-auto">
           {/* Module Title, Version Selector, and Copy JSON Button */}
@@ -121,14 +142,7 @@ export function ModuleDetails({
                     setSelectedVersionIndex(Number(e.target.value))
                   }
                 >
-                  {moduleData.versions.sort((a,b) => {
-                    // Sort versions by tag, 'latest' at top
-                    if (a.tag === "latest") return -1;
-                    if (b.tag === "latest") return 1;
-                    return a.tag > b.tag ? -1 : 1;
-
-                  }
-                  ).map((version, index) => (
+                  {moduleData.versions.map((version, index) => (
                     <option key={index} value={index}>
                       Version: {version.tag || "untagged"}
                     </option>
@@ -137,6 +151,7 @@ export function ModuleDetails({
               </div>
             </div>
 
+            {/* Rest of the component remains the same */}
             {/* Module description */}
             <div className="bg-placeholder dark:bg-dark-placeholder rounded-lg p-6 shadow-sm mb-8 border border-background-alt/20 dark:border-dark-background-alt/20">
               <h2 className="text-xl font-semibold mb-3 text-text dark:text-dark-text">
