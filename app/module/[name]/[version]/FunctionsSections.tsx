@@ -2,7 +2,7 @@
 
 import { FiCode } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
-import { renderCode } from "../../../utils/codeFormatter";
+import { renderCode } from "../../../../utils/codeFormatter";
 import CollapsibleImplementation from "./CollapsibleImplementation";
 
 interface FunctionsProps {
