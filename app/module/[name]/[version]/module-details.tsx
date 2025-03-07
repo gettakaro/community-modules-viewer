@@ -34,17 +34,13 @@ export function ModuleDetails({
 
   // Get the currently selected version
   const selectedVersion = moduleData.versions[selectedVersionIndex];
-  console.log(selectedVersionIndex)
   // Handle version change
   useEffect(() => {
-    console.log('hi')
     // Only navigate if the selected version is different from the current URL
     if (selectedVersion && selectedVersion.tag) {
       const currentUrlPath = window.location.pathname;
       const targetPath = `/module/${moduleData.name}/${selectedVersion.tag}`;
       
-      console.log("currentUrlPath", currentUrlPath);
-      console.log("targetPath", targetPath);
       // Only push to history if we're actually changing versions
       if (currentUrlPath !== targetPath) {
         router.push(targetPath);
