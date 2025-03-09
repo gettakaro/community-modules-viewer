@@ -9,7 +9,7 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import Link from "next/link";
-import { ModuleData } from "../../../../utils/modules";
+import { ModuleData } from "../../../../utils/moduleData";
 
 interface ModuleSidebarProps {
   allModules: ModuleData[];

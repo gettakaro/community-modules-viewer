@@ -1,8 +1,8 @@
 "use client";
 import { FiLock } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
-import { Permission } from "../../../../utils/modules";
 import Markdown from '../../../../utils/markdown'
+import { Permission } from "../../../../utils/moduleData";
 
 interface PermissionsProps {
   permissions: Permission[];
