@@ -68,9 +68,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set short sha
+        id: short_sha
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Run container
         run: |
-          docker run -d -p 3000:3000 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ github.sha }}"
+          docker run -d -p 3000:3000 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ steps.short_sha.outputs.sha_short }}"
           # Wait for container to be ready by curling the server
           while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000)" != "200" ]]; do sleep 1; done
 
