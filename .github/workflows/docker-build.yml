@@ -68,12 +68,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pull Docker image
-        run: docker pull $(echo "ghcr.io/${{ github.repository }}:$(echo ${{ github.ref }} | sed 's/refs\/heads\///')")
-
       - name: Run container
         run: |
-          docker run -d -p 3000:3000 --name app-container $(echo "ghcr.io/${{ github.repository }}:$(echo ${{ github.ref }} | sed 's/refs\/heads\///')")
+          docker run -d -p 3000:3000 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ github.sha }}"
           # Wait for container to be ready by curling the server
           while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000)" != "200" ]]; do sleep 1; done
 
