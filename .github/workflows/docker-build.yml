@@ -73,6 +73,7 @@ jobs:
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Run container
+        timeout-minutes: 5
         run: |
           docker run -d -p 3000:53118 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ steps.short_sha.outputs.sha_short }}"
           # Wait for container to be ready by curling the server
