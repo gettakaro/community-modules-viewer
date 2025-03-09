@@ -74,7 +74,7 @@ jobs:
 
       - name: Run container
         run: |
-          docker run -d -p 3000:3000 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ steps.short_sha.outputs.sha_short }}"
+          docker run -d -p 3000:53118 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ steps.short_sha.outputs.sha_short }}"
           # Wait for container to be ready by curling the server
           while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000)" != "200" ]]; do sleep 1; done
 
