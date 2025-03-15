@@ -5,6 +5,11 @@
   ],
   "packageRules": [
     {
+      "matchManagers": [
+        "dockerfile",
+        "npm",
+        "github-actions"
+      ],
       "automerge": true,
       "minimumReleaseAge": "7 days"
     }
