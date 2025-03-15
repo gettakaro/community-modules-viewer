@@ -17,6 +17,8 @@ test.describe('Can browse to all community modules', () => {
       const downloadPromise = page.waitForEvent('download');
       await page.getByRole('button', { name: 'Download module data as JSON' }).click();
       const download = await downloadPromise;
+      expect(download.suggestedFilename()).toBe(`${moduleName}-latest.json`);
+      await expect(page.getByRole('heading', { name: moduleName, exact: true })).toHaveText(moduleName);
     });
   }
 });
