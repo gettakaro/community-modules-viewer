@@ -5,11 +5,8 @@
   ],
   "packageRules": [
     {
-      "matchDepTypes": [
-        "devDependencies"
-      ],
       "automerge": true,
-      "minimumReleaseAge": "3 days"
+      "minimumReleaseAge": "7 days"
     }
   ]
 }
