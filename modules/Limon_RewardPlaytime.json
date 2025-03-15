@@ -1,0 +1,94 @@
+{
+    "name": "Limon_RewardPlaytime",
+    "versions": [
+        {
+            "tag": "latest",
+            "description": "Rewards given when a player has been online for a certain amount of time\"",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"rewardInterval\":{\"title\":\"rewardInterval\",\"description\":\"Give rewards every X minutes of playtime\",\"default\":1200000,\"x-component\":\"duration\",\"type\":\"number\"},\"baseReward\":{\"title\":\"baseReward\",\"description\":\"Currency given per reward\",\"default\":0,\"type\":\"number\"},\"possibleItems\":{\"title\":\"Items\",\"description\":\"Items that can be randomly awarded\",\"x-component\":\"item\",\"type\":\"array\",\"uniqueItems\":true,\"items\":{\"type\":\"object\",\"title\":\"Item\",\"properties\":{\"item\":{\"type\":\"string\",\"title\":\"Item\"},\"amount\":{\"type\":\"number\",\"title\":\"Amount\"},\"quality\":{\"type\":\"string\",\"title\":\"Quality\"}}}},\"itemChance\":{\"title\":\"itemChance\",\"description\":\"Chance to receive an item (1-100)\\n\",\"type\":\"string\",\"minLength\":1,\"maxLength\":100},\"rewardMessage\":{\"title\":\"rewardMessage\",\"description\":\"Message with placeholders {minutes}, {currency}, {item}, {streak}\",\"default\":\"\\\"You've been online for {minutes} minutes! Reward: {currency} currency and {item}. Consecutive rewards: {streak}\",\"type\":\"string\"},\"useStreakMultiplier\":{\"title\":\"useStreakMultiplier\",\"description\":\"Enable growing multiplier for consecutive rewards\",\"default\":false,\"type\":\"boolean\"},\"streakMultiplierValue\":{\"title\":\"streakMultiplierValue\",\"description\":\"Multiplier applied each consecutive reward (1.1 = +10%)\",\"default\":11,\"type\":\"number\"}}}",
+            "uiSchema": "{}",
+            "commands": [
+                {
+                    "function": "// commands/playtime.js\n\nimport { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // Search for the most recent player connected event for this player\n    const connectEvents = await takaro.event.eventControllerSearch({\n        filters: {\n            eventName: ['player-connected'],\n            gameserverId: [gameServerId],\n            playerId: [player.id]\n        },\n        sortBy: \"createdAt\",\n        sortDirection: \"desc\",\n        limit: 1\n    });\n\n    // Format session playtime\n    let sessionTimeString = \"No data available\";\n    if (connectEvents.data.data.length > 0) {\n        // Get the connection timestamp\n        const connectionTime = new Date(connectEvents.data.data[0].createdAt);\n        const currentTime = new Date();\n\n        // Calculate time difference in minutes\n        const diffMs = currentTime - connectionTime;\n        const diffMinutes = Math.floor(diffMs / 60000);\n\n        sessionTimeString = formatPlaytime(diffMinutes);\n    }\n\n    // Get playtime from POG and player objects (in seconds)\n    const serverPlaytimeMinutes = Math.floor(pog.playtimeSeconds / 60);\n    const communityPlaytimeMinutes = Math.floor(player.playtimeSeconds / 60);\n\n    const serverPlaytimeString = formatPlaytime(serverPlaytimeMinutes);\n    const communityPlaytimeString = formatPlaytime(communityPlaytimeMinutes);\n\n    await player.pm(\n        `Playtime stats:\\n` +\n        `Current session: ${sessionTimeString}\\n` +\n        `This server: ${serverPlaytimeString}\\n` +\n        `Total community: ${communityPlaytimeString}`\n    );\n}\n\n// Helper function to format minutes into readable time\nfunction formatPlaytime(minutes) {\n    const days = Math.floor(minutes / 1440);\n    const hours = Math.floor((minutes % 1440) / 60);\n    const remainingMinutes = minutes % 60;\n\n    let timeString = \"\";\n\n    if (days > 0) {\n        timeString += `${days} day${days !== 1 ? 's' : ''}`;\n        if (hours > 0 || remainingMinutes > 0) timeString += `, `;\n    }\n\n    if (hours > 0) {\n        timeString += `${hours} hour${hours !== 1 ? 's' : ''}`;\n        if (remainingMinutes > 0) timeString += ` and `;\n    }\n\n    if (remainingMinutes > 0 || (days === 0 && hours === 0)) {\n        timeString += `${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}`;\n    }\n\n    return timeString;\n}\n\nawait main();",
+                    "name": "playtime",
+                    "trigger": "playtime",
+                    "helpText": "Check your playtime statistics",
+                    "arguments": []
+                }
+            ],
+            "hooks": [],
+            "cronJobs": [
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                },
+                {
+                    "function": "// cronJobs/rewardOnlinePlaytime.js\n\nimport { takaro, data, checkPermission } from '@takaro/helpers';\n\n// Helper function to format playtime into readable time\nfunction formatPlaytime(minutes) {\n    if (minutes < 60) {\n        return `${minutes} minute${minutes === 1 ? '' : 's'}`;\n    } else if (minutes < 1440) {\n        const hours = Math.floor(minutes / 60);\n        const remainingMinutes = minutes % 60;\n        return `${hours} hour${hours === 1 ? '' : 's'} ${remainingMinutes} minute${remainingMinutes === 1 ? '' : 's'}`;\n    } else {\n        const days = Math.floor(minutes / 1440);\n        const hours = Math.floor((minutes % 1440) / 60);\n        return `${days} day${days === 1 ? '' : 's'} ${hours} hour${hours === 1 ? '' : 's'}`;\n    }\n}\n\nasync function main() {\n    const { gameServerId, module: mod } = data;\n\n    // Get online players\n    const onlinePlayers = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n        filters: {\n            gameServerId: [gameServerId],\n            online: [true]\n        }\n    });\n\n    // If no players online, exit early\n    if (onlinePlayers.data.meta.total === 0) {\n        return;\n    }\n\n    // Parse configuration values\n    const interval = mod.userConfig.rewardInterval;\n    const baseReward = mod.userConfig.baseReward;\n    const possibleItems = mod.userConfig.possibleItems || [];\n    const configItemChance = parseInt(mod.userConfig.itemChance || '0');\n    const rewardMessage = mod.userConfig.rewardMessage;\n\n    // Get currency name\n    let currencyName = \"coins\";\n    try {\n        const currencyNameSetting = await takaro.settings.settingsControllerGetOne('currencyName', gameServerId);\n        if (currencyNameSetting && currencyNameSetting.data.data) {\n            currencyName = currencyNameSetting.data.data.value;\n        }\n    } catch (error) {\n        // Use default if setting not found\n    }\n\n    // Process each online player\n    for (const pog of onlinePlayers.data.data) {\n        try {\n            // Find last reward time variable\n            const lastRewardVar = await takaro.variable.variableControllerSearch({\n                filters: {\n                    key: ['last_playtime_reward'],\n                    playerId: [pog.playerId],\n                    gameServerId: [gameServerId],\n                    moduleId: [mod.moduleId]\n                }\n            });\n\n            // Get current time\n            const now = Date.now();\n            let lastRewardTime = 0;\n            let lastRewardVarId = null;\n\n            if (lastRewardVar.data.data.length > 0) {\n                lastRewardTime = parseInt(lastRewardVar.data.data[0].value);\n                lastRewardVarId = lastRewardVar.data.data[0].id;\n            }\n\n            // Check if it's time for a reward\n            if (now - lastRewardTime >= interval) {\n                // Get player's session time\n                let sessionTimeString = \"some time\";\n                try {\n                    const connectEvents = await takaro.event.eventControllerSearch({\n                        filters: {\n                            eventName: ['player-connected'],\n                            gameserverId: [gameServerId],\n                            playerId: [pog.playerId]\n                        },\n                        sortBy: \"createdAt\",\n                        sortDirection: \"desc\",\n                        limit: 1\n                    });\n\n                    if (connectEvents.data.data.length > 0) {\n                        const connectionTime = new Date(connectEvents.data.data[0].createdAt);\n                        const currentTime = new Date();\n                        const diffMs = currentTime - connectionTime;\n                        const diffMinutes = Math.floor(diffMs / 60000);\n                        sessionTimeString = formatPlaytime(diffMinutes);\n                    }\n                } catch (error) {\n                    // Continue with default session time string\n                }\n\n                // Variables to track rewards\n                let currencyAwarded = 0;\n                let itemReceived = \"nothing\";\n\n                // Check for permission override for currency reward\n                const currencyPermission = checkPermission(pog, 'PLAYTIME_REWARD_OVERRIDE');\n                const actualReward = currencyPermission && currencyPermission.count != null ? currencyPermission.count : baseReward;\n\n                // Grant currency if configured\n                if (actualReward > 0) {\n                    await takaro.playerOnGameserver.playerOnGameServerControllerAddCurrency(gameServerId, pog.playerId, {\n                        currency: actualReward\n                    });\n                    currencyAwarded = actualReward;\n                }\n\n                // Check for item chance override\n                const itemChancePermission = checkPermission(pog, 'PLAYTIME_ITEM_CHANCE_OVERRIDE');\n                const actualItemChance = itemChancePermission && itemChancePermission.count != null\n                    ? itemChancePermission.count\n                    : configItemChance;\n\n                // Determine if player gets an item\n                if (possibleItems.length > 0 && Math.random() * 100 < actualItemChance) {\n                    // Select random item from the list\n                    const randomItem = possibleItems[Math.floor(Math.random() * possibleItems.length)];\n\n                    if (randomItem && randomItem.item) {\n                        try {\n                            // Get item details\n                            const itemDetails = await takaro.item.itemControllerFindOne(randomItem.item);\n                            if (itemDetails && itemDetails.data.data) {\n                                // Give item to player\n                                await takaro.gameserver.gameServerControllerGiveItem(gameServerId, pog.playerId, {\n                                    name: itemDetails.data.data.code,\n                                    amount: randomItem.amount || 1,\n                                    quality: randomItem.quality || ''\n                                });\n                                itemReceived = `${randomItem.amount || 1}x ${itemDetails.data.data.name}`;\n                            }\n                        } catch (error) {\n                            // Failed to give item, continue with default\n                        }\n                    }\n                }\n\n                // Send reward message to player\n                const formattedMessage = rewardMessage\n                    .replace('{minutes}', sessionTimeString)\n                    .replace('{currency}', `${currencyAwarded} ${currencyName}`)\n                    .replace('{item}', itemReceived);\n\n                await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n                    message: formattedMessage,\n                    opts: {\n                        recipient: {\n                            gameId: pog.gameId\n                        }\n                    }\n                });\n\n                // Update last reward time\n                if (lastRewardVarId) {\n                    await takaro.variable.variableControllerUpdate(lastRewardVarId, {\n                        value: now.toString()\n                    });\n                } else {\n                    await takaro.variable.variableControllerCreate({\n                        key: 'last_playtime_reward',\n                        value: now.toString(),\n                        playerId: pog.playerId,\n                        gameServerId: gameServerId,\n                        moduleId: mod.moduleId\n                    });\n                }\n            }\n        } catch (error) {\n            // Skip to next player if there's an error\n            continue;\n        }\n    }\n}\n\nawait main();",
+                    "name": "rewardOnlinePlaytime",
+                    "temporalValue": "0 0 * * *"
+                }
+            ],
+            "functions": [],
+            "permissions": [
+                {
+                    "canHaveCount": true,
+                    "description": "Override the base currency reward for playtime. Count value determines the reward amount.",
+                    "permission": "PLAYTIME_REWARD_OVERRIDE",
+                    "friendlyName": "Playtime Reward Override"
+                },
+                {
+                    "canHaveCount": true,
+                    "description": "Override the chance to receive an item. Count value is the percentage (0-100).",
+                    "permission": "PLAYTIME_ITEM_CHANCE_OVERRIDE",
+                    "friendlyName": "Playtime Item Chance Override"
+                }
+            ]
+        }
+    ],
+    "takaroVersion": "main"
+}
