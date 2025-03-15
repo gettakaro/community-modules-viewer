@@ -210,32 +210,6 @@ export default function ModuleSidebar({
       {/* Module List - Expanded view */}
       {!isCollapsed ? (
         <div className="space-y-4">
-          {/* Built-in Modules Section */}
-          <div>
-            <button
-              onClick={toggleBuiltinSection}
-              className="w-full flex items-center justify-between font-medium text-text-alt dark:text-dark-text-alt text-sm uppercase tracking-wider mb-2"
-            >
-              <span>Built-in ({filteredModules.builtin.length})</span>
-              {isBuiltinSectionCollapsed ? (
-                <FiChevronRight className="h-4 w-4" />
-              ) : (
-                <FiChevronDown className="h-4 w-4" />
-              )}
-            </button>
-
-            {!isBuiltinSectionCollapsed && (
-              <div className="space-y-1 mb-2">
-                {filteredModules.builtin.map(renderModuleItem)}
-                {filteredModules.builtin.length === 0 && (
-                  <div className="px-3 py-2 text-sm text-text-alt dark:text-dark-text-alt">
-                    No built-in modules found
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
           {/* Community Modules Section */}
           <div>
             <button
@@ -251,7 +225,7 @@ export default function ModuleSidebar({
             </button>
 
             {!isCommunityModulesSectionCollapsed && (
-              <div className="space-y-1">
+              <div className="space-y-1 mb-2">
                 {filteredModules.community.map(renderModuleItem)}
                 {filteredModules.community.length === 0 && (
                   <div className="px-3 py-2 text-sm text-text-alt dark:text-dark-text-alt">
@@ -261,22 +235,36 @@ export default function ModuleSidebar({
               </div>
             )}
           </div>
+
+          {/* Built-in Modules Section */}
+          <div>
+            <button
+              onClick={toggleBuiltinSection}
+              className="w-full flex items-center justify-between font-medium text-text-alt dark:text-dark-text-alt text-sm uppercase tracking-wider mb-2"
+            >
+              <span>Built-in ({filteredModules.builtin.length})</span>
+              {isBuiltinSectionCollapsed ? (
+                <FiChevronRight className="h-4 w-4" />
+              ) : (
+                <FiChevronDown className="h-4 w-4" />
+              )}
+            </button>
+
+            {!isBuiltinSectionCollapsed && (
+              <div className="space-y-1">
+                {filteredModules.builtin.map(renderModuleItem)}
+                {filteredModules.builtin.length === 0 && (
+                  <div className="px-3 py-2 text-sm text-text-alt dark:text-dark-text-alt">
+                    No built-in modules found
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         /* Icons-only view when collapsed */
         <div className="flex flex-col items-center space-y-3">
-          {/* Built-in Modules (icons only) */}
-          <div className="w-full flex flex-col items-center">
-            <div className="w-full border-b border-background-alt/20 dark:border-dark-background-alt/20 mb-2 pb-1 flex justify-center">
-              <span className="text-xs text-text-alt dark:text-dark-text-alt uppercase">
-                Built-in
-              </span>
-            </div>
-            <div className="flex flex-col items-center space-y-1">
-              {filteredModules.builtin.map(renderModuleIconItem)}
-            </div>
-          </div>
-
           {/* Community Modules (icons only) */}
           <div className="w-full flex flex-col items-center">
             <div className="w-full border-b border-background-alt/20 dark:border-dark-background-alt/20 mb-2 pb-1 flex justify-center">
@@ -286,6 +274,18 @@ export default function ModuleSidebar({
             </div>
             <div className="flex flex-col items-center space-y-1">
               {filteredModules.community.map(renderModuleIconItem)}
+            </div>
+          </div>
+
+          {/* Built-in Modules (icons only) */}
+          <div className="w-full flex flex-col items-center">
+            <div className="w-full border-b border-background-alt/20 dark:border-dark-background-alt/20 mb-2 pb-1 flex justify-center">
+              <span className="text-xs text-text-alt dark:text-dark-text-alt uppercase">
+                Built-in
+              </span>
+            </div>
+            <div className="flex flex-col items-center space-y-1">
+              {filteredModules.builtin.map(renderModuleIconItem)}
             </div>
           </div>
         </div>
