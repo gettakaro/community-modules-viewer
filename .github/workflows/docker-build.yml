@@ -88,6 +88,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - run: docker ps -a
+      - run: docker logs app-container
+      - run: netstat -tulpn
+      - run: curl -vL http://localhost:3000
+
       - name: Run Playwright tests
         run: npx playwright test
 
