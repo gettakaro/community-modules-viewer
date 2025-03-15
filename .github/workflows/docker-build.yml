@@ -76,8 +76,6 @@ jobs:
         timeout-minutes: 5
         run: |
           docker run -d -p 3000:53118 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ steps.short_sha.outputs.sha_short }}" --name app-container
-          # Wait for container to be ready by curling the server
-          while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000)" != "200" ]]; do sleep 1; done
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
