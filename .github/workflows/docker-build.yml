@@ -75,7 +75,7 @@ jobs:
       - name: Run container
         timeout-minutes: 5
         run: |
-          docker run -d -p 3000:53118 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ steps.short_sha.outputs.sha_short }}" --name app-container
+          docker run --name app-container -d -p 53118:53118 "ghcr.io/gettakaro/community-modules-viewer:sha-${{ steps.short_sha.outputs.sha_short }}"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -89,7 +89,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: TARGET_URL=http://localhost:53118 npx playwright test
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
