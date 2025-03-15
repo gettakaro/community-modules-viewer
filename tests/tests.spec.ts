@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { readdirSync } from 'fs';
 import { getBuiltins } from '../utils/getBuiltins';
+import { ModuleData } from '../utils/moduleData';
 
 const targetUrl = process.env.TARGET_URL || 'http://localhost:3000';
 
@@ -10,7 +11,7 @@ test.describe('Can browse to all community modules', () => {
   for (const file of moduleFiles) {
     const moduleName = file.replace('.json', '');
     test(`Can browse to ${moduleName}`, async ({ page }) => {
-      await page.goto(targetUrl);
+      await page.goto(targetUrl, { waitUntil: 'networkidle' });
 
       await page.getByRole('link', { name: moduleName, exact: true }).click();
       const downloadPromise = page.waitForEvent('download');
@@ -21,17 +22,17 @@ test.describe('Can browse to all community modules', () => {
 });
 
 test.describe('Can browse to all builtin modules', () => {
-  let moduleFiles = [];
+  let moduleFiles: ModuleData[] = [];
 
   test.beforeAll(async () => {
     moduleFiles = await getBuiltins()
   });
 
   test('Can browse to all builtins', async ({ page }) => {
-    for (const { name } of moduleFiles) {
-      await page.goto(targetUrl);
+    for (const { name, versions } of moduleFiles) {
+      await page.goto(targetUrl, { waitUntil: 'networkidle' });
       await page.getByRole('link', { name, exact: true }).click();
-      await page.getByRole('button', { name: 'Built-in module' });
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText(name);
     }
 
   });
