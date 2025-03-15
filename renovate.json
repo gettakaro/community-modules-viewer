@@ -11,6 +11,7 @@
         "github-actions"
       ],
       "automerge": true,
+      "platformAutomerge": true,
       "minimumReleaseAge": "7 days"
     }
   ]
