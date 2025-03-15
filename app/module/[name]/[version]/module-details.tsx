@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FiDownload, FiCheck } from "react-icons/fi";
-import { ModuleData } from "../../../../utils/modules";
 import ModuleSidebar from "./ModuleSidebar";
 import ConfigSection from "./ConfigSection";
 import CommandsSection from "./CommandsSection";
@@ -12,6 +11,7 @@ import CronJobsSection from "./CronJobsSection";
 import FunctionsSection from "./FunctionsSections";
 import PermissionsSection from "./PermissionsSection";
 import Markdown from '../../../../utils/markdown';
+import { ModuleData } from "../../../../utils/moduleData";
 
 interface ModuleDetailsProps {
   moduleData: ModuleData;
