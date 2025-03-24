@@ -1,0 +1,54 @@
+{
+    "name": "limon_VACChecker",
+    "versions": [
+        {
+            "tag": "latest",
+            "description": "this will check if a player has a vac based on date of ban, and you can decide to kick or ban.",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"PunishmentType\":{\"title\":\"PunishmentType\",\"description\":\"PunishmentType\",\"default\":\"kick\",\"type\":\"string\",\"enum\":[\"kick\",\"ban\"]},\"Ban Duration\":{\"title\":\"Ban Duration\",\"description\":\"Ban Duration\",\"default\":3600000,\"x-component\":\"duration\",\"type\":\"number\"},\"PunishmentMessage\":{\"title\":\"PunishmentMessage\",\"description\":\"Punishment Message\",\"default\":\"VAC ban detected {days} days ago\",\"type\":\"string\"},\"DaysThreshold\":{\"title\":\"DaysThreshold\",\"description\":\"Days Threshold\",\"type\":\"string\"}}}",
+            "uiSchema": "{}",
+            "commands": [],
+            "hooks": [
+                {
+                    "function": "import { takaro, data, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, player, pog } = data;\n    console.log(`VACBanChecker: Checking player ${player.name}`);\n\n    // Check for immunity permission\n    if (checkPermission(pog, 'VAC_BAN_IMMUNITY')) {\n        console.log(`VACBanChecker: Player ${player.name} has immunity, skipping check`);\n        return;\n    }\n\n    // Get the player data from their ID\n    const playerData = (await takaro.player.playerControllerGetOne(player.id)).data.data;\n    console.log(`VACBanChecker: Player Steam data loaded for ${player.name}`, {\n        vacBans: playerData.steamNumberOfVACBans,\n        daysSinceLastBan: playerData.steamsDaysSinceLastBan\n    });\n\n    // Check for VAC bans\n    if (playerData.steamNumberOfVACBans > 0 &&\n        parseInt(playerData.steamsDaysSinceLastBan) < data.module.userConfig.daysThreshold) {\n\n        const formattedMessage = data.module.userConfig.PunishmentMessage\n            .replace('{days}', playerData.steamsDaysSinceLastBan)\n            .replace('{threshold}', data.module.userConfig.daysThreshold);\n\n        if (data.module.userConfig.PunishmentType === 'kick') {\n            await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n                reason: formattedMessage\n            });\n\n            await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n                message: `${player.name} was kicked (VAC ban ${playerData.steamsDaysSinceLastBan} days ago)`\n            });\n        } else if (data.module.userConfig.PunishmentType === 'ban') {\n            const now = new Date();\n            const expiresAt = new Date(now.getTime() + (data.module.userConfig['Ban Duration']));\n\n            await takaro.player.banControllerCreate({\n                gameServerId,\n                playerId: player.id,\n                until: expiresAt,\n                reason: formattedMessage\n            });\n\n            await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n                message: `${player.name} was banned (VAC ban ${playerData.steamsDaysSinceLastBan} days ago)`\n            });\n        }\n    }\n}\n\nawait main();",
+                    "name": "vac-checker",
+                    "eventType": "player-connected"
+                }
+            ],
+            "cronJobs": [],
+            "functions": [],
+            "permissions": [
+                {
+                    "canHaveCount": false,
+                    "description": "VAC_BAN_IMMUNITY",
+                    "permission": "VAC_BAN_IMMUNITY",
+                    "friendlyName": "VAC_BAN_IMMUNITY"
+                }
+            ]
+        },
+        {
+            "tag": "1.0.0",
+            "description": "this will check if a player has a vac, and you can decide to kick or ban.",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"PunishmentType\":{\"title\":\"PunishmentType\",\"description\":\"PunishmentType\",\"default\":\"kick\",\"type\":\"string\",\"enum\":[\"kick\",\"ban\"]},\"Ban Duration\":{\"title\":\"Ban Duration\",\"description\":\"Ban Duration\",\"default\":3600000,\"x-component\":\"duration\",\"type\":\"number\"},\"PunishmentMessage\":{\"title\":\"PunishmentMessage\",\"description\":\"Punishment Message\",\"default\":\"VAC ban detected {days} days ago\",\"type\":\"string\"},\"DaysThreshold\":{\"title\":\"DaysThreshold\",\"description\":\"Days Threshold\",\"type\":\"string\"}}}",
+            "uiSchema": "{}",
+            "commands": [],
+            "hooks": [
+                {
+                    "function": "import { takaro, data, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, player, pog } = data;\n    console.log(`VACBanChecker: Checking player ${player.name}`);\n\n    // Check for immunity permission\n    if (checkPermission(pog, 'VAC_BAN_IMMUNITY')) {\n        console.log(`VACBanChecker: Player ${player.name} has immunity, skipping check`);\n        return;\n    }\n\n    // Get the player data from their ID\n    const playerData = (await takaro.player.playerControllerGetOne(player.id)).data.data;\n    console.log(`VACBanChecker: Player Steam data loaded for ${player.name}`, {\n        vacBans: playerData.steamNumberOfVACBans,\n        daysSinceLastBan: playerData.steamsDaysSinceLastBan\n    });\n\n    // Check for VAC bans\n    if (playerData.steamNumberOfVACBans > 0 &&\n        parseInt(playerData.steamsDaysSinceLastBan) < data.module.userConfig.daysThreshold) {\n\n        const formattedMessage = data.module.userConfig.PunishmentMessage\n            .replace('{days}', playerData.steamsDaysSinceLastBan)\n            .replace('{threshold}', data.module.userConfig.daysThreshold);\n\n        if (data.module.userConfig.PunishmentType === 'kick') {\n            await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n                reason: formattedMessage\n            });\n\n            await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n                message: `${player.name} was kicked (VAC ban ${playerData.steamsDaysSinceLastBan} days ago)`\n            });\n        } else if (data.module.userConfig.PunishmentType === 'ban') {\n            const now = new Date();\n            const expiresAt = new Date(now.getTime() + (data.module.userConfig['Ban Duration']));\n\n            await takaro.player.banControllerCreate({\n                gameServerId,\n                playerId: player.id,\n                until: expiresAt,\n                reason: formattedMessage\n            });\n\n            await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n                message: `${player.name} was banned (VAC ban ${playerData.steamsDaysSinceLastBan} days ago)`\n            });\n        }\n    }\n}\n\nawait main();",
+                    "name": "vac-checker",
+                    "eventType": "player-connected"
+                }
+            ],
+            "cronJobs": [],
+            "functions": [],
+            "permissions": [
+                {
+                    "canHaveCount": false,
+                    "description": "VAC_BAN_IMMUNITY",
+                    "permission": "VAC_BAN_IMMUNITY",
+                    "friendlyName": "VAC_BAN_IMMUNITY"
+                }
+            ]
+        }
+    ],
+    "takaroVersion": "main"
+}
