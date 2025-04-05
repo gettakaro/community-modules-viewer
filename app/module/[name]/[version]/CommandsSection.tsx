@@ -8,6 +8,7 @@ interface CommandsProps {
   commands: {
     trigger: string;
     name: string;
+    description: string;
     helpText?: string;
     function: string;
   }[];
@@ -32,6 +33,11 @@ export default function CommandsSection({ commands }: CommandsProps) {
             <div className="text-xl font-medium mb-2 text-text dark:text-dark-text">
               {command.name}
             </div>
+            <div className="bg-placeholder dark:bg-dark-placeholder rounded-lg shadow-sm mb-8 border border-background-alt/20 dark:border-dark-background-alt/20">
+              <Markdown>
+                {command.description || "No description available"}
+              </Markdown>
+            </div>            
             {command.helpText && (
               <div className="text-text-alt dark:text-dark-text-alt mb-4">
                 <Markdown>

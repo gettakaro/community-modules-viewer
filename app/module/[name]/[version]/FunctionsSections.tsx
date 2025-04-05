@@ -2,12 +2,13 @@
 
 import { FiCode } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
-import { renderCode } from "../../../../utils/codeFormatter";
 import CollapsibleImplementation from "./CollapsibleImplementation";
+import Markdown from '../../../../utils/markdown';
 
 interface FunctionsProps {
   functions: {
     name: string;
+    description: string;
     function: string;
   }[];
 }
@@ -28,6 +29,11 @@ export default function FunctionsSection({ functions }: FunctionsProps) {
             <div className="text-xl font-medium mb-3 text-text dark:text-dark-text">
               {func.name}
             </div>
+            <div className="bg-placeholder dark:bg-dark-placeholder rounded-lg shadow-sm mb-8 border border-background-alt/20 dark:border-dark-background-alt/20">
+              <Markdown>
+                {func.description || "No description available"}
+              </Markdown>
+            </div>               
             <CollapsibleImplementation code={func.function} />
           </div>
         ))}

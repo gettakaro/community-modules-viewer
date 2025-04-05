@@ -2,10 +2,12 @@
 import { FiMessageSquare } from "react-icons/fi";
 import ExpandableSection from "./ExpandableSection";
 import CollapsibleImplementation from "./CollapsibleImplementation";
+import Markdown from "../../../../utils/markdown";
 
 interface HooksProps {
   hooks: {
     name: string;
+    description: string;
     eventType: string;
     function: string;
   }[];
@@ -32,7 +34,13 @@ export default function HooksSection({ hooks }: HooksProps) {
                 {hook.eventType}
               </span>
             </div>
-            
+
+            <div className="bg-placeholder dark:bg-dark-placeholder rounded-lg shadow-sm mb-8 border border-background-alt/20 dark:border-dark-background-alt/20">
+                <Markdown>
+                  {hook.description || "No description available"}
+                </Markdown>
+              </div>      
+
             <CollapsibleImplementation code={hook.function} />
           </div>
         ))}

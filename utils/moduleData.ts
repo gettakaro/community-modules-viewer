@@ -19,6 +19,7 @@ interface ModuleVersion {
 
 interface Hook {
   name: string;
+  description: string;
   eventType: string;
   function: string;
 }
@@ -26,18 +27,21 @@ interface Hook {
 interface Command {
   trigger: string;
   name: string;
+  description: string;
   helpText?: string;
   function: string;
 }
 
 interface CronJob {
   name: string;
+  description: string;
   schedule: string;
   function: string;
 }
 
 interface Function {
   name: string;
+  description: string;
   function: string;
 }
 
