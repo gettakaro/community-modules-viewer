@@ -39,7 +39,7 @@ export function ModuleDetails({
     // Only navigate if the selected version is different from the current URL
     if (selectedVersion && selectedVersion.tag) {
       const currentUrlPath = window.location.pathname;
-      const targetPath = `/module/${moduleData.name}/${selectedVersion.tag}`;
+      const targetPath = `/module/${moduleData.name}/${selectedVersion.tag}`.replaceAll(' ', '%20');
       
       // Only push to history if we're actually changing versions
       if (currentUrlPath !== targetPath) {
