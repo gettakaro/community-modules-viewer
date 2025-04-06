@@ -1,0 +1,40 @@
+{
+    "name": "Mad_Bosskills",
+    "versions": [
+        {
+            "tag": "2.0.1",
+            "description": "Pay and Announcement for Bosses",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[\"coinAmountDevourer\"],\"additionalProperties\":false,\"properties\":{\"coinAmountDevourer\":{\"title\":\"coinAmountDevourer\",\"description\":\"Amoint of Coin to award\",\"default\":0,\"type\":\"number\"},\"announceDevourer\":{\"title\":\"announceDevourer\",\"description\":\"Post in chat Boss Kill\",\"type\":\"string\"}}}",
+            "uiSchema": "{}",
+            "commands": [],
+            "hooks": [
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, eventData } = data;\n\n    const namePattern = /entityKilled: (\\w+) \\(Steam_/;\n    const nameMatch = eventData.msg.match(namePattern);\n    const playerName = nameMatch ? nameMatch[1] : \"Unknown\";\n\n\n    const pattern = /Steam_(\\d+)/;\n    const match = data.eventData.msg.match(pattern);\n    const steamIdx = match[1];\n    const playerid = (await takaro.player.playerControllerSearch({ filters: { steamId: [steamIdx] } })).data.data[0].id;\n\n    // Send the message with backticks\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `[FFFF33]${playerName} just killed a [-][00FEED]Devourer[-] and received 300 [D49F69]Twinkies[-]`\n    });\n\n    // Grant currency to the player\n    await takaro.playerOnGameserver.playerOnGameServerControllerAddCurrency(gameServerId, playerid, {\n        currency: 300\n    });\n}\n\nawait main();",
+                    "name": "Devourer",
+                    "eventType": "log"
+                }
+            ],
+            "cronJobs": [],
+            "functions": [],
+            "permissions": []
+        },
+        {
+            "tag": "latest",
+            "description": "Pay and Announcement for Bosses",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[\"coinAmountDevourer\"],\"additionalProperties\":false,\"properties\":{\"coinAmountDevourer\":{\"title\":\"coinAmountDevourer\",\"description\":\"Amoint of Coin to award\",\"default\":0,\"type\":\"number\"},\"announceDevourer\":{\"title\":\"announceDevourer\",\"description\":\"Post in chat Boss Kill\",\"type\":\"string\"}}}",
+            "uiSchema": "{}",
+            "commands": [],
+            "hooks": [
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, eventData } = data;\n\n    const namePattern = /entityKilled: (\\w+) \\(Steam_/;\n    const nameMatch = eventData.msg.match(namePattern);\n    const playerName = nameMatch ? nameMatch[1] : \"Unknown\";\n\n\n    const pattern = /Steam_(\\d+)/;\n    const match = data.eventData.msg.match(pattern);\n    const steamIdx = match[1];\n    const playerid = (await takaro.player.playerControllerSearch({ filters: { steamId: [steamIdx] } })).data.data[0].id;\n\n    // Send the message with backticks\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `[FFFF33]${playerName} just killed a [-][00FEED]Devourer[-] and received 300 [D49F69]Twinkies[-]`\n    });\n\n    // Grant currency to the player\n    await takaro.playerOnGameserver.playerOnGameServerControllerAddCurrency(gameServerId, playerid, {\n        currency: 300\n    });\n}\n\nawait main();",
+                    "name": "Devourer",
+                    "eventType": "log"
+                }
+            ],
+            "cronJobs": [],
+            "functions": [],
+            "permissions": []
+        }
+    ],
+    "takaroVersion": "main"
+}

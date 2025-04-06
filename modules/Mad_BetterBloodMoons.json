@@ -1,0 +1,39 @@
+{
+    "name": "Mad_BetterBloodMoons",
+    "versions": [
+        {
+            "tag": "latest",
+            "description": "Run the command /BBM and blood moons will automatically be set by CPM to override the default Blood Moons.  If you'd like to deactivate it, use /BBMoff.",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+            "uiSchema": "{}",
+            "commands": [
+                {
+                    "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'BBM_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the Better Blood Moons commmand.');\n    }\n\n    await pog.pm(`[70FE02]It is recommended to change the CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to [CC6CE7]false[-]`);\n\n\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsOverrideVanillaSpawner false`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAdjustForOnlinePlayers false`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsEnemyCount 0`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAddMaxAlive 0`,\n    });\n\n\n\n    await pog.pm(`[ADDFB3]Better Blood Moons have been turned off.[-]`);\n}\nawait main();",
+                    "name": "BBMoff",
+                    "trigger": "BBMoff",
+                    "helpText": "Run this command to set Better Blood Moons to default. If you changed the CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to true, set it back to false",
+                    "arguments": []
+                },
+                {
+                    "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'BBM_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the Better Blood Moons commmand.');\n    }\n\n    await pog.pm(`[70FE02]It is recommended to change the CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to [CC6CE7]true[-]`);\n\n\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsOverrideVanillaSpawner true`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAdjustForOnlinePlayers true`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsEnemyCount 6`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAddMaxAlive 40`,\n    });\n\n\n\n    await pog.pm(`[ADDFB3]The rest of the recommended settings will be handled by this command... [CC6CE7]Enjoy![-]`);\n}\nawait main();",
+                    "name": "BBM",
+                    "trigger": "BBM",
+                    "helpText": "[FF6D6A]Run this command to set Better Blood Moons to default. If you change dthe CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to true, set it back to false,",
+                    "arguments": []
+                }
+            ],
+            "hooks": [],
+            "cronJobs": [],
+            "functions": [],
+            "permissions": [
+                {
+                    "canHaveCount": false,
+                    "description": "Blood Moons",
+                    "permission": "BETTER_BLOOD_MOONS",
+                    "friendlyName": "Better Blood Moons"
+                }
+            ]
+        }
+    ],
+    "takaroVersion": "main"
+}
