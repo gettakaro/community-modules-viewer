@@ -5,7 +5,7 @@ import { ModuleData } from '../utils/moduleData';
 
 const targetUrl = process.env.TARGET_URL || 'http://localhost:3000';
 
-const moduleFiles = readdirSync('modules');
+const moduleFiles = readdirSync('modules').filter(file => file.endsWith('.json'));
 
 test.describe('Can browse to all community modules', () => {
   for (const file of moduleFiles) {
