@@ -22,20 +22,20 @@
   - [x] 3.4 [depends on: 1.6] Create section components (Config, Commands, Hooks, CronJobs, Permissions)
   - [x] 3.5 [depends on: 3.2, 3.4] Build ModuleDetails main component
 
-- [ ] 4.0 Create module browsing and navigation features
+- [x] 4.0 Create module browsing and navigation features
   - [x] 4.1 [depends on: 2.3, 3.2] Build ModuleSidebar with module listing
-  - [ ] 4.2 [depends on: 4.1] Implement sidebar collapse/expand functionality with LocalStorage
+  - [x] 4.2 [depends on: 4.1] Implement sidebar collapse/expand functionality with LocalStorage
   - [x] 4.3 [depends on: 2.4] Create dynamic routing pages for modules
   - [x] 4.4 [depends on: 4.3] Implement auto-redirect logic for homepage and version routes
   - [x] 4.5 [depends on: 3.5, 4.3] Connect module detail pages with ModuleDetails component
 
-- [ ] 5.0 Implement search, filtering, and export functionality
-  - [ ] 5.1 [depends on: 4.1] Add search input to ModuleSidebar
-  - [ ] 5.2 [depends on: 5.1] Create searchUtils for real-time filtering
-  - [ ] 5.3 [depends on: 5.2] Implement search result counts display
-  - [ ] 5.4 [depends on: 5.1] Add LocalStorage persistence for search state
-  - [ ] 5.5 [depends on: 3.5] Implement JSON export functionality with download
-  - [ ] 5.6 [depends on: 4.5] Add version selector dropdown to module details
+- [x] 5.0 Implement search, filtering, and export functionality
+  - [x] 5.1 [depends on: 4.1] Add search input to ModuleSidebar
+  - [x] 5.2 [depends on: 5.1] Create searchUtils for real-time filtering
+  - [x] 5.3 [depends on: 5.2] Implement search result counts display
+  - [x] 5.4 [depends on: 5.1] Add LocalStorage persistence for search state
+  - [x] 5.5 [depends on: 3.5] Implement JSON export functionality with download
+  - [x] 5.6 [depends on: 4.5] Add version selector dropdown to module details
 
 - [ ] 6.0 Add testing, CI/CD, and production optimization
   - [ ] 6.1 [depends on: 3.0] Write unit tests for all components
@@ -74,7 +74,7 @@
 - `tests/e2e/` - Directory for Playwright E2E tests (created)
 - `components/ModuleSidebar.tsx` - Collapsible sidebar with module list, search, filtering, and navigation functionality (created)
 - `app/module/layout.tsx` - Two-column layout component integrating sidebar with module content pages (created)
-- `components/ModuleDetails.tsx` - Main module details display component with version management and section integration (created)
+- `components/ModuleDetails.tsx` - Main module details display component with version management, section integration, and export functionality (updated)
 - `components/ModuleDetails.test.tsx` - Unit tests for module details
 - `components/ModuleCard.tsx` - Reusable card component for displaying module information with Takaro styling (created)
 - `components/ConfigSection.tsx` - Configuration schema display component with JSON/UI schema parsing and display (created)
@@ -87,6 +87,7 @@
 - `utils/moduleLoader.test.ts` - Unit tests for module loader
 - `utils/searchUtils.ts` - Search and filter utility functions
 - `utils/searchUtils.test.ts` - Unit tests for search utilities
+- `utils/exportUtils.ts` - Module export functionality for JSON download and clipboard copying (created)
 - `lib/github.ts` - GitHub API client for fetching built-in modules with Zod validation (updated)
 - `lib/types.ts` - TypeScript interfaces and Zod validation schemas for module data structures (updated with validation)
 - `tailwind.config.js` - Tailwind configuration with Takaro theme colors

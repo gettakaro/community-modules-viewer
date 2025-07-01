@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { ModuleWithMeta } from '@/lib/types';
 import { ConfigSection } from './ConfigSection';
 import { CommandsSection } from './CommandsSection';
 import { HooksSection } from './HooksSection';
 import { CronJobsSection } from './CronJobsSection';
 import { PermissionsSection } from './PermissionsSection';
+import { exportModuleAsJSON } from '@/utils/exportUtils';
 
 export interface ModuleDetailsProps {
   /** Module data to display */
@@ -61,6 +62,42 @@ export function ModuleDetails({
   // Handle version change
   const handleVersionChange = (version: string) => {
     onVersionChange?.(version);
+  };
+
+  // Export functionality
+  const [exportMenuOpen, setExportMenuOpen] = useState(false);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
+
+  // Click outside handler for export menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        exportMenuRef.current &&
+        !exportMenuRef.current.contains(event.target as Node)
+      ) {
+        setExportMenuOpen(false);
+      }
+    };
+
+    if (exportMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [exportMenuOpen]);
+
+  const handleExportCurrentVersion = () => {
+    if (currentVersion) {
+      exportModuleAsJSON(module, currentVersion);
+      setExportMenuOpen(false);
+    }
+  };
+
+  const handleExportAllVersions = () => {
+    exportModuleAsJSON(module);
+    setExportMenuOpen(false);
   };
 
   // Calculate section availability and counts
@@ -144,11 +181,102 @@ export function ModuleDetails({
               </p>
             )}
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <span className={sourceColors[module.source]}>{module.source}</span>
-            <span className="text-xs text-takaro-text-muted">
-              Takaro {module.takaroVersion}
-            </span>
+          <div className="flex items-start gap-4">
+            <div className="flex flex-col items-end gap-2">
+              <span className={sourceColors[module.source]}>
+                {module.source}
+              </span>
+              <span className="text-xs text-takaro-text-muted">
+                Takaro {module.takaroVersion}
+              </span>
+            </div>
+
+            {/* Export Button */}
+            <div className="relative" ref={exportMenuRef}>
+              <button
+                onClick={() => setExportMenuOpen(!exportMenuOpen)}
+                className="btn btn-ghost btn-sm"
+                aria-label="Export module data"
+                title="Export module data"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+              </button>
+
+              {/* Export Menu Dropdown */}
+              {exportMenuOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-takaro-card border border-takaro-border rounded-lg shadow-lg z-10">
+                  <div className="p-2">
+                    <button
+                      onClick={handleExportCurrentVersion}
+                      className="w-full text-left px-3 py-2 text-sm text-takaro-text-primary hover:bg-takaro-card-hover rounded transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+                          />
+                        </svg>
+                        <div>
+                          <div className="font-medium">
+                            Export Current Version
+                          </div>
+                          <div className="text-xs text-takaro-text-muted">
+                            Download {currentVersion.tag} as JSON
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={handleExportAllVersions}
+                      className="w-full text-left px-3 py-2 text-sm text-takaro-text-primary hover:bg-takaro-card-hover rounded transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                          />
+                        </svg>
+                        <div>
+                          <div className="font-medium">Export All Versions</div>
+                          <div className="text-xs text-takaro-text-muted">
+                            Download complete module data
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
