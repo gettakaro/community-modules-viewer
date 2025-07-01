@@ -45,6 +45,21 @@
   - [x] 6.5 [depends on: 4.0, 5.0] Implement lazy loading for code highlighting
   - [x] 6.6 [depends on: 6.3] Add mobile responsive design and test on various devices
 
+- [ ] 7.0 Comprehensive E2E Testing Suite
+  - [ ] 7.1 [depends on: 6.6] Mobile responsiveness E2E tests - hamburger menu interactions, mobile navigation, responsive layouts
+  - [ ] 7.2 [depends on: 5.0] Source filtering E2E tests - Community/Built-in filter functionality and filter combinations
+  - [ ] 7.3 [depends on: 4.0] Navigation edge cases E2E tests - auto-redirects, 404 handling, URL validation
+  - [ ] 7.4 [depends on: 3.0] All section types E2E tests - config, commands, hooks, cron jobs, functions, permissions sections
+  - [ ] 7.5 [depends on: 7.4] Section interactions E2E tests - collapse/expand, Pretty/Raw toggle for each section type
+  - [ ] 7.6 [depends on: 7.4] Empty state handling E2E tests - modules with missing sections, empty data scenarios
+  - [ ] 7.7 [depends on: 5.0] State persistence E2E tests - localStorage for search/filter/sidebar state across sessions
+  - [ ] 7.8 [depends on: 4.0] Cross-module navigation E2E tests - browsing between modules while maintaining state
+  - [ ] 7.9 [depends on: 5.6] Version management E2E tests - switching versions within module, URL updates
+  - [ ] 7.10 [depends on: 5.5] Export workflows E2E tests - current version vs all versions export validation
+  - [ ] 7.11 [depends on: 6.6] Multi-device E2E tests - tablet breakpoints, various mobile screen sizes
+  - [ ] 7.12 [depends on: 6.5] Performance E2E tests - lazy loading verification, large module handling
+  - [ ] 7.13 [depends on: 2.0] Error scenarios E2E tests - network failures, malformed data, missing assets
+
 ## Relevant Files
 
 - `app/layout.tsx` - Root layout with Takaro-aligned dark theme, metadata, and viewport configuration (updated)
