@@ -1,0 +1,48 @@
+{
+  "name": "community-modules-viewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:dev": "docker compose up",
+    "docker:build": "docker compose build",
+    "docker:down": "docker compose down",
+    "docker:prod": "docker compose -f docker-compose.prod.yml up",
+    "docker:prod:build": "docker compose -f docker-compose.prod.yml build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gettakaro/community-modules-viewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gettakaro/community-modules-viewer/issues"
+  },
+  "homepage": "https://github.com/gettakaro/community-modules-viewer#readme",
+  "dependencies": {
+    "@playwright/test": "^1.53.2",
+    "next": "^15.3.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.0.7",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^10.4.21",
+    "daisyui": "^5.0.43",
+    "eslint-config-next": "^15.3.4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3"
+  }
+}

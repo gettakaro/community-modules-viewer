@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-takaro-background text-white;
+  }
+  
+  body {
+    @apply bg-takaro-background;
+  }
+}
