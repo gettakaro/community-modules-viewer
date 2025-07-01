@@ -13,9 +13,11 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "typecheck": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docker:dev": "docker compose up",
+    "docker:up": "docker compose up",
     "docker:build": "docker compose build",
     "docker:down": "docker compose down",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up",
+    "docker:dev:build": "docker compose -f docker-compose.dev.yml build",
     "docker:prod": "docker compose -f docker-compose.prod.yml up",
     "docker:prod:build": "docker compose -f docker-compose.prod.yml build"
   },

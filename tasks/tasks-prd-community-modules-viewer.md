@@ -15,19 +15,19 @@
   - [x] 2.4 [depends on: 2.3] Implement static page generation for all module/version combinations
   - [x] 2.5 [depends on: 2.1] Add module data validation and error handling
 
-- [ ] 3.0 Build core UI components with Takaro design system
+- [x] 3.0 Build core UI components with Takaro design system
   - [x] 3.1 [depends on: 1.2] Create root layout with dark theme and global styles
   - [x] 3.2 [depends on: 3.1] Build ModuleCard component with Takaro styling
   - [x] 3.3 [depends on: 3.1] Implement CollapsibleCode component with PrismJS integration
-  - [ ] 3.4 [depends on: 1.6] Create section components (Config, Commands, Hooks, CronJobs, Permissions)
-  - [ ] 3.5 [depends on: 3.2, 3.4] Build ModuleDetails main component
+  - [x] 3.4 [depends on: 1.6] Create section components (Config, Commands, Hooks, CronJobs, Permissions)
+  - [x] 3.5 [depends on: 3.2, 3.4] Build ModuleDetails main component
 
 - [ ] 4.0 Create module browsing and navigation features
   - [ ] 4.1 [depends on: 2.3, 3.2] Build ModuleSidebar with module listing
   - [ ] 4.2 [depends on: 4.1] Implement sidebar collapse/expand functionality with LocalStorage
-  - [ ] 4.3 [depends on: 2.4] Create dynamic routing pages for modules
-  - [ ] 4.4 [depends on: 4.3] Implement auto-redirect logic for homepage and version routes
-  - [ ] 4.5 [depends on: 3.5, 4.3] Connect module detail pages with ModuleDetails component
+  - [x] 4.3 [depends on: 2.4] Create dynamic routing pages for modules
+  - [x] 4.4 [depends on: 4.3] Implement auto-redirect logic for homepage and version routes
+  - [x] 4.5 [depends on: 3.5, 4.3] Connect module detail pages with ModuleDetails component
 
 - [ ] 5.0 Implement search, filtering, and export functionality
   - [ ] 5.1 [depends on: 4.1] Add search input to ModuleSidebar
@@ -74,14 +74,14 @@
 - `tests/e2e/` - Directory for Playwright E2E tests (created)
 - `components/ModuleSidebar.tsx` - Collapsible sidebar with module list and search
 - `components/ModuleSidebar.test.tsx` - Unit tests for sidebar component
-- `components/ModuleDetails.tsx` - Main module details display component
+- `components/ModuleDetails.tsx` - Main module details display component with version management and section integration (created)
 - `components/ModuleDetails.test.tsx` - Unit tests for module details
 - `components/ModuleCard.tsx` - Reusable card component for displaying module information with Takaro styling (created)
-- `components/ConfigSection.tsx` - Configuration schema display component
-- `components/CommandsSection.tsx` - Commands list with collapsible code
-- `components/HooksSection.tsx` - Hooks display with implementation code
-- `components/CronJobsSection.tsx` - Cron jobs section component
-- `components/PermissionsSection.tsx` - Permissions display component
+- `components/ConfigSection.tsx` - Configuration schema display component with JSON/UI schema parsing and display (created)
+- `components/CommandsSection.tsx` - Commands list with collapsible code, arguments, and usage examples (created)
+- `components/HooksSection.tsx` - Hooks display with implementation code, event types, and regex patterns (created)
+- `components/CronJobsSection.tsx` - Cron jobs section component with human-readable schedule explanations (created)
+- `components/PermissionsSection.tsx` - Permissions display component with grouping and count capabilities (created)
 - `components/CollapsibleCode.tsx` - Reusable code viewer with PrismJS syntax highlighting and expand/collapse functionality (created)
 - `utils/moduleLoader.ts` - Module data fetching and processing utilities with aggregation logic and Zod validation (updated)
 - `utils/moduleLoader.test.ts` - Unit tests for module loader

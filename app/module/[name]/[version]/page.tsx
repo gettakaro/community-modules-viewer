@@ -3,6 +3,7 @@ import {
   getModuleByName,
   getAllModuleVersionPaths,
 } from '@/utils/moduleLoader';
+import { ModuleDetails } from '@/components/ModuleDetails';
 
 interface ModuleVersionPageProps {
   params: Promise<{
@@ -40,33 +41,9 @@ export default async function ModuleVersionPage({
     notFound();
   }
 
-  // For now, render a simple placeholder
-  // Later this will use the ModuleDetails component
   return (
-    <div className="container mx-auto p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">{moduleData.name}</h1>
-        <div className="flex items-center gap-4">
-          <span className="badge badge-primary">{version}</span>
-          <span className="badge badge-secondary">{moduleData.source}</span>
-        </div>
-      </div>
-
-      <div className="prose prose-invert max-w-none">
-        <h2>Description</h2>
-        <p>{moduleVersion.description || 'No description available.'}</p>
-
-        <h2>Module Information</h2>
-        <ul>
-          <li>Commands: {moduleVersion.commands.length}</li>
-          <li>Hooks: {moduleVersion.hooks.length}</li>
-          <li>Cron Jobs: {moduleVersion.cronJobs.length}</li>
-          <li>Permissions: {moduleVersion.permissions.length}</li>
-        </ul>
-
-        <h2>Takaro Version</h2>
-        <p>{moduleData.takaroVersion}</p>
-      </div>
+    <div className="container mx-auto p-6 max-w-6xl">
+      <ModuleDetails module={moduleData} selectedVersion={version} />
     </div>
   );
 }

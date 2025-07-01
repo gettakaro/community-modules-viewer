@@ -1,47 +1,67 @@
-# Docker Development Guide
+# Docker Environment
 
-## Development
+This project uses Docker with a **static-first approach** for realistic testing.
 
-To run the application in development mode with Docker:
+## Quick Start
+
+### Default (Static Build - Recommended)
+
+Start the static build server:
 
 ```bash
-# Build and start the development container
-npm run docker:dev
-
-# Or manually:
+npm run docker:up
+# or
 docker compose up
-
-# To rebuild the container
-npm run docker:build
-
-# To stop the container
-npm run docker:down
 ```
 
-The application will be available at http://localhost:3001 with hot-reloading enabled.
+This will:
 
-## Production
+- Build the Next.js application as static files
+- Serve static files using a simple HTTP server
+- Make the app available at http://localhost:3001
+- No hydration, no dev server - pure static files
 
-To build and run the production container:
+### Development Mode (When Needed)
+
+For active development with hot reloading:
 
 ```bash
-# Build the production container
-npm run docker:prod:build
-
-# Run the production container
-npm run docker:prod
+npm run docker:dev
 ```
 
-## Docker Commands
+This enables:
 
-- `npm run docker:dev` - Start development environment
-- `npm run docker:build` - Build development container
-- `npm run docker:down` - Stop all containers
-- `npm run docker:prod` - Start production environment
-- `npm run docker:prod:build` - Build production container
+- Next.js development server
+- Hot module reloading
+- Development features
 
-## Notes
+## Available Commands
 
-- The development container mounts the local directory for hot-reloading
-- Node modules are stored in a separate volume to avoid conflicts
-- Production build creates a static export served by a lightweight server
+| Command                    | Description                                                |
+| -------------------------- | ---------------------------------------------------------- |
+| `npm run docker:up`        | **Default**: Static build server (recommended for testing) |
+| `npm run docker:build`     | Build the static Docker image                              |
+| `npm run docker:down`      | Stop all containers                                        |
+| `npm run docker:dev`       | Development server with hot reloading                      |
+| `npm run docker:dev:build` | Build development Docker image                             |
+| `npm run docker:prod`      | Production static server (same as default)                 |
+
+## Why Static First?
+
+- **Realistic Testing**: Tests the actual static files users receive
+- **No Hydration Issues**: Pure static HTML/CSS/JS
+- **Faster**: No server-side processing
+- **Production-Like**: Matches deployment environment
+
+## Configuration
+
+- **Port**: 3001 (mapped from container port 3000)
+- **Static Files**: Generated in `out/` directory
+- **Server**: Uses `serve` package for static file serving
+
+## Troubleshooting
+
+- **Port conflicts**: Ensure port 3001 is available
+- **Build issues**: Run `docker compose build --no-cache` to rebuild
+- **Static files**: Check `out/` directory is generated after build
+- **Styling issues**: Use static build (default) instead of dev server

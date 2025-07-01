@@ -19,7 +19,8 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "prefer-const": "error"
+    "prefer-const": "error",
+    "react/no-unescaped-entities": "off"
   },
   "overrides": [
     {
