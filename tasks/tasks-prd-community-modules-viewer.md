@@ -23,7 +23,7 @@
   - [x] 3.5 [depends on: 3.2, 3.4] Build ModuleDetails main component
 
 - [ ] 4.0 Create module browsing and navigation features
-  - [ ] 4.1 [depends on: 2.3, 3.2] Build ModuleSidebar with module listing
+  - [x] 4.1 [depends on: 2.3, 3.2] Build ModuleSidebar with module listing
   - [ ] 4.2 [depends on: 4.1] Implement sidebar collapse/expand functionality with LocalStorage
   - [x] 4.3 [depends on: 2.4] Create dynamic routing pages for modules
   - [x] 4.4 [depends on: 4.3] Implement auto-redirect logic for homepage and version routes
@@ -48,7 +48,7 @@
 ## Relevant Files
 
 - `app/layout.tsx` - Root layout with Takaro-aligned dark theme, metadata, and viewport configuration (updated)
-- `app/page.tsx` - Homepage with auto-redirect to first module (updated - now functional)
+- `app/page.tsx` - Homepage with module statistics and sidebar integration (updated)
 - `app/module/[name]/page.tsx` - Module detail page with version redirect (created)
 - `app/module/[name]/[version]/page.tsx` - Module version detail page (created)
 - `package.json` - Updated with Next.js 15, React, TypeScript, Zod, and PrismJS dependencies
@@ -72,8 +72,8 @@
 - `utils/` - Directory for utility functions (created)
 - `lib/` - Directory for library code and types (created)
 - `tests/e2e/` - Directory for Playwright E2E tests (created)
-- `components/ModuleSidebar.tsx` - Collapsible sidebar with module list and search
-- `components/ModuleSidebar.test.tsx` - Unit tests for sidebar component
+- `components/ModuleSidebar.tsx` - Collapsible sidebar with module list, search, filtering, and navigation functionality (created)
+- `app/module/layout.tsx` - Two-column layout component integrating sidebar with module content pages (created)
 - `components/ModuleDetails.tsx` - Main module details display component with version management and section integration (created)
 - `components/ModuleDetails.test.tsx` - Unit tests for module details
 - `components/ModuleCard.tsx` - Reusable card component for displaying module information with Takaro styling (created)

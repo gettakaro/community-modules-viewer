@@ -154,7 +154,63 @@
 
   /* Module sidebar styling */
   .sidebar-takaro {
-    @apply bg-takaro-card border-r border-takaro-border;
+    @apply bg-takaro-card border-r border-takaro-border flex flex-col h-full min-h-screen w-80 fixed left-0 top-0 z-30 transition-all duration-300;
+  }
+
+  .sidebar-takaro.sidebar-collapsed {
+    @apply w-12;
+  }
+
+  .sidebar-header {
+    @apply p-4 border-b border-takaro-border;
+  }
+
+  .sidebar-stats {
+    @apply mt-2;
+  }
+
+  .sidebar-search {
+    @apply p-4 border-b border-takaro-border;
+  }
+
+  .sidebar-filter {
+    @apply px-4 pb-4;
+  }
+
+  .sidebar-modules {
+    @apply flex-1 p-4 overflow-y-auto;
+  }
+
+  .module-card-sidebar {
+    @apply text-sm;
+  }
+
+  .module-card-sidebar h3 {
+    @apply text-base;
+  }
+
+  .module-card-sidebar p {
+    @apply text-xs;
+  }
+
+  /* Main content area when sidebar is present */
+  .main-content-with-sidebar {
+    @apply ml-80 transition-all duration-300;
+  }
+
+  /* Responsive sidebar adjustments */
+  @media (max-width: 768px) {
+    .sidebar-takaro {
+      @apply -translate-x-full;
+    }
+
+    .sidebar-takaro.sidebar-open {
+      @apply translate-x-0;
+    }
+
+    .main-content-with-sidebar {
+      @apply ml-0;
+    }
   }
 
   /* Search input styling */
