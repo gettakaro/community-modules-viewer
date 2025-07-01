@@ -52,8 +52,8 @@ function transformModule(moduleData) {
     const transformedVersion = {
       tag: version.tag,
       description: version.description || `Built-in module: ${moduleData.name}`,
-      configSchema: JSON.stringify(version.configSchema || {}),
-      uiSchema: JSON.stringify(version.uiSchema || {}),
+      configSchema: version.configSchema || '{}',
+      uiSchema: version.uiSchema || '{}',
       commands: [],
       hooks: [],
       cronJobs: [],
