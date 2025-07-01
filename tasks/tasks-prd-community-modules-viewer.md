@@ -18,7 +18,7 @@
 - [ ] 3.0 Build core UI components with Takaro design system
   - [x] 3.1 [depends on: 1.2] Create root layout with dark theme and global styles
   - [x] 3.2 [depends on: 3.1] Build ModuleCard component with Takaro styling
-  - [ ] 3.3 [depends on: 3.1] Implement CollapsibleCode component with PrismJS integration
+  - [x] 3.3 [depends on: 3.1] Implement CollapsibleCode component with PrismJS integration
   - [ ] 3.4 [depends on: 1.6] Create section components (Config, Commands, Hooks, CronJobs, Permissions)
   - [ ] 3.5 [depends on: 3.2, 3.4] Build ModuleDetails main component
 
@@ -51,7 +51,7 @@
 - `app/page.tsx` - Homepage with auto-redirect to first module (updated - now functional)
 - `app/module/[name]/page.tsx` - Module detail page with version redirect (created)
 - `app/module/[name]/[version]/page.tsx` - Module version detail page (created)
-- `package.json` - Updated with Next.js 15, React, TypeScript, and Zod dependencies
+- `package.json` - Updated with Next.js 15, React, TypeScript, Zod, and PrismJS dependencies
 - `tsconfig.json` - TypeScript configuration for Next.js
 - `next.config.js` - Next.js configuration with static export settings
 - `.gitignore` - Already existed with proper Next.js entries
@@ -82,7 +82,7 @@
 - `components/HooksSection.tsx` - Hooks display with implementation code
 - `components/CronJobsSection.tsx` - Cron jobs section component
 - `components/PermissionsSection.tsx` - Permissions display component
-- `components/CollapsibleCode.tsx` - Reusable code viewer with syntax highlighting
+- `components/CollapsibleCode.tsx` - Reusable code viewer with PrismJS syntax highlighting and expand/collapse functionality (created)
 - `utils/moduleLoader.ts` - Module data fetching and processing utilities with aggregation logic and Zod validation (updated)
 - `utils/moduleLoader.test.ts` - Unit tests for module loader
 - `utils/searchUtils.ts` - Search and filter utility functions
