@@ -8,7 +8,7 @@ test.describe('Community Modules Viewer', () => {
     await expect(page).toHaveTitle(/Community Modules/);
 
     // Check for module statistics display
-    await expect(page.locator('text=Available Modules')).toBeVisible();
+    await expect(page.locator('text=Total Modules')).toBeVisible();
 
     // Verify sidebar is present
     await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
@@ -23,10 +23,12 @@ test.describe('Community Modules Viewer', () => {
     // Click on first module link
     const firstModuleLink = page.locator('[data-testid="module-link"]').first();
     await expect(firstModuleLink).toBeVisible();
-    await firstModuleLink.click();
 
-    // Should navigate to module details page
-    await expect(page.url()).toMatch(/\/module\/[^\/]+\/latest/);
+    // Click and wait for navigation
+    await Promise.all([
+      page.waitForURL(/\/module\/[^\/]+\/[^\/]+/),
+      firstModuleLink.click(),
+    ]);
 
     // Check that module details are displayed
     await expect(page.locator('[data-testid="module-details"]')).toBeVisible();
@@ -53,7 +55,7 @@ test.describe('Community Modules Viewer', () => {
 
   test('schema display Pretty/Raw toggle works', async ({ page }) => {
     // Navigate to a module with config schema
-    await page.goto('/module/geoBlock/latest');
+    await page.goto('/module/geoBlock');
 
     // Wait for page to load
     await expect(page.locator('[data-testid="module-details"]')).toBeVisible();
@@ -65,7 +67,8 @@ test.describe('Community Modules Viewer', () => {
     if (await prettyButton.isVisible()) {
       // Test switching to Raw view
       await rawButton.click();
-      await expect(page.locator('pre')).toBeVisible(); // Raw JSON should be in <pre>
+      // Check that at least one pre element is visible (multiple schema sections may have pre elements)
+      await expect(page.locator('pre').first()).toBeVisible();
 
       // Switch back to Pretty view
       await prettyButton.click();
@@ -77,7 +80,7 @@ test.describe('Community Modules Viewer', () => {
 
   test('collapsible code sections work', async ({ page }) => {
     // Navigate to a module page
-    await page.goto('/module/geoBlock/latest');
+    await page.goto('/module/geoBlock');
 
     // Wait for page to load
     await expect(page.locator('[data-testid="module-details"]')).toBeVisible();
@@ -98,7 +101,7 @@ test.describe('Community Modules Viewer', () => {
 
   test('version selector dropdown works', async ({ page }) => {
     // Navigate to a module that has multiple versions
-    await page.goto('/module/geoBlock/latest');
+    await page.goto('/module/geoBlock');
 
     // Wait for page to load
     await expect(page.locator('[data-testid="module-details"]')).toBeVisible();
@@ -116,7 +119,7 @@ test.describe('Community Modules Viewer', () => {
 
   test('module export functionality', async ({ page }) => {
     // Navigate to a module page
-    await page.goto('/module/geoBlock/latest');
+    await page.goto('/module/geoBlock');
 
     // Wait for page to load
     await expect(page.locator('[data-testid="module-details"]')).toBeVisible();
