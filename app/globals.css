@@ -3,11 +3,224 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Takaro Dark Theme Variables */
+    --takaro-primary: #8b5cf6;
+    --takaro-primary-hover: #7c3aed;
+    --takaro-secondary: #6b7280;
+    --takaro-secondary-hover: #9ca3af;
+    --takaro-success: #10b981;
+    --takaro-error: #ef4444;
+    --takaro-warning: #fbbd23;
+    --takaro-info: #3abff8;
+    --takaro-background: #000000;
+    --takaro-card: #1a1a1a;
+    --takaro-card-hover: #2a2a2a;
+    --takaro-border: #374151;
+    --takaro-text-primary: #ffffff;
+    --takaro-text-secondary: #d1d5db;
+    --takaro-text-muted: #9ca3af;
+  }
+
   html {
-    @apply bg-takaro-background text-white;
+    @apply bg-takaro-background text-white antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    scroll-behavior: smooth;
   }
 
   body {
+    @apply bg-takaro-background text-takaro-text-primary;
+    font-family:
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      'Noto Sans',
+      sans-serif;
+  }
+
+  /* Scrollbar Styling for Dark Theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
     @apply bg-takaro-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-takaro-secondary rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-takaro-secondary-hover;
+  }
+
+  /* Focus rings for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-takaro-primary;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-takaro-primary text-white;
+  }
+
+  /* Typography improvements */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-takaro-text-primary font-semibold;
+    line-height: 1.2;
+  }
+
+  p {
+    @apply text-takaro-text-secondary;
+    line-height: 1.6;
+  }
+
+  a {
+    @apply text-takaro-primary hover:text-takaro-primary-hover transition-colors;
+  }
+
+  code {
+    @apply bg-takaro-card text-takaro-text-primary px-1 py-0.5 rounded text-sm;
+  }
+
+  pre {
+    @apply bg-takaro-card border border-takaro-border rounded-lg p-4 overflow-auto;
+  }
+
+  pre code {
+    @apply bg-transparent p-0;
+  }
+}
+
+@layer components {
+  /* Takaro Button Variants */
+  .btn-takaro-primary {
+    @apply bg-takaro-primary hover:bg-takaro-primary-hover text-white font-medium px-4 py-2 rounded-md transition-colors;
+  }
+
+  .btn-takaro-secondary {
+    @apply bg-takaro-secondary hover:bg-takaro-secondary-hover text-white font-medium px-4 py-2 rounded-md transition-colors;
+  }
+
+  .btn-takaro-outline {
+    @apply border border-takaro-primary text-takaro-primary hover:bg-takaro-primary hover:text-white font-medium px-4 py-2 rounded-md transition-colors;
+  }
+
+  /* Takaro Card Component */
+  .card-takaro {
+    @apply bg-takaro-card border border-takaro-border rounded-lg p-4 shadow-sm hover:bg-takaro-card-hover transition-colors;
+  }
+
+  .card-takaro-hover {
+    @apply hover:shadow-lg hover:border-takaro-primary/20 transform hover:-translate-y-0.5 transition-all;
+  }
+
+  /* Takaro Input Components */
+  .input-takaro {
+    @apply bg-takaro-card border border-takaro-border text-takaro-text-primary placeholder-takaro-text-muted px-3 py-2 rounded-md focus:border-takaro-primary focus:ring-1 focus:ring-takaro-primary transition-colors;
+  }
+
+  /* Takaro Badge Components */
+  .badge-takaro-primary {
+    @apply bg-takaro-primary text-white px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-takaro-secondary {
+    @apply bg-takaro-secondary text-white px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-takaro-success {
+    @apply bg-takaro-success text-white px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-takaro-error {
+    @apply bg-takaro-error text-white px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* Code highlighting improvements */
+  .code-highlight {
+    @apply bg-takaro-card border border-takaro-border rounded-lg;
+  }
+
+  /* Module sidebar styling */
+  .sidebar-takaro {
+    @apply bg-takaro-card border-r border-takaro-border;
+  }
+
+  /* Search input styling */
+  .search-takaro {
+    @apply input-takaro w-full;
+  }
+}
+
+@layer utilities {
+  /* Text color utilities */
+  .text-takaro-primary {
+    color: var(--takaro-text-primary);
+  }
+
+  .text-takaro-secondary {
+    color: var(--takaro-text-secondary);
+  }
+
+  .text-takaro-muted {
+    color: var(--takaro-text-muted);
+  }
+
+  /* Background utilities */
+  .bg-takaro-card-hover {
+    background-color: var(--takaro-card-hover);
+  }
+
+  .bg-takaro-primary-hover {
+    background-color: var(--takaro-primary-hover);
+  }
+
+  .bg-takaro-secondary-hover {
+    background-color: var(--takaro-secondary-hover);
+  }
+
+  /* Border utilities */
+  .border-takaro {
+    border-color: var(--takaro-border);
+  }
+
+  /* Animation utilities for smooth interactions */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

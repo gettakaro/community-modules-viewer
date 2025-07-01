@@ -16,7 +16,7 @@
   - [x] 2.5 [depends on: 2.1] Add module data validation and error handling
 
 - [ ] 3.0 Build core UI components with Takaro design system
-  - [ ] 3.1 [depends on: 1.2] Create root layout with dark theme and global styles
+  - [x] 3.1 [depends on: 1.2] Create root layout with dark theme and global styles
   - [ ] 3.2 [depends on: 3.1] Build ModuleCard component with Takaro styling
   - [ ] 3.3 [depends on: 3.1] Implement CollapsibleCode component with PrismJS integration
   - [ ] 3.4 [depends on: 1.6] Create section components (Config, Commands, Hooks, CronJobs, Permissions)
@@ -47,7 +47,7 @@
 
 ## Relevant Files
 
-- `app/layout.tsx` - Root layout with Takaro-aligned dark theme and global styles (created - basic structure)
+- `app/layout.tsx` - Root layout with Takaro-aligned dark theme, metadata, and viewport configuration (updated)
 - `app/page.tsx` - Homepage with auto-redirect to first module (updated - now functional)
 - `app/module/[name]/page.tsx` - Module detail page with version redirect (created)
 - `app/module/[name]/[version]/page.tsx` - Module version detail page (created)
@@ -57,7 +57,7 @@
 - `.gitignore` - Already existed with proper Next.js entries
 - `tailwind.config.js` - Tailwind configuration with DaisyUI and Takaro theme colors (created)
 - `postcss.config.js` - PostCSS configuration for Tailwind CSS (created)
-- `app/globals.css` - Global styles with Tailwind directives (created)
+- `app/globals.css` - Comprehensive dark theme global styles with Takaro design system, component classes, and animations (updated)
 - `Dockerfile` - Development Docker configuration (created)
 - `docker-compose.yml` - Docker Compose development environment configuration (created)
 - `Dockerfile.prod` - Production Docker configuration (created)
