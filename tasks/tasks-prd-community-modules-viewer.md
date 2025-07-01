@@ -17,7 +17,7 @@
 
 - [ ] 3.0 Build core UI components with Takaro design system
   - [x] 3.1 [depends on: 1.2] Create root layout with dark theme and global styles
-  - [ ] 3.2 [depends on: 3.1] Build ModuleCard component with Takaro styling
+  - [x] 3.2 [depends on: 3.1] Build ModuleCard component with Takaro styling
   - [ ] 3.3 [depends on: 3.1] Implement CollapsibleCode component with PrismJS integration
   - [ ] 3.4 [depends on: 1.6] Create section components (Config, Commands, Hooks, CronJobs, Permissions)
   - [ ] 3.5 [depends on: 3.2, 3.4] Build ModuleDetails main component
@@ -76,7 +76,7 @@
 - `components/ModuleSidebar.test.tsx` - Unit tests for sidebar component
 - `components/ModuleDetails.tsx` - Main module details display component
 - `components/ModuleDetails.test.tsx` - Unit tests for module details
-- `components/ModuleCard.tsx` - Card component for module display in sidebar
+- `components/ModuleCard.tsx` - Reusable card component for displaying module information with Takaro styling (created)
 - `components/ConfigSection.tsx` - Configuration schema display component
 - `components/CommandsSection.tsx` - Commands list with collapsible code
 - `components/HooksSection.tsx` - Hooks display with implementation code
