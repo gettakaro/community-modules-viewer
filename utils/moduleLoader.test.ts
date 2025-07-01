@@ -117,7 +117,7 @@ describe('moduleLoader', () => {
         functions: [
           {
             name: 'testFunction',
-            code: 'console.log("test")',
+            function: 'console.log("test")',
           },
         ],
         permissions: [],

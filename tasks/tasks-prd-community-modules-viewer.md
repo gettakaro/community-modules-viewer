@@ -42,7 +42,7 @@
   - [x] 6.2 [depends on: 2.0] Write unit tests for utility functions
   - [x] 6.3 [depends on: 5.0] Create Playwright E2E tests for critical user flows
   - [x] 6.4 [depends on: 1.0] Set up GitHub Actions CI/CD pipeline
-  - [ ] 6.5 [depends on: 4.0, 5.0] Implement lazy loading for code highlighting
+  - [x] 6.5 [depends on: 4.0, 5.0] Implement lazy loading for code highlighting
   - [ ] 6.6 [depends on: 6.3] Add mobile responsive design and test on various devices
 
 ## Relevant Files
@@ -82,7 +82,7 @@
 - `components/HooksSection.tsx` - Hooks display with implementation code, event types, and regex patterns (created)
 - `components/CronJobsSection.tsx` - Cron jobs section component with human-readable schedule explanations (created)
 - `components/PermissionsSection.tsx` - Permissions display component with grouping and count capabilities (created)
-- `components/CollapsibleCode.tsx` - Reusable code viewer with PrismJS syntax highlighting and expand/collapse functionality (created)
+- `components/CollapsibleCode.tsx` - Reusable code viewer with PrismJS syntax highlighting, expand/collapse functionality, and lazy loading optimization (updated)
 - `utils/moduleLoader.ts` - Module data fetching and processing utilities with aggregation logic and Zod validation (updated)
 - `utils/moduleLoader.test.ts` - Unit tests for module loader
 - `utils/searchUtils.ts` - Search and filter utility functions

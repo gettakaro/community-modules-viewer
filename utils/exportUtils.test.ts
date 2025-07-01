@@ -97,7 +97,10 @@ describe('exportUtils', () => {
       });
 
       // Get the JSON content and verify structure
-      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [string[], object];
+      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [
+        string[],
+        object,
+      ];
       const jsonContent = blobCallArgs[0][0];
       const exportedData = JSON.parse(jsonContent);
 
@@ -125,7 +128,10 @@ describe('exportUtils', () => {
       });
 
       // Get the JSON content and verify structure
-      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [string[], object];
+      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [
+        string[],
+        object,
+      ];
       const jsonContent = blobCallArgs[0][0];
       const exportedData = JSON.parse(jsonContent);
 
@@ -182,7 +188,10 @@ describe('exportUtils', () => {
     it('should format JSON with proper indentation', () => {
       exportModuleAsJSON(mockModule);
 
-      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [string[], object];
+      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [
+        string[],
+        object,
+      ];
       const jsonContent = blobCallArgs[0][0];
 
       // Verify the JSON is pretty-formatted
@@ -213,7 +222,10 @@ describe('exportUtils', () => {
 
       exportModuleAsJSON(moduleWithEmptyArrays);
 
-      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [string[], object];
+      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [
+        string[],
+        object,
+      ];
       const jsonContent = blobCallArgs[0][0];
       const exportedData = JSON.parse(jsonContent);
 

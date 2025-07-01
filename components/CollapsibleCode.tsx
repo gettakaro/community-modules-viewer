@@ -1,16 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Prism from 'prismjs';
 
-// Import core PrismJS languages and plugins
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-bash';
-
-// Import dark theme for PrismJS
+// Import dark theme for PrismJS (loaded upfront for consistent styling)
 import 'prismjs/themes/prism-tomorrow.css';
 
 export interface CollapsibleCodeProps {
@@ -45,14 +37,90 @@ export function CollapsibleCode({
 }: CollapsibleCodeProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [copied, setCopied] = useState(false);
+  const [isHighlighting, setIsHighlighting] = useState(false);
+  const [highlightError, setHighlightError] = useState<string | null>(null);
   const codeRef = useRef<HTMLElement>(null);
 
-  // Apply syntax highlighting
+  // Lazy load PrismJS and apply syntax highlighting
   useEffect(() => {
-    if (codeRef.current) {
-      Prism.highlightElement(codeRef.current);
+    if (isExpanded && codeRef.current) {
+      const loadPrismAndHighlight = async () => {
+        setIsHighlighting(true);
+        setHighlightError(null);
+
+        try {
+          // Dynamically import Prism and language modules
+          const [{ default: Prism }] = await Promise.all([
+            import('prismjs'),
+            // Load language modules based on the language prop
+            loadLanguageModule(language),
+          ]);
+
+          // Apply syntax highlighting
+          if (codeRef.current) {
+            Prism.highlightElement(codeRef.current);
+          }
+        } catch (error) {
+          console.error('Failed to load PrismJS or highlight code:', error);
+          setHighlightError('Failed to load syntax highlighting');
+        } finally {
+          setIsHighlighting(false);
+        }
+      };
+
+      loadPrismAndHighlight();
     }
   }, [code, language, isExpanded]);
+
+  // Function to dynamically load language modules
+  const loadLanguageModule = async (lang: string) => {
+    const normalizedLang = lang.toLowerCase();
+
+    try {
+      switch (normalizedLang) {
+        case 'javascript':
+        case 'js':
+          await import('prismjs/components/prism-javascript' as any);
+          break;
+        case 'typescript':
+        case 'ts':
+          await import('prismjs/components/prism-typescript' as any);
+          break;
+        case 'jsx':
+          await import('prismjs/components/prism-jsx' as any);
+          break;
+        case 'tsx':
+          // TSX requires TypeScript and JSX
+          await Promise.all([
+            import('prismjs/components/prism-typescript' as any),
+            import('prismjs/components/prism-jsx' as any),
+          ]);
+          break;
+        case 'json':
+          await import('prismjs/components/prism-json' as any);
+          break;
+        case 'bash':
+        case 'shell':
+          await import('prismjs/components/prism-bash' as any);
+          break;
+        default:
+          // For unknown languages, try to load the component
+          try {
+            await import(`prismjs/components/prism-${normalizedLang}` as any);
+          } catch {
+            // If the language module doesn't exist, just continue without it
+            console.warn(
+              `PrismJS language component for '${normalizedLang}' not found`,
+            );
+          }
+      }
+    } catch (error) {
+      console.warn(
+        `Failed to load PrismJS component for '${normalizedLang}':`,
+        error,
+      );
+    }
+  };
 
   const handleCopy = async () => {
     try {
@@ -182,10 +250,44 @@ export function CollapsibleCode({
       {/* Code content - only show when expanded */}
       {isExpanded && (
         <div className="relative">
+          {/* Loading state */}
+          {isHighlighting && (
+            <div className="absolute inset-0 bg-takaro-card/80 flex items-center justify-center z-10">
+              <div className="flex items-center gap-2 text-takaro-text-secondary">
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-takaro-accent border-t-transparent"></div>
+                <span className="text-sm">Loading syntax highlighting...</span>
+              </div>
+            </div>
+          )}
+
+          {/* Error state */}
+          {highlightError && (
+            <div className="bg-red-900/20 border border-red-500/30 rounded-md p-3 m-2">
+              <div className="flex items-center gap-2 text-red-400">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
+                </svg>
+                <span className="text-sm">{highlightError}</span>
+              </div>
+            </div>
+          )}
+
           <pre
             className={`
               !bg-takaro-card !border-0 !rounded-none overflow-auto text-sm
               ${showLineNumbers ? 'line-numbers' : ''}
+              ${isHighlighting ? 'opacity-50' : ''}
             `}
           >
             <code ref={codeRef} className={getLanguageClass()}>
