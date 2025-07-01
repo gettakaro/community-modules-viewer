@@ -39,7 +39,7 @@
 
 - [ ] 6.0 Add testing, CI/CD, and production optimization
   - [x] 6.1 [depends on: 3.0] Write unit tests for all components
-  - [ ] 6.2 [depends on: 2.0] Write unit tests for utility functions
+  - [x] 6.2 [depends on: 2.0] Write unit tests for utility functions
   - [x] 6.3 [depends on: 5.0] Create Playwright E2E tests for critical user flows
   - [x] 6.4 [depends on: 1.0] Set up GitHub Actions CI/CD pipeline
   - [ ] 6.5 [depends on: 4.0, 5.0] Implement lazy loading for code highlighting
@@ -98,8 +98,13 @@
 - `scripts/test-e2e.sh` - Shell script for automated production testing workflow (created)
 - `nginx.conf` - Nginx configuration for production static file serving (created)
 - `.github/workflows/ci.yml` - GitHub Actions CI/CD pipeline configuration with quality checks and E2E tests (created)
+- `jest.config.js` - Jest configuration with Next.js integration and path mapping (created)
+- `jest.setup.js` - Jest setup file with Next.js router and navigation mocks (created)
+- `utils/exportUtils.test.ts` - Unit tests for JSON export functionality (created)
+- `utils/moduleLoader.test.ts` - Unit tests for module normalization utilities (created)
 
 ### Notes
 
 - Unit tests should typically be placed alongside the code files they are testing (e.g., `MyComponent.tsx` and `MyComponent.test.tsx` in the same directory).
-- Use `npx jest [optional/path/to/test/file]` to run tests. Running without a path executes all tests found by the Jest configuration.
+- Use `npm run test:unit` to run Jest unit tests, `npm run test:e2e:prod` for E2E tests, or `npm run test:all` for both.
+- Jest is configured with Next.js integration, JSDOM environment, and path mapping for `@/` imports.
