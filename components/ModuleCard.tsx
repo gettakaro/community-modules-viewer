@@ -1,4 +1,5 @@
 import { ModuleWithMeta } from '@/lib/types';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 export interface ModuleCardProps {
   /** Module data to display */
@@ -68,16 +69,12 @@ export function ModuleCard({
 
       {/* Description */}
       {displayDescription && (
-        <p
-          className="text-takaro-text-secondary text-sm mb-3 overflow-hidden"
-          style={{
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
-          {displayDescription}
-        </p>
+        <MarkdownRenderer
+          content={displayDescription}
+          className="text-takaro-text-secondary text-sm mb-3"
+          truncate={true}
+          maxLines={2}
+        />
       )}
 
       {/* Footer with version info and components count */}

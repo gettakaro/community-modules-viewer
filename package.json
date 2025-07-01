@@ -39,6 +39,7 @@
     "prismjs": "^1.29.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

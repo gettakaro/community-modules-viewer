@@ -8,6 +8,7 @@ import { HooksSection } from './HooksSection';
 import { CronJobsSection } from './CronJobsSection';
 import { PermissionsSection } from './PermissionsSection';
 import { exportModuleAsJSON } from '@/utils/exportUtils';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 export interface ModuleDetailsProps {
   /** Module data to display */
@@ -176,9 +177,10 @@ export function ModuleDetails({
               {module.name}
             </h1>
             {currentVersion.description && (
-              <p className="text-takaro-text-secondary leading-relaxed">
-                {currentVersion.description}
-              </p>
+              <MarkdownRenderer
+                content={currentVersion.description}
+                className="text-takaro-text-secondary leading-relaxed"
+              />
             )}
           </div>
           <div className="flex items-start gap-4">

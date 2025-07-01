@@ -2,6 +2,7 @@
 
 import { ModuleCommand, ArgumentType } from '@/lib/types';
 import { CollapsibleCode } from './CollapsibleCode';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 export interface CommandsSectionProps {
   /** Array of module commands to display */
@@ -144,9 +145,10 @@ export function CommandsSection({
                   <h4 className="text-sm font-medium text-takaro-text-primary mb-1">
                     Description
                   </h4>
-                  <p className="text-sm text-takaro-text-secondary">
-                    {command.helpText}
-                  </p>
+                  <MarkdownRenderer
+                    content={command.helpText}
+                    className="text-sm text-takaro-text-secondary"
+                  />
                 </div>
               )}
             </div>

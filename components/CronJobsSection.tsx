@@ -2,6 +2,7 @@
 
 import { ModuleCronJob } from '@/lib/types';
 import { CollapsibleCode } from './CollapsibleCode';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 export interface CronJobsSectionProps {
   /** Array of module cron jobs to display */
@@ -286,9 +287,10 @@ export function CronJobsSection({
                   <h4 className="text-sm font-medium text-takaro-text-primary mb-1">
                     Description
                   </h4>
-                  <p className="text-sm text-takaro-text-secondary">
-                    {cronJob.description}
-                  </p>
+                  <MarkdownRenderer
+                    content={cronJob.description}
+                    className="text-sm text-takaro-text-secondary"
+                  />
                 </div>
               )}
             </div>
