@@ -273,7 +273,6 @@ export function ConfigSection({
                 language="json"
                 title="JSON Schema"
                 defaultExpanded={defaultExpanded}
-                showCopy={true}
                 className="bg-takaro-card border border-takaro-border"
               />
             )}
@@ -366,7 +365,6 @@ export function ConfigSection({
                 language="json"
                 title="UI Schema"
                 defaultExpanded={defaultExpanded}
-                showCopy={true}
                 className="bg-takaro-card border border-takaro-border"
               />
             )}

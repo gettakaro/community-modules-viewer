@@ -16,8 +16,6 @@ export interface CollapsibleCodeProps {
   defaultExpanded?: boolean;
   /** Additional CSS classes */
   className?: string;
-  /** Whether to show copy button */
-  showCopy?: boolean;
   /** Whether to show line numbers */
   showLineNumbers?: boolean;
 }
@@ -32,11 +30,9 @@ export function CollapsibleCode({
   title,
   defaultExpanded = false,
   className = '',
-  showCopy = true,
   showLineNumbers = false,
 }: CollapsibleCodeProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const [copied, setCopied] = useState(false);
   const [isHighlighting, setIsHighlighting] = useState(false);
   const [highlightError, setHighlightError] = useState<string | null>(null);
   const codeRef = useRef<HTMLElement>(null);
@@ -122,16 +118,6 @@ export function CollapsibleCode({
     }
   };
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy code:', err);
-    }
-  };
-
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
   };
@@ -171,53 +157,6 @@ export function CollapsibleCode({
         </div>
 
         <div className="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto justify-end sm:justify-start">
-          {showCopy && (
-            <button
-              onClick={handleCopy}
-              className="btn-takaro-outline text-xs px-3 py-2 sm:px-2 sm:py-1 h-auto min-h-0 min-w-[44px] touch-manipulation"
-              title="Copy to clipboard"
-              aria-label="Copy code to clipboard"
-            >
-              {copied ? (
-                <span className="flex items-center gap-1">
-                  <svg
-                    className="w-3 h-3"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  Copied
-                </span>
-              ) : (
-                <span className="flex items-center gap-1">
-                  <svg
-                    className="w-3 h-3"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                    />
-                  </svg>
-                  Copy
-                </span>
-              )}
-            </button>
-          )}
-
           <button
             onClick={toggleExpanded}
             className="btn-takaro-outline text-xs px-3 py-2 sm:px-2 sm:py-1 h-auto min-h-0 min-w-[44px] touch-manipulation"

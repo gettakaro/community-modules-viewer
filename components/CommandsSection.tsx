@@ -250,7 +250,6 @@ export function CommandsSection({
                 language="javascript"
                 title={`${command.name} Function`}
                 defaultExpanded={defaultExpanded}
-                showCopy={true}
                 className="bg-takaro-card border border-takaro-border"
               />
             </div>

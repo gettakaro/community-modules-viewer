@@ -385,7 +385,6 @@ export function HooksSection({
                       language="javascript"
                       title={`${hook.name} Hook Function`}
                       defaultExpanded={defaultExpanded}
-                      showCopy={true}
                       className="bg-takaro-card border border-takaro-border"
                     />
                   </div>

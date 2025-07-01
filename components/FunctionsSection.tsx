@@ -146,7 +146,6 @@ export function FunctionsSection({
                 language="javascript"
                 title={`${func.name} Function`}
                 defaultExpanded={defaultExpanded}
-                showCopy={true}
                 className="bg-takaro-card border border-takaro-border"
               />
             </div>
