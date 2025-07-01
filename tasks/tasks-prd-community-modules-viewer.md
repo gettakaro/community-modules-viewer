@@ -9,8 +9,8 @@
   - [x] 1.6 Set up TypeScript interfaces in lib/types.ts for module data structures
 
 - [ ] 2.0 Implement module data loading and processing system
-  - [ ] 2.1 [depends on: 1.6] Create moduleLoader utility for reading local JSON files
-  - [ ] 2.2 [depends on: 1.6] Implement GitHub API client for fetching built-in modules
+  - [x] 2.1 [depends on: 1.6] Create moduleLoader utility for reading local JSON files
+  - [x] 2.2 [depends on: 1.6] Implement GitHub API client for fetching built-in modules
   - [ ] 2.3 [depends on: 2.1, 2.2] Create module data aggregation and normalization logic
   - [ ] 2.4 [depends on: 2.3] Implement static page generation for all module/version combinations
   - [ ] 2.5 [depends on: 2.1] Add module data validation and error handling
@@ -83,11 +83,11 @@
 - `components/CronJobsSection.tsx` - Cron jobs section component
 - `components/PermissionsSection.tsx` - Permissions display component
 - `components/CollapsibleCode.tsx` - Reusable code viewer with syntax highlighting
-- `utils/moduleLoader.ts` - Module data fetching and processing utilities
+- `utils/moduleLoader.ts` - Module data fetching and processing utilities (created)
 - `utils/moduleLoader.test.ts` - Unit tests for module loader
 - `utils/searchUtils.ts` - Search and filter utility functions
 - `utils/searchUtils.test.ts` - Unit tests for search utilities
-- `lib/github.ts` - GitHub API client for fetching built-in modules
+- `lib/github.ts` - GitHub API client for fetching built-in modules (created)
 - `lib/types.ts` - TypeScript interfaces for module data structures (created)
 - `tailwind.config.js` - Tailwind configuration with Takaro theme colors
 - `docker-compose.yml` - Docker development environment configuration
