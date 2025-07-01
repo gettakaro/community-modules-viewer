@@ -1,15 +1,34 @@
-import { Module, ModuleWithMeta, isModule, ModuleSource } from '@/lib/types';
+import {
+  Module,
+  ModuleWithMeta,
+  ModuleSource,
+  ModuleLoadResult,
+  ModuleValidationError,
+  validateModule,
+  validateModuleWithMeta,
+  formatValidationError,
+  ModuleSchema,
+} from '@/lib/types';
 import { fetchBuiltinModules } from '@/lib/github';
 import fs from 'fs/promises';
 import path from 'path';
 
 /**
- * Load all community modules from the local modules directory
- * @returns Array of modules with metadata
+ * Load all community modules from the local modules directory with detailed error reporting
+ * @param reportErrors - Whether to return detailed error information
+ * @returns Array of modules with metadata or detailed load result
  */
-export async function loadLocalModules(): Promise<ModuleWithMeta[]> {
+export async function loadLocalModules(): Promise<ModuleWithMeta[]>;
+export async function loadLocalModules(
+  reportErrors: true,
+): Promise<ModuleLoadResult>;
+export async function loadLocalModules(
+  reportErrors?: boolean,
+): Promise<ModuleWithMeta[] | ModuleLoadResult> {
   const modules: ModuleWithMeta[] = [];
+  const errors: ModuleValidationError[] = [];
   const modulesDir = path.join(process.cwd(), 'modules');
+  let attempted = 0;
 
   try {
     // Check if modules directory exists
@@ -20,27 +39,133 @@ export async function loadLocalModules(): Promise<ModuleWithMeta[]> {
 
     // Filter for JSON files only
     const jsonFiles = files.filter((file) => file.endsWith('.json'));
+    attempted = jsonFiles.length;
 
     // Load each module file
     for (const file of jsonFiles) {
-      const module = await loadModuleFile(file);
-      if (module) {
-        modules.push(module);
+      if (reportErrors) {
+        const result = await loadModuleFileWithErrors(file);
+        if (result.success) {
+          modules.push(result.module);
+        } else {
+          errors.push(result.error);
+        }
+      } else {
+        const module = await loadModuleFile(file);
+        if (module) {
+          modules.push(module);
+        }
       }
     }
 
     // Sort modules alphabetically by name
     modules.sort((a, b) => a.name.localeCompare(b.name));
   } catch (error) {
-    console.warn('Failed to read modules directory:', error);
-    // Return empty array if directory doesn't exist or can't be read
+    const errorMessage = `Failed to read modules directory: ${error}`;
+    console.warn(errorMessage);
+
+    if (reportErrors) {
+      errors.push({
+        source: modulesDir,
+        error: new Error(errorMessage) as any,
+        message: errorMessage,
+        data: null,
+      });
+    }
+  }
+
+  if (reportErrors) {
+    return {
+      modules,
+      errors,
+      stats: {
+        attempted,
+        successful: modules.length,
+        failed: errors.length,
+      },
+    };
   }
 
   return modules;
 }
 
 /**
- * Load a single module file from the modules directory
+ * Load a single module file with detailed error reporting
+ * @param filename - Name of the JSON file to load
+ * @returns Success result with module or error details
+ */
+async function loadModuleFileWithErrors(
+  filename: string,
+): Promise<
+  | { success: true; module: ModuleWithMeta }
+  | { success: false; error: ModuleValidationError }
+> {
+  const modulesDir = path.join(process.cwd(), 'modules');
+  const filePath = path.join(modulesDir, filename);
+
+  try {
+    // Read the file content
+    const content = await fs.readFile(filePath, 'utf-8');
+
+    // Parse JSON
+    const rawData = JSON.parse(content);
+
+    // Validate the module structure using Zod
+    const validation = validateModule(rawData);
+
+    if (!validation.success) {
+      return {
+        success: false,
+        error: {
+          source: filename,
+          error: validation.error,
+          message: formatValidationError(validation.error, filename),
+          data: rawData,
+        },
+      };
+    }
+
+    // Add metadata and validate the complete structure
+    const moduleWithMeta = {
+      ...validation.data,
+      source: 'community' as const,
+      path: filePath,
+    };
+
+    const metaValidation = validateModuleWithMeta(moduleWithMeta);
+    if (!metaValidation.success) {
+      return {
+        success: false,
+        error: {
+          source: filename,
+          error: metaValidation.error,
+          message: formatValidationError(metaValidation.error, filename),
+          data: moduleWithMeta,
+        },
+      };
+    }
+
+    return { success: true, module: metaValidation.data };
+  } catch (error) {
+    const message =
+      error instanceof SyntaxError
+        ? `Invalid JSON in ${filename}: ${error.message}`
+        : `Failed to load module ${filename}: ${error}`;
+
+    return {
+      success: false,
+      error: {
+        source: filename,
+        error: error as any,
+        message,
+        data: null,
+      },
+    };
+  }
+}
+
+/**
+ * Load a single module file from the modules directory with Zod validation
  * @param filename - Name of the JSON file to load
  * @returns Module with metadata or null if invalid
  */
@@ -55,25 +180,38 @@ export async function loadModuleFile(
     const content = await fs.readFile(filePath, 'utf-8');
 
     // Parse JSON
-    const data = JSON.parse(content);
+    const rawData = JSON.parse(content);
 
-    // Validate the module structure
-    if (!isModule(data)) {
-      console.warn(`Invalid module structure in ${filename}`);
+    // Validate the module structure using Zod
+    const validation = validateModule(rawData);
+
+    if (!validation.success) {
+      const errorMessage = formatValidationError(validation.error, filename);
+      console.warn(errorMessage);
       return null;
     }
 
-    // Add metadata
-    const moduleWithMeta: ModuleWithMeta = {
-      ...data,
-      source: 'community',
+    // Add metadata and validate the complete structure
+    const moduleWithMeta = {
+      ...validation.data,
+      source: 'community' as const,
       path: filePath,
     };
 
-    return moduleWithMeta;
+    const metaValidation = validateModuleWithMeta(moduleWithMeta);
+    if (!metaValidation.success) {
+      const errorMessage = formatValidationError(
+        metaValidation.error,
+        filename,
+      );
+      console.warn(errorMessage);
+      return null;
+    }
+
+    return metaValidation.data;
   } catch (error) {
     if (error instanceof SyntaxError) {
-      console.warn(`Invalid JSON in ${filename}:`, error.message);
+      console.warn(`Invalid JSON in ${filename}: ${error.message}`);
     } else {
       console.warn(`Failed to load module ${filename}:`, error);
     }

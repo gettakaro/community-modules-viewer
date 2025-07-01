@@ -1,6 +1,9 @@
 /**
  * TypeScript interfaces for Takaro module data structures
+ * With Zod schemas for runtime validation
  */
+
+import { z } from 'zod';
 
 /**
  * Main module interface containing all versions
@@ -81,6 +84,33 @@ export enum ArgumentType {
 }
 
 /**
+ * Zod schema for ArgumentType enum
+ */
+export const ArgumentTypeSchema = z.nativeEnum(ArgumentType);
+
+/**
+ * Zod schema for command arguments
+ */
+export const CommandArgumentSchema = z.object({
+  name: z.string().min(1, 'Argument name cannot be empty'),
+  type: ArgumentTypeSchema,
+  helpText: z.string(),
+  defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
+  position: z.number().int().min(0, 'Position must be non-negative'),
+});
+
+/**
+ * Zod schema for module commands
+ */
+export const ModuleCommandSchema = z.object({
+  function: z.string().min(1, 'Command function cannot be empty'),
+  name: z.string().min(1, 'Command name cannot be empty'),
+  trigger: z.string().min(1, 'Command trigger cannot be empty'),
+  helpText: z.string(),
+  arguments: z.array(CommandArgumentSchema).default([]),
+});
+
+/**
  * Module hook for responding to game events
  */
 export interface ModuleHook {
@@ -93,7 +123,7 @@ export interface ModuleHook {
   /** Type of event this hook responds to */
   eventType: HookEventType;
   /** Optional regex pattern for log-based hooks */
-  regex?: string;
+  regex?: string | null;
 }
 
 /**
@@ -112,6 +142,35 @@ export type HookEventType =
   | 'role-removed'
   | 'command-executed'
   | string; // Allow other event types for extensibility
+
+/**
+ * Zod schema for hook event types
+ */
+export const HookEventTypeSchema = z.union([
+  z.literal('chat-message'),
+  z.literal('player-connected'),
+  z.literal('player-disconnected'),
+  z.literal('discord-message'),
+  z.literal('server-status-changed'),
+  z.literal('log'),
+  z.literal('entity-killed'),
+  z.literal('player-new-ip-detected'),
+  z.literal('role-assigned'),
+  z.literal('role-removed'),
+  z.literal('command-executed'),
+  z.string(), // Allow other event types
+]);
+
+/**
+ * Zod schema for module hooks
+ */
+export const ModuleHookSchema = z.object({
+  function: z.string().min(1, 'Hook function cannot be empty'),
+  name: z.string().min(1, 'Hook name cannot be empty'),
+  description: z.string().nullable().optional(),
+  eventType: HookEventTypeSchema,
+  regex: z.string().nullable().optional(),
+});
 
 /**
  * Scheduled cron job
@@ -154,9 +213,46 @@ export interface ModulePermission {
 }
 
 /**
+ * Zod schema for cron jobs
+ */
+export const ModuleCronJobSchema = z.object({
+  function: z.string().min(1, 'Cron job function cannot be empty'),
+  name: z.string().min(1, 'Cron job name cannot be empty'),
+  description: z.string().nullable().optional(),
+  temporalValue: z.string().min(1, 'Temporal value cannot be empty'),
+});
+
+/**
+ * Zod schema for module functions
+ */
+export const ModuleFunctionSchema = z.object({
+  function: z.string().min(1, 'Function code cannot be empty'),
+  name: z.string().min(1, 'Function name cannot be empty'),
+  description: z.string().nullable().optional(),
+});
+
+/**
+ * Zod schema for module permissions
+ */
+export const ModulePermissionSchema = z.object({
+  canHaveCount: z.boolean(),
+  description: z.string(),
+  permission: z.string().min(1, 'Permission key cannot be empty'),
+  friendlyName: z.string().min(1, 'Friendly name cannot be empty'),
+});
+
+/**
  * Module source type
  */
 export type ModuleSource = 'community' | 'builtin';
+
+/**
+ * Zod schema for module source
+ */
+export const ModuleSourceSchema = z.union([
+  z.literal('community'),
+  z.literal('builtin'),
+]);
 
 /**
  * Extended module interface with metadata
@@ -169,37 +265,95 @@ export interface ModuleWithMeta extends Module {
 }
 
 /**
- * Type guard to check if an object is a valid Module
+ * Zod schema for module versions
  */
-export function isModule(obj: unknown): obj is Module {
-  if (!obj || typeof obj !== 'object') return false;
-  const mod = obj as Record<string, unknown>;
+export const ModuleVersionSchema = z.object({
+  tag: z.string().min(1, 'Version tag cannot be empty'),
+  description: z.string().default(''),
+  configSchema: z.string().default('{}'),
+  uiSchema: z.string().default('{}'),
+  commands: z.array(ModuleCommandSchema).default([]),
+  hooks: z.array(ModuleHookSchema).default([]),
+  cronJobs: z.array(ModuleCronJobSchema).default([]),
+  functions: z.array(ModuleFunctionSchema).default([]),
+  permissions: z.array(ModulePermissionSchema).default([]),
+});
 
-  return (
-    typeof mod.name === 'string' &&
-    Array.isArray(mod.versions) &&
-    typeof mod.takaroVersion === 'string'
-  );
+/**
+ * Zod schema for main module
+ */
+export const ModuleSchema = z.object({
+  name: z.string().min(1, 'Module name cannot be empty'),
+  versions: z
+    .array(ModuleVersionSchema)
+    .min(1, 'Module must have at least one version'),
+  takaroVersion: z.string().min(1, 'Takaro version cannot be empty'),
+});
+
+/**
+ * Zod schema for module with metadata
+ */
+export const ModuleWithMetaSchema = ModuleSchema.extend({
+  source: ModuleSourceSchema,
+  path: z.string().optional(),
+});
+
+/**
+ * Zod-based validation function for modules
+ * @param obj - Object to validate
+ * @returns Validation result with parsed data or error details
+ */
+export function validateModule(obj: unknown):
+  | {
+      success: true;
+      data: Module;
+    }
+  | {
+      success: false;
+      error: z.ZodError;
+    } {
+  const result = ModuleSchema.safeParse(obj);
+  return result.success
+    ? { success: true, data: result.data }
+    : { success: false, error: result.error };
 }
 
 /**
- * Type guard to check if an object is a valid ModuleVersion
+ * Zod-based validation function for modules with metadata
+ * @param obj - Object to validate
+ * @returns Validation result with parsed data or error details
+ */
+export function validateModuleWithMeta(obj: unknown):
+  | {
+      success: true;
+      data: ModuleWithMeta;
+    }
+  | {
+      success: false;
+      error: z.ZodError;
+    } {
+  const result = ModuleWithMetaSchema.safeParse(obj);
+  return result.success
+    ? { success: true, data: result.data }
+    : { success: false, error: result.error };
+}
+
+/**
+ * Legacy type guard for backward compatibility
+ * @deprecated Use validateModule() instead for better error handling
+ */
+export function isModule(obj: unknown): obj is Module {
+  const result = ModuleSchema.safeParse(obj);
+  return result.success;
+}
+
+/**
+ * Legacy type guard for backward compatibility
+ * @deprecated Use validateModuleWithMeta() instead for better error handling
  */
 export function isModuleVersion(obj: unknown): obj is ModuleVersion {
-  if (!obj || typeof obj !== 'object') return false;
-  const version = obj as Record<string, unknown>;
-
-  return (
-    typeof version.tag === 'string' &&
-    typeof version.description === 'string' &&
-    typeof version.configSchema === 'string' &&
-    typeof version.uiSchema === 'string' &&
-    Array.isArray(version.commands) &&
-    Array.isArray(version.hooks) &&
-    Array.isArray(version.cronJobs) &&
-    Array.isArray(version.functions) &&
-    Array.isArray(version.permissions)
-  );
+  const result = ModuleVersionSchema.safeParse(obj);
+  return result.success;
 }
 
 /**
@@ -208,4 +362,51 @@ export function isModuleVersion(obj: unknown): obj is ModuleVersion {
 export interface ModuleSearchResult {
   module: ModuleWithMeta;
   matchedIn: ('name' | 'description' | 'command' | 'permission')[];
+}
+
+/**
+ * Module validation error details
+ */
+export interface ModuleValidationError {
+  /** Source file path or identifier */
+  source: string;
+  /** Validation error from Zod */
+  error: z.ZodError;
+  /** Human-readable error message */
+  message: string;
+  /** Raw data that failed validation */
+  data: unknown;
+}
+
+/**
+ * Module loading result with error handling
+ */
+export interface ModuleLoadResult {
+  /** Successfully loaded modules */
+  modules: ModuleWithMeta[];
+  /** Validation errors encountered */
+  errors: ModuleValidationError[];
+  /** Loading statistics */
+  stats: {
+    attempted: number;
+    successful: number;
+    failed: number;
+  };
+}
+
+/**
+ * Format Zod error for human consumption
+ */
+export function formatValidationError(
+  error: z.ZodError,
+  source: string,
+): string {
+  const issues = error.issues
+    .map((issue: z.ZodIssue) => {
+      const path = issue.path.length > 0 ? ` at ${issue.path.join('.')}` : '';
+      return `${issue.message}${path}`;
+    })
+    .join('; ');
+
+  return `Validation failed in ${source}: ${issues}`;
 }

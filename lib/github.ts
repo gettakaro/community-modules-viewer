@@ -1,4 +1,10 @@
-import { Module, ModuleWithMeta, isModule } from '@/lib/types';
+import {
+  Module,
+  ModuleWithMeta,
+  validateModule,
+  validateModuleWithMeta,
+  formatValidationError,
+} from '@/lib/types';
 
 const GITHUB_API_BASE = 'https://api.github.com';
 const REPO_OWNER = 'gettakaro';
@@ -121,23 +127,49 @@ async function fetchAndParseModule(
 
     if (file.name.endsWith('.json')) {
       // Parse JSON directly
-      const data = JSON.parse(content);
-      if (isModule(data)) {
-        return {
-          ...data,
-          source: 'builtin',
+      const rawData = JSON.parse(content);
+      const validation = validateModule(rawData);
+
+      if (validation.success) {
+        const moduleWithMeta = {
+          ...validation.data,
+          source: 'builtin' as const,
           path: file.html_url,
         };
+
+        const metaValidation = validateModuleWithMeta(moduleWithMeta);
+        if (metaValidation.success) {
+          return metaValidation.data;
+        } else {
+          console.warn(formatValidationError(metaValidation.error, file.name));
+        }
+      } else {
+        console.warn(formatValidationError(validation.error, file.name));
       }
     } else if (file.name.endsWith('.ts')) {
       // Parse TypeScript module
       const moduleData = parseTypeScriptModule(content);
-      if (moduleData && isModule(moduleData)) {
-        return {
-          ...moduleData,
-          source: 'builtin',
-          path: file.html_url,
-        };
+      if (moduleData) {
+        const validation = validateModule(moduleData);
+
+        if (validation.success) {
+          const moduleWithMeta = {
+            ...validation.data,
+            source: 'builtin' as const,
+            path: file.html_url,
+          };
+
+          const metaValidation = validateModuleWithMeta(moduleWithMeta);
+          if (metaValidation.success) {
+            return metaValidation.data;
+          } else {
+            console.warn(
+              formatValidationError(metaValidation.error, file.name),
+            );
+          }
+        } else {
+          console.warn(formatValidationError(validation.error, file.name));
+        }
       }
     }
   } catch (error) {
