@@ -15,31 +15,37 @@ Static web application for browsing Takaro game server modules. Provides documen
 ## User Stories
 
 ### Phase 1: Basic Module Listing
+
 - **As a server admin**, I want to see all available modules, so I can discover what's available
 - **As a developer**, I want to browse module code examples, so I can learn module development
 
 ### Phase 2: Module Details
+
 - **As a server admin**, I want to view module configuration options, so I can understand setup requirements
 - **As a server admin**, I want to see all module commands and permissions, so I can plan user access
 - **As a developer**, I want to view implementation code, so I can understand how modules work
 
 ### Phase 3: Search & Filter
+
 - **As a server admin**, I want to search modules by name/description, so I can quickly find what I need
 - **As a server admin**, I want to filter built-in vs community modules, so I can choose trusted sources
 
 ### Phase 4: Export & Version Management
+
 - **As a server admin**, I want to export module JSON, so I can import directly to my server
 - **As a server admin**, I want to switch between module versions, so I can use compatible versions
 
 ## Functional Requirements
 
 ### Phase 1: Basic Module Listing
+
 1. Display all modules in sidebar navigation
 2. Show module name and description
 3. Categorize as Built-in or Community
 4. Auto-redirect to first module on homepage
 
 ### Phase 2: Module Details View
+
 5. Display module metadata (name, description, version)
 6. Show configuration schema with:
    - Field types and defaults
@@ -64,12 +70,14 @@ Static web application for browsing Takaro game server modules. Provides documen
     - Count capability flag
 
 ### Phase 3: Search & Filter
+
 11. Real-time search across module names and descriptions
 12. Display search result counts
 13. Separate counts for Built-in vs Community
 14. Persist search state during navigation
 
 ### Phase 4: Export & Version Management
+
 15. One-click JSON export with proper formatting
 16. Version selector dropdown
 17. URL-based version routing (/module/[name]/[version])
@@ -87,6 +95,7 @@ Static web application for browsing Takaro game server modules. Provides documen
 ## Technical Considerations
 
 ### Tech Stack
+
 - **Framework**: Next.js 15 (App Router, Static Export)
 - **UI Library**: DaisyUI + Tailwind CSS
 - **Language**: TypeScript
@@ -95,6 +104,7 @@ Static web application for browsing Takaro game server modules. Provides documen
 - **Icons**: react-icons
 
 ### Design System (Takaro-aligned)
+
 - **Theme**: Dark mode matching Takaro dashboard
   - Background: Pure black (#000000)
   - Card backgrounds: Dark gray (#1a1a1a)
@@ -118,6 +128,7 @@ Static web application for browsing Takaro game server modules. Provides documen
   - Clear hierarchy: 2xl for headings, base for body, sm for meta
 
 ### Development Environment
+
 ```yaml
 # docker-compose.yml
 services:
@@ -127,11 +138,12 @@ services:
       - .:/app
     working_dir: /app
     ports:
-      - "3000:3000"
+      - '3000:3000'
     command: npm run dev
 ```
 
 ### Project Structure
+
 ```
 /app
   /module
@@ -156,11 +168,13 @@ services:
 ```
 
 ### Data Loading
+
 - **Built-in modules**: Fetch from https://github.com/gettakaro/takaro/tree/main/packages/lib-modules/src/modules
 - **Community modules**: Load from `/modules/*.json`
 - **Build-time processing**: Generate static pages for all module/version combinations
 
 ### State Management
+
 - URL-based routing for module/version selection
 - LocalStorage for:
   - Sidebar collapse state
@@ -168,13 +182,16 @@ services:
 - React hooks for component state
 
 ### Testing Strategy
+
 - **Playwright E2E Tests**:
   ```typescript
   test('can search for modules', async ({ page }) => {
-    await page.goto('/')
-    await page.fill('[data-testid="module-search"]', 'teleport')
-    await expect(page.locator('[data-testid="search-results"]')).toContainText('1 result')
-  })
+    await page.goto('/');
+    await page.fill('[data-testid="module-search"]', 'teleport');
+    await expect(page.locator('[data-testid="search-results"]')).toContainText(
+      '1 result',
+    );
+  });
   ```
 - **Smoke tests** for critical paths:
   - Module listing loads
@@ -183,6 +200,7 @@ services:
   - Export button works
 
 ### CI/CD Pipeline
+
 ```yaml
 # .github/workflows/ci.yml
 name: CI
@@ -201,11 +219,13 @@ jobs:
 ```
 
 ### Code Quality
+
 - **ESLint**: Standard Next.js config + strict TypeScript
 - **Prettier**: Format on save, 2-space indent, single quotes
 - **Pre-commit hooks**: Run lint & format
 
 ### Performance Requirements
+
 - **Static Generation**: All pages pre-rendered at build time
 - **Lazy Loading**: Code syntax highlighting loaded on-demand
 - **Bundle Size**: < 200KB initial JS
@@ -222,6 +242,7 @@ jobs:
 ## User Flows
 
 ### Flow 1: Finding and Viewing a Module
+
 ```
 1. User lands on homepage → Auto-redirect to first module
 2. User sees sidebar with all modules
@@ -231,6 +252,7 @@ jobs:
 ```
 
 ### Flow 2: Exporting a Module
+
 ```
 1. User on module detail page
 2. User clicks "Export JSON" button
@@ -239,6 +261,7 @@ jobs:
 ```
 
 ### Flow 3: Switching Module Versions
+
 ```
 1. User on module detail page
 2. User sees version dropdown in header
@@ -250,6 +273,7 @@ jobs:
 ## Development Phases
 
 ### Phase 1: Basic Structure (Week 1)
+
 - Next.js setup with TypeScript
 - Docker Compose dev environment
 - Basic routing structure
@@ -257,18 +281,21 @@ jobs:
 - Simple module list display
 
 ### Phase 2: Module Details (Week 2)
+
 - Module detail page components
 - Collapsible sections
 - Code syntax highlighting
 - Configuration schema display
 
 ### Phase 3: Search & Navigation (Week 3)
+
 - Search functionality
 - Sidebar filtering
 - URL-based navigation
 - Persistent UI state
 
 ### Phase 4: Polish & Export (Week 4)
+
 - JSON export feature
 - Version management
 - Mobile responsive design

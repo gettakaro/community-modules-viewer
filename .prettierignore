@@ -1,0 +1,35 @@
+# Dependencies
+node_modules
+
+# Next.js
+.next
+out
+
+# Testing
+coverage
+
+# Build outputs
+build
+dist
+
+# Logs
+*.log
+
+# Environment files
+.env*
+
+# Git
+.git
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

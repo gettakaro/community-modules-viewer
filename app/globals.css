@@ -6,7 +6,7 @@
   html {
     @apply bg-takaro-background text-white;
   }
-  
+
   body {
     @apply bg-takaro-background;
   }
