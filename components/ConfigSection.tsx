@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { CollapsibleCode } from './CollapsibleCode';
+import { SchemaRenderer } from './SchemaRenderer';
 
 export interface ConfigSectionProps {
   /** JSON schema for configuration as a string */
@@ -24,6 +26,7 @@ export function ConfigSection({
   className = '',
   defaultExpanded = false,
 }: ConfigSectionProps) {
+  const [viewMode, setViewMode] = useState<'pretty' | 'raw'>('pretty');
   /**
    * Safely parse JSON string and format it for display
    * @param jsonString - JSON string to parse and format
@@ -148,12 +151,36 @@ export function ConfigSection({
       aria-labelledby="config-section-title"
     >
       <div className="space-y-4">
-        <h2
-          id="config-section-title"
-          className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
-        >
-          Configuration
-        </h2>
+        <div className="flex items-center justify-between">
+          <h2
+            id="config-section-title"
+            className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
+          >
+            Configuration
+          </h2>
+          <div className="flex items-center gap-1 bg-takaro-card rounded-lg p-1">
+            <button
+              onClick={() => setViewMode('pretty')}
+              className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                viewMode === 'pretty'
+                  ? 'bg-takaro-accent text-white'
+                  : 'text-takaro-text-muted hover:text-takaro-text-secondary'
+              }`}
+            >
+              Pretty
+            </button>
+            <button
+              onClick={() => setViewMode('raw')}
+              className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                viewMode === 'raw'
+                  ? 'bg-takaro-accent text-white'
+                  : 'text-takaro-text-muted hover:text-takaro-text-secondary'
+              }`}
+            >
+              Raw JSON
+            </button>
+          </div>
+        </div>
         <p className="text-takaro-text-secondary text-sm">
           Configure this module using the schemas below. The JSON schema defines
           the data structure, while the UI schema customizes how the
@@ -233,14 +260,24 @@ export function ConfigSection({
             </div>
           </div>
         ) : (
-          <CollapsibleCode
-            code={formattedConfigSchema}
-            language="json"
-            title="JSON Schema"
-            defaultExpanded={defaultExpanded}
-            showCopy={true}
-            className="bg-takaro-card border border-takaro-border"
-          />
+          <>
+            {viewMode === 'pretty' ? (
+              <SchemaRenderer
+                schema={configSchema}
+                defaultExpanded={defaultExpanded}
+                className="bg-takaro-card border border-takaro-border rounded-lg p-4"
+              />
+            ) : (
+              <CollapsibleCode
+                code={formattedConfigSchema}
+                language="json"
+                title="JSON Schema"
+                defaultExpanded={defaultExpanded}
+                showCopy={true}
+                className="bg-takaro-card border border-takaro-border"
+              />
+            )}
+          </>
         )}
       </div>
 
@@ -316,14 +353,24 @@ export function ConfigSection({
             </div>
           </div>
         ) : (
-          <CollapsibleCode
-            code={formattedUiSchema}
-            language="json"
-            title="UI Schema"
-            defaultExpanded={defaultExpanded}
-            showCopy={true}
-            className="bg-takaro-card border border-takaro-border"
-          />
+          <>
+            {viewMode === 'pretty' ? (
+              <SchemaRenderer
+                schema={uiSchema}
+                defaultExpanded={defaultExpanded}
+                className="bg-takaro-card border border-takaro-border rounded-lg p-4"
+              />
+            ) : (
+              <CollapsibleCode
+                code={formattedUiSchema}
+                language="json"
+                title="UI Schema"
+                defaultExpanded={defaultExpanded}
+                showCopy={true}
+                className="bg-takaro-card border border-takaro-border"
+              />
+            )}
+          </>
         )}
       </div>
 
