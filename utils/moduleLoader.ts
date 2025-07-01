@@ -9,7 +9,6 @@ import {
   formatValidationError,
   ModuleSchema,
 } from '@/lib/types';
-import { fetchBuiltinModules } from '@/lib/github';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -220,7 +219,76 @@ export async function loadModuleFile(
 }
 
 /**
- * Load all modules from both local and GitHub sources
+ * Load built-in modules from local files (populated at build time)
+ * @returns Array of built-in modules with metadata
+ */
+export async function loadBuiltinModules(): Promise<ModuleWithMeta[]> {
+  const modules: ModuleWithMeta[] = [];
+  const builtinDir = path.join(process.cwd(), 'data', 'builtin-modules');
+
+  try {
+    // Check if builtin modules directory exists
+    await fs.access(builtinDir);
+
+    // Read all files in the builtin modules directory
+    const files = await fs.readdir(builtinDir);
+
+    // Filter for JSON files only (skip index.json)
+    const jsonFiles = files.filter(
+      (file) => file.endsWith('.json') && file !== 'index.json',
+    );
+
+    // Load each module file
+    for (const file of jsonFiles) {
+      try {
+        const filePath = path.join(builtinDir, file);
+        const content = await fs.readFile(filePath, 'utf-8');
+        const moduleData = JSON.parse(content);
+
+        // Validate the module structure
+        const validation = validateModule(moduleData);
+        if (validation.success) {
+          const moduleWithMeta = {
+            ...validation.data,
+            source: 'builtin' as const,
+            path: filePath,
+          };
+
+          const metaValidation = validateModuleWithMeta(moduleWithMeta);
+          if (metaValidation.success) {
+            modules.push(metaValidation.data);
+          } else {
+            console.warn(
+              `Invalid built-in module structure in ${file}:`,
+              formatValidationError(metaValidation.error, file),
+            );
+          }
+        } else {
+          console.warn(
+            `Invalid built-in module in ${file}:`,
+            formatValidationError(validation.error, file),
+          );
+        }
+      } catch (error) {
+        console.warn(`Failed to load built-in module ${file}:`, error);
+      }
+    }
+
+    // Sort modules alphabetically
+    modules.sort((a, b) => a.name.localeCompare(b.name));
+  } catch (error) {
+    // Built-in modules directory doesn't exist or couldn't be read
+    // This is not fatal - the app works fine with just community modules
+    console.info(
+      'No built-in modules found (this is normal if not fetched yet)',
+    );
+  }
+
+  return modules;
+}
+
+/**
+ * Load all modules from both local and built-in sources
  * Community modules take precedence over built-in modules with the same name
  * @returns Array of all modules with metadata
  */
@@ -229,7 +297,7 @@ export async function loadAllModules(): Promise<ModuleWithMeta[]> {
     // Load from both sources in parallel for better performance
     const [localModules, builtinModules] = await Promise.all([
       loadLocalModules(),
-      fetchBuiltinModules(),
+      loadBuiltinModules(),
     ]);
 
     // Use a Map for deduplication by module name
@@ -263,7 +331,7 @@ export async function loadAllModules(): Promise<ModuleWithMeta[]> {
     return allModules;
   } catch (error) {
     console.error('Failed to load all modules:', error);
-    // Try to return at least local modules if GitHub fetch fails
+    // Try to return at least local modules if built-in loading fails
     try {
       const localModules = await loadLocalModules();
       console.warn(
@@ -288,7 +356,7 @@ export async function loadModulesBySource(
   if (source === 'community') {
     return loadLocalModules();
   } else if (source === 'builtin') {
-    return fetchBuiltinModules();
+    return loadBuiltinModules();
   } else {
     throw new Error(`Invalid module source: ${source}`);
   }
@@ -306,7 +374,7 @@ export async function getModuleStats(): Promise<{
 }> {
   const [localModules, builtinModules] = await Promise.all([
     loadLocalModules(),
-    fetchBuiltinModules(),
+    loadBuiltinModules(),
   ]);
 
   const localNames = new Set(localModules.map((m) => m.name));

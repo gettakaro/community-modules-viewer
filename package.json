@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/fetch-builtin-modules.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -13,6 +14,7 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "typecheck": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "fetch:modules": "node scripts/fetch-builtin-modules.js",
     "docker:up": "docker compose up",
     "docker:build": "docker compose build",
     "docker:down": "docker compose down",
