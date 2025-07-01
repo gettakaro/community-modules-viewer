@@ -177,9 +177,9 @@ export function ModuleDetails({
     <div data-testid="module-details" className={`space-y-6 ${className}`}>
       {/* Module Header */}
       <div className="card-takaro">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1 mr-4">
-            <h1 className="text-2xl font-bold text-takaro-text-primary mb-2">
+        <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-4">
+          <div className="flex-1 w-full sm:mr-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-takaro-text-primary mb-2">
               {module.name}
             </h1>
             {currentVersion.description && (
@@ -189,8 +189,8 @@ export function ModuleDetails({
               />
             )}
           </div>
-          <div className="flex items-start gap-4">
-            <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-start gap-4 w-full sm:w-auto">
+            <div className="flex flex-col items-start sm:items-end gap-2">
               <span className={sourceColors[module.source]}>
                 {module.source}
               </span>
@@ -292,31 +292,33 @@ export function ModuleDetails({
         {/* Version Selector */}
         {module.versions.length > 1 && (
           <div className="border-t border-takaro-border pt-4">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
               <label
                 htmlFor="version-select"
-                className="text-sm font-medium text-takaro-text-primary"
+                className="text-sm font-medium text-takaro-text-primary flex-shrink-0"
               >
                 Version:
               </label>
-              <select
-                id="version-select"
-                data-testid="version-selector"
-                value={currentVersion.tag}
-                onChange={(e) => handleVersionChange(e.target.value)}
-                className="input-takaro text-sm min-w-0 flex-shrink-0"
-                aria-label="Select module version"
-              >
-                {module.versions.map((version) => (
-                  <option key={version.tag} value={version.tag}>
-                    {version.tag}
-                  </option>
-                ))}
-              </select>
-              <span className="text-xs text-takaro-text-muted">
-                ({module.versions.length} version
-                {module.versions.length !== 1 ? 's' : ''} available)
-              </span>
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                <select
+                  id="version-select"
+                  data-testid="version-selector"
+                  value={currentVersion.tag}
+                  onChange={(e) => handleVersionChange(e.target.value)}
+                  className="input-takaro text-sm min-w-0 flex-shrink-0 w-full sm:w-auto"
+                  aria-label="Select module version"
+                >
+                  {module.versions.map((version) => (
+                    <option key={version.tag} value={version.tag}>
+                      {version.tag}
+                    </option>
+                  ))}
+                </select>
+                <span className="text-xs text-takaro-text-muted whitespace-nowrap">
+                  ({module.versions.length} version
+                  {module.versions.length !== 1 ? 's' : ''} available)
+                </span>
+              </div>
             </div>
           </div>
         )}
@@ -327,7 +329,7 @@ export function ModuleDetails({
             <h3 className="text-sm font-medium text-takaro-text-primary mb-3">
               Components Overview
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {Object.entries(sectionStats).map(([key, stats]) => (
                 <div
                   key={key}
@@ -558,13 +560,13 @@ function SectionWrapper({
     <div className="card-takaro">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between p-4 hover:bg-takaro-card-hover transition-colors focus:outline-none focus:ring-2 focus:ring-takaro-primary rounded-lg"
+        className="w-full flex items-center justify-between p-3 sm:p-4 hover:bg-takaro-card-hover transition-colors focus:outline-none focus:ring-2 focus:ring-takaro-primary rounded-lg"
         aria-expanded={!isCollapsed}
         aria-controls={`section-${title.toLowerCase().replace(' ', '-')}`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
           <svg
-            className="w-5 h-5 text-takaro-primary"
+            className="w-4 h-4 sm:w-5 sm:h-5 text-takaro-primary flex-shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -572,13 +574,15 @@ function SectionWrapper({
           >
             {icons[icon]}
           </svg>
-          <h2 className="text-lg font-semibold text-takaro-text-primary">
+          <h2 className="text-base sm:text-lg font-semibold text-takaro-text-primary truncate">
             {title}
           </h2>
-          <span className="badge-takaro-secondary text-xs">{count}</span>
+          <span className="badge-takaro-secondary text-xs flex-shrink-0">
+            {count}
+          </span>
         </div>
         <svg
-          className={`w-5 h-5 text-takaro-text-secondary transition-transform ${
+          className={`w-4 h-4 sm:w-5 sm:h-5 text-takaro-text-secondary transition-transform flex-shrink-0 ml-2 ${
             isCollapsed ? '' : 'rotate-180'
           }`}
           fill="none"

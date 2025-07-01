@@ -1,5 +1,5 @@
 import { loadAllModules } from '@/utils/moduleLoader';
-import { ModuleSidebar } from '@/components/ModuleSidebar';
+import { MobileLayoutWrapper } from '@/components/MobileLayoutWrapper';
 
 export default async function ModuleLayout({
   children,
@@ -15,12 +15,8 @@ export default async function ModuleLayout({
   const { name: selectedModule } = await params;
 
   return (
-    <div className="min-h-screen bg-takaro-background">
-      {/* Sidebar */}
-      <ModuleSidebar modules={modules} selectedModule={selectedModule} />
-
-      {/* Main Content Area */}
-      <div className="main-content-with-sidebar">{children}</div>
-    </div>
+    <MobileLayoutWrapper modules={modules} selectedModule={selectedModule}>
+      {children}
+    </MobileLayoutWrapper>
   );
 }

@@ -156,25 +156,25 @@ export function CollapsibleCode({
   return (
     <div className={`code-highlight overflow-hidden ${className}`}>
       {/* Header with title and controls */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-takaro-border bg-takaro-card">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-4 py-2 border-b border-takaro-border bg-takaro-card gap-2 sm:gap-0">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
           {title && (
-            <h4 className="text-sm font-medium text-takaro-text-primary">
+            <h4 className="text-sm font-medium text-takaro-text-primary truncate">
               {title}
             </h4>
           )}
           {language && (
-            <span className="badge-takaro-secondary text-xs">
+            <span className="badge-takaro-secondary text-xs flex-shrink-0">
               {language.toUpperCase()}
             </span>
           )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-shrink-0 w-full sm:w-auto justify-end sm:justify-start">
           {showCopy && (
             <button
               onClick={handleCopy}
-              className="btn-takaro-outline text-xs px-2 py-1 h-auto min-h-0"
+              className="btn-takaro-outline text-xs px-3 py-2 sm:px-2 sm:py-1 h-auto min-h-0 min-w-[44px] touch-manipulation"
               title="Copy to clipboard"
               aria-label="Copy code to clipboard"
             >
@@ -220,7 +220,7 @@ export function CollapsibleCode({
 
           <button
             onClick={toggleExpanded}
-            className="btn-takaro-outline text-xs px-2 py-1 h-auto min-h-0"
+            className="btn-takaro-outline text-xs px-3 py-2 sm:px-2 sm:py-1 h-auto min-h-0 min-w-[44px] touch-manipulation"
             aria-label={isExpanded ? 'Hide code' : 'Show code'}
             aria-expanded={isExpanded}
           >
@@ -285,9 +285,10 @@ export function CollapsibleCode({
 
           <pre
             className={`
-              !bg-takaro-card !border-0 !rounded-none overflow-auto text-sm
+              !bg-takaro-card !border-0 !rounded-none overflow-auto text-xs sm:text-sm
               ${showLineNumbers ? 'line-numbers' : ''}
               ${isHighlighting ? 'opacity-50' : ''}
+              p-3 sm:p-4
             `}
           >
             <code ref={codeRef} className={getLanguageClass()}>
