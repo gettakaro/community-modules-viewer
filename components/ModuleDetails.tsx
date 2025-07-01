@@ -6,6 +6,7 @@ import { ConfigSection } from './ConfigSection';
 import { CommandsSection } from './CommandsSection';
 import { HooksSection } from './HooksSection';
 import { CronJobsSection } from './CronJobsSection';
+import { FunctionsSection } from './FunctionsSection';
 import { PermissionsSection } from './PermissionsSection';
 import { exportModuleAsJSON } from '@/utils/exportUtils';
 import { MarkdownRenderer } from './MarkdownRenderer';
@@ -50,6 +51,7 @@ export function ModuleDetails({
     commands: false,
     hooks: false,
     cronJobs: false,
+    functions: false,
     permissions: false,
   });
 
@@ -125,6 +127,10 @@ export function ModuleDetails({
       cronJobs: {
         available: currentVersion.cronJobs.length > 0,
         count: currentVersion.cronJobs.length,
+      },
+      functions: {
+        available: currentVersion.functions.length > 0,
+        count: currentVersion.functions.length,
       },
       permissions: {
         available: currentVersion.permissions.length > 0,
@@ -376,7 +382,7 @@ export function ModuleDetails({
         >
           <CommandsSection
             commands={currentVersion.commands}
-            defaultExpanded={!collapsedSections.commands}
+            defaultExpanded={false}
           />
         </SectionWrapper>
       )}
@@ -390,10 +396,7 @@ export function ModuleDetails({
           onToggle={() => toggleSection('hooks')}
           count={sectionStats.hooks.count}
         >
-          <HooksSection
-            hooks={currentVersion.hooks}
-            defaultExpanded={!collapsedSections.hooks}
-          />
+          <HooksSection hooks={currentVersion.hooks} defaultExpanded={false} />
         </SectionWrapper>
       )}
 
@@ -408,7 +411,23 @@ export function ModuleDetails({
         >
           <CronJobsSection
             cronJobs={currentVersion.cronJobs}
-            defaultExpanded={!collapsedSections.cronJobs}
+            defaultExpanded={false}
+          />
+        </SectionWrapper>
+      )}
+
+      {/* Functions Section */}
+      {sectionStats?.functions.available && (
+        <SectionWrapper
+          title="Functions"
+          icon="code"
+          isCollapsed={collapsedSections.functions}
+          onToggle={() => toggleSection('functions')}
+          count={sectionStats.functions.count}
+        >
+          <FunctionsSection
+            functions={currentVersion.functions}
+            defaultExpanded={false}
           />
         </SectionWrapper>
       )}
@@ -424,7 +443,7 @@ export function ModuleDetails({
         >
           <PermissionsSection
             permissions={currentVersion.permissions}
-            defaultExpanded={!collapsedSections.permissions}
+            defaultExpanded={false}
           />
         </SectionWrapper>
       )}
@@ -467,7 +486,7 @@ export function ModuleDetails({
  */
 interface SectionWrapperProps {
   title: string;
-  icon: 'cog' | 'terminal' | 'lightning' | 'clock' | 'shield';
+  icon: 'cog' | 'terminal' | 'lightning' | 'clock' | 'shield' | 'code';
   isCollapsed: boolean;
   onToggle: () => void;
   count: number;
@@ -521,6 +540,14 @@ function SectionWrapper({
         strokeLinejoin="round"
         strokeWidth={2}
         d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+      />
+    ),
+    code: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
       />
     ),
   };
