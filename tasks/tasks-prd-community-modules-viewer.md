@@ -41,7 +41,7 @@
   - [x] 6.1 [depends on: 3.0] Write unit tests for all components
   - [ ] 6.2 [depends on: 2.0] Write unit tests for utility functions
   - [x] 6.3 [depends on: 5.0] Create Playwright E2E tests for critical user flows
-  - [ ] 6.4 [depends on: 1.0] Set up GitHub Actions CI/CD pipeline
+  - [x] 6.4 [depends on: 1.0] Set up GitHub Actions CI/CD pipeline
   - [ ] 6.5 [depends on: 4.0, 5.0] Implement lazy loading for code highlighting
   - [ ] 6.6 [depends on: 6.3] Add mobile responsive design and test on various devices
 
@@ -92,9 +92,12 @@
 - `lib/types.ts` - TypeScript interfaces and Zod validation schemas for module data structures (updated with validation)
 - `tailwind.config.js` - Tailwind configuration with Takaro theme colors
 - `docker-compose.yml` - Docker development environment configuration
-- `.github/workflows/ci.yml` - CI/CD pipeline configuration
 - `playwright.config.js` - Playwright test configuration for smoke tests (created)
+- `playwright.config.prod.js` - Playwright configuration for production testing (created)
 - `tests/e2e/modules.spec.ts` - Playwright E2E smoke tests for core user flows (created)
+- `scripts/test-e2e.sh` - Shell script for automated production testing workflow (created)
+- `nginx.conf` - Nginx configuration for production static file serving (created)
+- `.github/workflows/ci.yml` - GitHub Actions CI/CD pipeline configuration with quality checks and E2E tests (created)
 
 ### Notes
 
