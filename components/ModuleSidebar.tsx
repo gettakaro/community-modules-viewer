@@ -121,6 +121,7 @@ export function ModuleSidebar({
 
   return (
     <div
+      data-testid="module-sidebar"
       className={`sidebar-takaro ${isCollapsed ? 'sidebar-collapsed' : ''} ${className}`}
     >
       {/* Sidebar Header */}
@@ -152,7 +153,10 @@ export function ModuleSidebar({
 
         {!isCollapsed && (
           <div className="sidebar-stats">
-            <div className="text-xs text-takaro-text-muted">
+            <div
+              className="text-xs text-takaro-text-muted"
+              data-testid="search-results-count"
+            >
               {stats.filtered} of {stats.total} modules
               {(searchTerm || sourceFilter !== 'all') && (
                 <button
@@ -190,6 +194,7 @@ export function ModuleSidebar({
                 placeholder="Search modules..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                data-testid="search-input"
                 className="input input-bordered w-full pl-10 pr-4 py-2 bg-takaro-card border-takaro-border text-takaro-text-primary placeholder-takaro-text-muted focus:border-takaro-primary"
               />
               {searchTerm && (

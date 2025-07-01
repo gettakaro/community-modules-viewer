@@ -101,7 +101,7 @@ export function SchemaRenderer({
   }
 
   return (
-    <div className={`space-y-4 ${className}`}>
+    <div data-testid="schema-renderer" className={`space-y-4 ${className}`}>
       <div className="flex items-center justify-between">
         <h4 className="text-sm font-medium text-takaro-text-primary">
           Configuration Properties (

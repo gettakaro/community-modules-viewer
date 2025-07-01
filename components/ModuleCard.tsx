@@ -45,6 +45,7 @@ export function ModuleCard({
 
   return (
     <div
+      data-testid="module-link"
       className={`
         card-takaro card-takaro-hover cursor-pointer
         ${isSelected ? 'border-takaro-primary bg-takaro-card-hover' : ''}

@@ -174,7 +174,7 @@ export function ModuleDetails({
   };
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div data-testid="module-details" className={`space-y-6 ${className}`}>
       {/* Module Header */}
       <div className="card-takaro">
         <div className="flex items-start justify-between mb-4">
@@ -203,6 +203,7 @@ export function ModuleDetails({
             <div className="relative" ref={exportMenuRef}>
               <button
                 onClick={() => setExportMenuOpen(!exportMenuOpen)}
+                data-testid="export-button"
                 className="btn btn-ghost btn-sm"
                 aria-label="Export module data"
                 title="Export module data"
@@ -300,6 +301,7 @@ export function ModuleDetails({
               </label>
               <select
                 id="version-select"
+                data-testid="version-selector"
                 value={currentVersion.tag}
                 onChange={(e) => handleVersionChange(e.target.value)}
                 className="input-takaro text-sm min-w-0 flex-shrink-0"

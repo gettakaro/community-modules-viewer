@@ -38,9 +38,9 @@
   - [x] 5.6 [depends on: 4.5] Add version selector dropdown to module details
 
 - [ ] 6.0 Add testing, CI/CD, and production optimization
-  - [ ] 6.1 [depends on: 3.0] Write unit tests for all components
+  - [x] 6.1 [depends on: 3.0] Write unit tests for all components
   - [ ] 6.2 [depends on: 2.0] Write unit tests for utility functions
-  - [ ] 6.3 [depends on: 5.0] Create Playwright E2E tests for critical user flows
+  - [x] 6.3 [depends on: 5.0] Create Playwright E2E tests for critical user flows
   - [ ] 6.4 [depends on: 1.0] Set up GitHub Actions CI/CD pipeline
   - [ ] 6.5 [depends on: 4.0, 5.0] Implement lazy loading for code highlighting
   - [ ] 6.6 [depends on: 6.3] Add mobile responsive design and test on various devices
@@ -93,7 +93,8 @@
 - `tailwind.config.js` - Tailwind configuration with Takaro theme colors
 - `docker-compose.yml` - Docker development environment configuration
 - `.github/workflows/ci.yml` - CI/CD pipeline configuration
-- `tests/e2e/modules.spec.ts` - Playwright E2E tests
+- `playwright.config.js` - Playwright test configuration for smoke tests (created)
+- `tests/e2e/modules.spec.ts` - Playwright E2E smoke tests for core user flows (created)
 
 ### Notes
 

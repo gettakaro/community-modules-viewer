@@ -1,3 +1,4 @@
+# Build stage
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -11,22 +12,20 @@ RUN npm ci
 # Copy the rest of the application
 COPY . .
 
-# Build the application
+# Build the application (creates static files in 'out' directory)
 RUN npm run build
 
-# Production stage
-FROM node:20-alpine
+# Production stage with nginx
+FROM nginx:alpine
 
-WORKDIR /app
+# Copy static files from builder stage
+COPY --from=builder /app/out /usr/share/nginx/html
 
-# Copy built application from builder stage
-COPY --from=builder /app/out ./out
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Install a simple static server
-RUN npm install -g serve
+# Expose port 80
+EXPOSE 80
 
-# Expose port
-EXPOSE 3000
-
-# Serve the static files
-CMD ["serve", "-s", "out", "-l", "3000"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
