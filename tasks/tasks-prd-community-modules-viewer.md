@@ -11,8 +11,8 @@
 - [ ] 2.0 Implement module data loading and processing system
   - [x] 2.1 [depends on: 1.6] Create moduleLoader utility for reading local JSON files
   - [x] 2.2 [depends on: 1.6] Implement GitHub API client for fetching built-in modules
-  - [ ] 2.3 [depends on: 2.1, 2.2] Create module data aggregation and normalization logic
-  - [ ] 2.4 [depends on: 2.3] Implement static page generation for all module/version combinations
+  - [x] 2.3 [depends on: 2.1, 2.2] Create module data aggregation and normalization logic
+  - [x] 2.4 [depends on: 2.3] Implement static page generation for all module/version combinations
   - [ ] 2.5 [depends on: 2.1] Add module data validation and error handling
 
 - [ ] 3.0 Build core UI components with Takaro design system
@@ -48,7 +48,9 @@
 ## Relevant Files
 
 - `app/layout.tsx` - Root layout with Takaro-aligned dark theme and global styles (created - basic structure)
-- `app/page.tsx` - Homepage with auto-redirect to first module (created - placeholder)
+- `app/page.tsx` - Homepage with auto-redirect to first module (updated - now functional)
+- `app/module/[name]/page.tsx` - Module detail page with version redirect (created)
+- `app/module/[name]/[version]/page.tsx` - Module version detail page (created)
 - `package.json` - Updated with Next.js 15, React, and TypeScript dependencies
 - `tsconfig.json` - TypeScript configuration for Next.js
 - `next.config.js` - Next.js configuration with static export settings
@@ -70,8 +72,6 @@
 - `utils/` - Directory for utility functions (created)
 - `lib/` - Directory for library code and types (created)
 - `tests/e2e/` - Directory for Playwright E2E tests (created)
-- `app/module/[name]/page.tsx` - Module detail page with version redirect
-- `app/module/[name]/[version]/page.tsx` - Module version detail page
 - `components/ModuleSidebar.tsx` - Collapsible sidebar with module list and search
 - `components/ModuleSidebar.test.tsx` - Unit tests for sidebar component
 - `components/ModuleDetails.tsx` - Main module details display component
@@ -83,7 +83,7 @@
 - `components/CronJobsSection.tsx` - Cron jobs section component
 - `components/PermissionsSection.tsx` - Permissions display component
 - `components/CollapsibleCode.tsx` - Reusable code viewer with syntax highlighting
-- `utils/moduleLoader.ts` - Module data fetching and processing utilities (created)
+- `utils/moduleLoader.ts` - Module data fetching and processing utilities with aggregation logic (updated)
 - `utils/moduleLoader.test.ts` - Unit tests for module loader
 - `utils/searchUtils.ts` - Search and filter utility functions
 - `utils/searchUtils.test.ts` - Unit tests for search utilities

@@ -18,7 +18,7 @@ npm run docker:build
 npm run docker:down
 ```
 
-The application will be available at http://localhost:3000 with hot-reloading enabled.
+The application will be available at http://localhost:3001 with hot-reloading enabled.
 
 ## Production
 
