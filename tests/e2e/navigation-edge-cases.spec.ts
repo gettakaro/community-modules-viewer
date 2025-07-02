@@ -121,27 +121,45 @@ test.describe('Navigation Edge Cases', () => {
       for (const url of malformedUrls) {
         const response = await page.goto(url);
 
-        // Should handle gracefully - either 404, redirect, or error (500 in dev mode)
-        expect(response?.status()).toBeGreaterThanOrEqual(200);
+        // Malformed URLs should return error status codes (400+ for client/server errors)
+        expect(
+          response?.status(),
+          `URL ${url} should return 400+ status code but got ${response?.status()}`,
+        ).toBeGreaterThanOrEqual(400);
       }
     });
   });
 
   test.describe('URL Validation', () => {
     test('handles special characters in URLs', async ({ page }) => {
-      // Test various special characters that might appear in module names
-      const specialCharUrls = [
-        '/module/test%20module/latest',
-        '/module/test-module-123/v1.0.0',
-        '/module/test_module/latest',
-        '/module/test.module/latest',
+      // Test URLs with encoded/special characters - these should be handled gracefully
+      const validSpecialCharUrls = [
+        '/module/test-module-123/v1.0.0', // Hyphens and numbers (common)
+        '/module/test_module/latest', // Underscores (common)
+        '/module/test.module/latest', // Dots (less common but valid)
       ];
 
-      for (const url of specialCharUrls) {
-        const response = await page.goto(url);
+      // URLs with problematic characters that should likely return errors
+      const problematicUrls = [
+        '/module/test%20module/latest', // URL-encoded space (problematic)
+      ];
 
-        // Should handle gracefully - either valid page, 404, or error (500 in dev mode)
-        expect(response?.status()).toBeGreaterThanOrEqual(200);
+      // Valid-looking URLs should return 200+ (success, redirect, client error, or 500 in dev mode)
+      for (const url of validSpecialCharUrls) {
+        const response = await page.goto(url);
+        expect(
+          response?.status(),
+          `Valid special char URL ${url} should return 200+ but got ${response?.status()}`,
+        ).toBeGreaterThanOrEqual(200);
+      }
+
+      // Problematic URLs should return 400+ error codes
+      for (const url of problematicUrls) {
+        const response = await page.goto(url);
+        expect(
+          response?.status(),
+          `Problematic URL ${url} should return 400+ status code but got ${response?.status()}`,
+        ).toBeGreaterThanOrEqual(400);
       }
     });
 
