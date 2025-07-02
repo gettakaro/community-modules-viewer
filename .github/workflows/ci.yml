@@ -118,7 +118,7 @@ jobs:
       - name: Run container for testing
         timeout-minutes: 5
         run: |
-          docker run --name test-container -d -p 3002:80 "ghcr.io/${{ github.repository }}:sha-${{ steps.short_sha.outputs.sha_short }}"
+          docker run --name test-container -d -p 3002:53118 "ghcr.io/${{ github.repository }}:sha-${{ steps.short_sha.outputs.sha_short }}"
 
       - name: Wait for container to be ready
         run: |

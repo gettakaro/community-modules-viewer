@@ -35,7 +35,7 @@ docker build -f Dockerfile.prod -t $IMAGE_NAME .
 
 # Step 2: Run the container
 echo -e "${YELLOW}Starting production container on port $TEST_PORT...${NC}"
-docker run -d --name $CONTAINER_NAME -p $TEST_PORT:80 $IMAGE_NAME
+docker run -d --name $CONTAINER_NAME -p $TEST_PORT:53118 $IMAGE_NAME
 
 # Step 3: Wait for container to be ready
 echo -e "${YELLOW}Waiting for container to be ready...${NC}"
