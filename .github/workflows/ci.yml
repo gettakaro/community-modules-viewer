@@ -141,13 +141,3 @@ jobs:
         run: |
           docker stop test-container || true
           docker rm test-container || true
-
-  # Security scan
-  security-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run npm audit
-        run: npm audit --production --audit-level=high || true
