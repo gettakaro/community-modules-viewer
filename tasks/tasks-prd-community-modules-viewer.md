@@ -47,7 +47,7 @@
 
 - [ ] 7.0 Comprehensive E2E Testing Suite
   - [x] 7.1 [depends on: 6.6] Mobile responsiveness E2E tests - hamburger menu interactions, mobile navigation, responsive layouts
-  - [ ] 7.2 [depends on: 5.0] Source filtering E2E tests - Community/Built-in filter functionality and filter combinations
+  - [x] 7.2 [depends on: 5.0] Source filtering E2E tests - Community/Built-in filter functionality and filter combinations
   - [ ] 7.3 [depends on: 4.0] Navigation edge cases E2E tests - auto-redirects, 404 handling, URL validation
   - [ ] 7.4 [depends on: 3.0] All section types E2E tests - config, commands, hooks, cron jobs, functions, permissions sections
   - [ ] 7.5 [depends on: 7.4] Section interactions E2E tests - collapse/expand, Pretty/Raw toggle for each section type
@@ -119,6 +119,7 @@
 - `utils/exportUtils.test.ts` - Unit tests for JSON export functionality (created)
 - `utils/moduleLoader.test.ts` - Unit tests for module normalization utilities (created)
 - `tests/e2e/mobile-responsive.spec.ts` - Comprehensive E2E tests for mobile responsiveness including hamburger menu, navigation, and responsive layouts (created)
+- `tests/e2e/source-filtering.spec.ts` - E2E tests for Community/Built-in filter functionality and filter combinations (created)
 
 ### Notes
 
