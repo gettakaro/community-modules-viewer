@@ -191,6 +191,10 @@ export function ModuleSidebar({
       'anti-cheat',
       'community-management',
       'minigames',
+      'economy',
+      'integration',
+      'administration',
+      'events',
       'Built-in',
       'Uncategorized',
     ];

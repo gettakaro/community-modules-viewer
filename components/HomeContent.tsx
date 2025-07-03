@@ -90,10 +90,34 @@ export function HomeContent({ modules }: HomeContentProps) {
                           'Fun games and entertainment for your players',
                         icon: '🎮',
                       },
+                      economy: {
+                        name: 'Economy',
+                        description:
+                          'Currency, trading, and reward systems for your server',
+                        icon: '💰',
+                      },
+                      integration: {
+                        name: 'Integration',
+                        description:
+                          'Connect your server with Discord and other services',
+                        icon: '🔗',
+                      },
+                      administration: {
+                        name: 'Administration',
+                        description:
+                          'Server management, automation, and admin tools',
+                        icon: '⚙️',
+                      },
+                      events: {
+                        name: 'Events',
+                        description:
+                          'Special events and enhanced gameplay features',
+                        icon: '🎉',
+                      },
                       'Built-in': {
                         name: 'Built-in',
                         description: 'Official modules included with Takaro',
-                        icon: '⚙️',
+                        icon: '📋',
                       },
                       Uncategorized: {
                         name: 'Uncategorized',
@@ -107,6 +131,10 @@ export function HomeContent({ modules }: HomeContentProps) {
                       'anti-cheat',
                       'community-management',
                       'minigames',
+                      'economy',
+                      'integration',
+                      'administration',
+                      'events',
                       'Built-in',
                       'Uncategorized',
                     ];
