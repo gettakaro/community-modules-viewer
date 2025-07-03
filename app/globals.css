@@ -154,7 +154,7 @@
 
   /* Module sidebar styling */
   .sidebar-takaro {
-    @apply bg-takaro-card border-r border-takaro-border flex flex-col h-full min-h-screen w-80 fixed left-0 top-0 z-30 transition-all duration-300;
+    @apply bg-takaro-card border-r border-takaro-border flex flex-col h-full min-h-screen w-80 fixed left-0 top-0 z-[45] transition-all duration-300;
   }
 
   .sidebar-takaro.sidebar-collapsed {
@@ -179,6 +179,8 @@
 
   .sidebar-modules {
     @apply flex-1 p-4 overflow-y-auto;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
   }
 
   .module-card-sidebar {

@@ -1,17 +1,14 @@
 import { loadAllModules } from '@/utils/moduleLoader';
-import { ModuleSidebar } from '@/components/ModuleSidebar';
+import { MobileLayoutWrapper } from '@/components/MobileLayoutWrapper';
 
 export default async function Home() {
   // Get all modules for the sidebar
   const modules = await loadAllModules();
 
   return (
-    <div className="min-h-screen bg-takaro-background">
-      {/* Sidebar */}
-      <ModuleSidebar modules={modules} />
-
+    <MobileLayoutWrapper modules={modules}>
       {/* Main Content Area */}
-      <div className="main-content-with-sidebar">
+      <div>
         <main className="container mx-auto p-8">
           <div className="card-takaro max-w-2xl">
             <h1 className="text-4xl font-bold text-takaro-text-primary mb-4">
@@ -78,6 +75,6 @@ export default async function Home() {
           </div>
         </main>
       </div>
-    </div>
+    </MobileLayoutWrapper>
   );
 }

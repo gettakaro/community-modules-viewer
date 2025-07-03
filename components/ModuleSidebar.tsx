@@ -171,6 +171,35 @@ export function ModuleSidebar({
     }
   }, [isMobileOpen, isMobile, setIsMobileOpen]);
 
+  // Lock body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (isMobile && isMobileOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+
+      // Lock body scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        // Restore body scroll
+        const savedScrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+
+        // Restore scroll position
+        if (savedScrollY) {
+          window.scrollTo(
+            0,
+            parseInt(savedScrollY.replace('-', '').replace('px', ''), 10),
+          );
+        }
+      };
+    }
+  }, [isMobile, isMobileOpen]);
+
   const clearSearch = () => {
     setSearchTerm('');
     setSourceFilter('all');
@@ -392,7 +421,7 @@ export function MobileMenuButton({
     <button
       onClick={onToggle}
       className={`
-        fixed top-4 left-4 z-50 p-3 bg-takaro-card border border-takaro-border rounded-lg
+        fixed top-4 left-4 z-[60] p-3 bg-takaro-card border border-takaro-border rounded-lg
         shadow-lg md:hidden transition-all duration-300 hover:bg-takaro-card-hover
         ${isOpen ? 'left-72' : 'left-4'}
         ${className}
