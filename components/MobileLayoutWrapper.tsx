@@ -1,8 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ModuleSidebar, MobileMenuButton } from '@/components/ModuleSidebar';
 import { ModuleWithMeta } from '@/lib/types';
+import {
+  CategoryFilterProvider,
+  useCategoryFilter,
+} from './CategoryFilterContext';
 
 export interface MobileLayoutWrapperProps {
   modules: ModuleWithMeta[];
@@ -10,12 +14,13 @@ export interface MobileLayoutWrapperProps {
   children: React.ReactNode;
 }
 
-export function MobileLayoutWrapper({
+function MobileLayoutWrapperInner({
   modules,
   selectedModule,
   children,
 }: MobileLayoutWrapperProps) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { categoryFilter, setCategoryFilter } = useCategoryFilter();
 
   return (
     <div className="min-h-screen bg-takaro-background">
@@ -31,10 +36,20 @@ export function MobileLayoutWrapper({
         selectedModule={selectedModule}
         isMobileOpen={isMobileOpen}
         onMobileToggle={setIsMobileOpen}
+        categoryFilter={categoryFilter}
+        onCategoryFilterChange={setCategoryFilter}
       />
 
       {/* Main Content Area */}
       <div className="main-content-with-sidebar">{children}</div>
     </div>
+  );
+}
+
+export function MobileLayoutWrapper(props: MobileLayoutWrapperProps) {
+  return (
+    <CategoryFilterProvider>
+      <MobileLayoutWrapperInner {...props} />
+    </CategoryFilterProvider>
   );
 }

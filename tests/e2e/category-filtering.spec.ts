@@ -113,40 +113,6 @@ test.describe('Category Filtering', () => {
     await expect(minigamesButton).not.toHaveClass(/btn-takaro-primary/);
   });
 
-  test('category filter works with source filter', async ({ page }) => {
-    // First apply community source filter
-    const communitySourceButton = page
-      .locator('button:has-text("Community")')
-      .first();
-    await communitySourceButton.click();
-    await expect(communitySourceButton).toHaveClass(/btn-takaro-primary/);
-
-    // Then apply minigames category filter
-    const minigamesButton = page.locator(
-      '[data-testid="category-filter-minigames"]',
-    );
-    await minigamesButton.click();
-    await expect(minigamesButton).toHaveClass(/btn-takaro-primary/);
-
-    // Should show only community minigames
-    const minigamesGroup = page.locator(
-      '[data-testid="category-group-minigames"]',
-    );
-    await expect(minigamesGroup).toBeVisible();
-
-    // All visible modules should be community modules
-    const moduleCards = minigamesGroup.locator('[data-testid="module-link"]');
-    const count = await moduleCards.count();
-
-    if (count > 0) {
-      const firstCard = moduleCards.first();
-      const badge = firstCard.locator(
-        '.badge-takaro-primary:has-text("community")',
-      );
-      await expect(badge).toBeVisible();
-    }
-  });
-
   test('category filter works with search', async ({ page }) => {
     // Apply minigames category filter
     const minigamesButton = page.locator(
@@ -181,8 +147,11 @@ test.describe('Category Filtering', () => {
     const searchInput = page.locator('[data-testid="search-input"]');
     await searchInput.fill('test');
 
-    // Click Clear button
-    const clearButton = page.locator('button:has-text("Clear")').first();
+    // Click Clear button - should be in the search results count area
+    const clearButton = page.locator(
+      '[data-testid="search-results-count"] button:has-text("Clear")',
+    );
+    await expect(clearButton).toBeVisible();
     await clearButton.click();
 
     // Category filter should reset to All
@@ -190,7 +159,17 @@ test.describe('Category Filtering', () => {
     await expect(allButton).toHaveClass(/btn-takaro-primary/);
     await expect(antiCheatButton).not.toHaveClass(/btn-takaro-primary/);
 
-    // Search should be empty
+    // Search should be empty - wait for it to clear
+    await page.waitForFunction(
+      () => {
+        const input = document.querySelector(
+          '[data-testid="search-input"]',
+        ) as HTMLInputElement;
+        return input && input.value === '';
+      },
+      { timeout: 5000 },
+    );
+
     await expect(searchInput).toHaveValue('');
   });
 
@@ -262,7 +241,7 @@ test.describe('Category Filtering', () => {
   test('category counts are accurate', async ({ page }) => {
     // Get all category filter buttons with counts
     const categoryButtons = page.locator(
-      '[data-testid^="category-filter-"]:not([data-testid="category-filter-all"])',
+      'button[data-testid^="category-filter-"]:not([data-testid="category-filter-all"])',
     );
     const buttonCount = await categoryButtons.count();
 

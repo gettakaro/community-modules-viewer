@@ -260,4 +260,62 @@ test.describe('Community Modules Viewer', () => {
     // Modules should be visible again
     await expect(categoryModules).toBeVisible();
   });
+
+  test('clicking category cards updates sidebar filter', async ({ page }) => {
+    await page.goto('/');
+
+    // Wait for page to load
+    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+
+    // Verify initial state - "All" filter should be active
+    const allFilterButton = page.locator('[data-testid="category-filter-all"]');
+    await expect(allFilterButton).toHaveClass(/btn-takaro-primary/);
+
+    // Click on Anti Cheat category card
+    const antiCheatCard = page.locator(
+      '[data-testid="category-card-anti-cheat"]',
+    );
+    await expect(antiCheatCard).toBeVisible();
+    await antiCheatCard.click();
+
+    // Verify sidebar filter updated
+    const antiCheatFilterButton = page.locator(
+      '[data-testid="category-filter-anti-cheat"]',
+    );
+    await expect(antiCheatFilterButton).toHaveClass(/btn-takaro-primary/);
+    await expect(allFilterButton).not.toHaveClass(/btn-takaro-primary/);
+
+    // Verify only anti-cheat modules are shown
+    const visibleCategories = page.locator(
+      '[data-testid^="category-group-"]:visible',
+    );
+    const categoryCount = await visibleCategories.count();
+    expect(categoryCount).toBe(1);
+
+    const antiCheatGroup = page.locator(
+      '[data-testid="category-group-anti-cheat"]',
+    );
+    await expect(antiCheatGroup).toBeVisible();
+
+    // Click on Community Management category card
+    const communityCard = page.locator(
+      '[data-testid="category-card-community-management"]',
+    );
+    await expect(communityCard).toBeVisible();
+    await communityCard.click();
+
+    // Verify filter switched to community management
+    const communityFilterButton = page.locator(
+      '[data-testid="category-filter-community-management"]',
+    );
+    await expect(communityFilterButton).toHaveClass(/btn-takaro-primary/);
+    await expect(antiCheatFilterButton).not.toHaveClass(/btn-takaro-primary/);
+
+    // Verify only community management modules are shown
+    const communityGroup = page.locator(
+      '[data-testid="category-group-community-management"]',
+    );
+    await expect(communityGroup).toBeVisible();
+    await expect(antiCheatGroup).not.toBeVisible();
+  });
 });

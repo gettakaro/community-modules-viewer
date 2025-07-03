@@ -16,6 +16,10 @@ export interface ModuleSidebarProps {
   isMobileOpen?: boolean;
   /** Callback to toggle mobile sidebar */
   onMobileToggle?: (isOpen: boolean) => void;
+  /** Controlled category filter state */
+  categoryFilter?: string;
+  /** Callback for category filter changes */
+  onCategoryFilterChange?: (category: string) => void;
 }
 
 /**
@@ -28,12 +32,12 @@ export function ModuleSidebar({
   className = '',
   isMobileOpen: externalMobileOpen,
   onMobileToggle,
+  categoryFilter: externalCategoryFilter,
+  onCategoryFilterChange,
 }: ModuleSidebarProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [sourceFilter, setSourceFilter] = useState<
-    'all' | 'community' | 'builtin'
-  >('all');
-  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [internalCategoryFilter, setInternalCategoryFilter] =
+    useState<string>('all');
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(
     new Set(),
   );
@@ -49,6 +53,16 @@ export function ModuleSidebar({
         ? (open: boolean) => onMobileToggle(open)
         : setInternalMobileOpen,
     [onMobileToggle],
+  );
+
+  // Use external category filter if provided, otherwise use internal state
+  const categoryFilter = externalCategoryFilter ?? internalCategoryFilter;
+  const setCategoryFilter = useMemo(
+    () =>
+      onCategoryFilterChange
+        ? (category: string) => onCategoryFilterChange(category)
+        : setInternalCategoryFilter,
+    [onCategoryFilterChange],
   );
 
   // Detect mobile screen size
@@ -68,10 +82,6 @@ export function ModuleSidebar({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedSearch = localStorage.getItem('module-search');
-      const savedFilter = localStorage.getItem('module-source-filter');
-      const savedCategoryFilter = localStorage.getItem(
-        'module-category-filter',
-      );
       const savedCollapsedCategories = localStorage.getItem(
         'collapsed-categories',
       );
@@ -80,14 +90,15 @@ export function ModuleSidebar({
       if (savedSearch) {
         setSearchTerm(savedSearch);
       }
-      if (
-        savedFilter &&
-        ['all', 'community', 'builtin'].includes(savedFilter)
-      ) {
-        setSourceFilter(savedFilter as 'all' | 'community' | 'builtin');
-      }
-      if (savedCategoryFilter) {
-        setCategoryFilter(savedCategoryFilter);
+      // Don't load category filter from localStorage if external control is provided
+      // The external controller (context) will handle persistence
+      if (!externalCategoryFilter) {
+        const savedCategoryFilter = localStorage.getItem(
+          'module-category-filter',
+        );
+        if (savedCategoryFilter) {
+          setInternalCategoryFilter(savedCategoryFilter);
+        }
       }
       if (savedCollapsedCategories) {
         try {
@@ -106,7 +117,7 @@ export function ModuleSidebar({
         setIsMobileOpen(false);
       }
     }
-  }, [setIsMobileOpen]);
+  }, [setIsMobileOpen, externalCategoryFilter]);
 
   // Save search state to localStorage
   useEffect(() => {
@@ -116,16 +127,10 @@ export function ModuleSidebar({
   }, [searchTerm]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('module-source-filter', sourceFilter);
-    }
-  }, [sourceFilter]);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !externalCategoryFilter) {
       localStorage.setItem('module-category-filter', categoryFilter);
     }
-  }, [categoryFilter]);
+  }, [categoryFilter, externalCategoryFilter]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -145,11 +150,6 @@ export function ModuleSidebar({
   // Filter and search modules
   const filteredModules = useMemo(() => {
     let filtered = modules;
-
-    // Filter by source
-    if (sourceFilter !== 'all') {
-      filtered = filtered.filter((module) => module.source === sourceFilter);
-    }
 
     // Filter by category
     if (categoryFilter !== 'all') {
@@ -172,7 +172,7 @@ export function ModuleSidebar({
     }
 
     return filtered.sort((a, b) => a.name.localeCompare(b.name));
-  }, [modules, searchTerm, sourceFilter, categoryFilter]);
+  }, [modules, searchTerm, categoryFilter]);
 
   // Group modules by category
   const modulesByCategory = useMemo(() => {
@@ -219,11 +219,6 @@ export function ModuleSidebar({
 
   // Calculate statistics
   const stats = useMemo(() => {
-    const communityCount = modules.filter(
-      (m) => m.source === 'community',
-    ).length;
-    const builtinCount = modules.filter((m) => m.source === 'builtin').length;
-
     // Get unique categories
     const categories = new Set(
       modules.map((m) => m.category || 'Uncategorized'),
@@ -231,8 +226,6 @@ export function ModuleSidebar({
 
     return {
       total: modules.length,
-      community: communityCount,
-      builtin: builtinCount,
       filtered: filteredModules.length,
       categories: Array.from(categories),
     };
@@ -295,9 +288,12 @@ export function ModuleSidebar({
   }, [isMobile, isMobileOpen]);
 
   const clearSearch = () => {
+    // Clear search first
     setSearchTerm('');
-    setSourceFilter('all');
-    setCategoryFilter('all');
+    // Then clear filter in next tick
+    setTimeout(() => {
+      setCategoryFilter('all');
+    }, 0);
   };
 
   const toggleCategory = (category: string) => {
@@ -369,9 +365,7 @@ export function ModuleSidebar({
                 data-testid="search-results-count"
               >
                 {stats.filtered} of {stats.total} modules
-                {(searchTerm ||
-                  sourceFilter !== 'all' ||
-                  categoryFilter !== 'all') && (
+                {(searchTerm || categoryFilter !== 'all') && (
                   <button
                     onClick={clearSearch}
                     className="ml-2 text-takaro-primary hover:text-takaro-primary-hover"
@@ -431,42 +425,6 @@ export function ModuleSidebar({
                     </svg>
                   </button>
                 )}
-              </div>
-            </div>
-
-            {/* Source Filter */}
-            <div className="sidebar-filter">
-              <div className="flex gap-1">
-                <button
-                  onClick={() => setSourceFilter('all')}
-                  className={`btn btn-sm flex-1 ${
-                    sourceFilter === 'all'
-                      ? 'btn-takaro-primary'
-                      : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                  }`}
-                >
-                  All ({stats.total})
-                </button>
-                <button
-                  onClick={() => setSourceFilter('community')}
-                  className={`btn btn-sm flex-1 ${
-                    sourceFilter === 'community'
-                      ? 'btn-takaro-primary'
-                      : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                  }`}
-                >
-                  Community ({stats.community})
-                </button>
-                <button
-                  onClick={() => setSourceFilter('builtin')}
-                  className={`btn btn-sm flex-1 ${
-                    sourceFilter === 'builtin'
-                      ? 'btn-takaro-primary'
-                      : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                  }`}
-                >
-                  Built-in ({stats.builtin})
-                </button>
               </div>
             </div>
 
@@ -530,9 +488,7 @@ export function ModuleSidebar({
                     />
                   </svg>
                   <div className="text-sm">
-                    {searchTerm ||
-                    sourceFilter !== 'all' ||
-                    categoryFilter !== 'all'
+                    {searchTerm || categoryFilter !== 'all'
                       ? 'No modules match your filters'
                       : 'No modules available'}
                   </div>
