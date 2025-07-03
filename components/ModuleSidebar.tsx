@@ -338,7 +338,10 @@ export function ModuleSidebar({
         {/* Sidebar Header */}
         <div className="sidebar-header">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-takaro-text-primary">
+            <h2
+              className="text-lg font-semibold text-takaro-text-primary cursor-pointer hover:text-takaro-primary transition-colors"
+              onClick={() => router.push('/')}
+            >
               {isCollapsed ? 'M' : 'Modules'}
             </h2>
             <button
@@ -442,7 +445,10 @@ export function ModuleSidebar({
                 data-testid="category-filter-buttons"
               >
                 <button
-                  onClick={() => setCategoryFilter('all')}
+                  onClick={() => {
+                    setCategoryFilter('all');
+                    router.push('/');
+                  }}
                   className={`btn btn-xs ${
                     categoryFilter === 'all'
                       ? 'btn-takaro-primary'
