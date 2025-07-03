@@ -33,6 +33,10 @@ export function ModuleSidebar({
   const [sourceFilter, setSourceFilter] = useState<
     'all' | 'community' | 'builtin'
   >('all');
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(
+    new Set(),
+  );
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [internalMobileOpen, setInternalMobileOpen] = useState(false);
   const router = useRouter();
@@ -65,6 +69,12 @@ export function ModuleSidebar({
     if (typeof window !== 'undefined') {
       const savedSearch = localStorage.getItem('module-search');
       const savedFilter = localStorage.getItem('module-source-filter');
+      const savedCategoryFilter = localStorage.getItem(
+        'module-category-filter',
+      );
+      const savedCollapsedCategories = localStorage.getItem(
+        'collapsed-categories',
+      );
       const savedCollapsed = localStorage.getItem('sidebar-collapsed');
 
       if (savedSearch) {
@@ -75,6 +85,17 @@ export function ModuleSidebar({
         ['all', 'community', 'builtin'].includes(savedFilter)
       ) {
         setSourceFilter(savedFilter as 'all' | 'community' | 'builtin');
+      }
+      if (savedCategoryFilter) {
+        setCategoryFilter(savedCategoryFilter);
+      }
+      if (savedCollapsedCategories) {
+        try {
+          const collapsed = JSON.parse(savedCollapsedCategories);
+          setCollapsedCategories(new Set(collapsed));
+        } catch {
+          // Ignore invalid JSON
+        }
       }
       if (savedCollapsed) {
         setIsCollapsed(savedCollapsed === 'true');
@@ -102,6 +123,21 @@ export function ModuleSidebar({
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      localStorage.setItem('module-category-filter', categoryFilter);
+    }
+  }, [categoryFilter]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(
+        'collapsed-categories',
+        JSON.stringify(Array.from(collapsedCategories)),
+      );
+    }
+  }, [collapsedCategories]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
       localStorage.setItem('sidebar-collapsed', isCollapsed.toString());
     }
   }, [isCollapsed]);
@@ -115,6 +151,13 @@ export function ModuleSidebar({
       filtered = filtered.filter((module) => module.source === sourceFilter);
     }
 
+    // Filter by category
+    if (categoryFilter !== 'all') {
+      filtered = filtered.filter(
+        (module) => module.category === categoryFilter,
+      );
+    }
+
     // Filter by search term
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase().trim();
@@ -123,12 +166,56 @@ export function ModuleSidebar({
         const descMatch = module.versions.some((version) =>
           version.description?.toLowerCase().includes(term),
         );
-        return nameMatch || descMatch;
+        const categoryMatch = module.category?.toLowerCase().includes(term);
+        return nameMatch || descMatch || categoryMatch;
       });
     }
 
     return filtered.sort((a, b) => a.name.localeCompare(b.name));
-  }, [modules, searchTerm, sourceFilter]);
+  }, [modules, searchTerm, sourceFilter, categoryFilter]);
+
+  // Group modules by category
+  const modulesByCategory = useMemo(() => {
+    const groups: Record<string, ModuleWithMeta[]> = {};
+
+    filteredModules.forEach((module) => {
+      const category = module.category || 'Uncategorized';
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(module);
+    });
+
+    // Sort categories, with specific order
+    const categoryOrder = [
+      'anti-cheat',
+      'community-management',
+      'minigames',
+      'Built-in',
+      'Uncategorized',
+    ];
+    const sortedCategories = Object.keys(groups).sort((a, b) => {
+      const aIndex = categoryOrder.indexOf(a);
+      const bIndex = categoryOrder.indexOf(b);
+
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex;
+      } else if (aIndex !== -1) {
+        return -1;
+      } else if (bIndex !== -1) {
+        return 1;
+      } else {
+        return a.localeCompare(b);
+      }
+    });
+
+    const sortedGroups: Record<string, ModuleWithMeta[]> = {};
+    sortedCategories.forEach((category) => {
+      sortedGroups[category] = groups[category];
+    });
+
+    return sortedGroups;
+  }, [filteredModules]);
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -136,11 +223,18 @@ export function ModuleSidebar({
       (m) => m.source === 'community',
     ).length;
     const builtinCount = modules.filter((m) => m.source === 'builtin').length;
+
+    // Get unique categories
+    const categories = new Set(
+      modules.map((m) => m.category || 'Uncategorized'),
+    );
+
     return {
       total: modules.length,
       community: communityCount,
       builtin: builtinCount,
       filtered: filteredModules.length,
+      categories: Array.from(categories),
     };
   }, [modules, filteredModules]);
 
@@ -203,6 +297,24 @@ export function ModuleSidebar({
   const clearSearch = () => {
     setSearchTerm('');
     setSourceFilter('all');
+    setCategoryFilter('all');
+  };
+
+  const toggleCategory = (category: string) => {
+    const newCollapsed = new Set(collapsedCategories);
+    if (newCollapsed.has(category)) {
+      newCollapsed.delete(category);
+    } else {
+      newCollapsed.add(category);
+    }
+    setCollapsedCategories(newCollapsed);
+  };
+
+  const formatCategoryName = (category: string) => {
+    return category
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
 
   return (
@@ -257,7 +369,9 @@ export function ModuleSidebar({
                 data-testid="search-results-count"
               >
                 {stats.filtered} of {stats.total} modules
-                {(searchTerm || sourceFilter !== 'all') && (
+                {(searchTerm ||
+                  sourceFilter !== 'all' ||
+                  categoryFilter !== 'all') && (
                   <button
                     onClick={clearSearch}
                     className="ml-2 text-takaro-primary hover:text-takaro-primary-hover"
@@ -356,9 +470,51 @@ export function ModuleSidebar({
               </div>
             </div>
 
+            {/* Category Filter */}
+            <div className="sidebar-filter">
+              <div className="mb-2 text-xs font-semibold text-takaro-text-primary">
+                Categories
+              </div>
+              <div
+                className="flex flex-wrap gap-1"
+                data-testid="category-filter-buttons"
+              >
+                <button
+                  onClick={() => setCategoryFilter('all')}
+                  className={`btn btn-xs ${
+                    categoryFilter === 'all'
+                      ? 'btn-takaro-primary'
+                      : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
+                  }`}
+                  data-testid="category-filter-all"
+                >
+                  All
+                </button>
+                {stats.categories.map((category) => {
+                  const count = modules.filter(
+                    (m) => (m.category || 'Uncategorized') === category,
+                  ).length;
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => setCategoryFilter(category)}
+                      className={`btn btn-xs ${
+                        categoryFilter === category
+                          ? 'btn-takaro-primary'
+                          : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
+                      }`}
+                      data-testid={`category-filter-${category}`}
+                    >
+                      {formatCategoryName(category)} ({count})
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Module List */}
             <div className="sidebar-modules">
-              {filteredModules.length === 0 ? (
+              {Object.keys(modulesByCategory).length === 0 ? (
                 <div className="text-center py-8 text-takaro-text-muted">
                   <svg
                     className="w-8 h-8 mx-auto mb-2 opacity-50"
@@ -374,22 +530,73 @@ export function ModuleSidebar({
                     />
                   </svg>
                   <div className="text-sm">
-                    {searchTerm || sourceFilter !== 'all'
+                    {searchTerm ||
+                    sourceFilter !== 'all' ||
+                    categoryFilter !== 'all'
                       ? 'No modules match your filters'
                       : 'No modules available'}
                   </div>
                 </div>
               ) : (
-                <div className="space-y-2">
-                  {filteredModules.map((module) => (
-                    <ModuleCard
-                      key={module.name}
-                      module={module}
-                      onClick={handleModuleClick}
-                      isSelected={selectedModule === module.name}
-                      className="module-card-sidebar"
-                    />
-                  ))}
+                <div className="space-y-3">
+                  {Object.entries(modulesByCategory).map(
+                    ([category, categoryModules]) => (
+                      <div
+                        key={category}
+                        className="space-y-2"
+                        data-testid={`category-group-${category}`}
+                      >
+                        {/* Category Header */}
+                        <div className="flex items-center justify-between">
+                          <button
+                            onClick={() => toggleCategory(category)}
+                            className="flex items-center gap-2 text-sm font-semibold text-takaro-text-primary hover:text-takaro-primary transition-colors"
+                            data-testid={`category-toggle-${category}`}
+                          >
+                            <svg
+                              className={`w-4 h-4 transform transition-transform ${
+                                collapsedCategories.has(category)
+                                  ? ''
+                                  : 'rotate-90'
+                              }`}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                            {formatCategoryName(category)}
+                          </button>
+                          <span className="text-xs text-takaro-text-muted">
+                            {categoryModules.length}
+                          </span>
+                        </div>
+
+                        {/* Category Modules */}
+                        {!collapsedCategories.has(category) && (
+                          <div
+                            className="space-y-2 ml-4"
+                            data-testid={`category-modules-${category}`}
+                          >
+                            {categoryModules.map((module) => (
+                              <ModuleCard
+                                key={module.name}
+                                module={module}
+                                onClick={handleModuleClick}
+                                isSelected={selectedModule === module.name}
+                                className="module-card-sidebar"
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ),
+                  )}
                 </div>
               )}
             </div>

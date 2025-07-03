@@ -21,7 +21,8 @@ export default async function Home() {
             </p>
 
             {modules.length > 0 ? (
-              <div className="space-y-4">
+              <div className="space-y-6">
+                {/* Statistics Grid */}
                 <div className="stats-grid grid grid-cols-2 gap-4">
                   <div className="stat-card bg-takaro-card-hover p-4 rounded-lg">
                     <div className="text-2xl font-bold text-takaro-primary">
@@ -41,9 +42,148 @@ export default async function Home() {
                   </div>
                 </div>
 
-                <div className="text-sm text-takaro-text-muted">
+                {/* Categories Overview */}
+                <div className="space-y-4">
+                  <h2
+                    className="text-2xl font-semibold text-takaro-text-primary"
+                    data-testid="category-section-title"
+                  >
+                    Browse by Category
+                  </h2>
+
+                  <div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    data-testid="category-cards-grid"
+                  >
+                    {(() => {
+                      // Group modules by category and calculate stats
+                      const categoryStats: Record<
+                        string,
+                        { count: number; modules: any[] }
+                      > = {};
+                      modules.forEach((module) => {
+                        const category = module.category || 'Uncategorized';
+                        if (!categoryStats[category]) {
+                          categoryStats[category] = { count: 0, modules: [] };
+                        }
+                        categoryStats[category].count++;
+                        categoryStats[category].modules.push(module);
+                      });
+
+                      // Define category info with descriptions
+                      const categoryInfo: Record<
+                        string,
+                        { name: string; description: string; icon: string }
+                      > = {
+                        'anti-cheat': {
+                          name: 'Anti Cheat',
+                          description:
+                            'Security and moderation tools to keep your server safe',
+                          icon: '🛡️',
+                        },
+                        'community-management': {
+                          name: 'Community Management',
+                          description:
+                            'Tools for managing your community and player experience',
+                          icon: '👥',
+                        },
+                        minigames: {
+                          name: 'Minigames',
+                          description:
+                            'Fun games and entertainment for your players',
+                          icon: '🎮',
+                        },
+                        'Built-in': {
+                          name: 'Built-in',
+                          description: 'Official modules included with Takaro',
+                          icon: '⚙️',
+                        },
+                        Uncategorized: {
+                          name: 'Uncategorized',
+                          description: 'Other useful modules and utilities',
+                          icon: '📦',
+                        },
+                      };
+
+                      // Sort categories by predefined order
+                      const categoryOrder = [
+                        'anti-cheat',
+                        'community-management',
+                        'minigames',
+                        'Built-in',
+                        'Uncategorized',
+                      ];
+                      const sortedCategories = Object.keys(categoryStats).sort(
+                        (a, b) => {
+                          const aIndex = categoryOrder.indexOf(a);
+                          const bIndex = categoryOrder.indexOf(b);
+
+                          if (aIndex !== -1 && bIndex !== -1) {
+                            return aIndex - bIndex;
+                          } else if (aIndex !== -1) {
+                            return -1;
+                          } else if (bIndex !== -1) {
+                            return 1;
+                          } else {
+                            return a.localeCompare(b);
+                          }
+                        },
+                      );
+
+                      return sortedCategories.map((category) => {
+                        const stats = categoryStats[category];
+                        const info = categoryInfo[category] || {
+                          name: category
+                            .replace('-', ' ')
+                            .replace(/\b\w/g, (l) => l.toUpperCase()),
+                          description: `Modules in the ${category} category`,
+                          icon: '📁',
+                        };
+
+                        return (
+                          <div
+                            key={category}
+                            className="card-takaro card-takaro-hover p-6 cursor-pointer group"
+                            data-testid={`category-card-${category}`}
+                          >
+                            <div className="flex items-start justify-between mb-3">
+                              <div className="text-3xl">{info.icon}</div>
+                              <div className="text-2xl font-bold text-takaro-primary">
+                                {stats.count}
+                              </div>
+                            </div>
+                            <h3 className="text-lg font-semibold text-takaro-text-primary mb-2 group-hover:text-takaro-primary transition-colors">
+                              {info.name}
+                            </h3>
+                            <p className="text-sm text-takaro-text-secondary mb-4">
+                              {info.description}
+                            </p>
+                            {stats.count > 0 && (
+                              <div className="text-xs text-takaro-text-muted">
+                                Popular:{' '}
+                                {stats.modules
+                                  .slice(0, 2)
+                                  .map((m) =>
+                                    m.name
+                                      .replace('Limon_', '')
+                                      .replace('Mad_', ''),
+                                  )
+                                  .join(', ')}
+                                {stats.count > 2 &&
+                                  `, +${stats.count - 2} more`}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      });
+                    })()}
+                  </div>
+                </div>
+
+                <div className="text-sm text-takaro-text-muted border-t border-takaro-border pt-4">
                   Select a module from the sidebar to view its details,
-                  configuration, commands, and more.
+                  configuration, commands, and more. Use the category filters to
+                  find modules that fit your server's needs.
                 </div>
               </div>
             ) : (

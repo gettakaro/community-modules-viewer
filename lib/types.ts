@@ -262,6 +262,8 @@ export interface ModuleWithMeta extends Module {
   source: ModuleSource;
   /** File path or URL */
   path?: string;
+  /** Category of the module (derived from subdirectory structure) */
+  category?: string;
 }
 
 /**
@@ -296,6 +298,7 @@ export const ModuleSchema = z.object({
 export const ModuleWithMetaSchema = ModuleSchema.extend({
   source: ModuleSourceSchema,
   path: z.string().optional(),
+  category: z.string().optional(),
 });
 
 /**

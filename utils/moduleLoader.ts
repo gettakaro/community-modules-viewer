@@ -14,6 +14,7 @@ import path from 'path';
 
 /**
  * Load all community modules from the local modules directory with detailed error reporting
+ * Supports both flat structure and categorized subdirectories
  * @param reportErrors - Whether to return detailed error information
  * @returns Array of modules with metadata or detailed load result
  */
@@ -33,29 +34,45 @@ export async function loadLocalModules(
     // Check if modules directory exists
     await fs.access(modulesDir);
 
-    // Read all files in the modules directory
-    const files = await fs.readdir(modulesDir);
+    // Function to recursively scan directories for JSON files
+    const scanDirectory = async (
+      dir: string,
+      category?: string,
+    ): Promise<void> => {
+      const items = await fs.readdir(dir, { withFileTypes: true });
 
-    // Filter for JSON files only
-    const jsonFiles = files.filter((file) => file.endsWith('.json'));
-    attempted = jsonFiles.length;
+      for (const item of items) {
+        const itemPath = path.join(dir, item.name);
 
-    // Load each module file
-    for (const file of jsonFiles) {
-      if (reportErrors) {
-        const result = await loadModuleFileWithErrors(file);
-        if (result.success) {
-          modules.push(result.module);
-        } else {
-          errors.push(result.error);
-        }
-      } else {
-        const module = await loadModuleFile(file);
-        if (module) {
-          modules.push(module);
+        if (item.isDirectory()) {
+          // Recursively scan subdirectories with category name
+          await scanDirectory(itemPath, item.name);
+        } else if (item.isFile() && item.name.endsWith('.json')) {
+          attempted++;
+          const relativePath = path.relative(modulesDir, itemPath);
+
+          if (reportErrors) {
+            const result = await loadModuleFileWithErrors(
+              relativePath,
+              category,
+            );
+            if (result.success) {
+              modules.push(result.module);
+            } else {
+              errors.push(result.error);
+            }
+          } else {
+            const module = await loadModuleFile(relativePath, category);
+            if (module) {
+              modules.push(module);
+            }
+          }
         }
       }
-    }
+    };
+
+    // Start scanning from the modules directory
+    await scanDirectory(modulesDir);
 
     // Sort modules alphabetically by name
     modules.sort((a, b) => a.name.localeCompare(b.name));
@@ -90,11 +107,13 @@ export async function loadLocalModules(
 
 /**
  * Load a single module file with detailed error reporting
- * @param filename - Name of the JSON file to load
+ * @param filename - Relative path to the JSON file from modules directory
+ * @param category - Optional category name derived from subdirectory
  * @returns Success result with module or error details
  */
 async function loadModuleFileWithErrors(
   filename: string,
+  category?: string,
 ): Promise<
   | { success: true; module: ModuleWithMeta }
   | { success: false; error: ModuleValidationError }
@@ -129,6 +148,7 @@ async function loadModuleFileWithErrors(
       ...validation.data,
       source: 'community' as const,
       path: filePath,
+      category: category || 'Uncategorized',
     };
 
     const metaValidation = validateModuleWithMeta(moduleWithMeta);
@@ -165,11 +185,13 @@ async function loadModuleFileWithErrors(
 
 /**
  * Load a single module file from the modules directory with Zod validation
- * @param filename - Name of the JSON file to load
+ * @param filename - Relative path to the JSON file from modules directory
+ * @param category - Optional category name derived from subdirectory
  * @returns Module with metadata or null if invalid
  */
 export async function loadModuleFile(
   filename: string,
+  category?: string,
 ): Promise<ModuleWithMeta | null> {
   const modulesDir = path.join(process.cwd(), 'modules');
   const filePath = path.join(modulesDir, filename);
@@ -195,6 +217,7 @@ export async function loadModuleFile(
       ...validation.data,
       source: 'community' as const,
       path: filePath,
+      category: category || 'Uncategorized',
     };
 
     const metaValidation = validateModuleWithMeta(moduleWithMeta);
@@ -252,6 +275,7 @@ export async function loadBuiltinModules(): Promise<ModuleWithMeta[]> {
             ...validation.data,
             source: 'builtin' as const,
             path: filePath,
+            category: 'Built-in',
           };
 
           const metaValidation = validateModuleWithMeta(moduleWithMeta);

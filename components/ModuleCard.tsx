@@ -58,14 +58,24 @@ export function ModuleCard({
       role={onClick ? 'button' : 'article'}
       aria-label={`Module: ${module.name}`}
     >
-      {/* Header with name and source badge */}
+      {/* Header with name and badges */}
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-lg font-semibold text-takaro-text-primary truncate flex-1 mr-2">
           {module.name}
         </h3>
-        <span className={`${sourceColors[module.source]} flex-shrink-0`}>
-          {module.source}
-        </span>
+        <div className="flex gap-1 flex-shrink-0">
+          {module.category && (
+            <span className="badge-takaro-secondary text-xs">
+              {module.category
+                .split('-')
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')}
+            </span>
+          )}
+          <span className={`${sourceColors[module.source]}`}>
+            {module.source}
+          </span>
+        </div>
       </div>
 
       {/* Description */}

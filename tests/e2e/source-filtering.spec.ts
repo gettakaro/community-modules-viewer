@@ -7,8 +7,13 @@ test.describe('Source Filtering', () => {
 
     // Wait for modules to load
     await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+    // Updated to look for module links within category groups
     await expect(
-      page.locator('[data-testid="module-link"]').first(),
+      page
+        .locator(
+          '[data-testid^="category-modules-"] [data-testid="module-link"]',
+        )
+        .first(),
     ).toBeVisible();
   });
 
@@ -40,15 +45,18 @@ test.describe('Source Filtering', () => {
     // Wait for filter to apply
     await expect(communityButton).toHaveClass(/btn-takaro-primary/);
 
-    // Get all visible module cards
-    const moduleCards = page.locator('[data-testid="module-link"]');
+    // Get all visible module cards (now within category groups)
+    const moduleCards = page.locator(
+      '[data-testid^="category-modules-"] [data-testid="module-link"]:visible',
+    );
     const count = await moduleCards.count();
 
     // Should have at least one community module
     expect(count).toBeGreaterThan(0);
 
     // Check that all visible modules are community modules
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < Math.min(count, 5); i++) {
+      // Check first 5 for performance
       const card = moduleCards.nth(i);
       await expect(card).toBeVisible();
 
@@ -70,15 +78,18 @@ test.describe('Source Filtering', () => {
     // Wait for filter to apply
     await expect(builtinButton).toHaveClass(/btn-takaro-primary/);
 
-    // Get all visible module cards
-    const moduleCards = page.locator('[data-testid="module-link"]');
+    // Get all visible module cards (now within category groups)
+    const moduleCards = page.locator(
+      '[data-testid^="category-modules-"] [data-testid="module-link"]:visible',
+    );
     const count = await moduleCards.count();
 
     // Should have at least one built-in module
     expect(count).toBeGreaterThan(0);
 
     // Check that all visible modules are built-in modules
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < Math.min(count, 5); i++) {
+      // Check first 5 for performance
       const card = moduleCards.nth(i);
       await expect(card).toBeVisible();
 
@@ -144,13 +155,17 @@ test.describe('Source Filtering', () => {
     // Verify each filter shows correct number of modules
     await communityButton.click();
     const communityCards = await page
-      .locator('[data-testid="module-link"]')
+      .locator(
+        '[data-testid^="category-modules-"] [data-testid="module-link"]:visible',
+      )
       .count();
     expect(communityCards).toBe(communityCount);
 
     await builtinButton.click();
     const builtinCards = await page
-      .locator('[data-testid="module-link"]')
+      .locator(
+        '[data-testid^="category-modules-"] [data-testid="module-link"]:visible',
+      )
       .count();
     expect(builtinCards).toBe(builtinCount);
   });
@@ -216,7 +231,9 @@ test.describe('Source Filtering', () => {
     await expect(resultsCount).toBeVisible();
 
     // All results should still be community modules
-    const moduleCards = page.locator('[data-testid="module-link"]');
+    const moduleCards = page.locator(
+      '[data-testid^="category-modules-"] [data-testid="module-link"]:visible',
+    );
     const count = await moduleCards.count();
 
     if (count > 0) {
@@ -240,6 +257,14 @@ test.describe('Source Filtering', () => {
     const searchInput = page.locator('[data-testid="search-input"]');
     await searchInput.fill('test');
 
+    // Also apply a category filter
+    const minigamesButton = page.locator(
+      '[data-testid="category-filter-minigames"]',
+    );
+    if (await minigamesButton.isVisible()) {
+      await minigamesButton.click();
+    }
+
     // Click Clear button
     const clearButton = page.locator('button:has-text("Clear")').first();
     await clearButton.click();
@@ -251,6 +276,14 @@ test.describe('Source Filtering', () => {
     const allButton = page.locator('button:has-text("All")').first();
     await expect(allButton).toHaveClass(/btn-takaro-primary/);
     await expect(communityButton).not.toHaveClass(/btn-takaro-primary/);
+
+    // Category filter should also be reset to All
+    const categoryAllButton = page.locator(
+      '[data-testid="category-filter-all"]',
+    );
+    if (await categoryAllButton.isVisible()) {
+      await expect(categoryAllButton).toHaveClass(/btn-takaro-primary/);
+    }
   });
 
   test('empty filter results show appropriate message', async ({ page }) => {

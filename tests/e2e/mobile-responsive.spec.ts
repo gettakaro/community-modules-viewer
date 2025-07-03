@@ -136,6 +136,12 @@ test.describe('Mobile Responsiveness', () => {
       await expect(
         page.locator('[data-testid="search-results-count"]'),
       ).toBeVisible();
+
+      // Category filters should be visible on mobile
+      const categoryFilters = page.locator(
+        '[data-testid="category-filter-buttons"]',
+      );
+      await expect(categoryFilters).toBeVisible();
     });
 
     test('mobile overlay blocks interaction with main content', async ({

@@ -12,6 +12,24 @@ test.describe('Community Modules Viewer', () => {
 
     // Verify sidebar is present
     await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+
+    // Check for category section
+    await expect(
+      page.locator('[data-testid="category-section-title"]'),
+    ).toBeVisible();
+    await expect(
+      page.locator('[data-testid="category-section-title"]'),
+    ).toHaveText('Browse by Category');
+
+    // Check for category cards grid
+    await expect(
+      page.locator('[data-testid="category-cards-grid"]'),
+    ).toBeVisible();
+
+    // Check that at least one category card is visible
+    const categoryCards = page.locator('[data-testid^="category-card-"]');
+    const categoryCount = await categoryCards.count();
+    expect(categoryCount).toBeGreaterThan(0);
   });
 
   test('module navigation works', async ({ page }) => {
@@ -20,8 +38,15 @@ test.describe('Community Modules Viewer', () => {
     // Wait for modules to load in sidebar
     await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
 
-    // Click on first module link
-    const firstModuleLink = page.locator('[data-testid="module-link"]').first();
+    // Wait for categories to be rendered
+    await expect(
+      page.locator('[data-testid^="category-group-"]').first(),
+    ).toBeVisible();
+
+    // Find first visible module link within a category
+    const firstModuleLink = page
+      .locator('[data-testid^="category-modules-"] [data-testid="module-link"]')
+      .first();
     await expect(firstModuleLink).toBeVisible();
 
     // Click and wait for navigation
@@ -143,5 +168,96 @@ test.describe('Community Modules Viewer', () => {
         expect(download.suggestedFilename()).toMatch(/\.json$/);
       }
     }
+  });
+
+  test('category cards display on homepage', async ({ page }) => {
+    await page.goto('/');
+
+    // Check specific category cards exist
+    const antiCheatCard = page.locator(
+      '[data-testid="category-card-anti-cheat"]',
+    );
+    const communityMgmtCard = page.locator(
+      '[data-testid="category-card-community-management"]',
+    );
+    const minigamesCard = page.locator(
+      '[data-testid="category-card-minigames"]',
+    );
+
+    // Verify expected categories are visible
+    await expect(antiCheatCard).toBeVisible();
+    await expect(communityMgmtCard).toBeVisible();
+    await expect(minigamesCard).toBeVisible();
+
+    // Check that cards contain expected text
+    await expect(antiCheatCard).toContainText('Anti Cheat');
+    await expect(communityMgmtCard).toContainText('Community Management');
+    await expect(minigamesCard).toContainText('Minigames');
+
+    // Check that cards show module counts
+    const antiCheatCount = await antiCheatCard
+      .locator('.text-2xl')
+      .textContent();
+    expect(Number(antiCheatCount)).toBeGreaterThan(0);
+  });
+
+  test('sidebar shows modules grouped by category', async ({ page }) => {
+    await page.goto('/');
+
+    // Wait for sidebar to load
+    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+
+    // Check for category groups
+    const categoryGroups = page.locator('[data-testid^="category-group-"]');
+    const groupCount = await categoryGroups.count();
+    expect(groupCount).toBeGreaterThan(0);
+
+    // Check first category is expanded by default and shows modules
+    const firstCategoryModules = page
+      .locator('[data-testid^="category-modules-"]')
+      .first();
+    await expect(firstCategoryModules).toBeVisible();
+
+    // Check that modules are visible within the category
+    const modulesInFirstCategory = firstCategoryModules.locator(
+      '[data-testid="module-link"]',
+    );
+    const moduleCount = await modulesInFirstCategory.count();
+    expect(moduleCount).toBeGreaterThan(0);
+  });
+
+  test('category collapse/expand functionality works', async ({ page }) => {
+    await page.goto('/');
+
+    // Wait for sidebar to load
+    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+
+    // Find first category toggle button
+    const firstCategoryToggle = page
+      .locator('[data-testid^="category-toggle-"]')
+      .first();
+    await expect(firstCategoryToggle).toBeVisible();
+
+    // Get the category name from the toggle button
+    const categoryName = await firstCategoryToggle.getAttribute('data-testid');
+    const category = categoryName?.replace('category-toggle-', '') || '';
+
+    // Check initial state - modules should be visible
+    const categoryModules = page.locator(
+      `[data-testid="category-modules-${category}"]`,
+    );
+    await expect(categoryModules).toBeVisible();
+
+    // Click to collapse
+    await firstCategoryToggle.click();
+
+    // Modules should now be hidden
+    await expect(categoryModules).not.toBeVisible();
+
+    // Click to expand again
+    await firstCategoryToggle.click();
+
+    // Modules should be visible again
+    await expect(categoryModules).toBeVisible();
   });
 });
