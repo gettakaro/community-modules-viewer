@@ -27,7 +27,7 @@ export async function loadLocalModules(
 ): Promise<ModuleWithMeta[] | ModuleLoadResult> {
   const modules: ModuleWithMeta[] = [];
   const errors: ModuleValidationError[] = [];
-  const modulesDir = path.join(process.cwd(), 'modules');
+  const modulesDir = path.join(process.cwd(), 'public', 'modules');
   let attempted = 0;
 
   try {
@@ -118,7 +118,7 @@ async function loadModuleFileWithErrors(
   | { success: true; module: ModuleWithMeta }
   | { success: false; error: ModuleValidationError }
 > {
-  const modulesDir = path.join(process.cwd(), 'modules');
+  const modulesDir = path.join(process.cwd(), 'public', 'modules');
   const filePath = path.join(modulesDir, filename);
 
   try {
@@ -193,7 +193,7 @@ export async function loadModuleFile(
   filename: string,
   category?: string,
 ): Promise<ModuleWithMeta | null> {
-  const modulesDir = path.join(process.cwd(), 'modules');
+  const modulesDir = path.join(process.cwd(), 'public', 'modules');
   const filePath = path.join(modulesDir, filename);
 
   try {

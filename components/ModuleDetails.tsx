@@ -91,15 +91,15 @@ export function ModuleDetails({
     };
   }, [exportMenuOpen]);
 
-  const handleExportCurrentVersion = () => {
+  const handleExportCurrentVersion = async () => {
     if (currentVersion) {
-      exportModuleAsJSON(module, currentVersion);
+      await exportModuleAsJSON(module, currentVersion);
       setExportMenuOpen(false);
     }
   };
 
-  const handleExportAllVersions = () => {
-    exportModuleAsJSON(module);
+  const handleExportAllVersions = async () => {
+    await exportModuleAsJSON(module);
     setExportMenuOpen(false);
   };
 
