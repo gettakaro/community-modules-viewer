@@ -143,8 +143,8 @@ test.describe('Community Modules Viewer', () => {
   });
 
   test('module export functionality', async ({ page }) => {
-    // Navigate to a module page
-    await page.goto('/module/geoBlock');
+    // Navigate to a community module page (not built-in)
+    await page.goto('/module/7dtdStockMarket');
 
     // Wait for page to load
     await expect(page.locator('[data-testid="module-details"]')).toBeVisible();

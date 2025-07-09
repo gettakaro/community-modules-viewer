@@ -256,7 +256,7 @@ test.describe('Mobile Responsiveness', () => {
     test('all interactive elements work with click on mobile', async ({
       page,
     }) => {
-      await page.goto('/module/geoBlock');
+      await page.goto('/module/7dtdStockMarket');
 
       // Test collapsible code toggle with click (instead of tap)
       const codeToggle = page
