@@ -1,0 +1,34 @@
+{
+    "name": "Mad_droneTeleports",
+    "versions": [
+        {
+            "tag": "latest",
+            "description": "Drones aren't teleporting to players. Executes CPM - get drone after a teleport. 5 second delay. ",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+            "uiSchema": "{}",
+            "commands": [
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const {} = data;\n}\nawait main();",
+                    "name": "helps",
+                    "description": null,
+                    "trigger": "helps",
+                    "helpText": "No help text available",
+                    "arguments": []
+                }
+            ],
+            "hooks": [
+                {
+                    "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { player, pog, gameServerId } = data;\n    // The log message is provided by the Takaro event data.\n    const logMessageFromTakaro = data.eventData.msg;\n\n    // The regex to find and capture the CrossId.\n    const match = logMessageFromTakaro.match(/CrossId='(EOS_.*?)'/);\n\n    // Directly access the captured ID, since a match is guaranteed.\n    const eosID = match[1];\n\n    console.log(`Found EOS ID: ${eosID}`);\n\n\n    //eoc <Name/EntityId/SteamId> \"command param1 param2\"\n    //getdrone ${eosID}\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `getdrone ${eosID}`,\n    });\n\n}\nawait main();",
+                    "name": "drone Teleport",
+                    "description": "Teleports the drone to the player a few seconds after teleporting",
+                    "eventType": "log",
+                    "regex": "\\breason: Teleport\\b"
+                }
+            ],
+            "cronJobs": [],
+            "functions": [],
+            "permissions": []
+        }
+    ],
+    "takaroVersion": "v0.1.5"
+}
