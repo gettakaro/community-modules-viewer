@@ -5,6 +5,7 @@ on:
     branches: [main, development]
   pull_request:
     branches: [main, development]
+  merge_group:
 
 env:
   NODE_VERSION: '20'
