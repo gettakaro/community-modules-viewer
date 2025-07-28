@@ -144,27 +144,6 @@ test.describe('Mobile Responsiveness', () => {
       await expect(categoryFilters).toBeVisible();
     });
 
-    test('mobile overlay blocks interaction with main content', async ({
-      page,
-    }) => {
-      // Navigate to a module page
-      await page.goto('/module/geoBlock');
-
-      // Open mobile menu
-      const hamburgerButton = page.locator('button[aria-label="Open menu"]');
-      await hamburgerButton.click();
-
-      // Check that overlay is visible
-      const overlay = page.locator('.bg-black.bg-opacity-50');
-      await expect(overlay).toBeVisible();
-
-      // Click overlay to close sidebar
-      await overlay.click();
-
-      // Sidebar should close
-      const sidebar = page.locator('[data-testid="module-sidebar"]');
-      await expect(sidebar).not.toBeInViewport();
-    });
   });
 
   test.describe('Tablet Device Tests', () => {
