@@ -1,43 +1,49 @@
-import { getModuleByName, getModules } from '../../../../utils/modules';
-import { ModuleDetails } from './module-details';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
+import {
+  getModuleByName,
+  getAllModuleVersionPaths,
+} from '@/utils/moduleLoader';
+import { ModuleDetails } from '@/components/ModuleDetails';
 
-export default async function ModuleVersionDetailsPage(opts: { 
-  params: Promise<{ name: string; version: string } >
-}) {
-  const params  = await opts.params;
-  const moduleData = await getModuleByName(params.name);
-  const allModules = await getModules();
-  
+interface ModuleVersionPageProps {
+  params: Promise<{
+    name: string;
+    version: string;
+  }>;
+}
+
+export async function generateStaticParams() {
+  const paths = await getAllModuleVersionPaths();
+  return paths;
+}
+
+export async function generateMetadata({ params }: ModuleVersionPageProps) {
+  const { name, version } = await params;
+  return {
+    title: `${name} v${version} - Community Modules Viewer`,
+    description: `View details for ${name} module version ${version}`,
+  };
+}
+
+export default async function ModuleVersionPage({
+  params,
+}: ModuleVersionPageProps) {
+  const { name, version } = await params;
+  const moduleData = await getModuleByName(name);
+
   if (!moduleData) {
     notFound();
   }
-  
-  // Find the version index based on the URL parameter
-  const versionIndex = moduleData.versions.findIndex(
-    v => v.tag === params.version
-  );
-  
-  // If version doesn't exist, redirect to the latest version or show not found
-  if (versionIndex === -1) {
-  // Find the latest version if available
-    const latestVersionIndex = moduleData.versions.findIndex(v => v.tag === "latest");
-    if (latestVersionIndex !== -1) {
-      redirect(`/module/${params.name}/${moduleData.versions[latestVersionIndex].tag}`);
-    } else if (moduleData.versions.length > 0 && moduleData.versions[0].tag) {
-      redirect(`/module/${params.name}/${moduleData.versions[0].tag}`);
-    } else {
-      notFound();
-    }
+
+  const moduleVersion = moduleData.versions.find((v) => v.tag === version);
+
+  if (!moduleVersion) {
+    notFound();
   }
 
   return (
-    <main className="bg-background dark:bg-dark-background min-h-screen pb-16">
-      <ModuleDetails 
-        moduleData={moduleData} 
-        allModules={allModules} 
-        initialVersionIndex={versionIndex} 
-      />
-    </main>
+    <div className="container mx-auto p-6 max-w-6xl">
+      <ModuleDetails module={moduleData} selectedVersion={version} />
+    </div>
   );
 }

@@ -1,23 +1,18 @@
-FROM node:22-alpine AS builder
+FROM node:20-alpine
 
 WORKDIR /app
+
+# Copy package files
 COPY package*.json ./
-RUN npm install
 
+# Install dependencies
+RUN npm ci
+
+# Copy the rest of the application
 COPY . .
-RUN npm run build
 
-FROM node:22-alpine AS runner
-WORKDIR /app
+# Expose the port Next.js runs on
+EXPOSE 3000
 
-ENV NODE_ENV=production
-ENV PORT=53118
-ENV HOSTNAME="0.0.0.0"
-
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/modules ./modules
-
-EXPOSE 53118
-
-CMD ["node", "server.js"]
+# Start the development server
+CMD ["npm", "run", "dev"]
