@@ -1,58 +1,58 @@
 {
-    "name": "Link_Blocker",
-    "versions": [
+  "name": "Link_Blocker",
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "**Automatically block link sharing to prevent spam and promote safe communication.**\n\nThis module scans chat messages for links and applies configurable punishments (warnings, kicks, or bans) when links are shared.\n\n**Features:**\n- Regex-based URL detection\n- Warning and punishment system\n- Custom messages for violations\n- Configurable punishment and reset timing\n\n**Ideal For:**\n- Blocking phishing or spam links\n- Promoting safer communication environments",
+      "configSchema": "{\"$schema\": \"http://json-schema.org/draft-07/schema#\", \"type\": \"object\", \"additionalProperties\": false, \"properties\": {\"blockUrls\": {\"title\": \"Block URLs\", \"description\": \"Enable or disable URL blocking\", \"type\": \"boolean\", \"default\": true}, \"punishmentType\": {\"title\": \"Punishment Type\", \"description\": \"Action taken when a player sends a link\", \"type\": \"string\", \"enum\": [\"kick\", \"ban\", \"none\"], \"default\": \"kick\"}, \"banDuration\": {\"title\": \"Ban Duration\", \"type\": \"number\", \"default\": 300000}, \"warningsBeforePunishment\": {\"title\": \"Warnings Before Punishment\", \"type\": \"number\", \"default\": 1}, \"warningResetTime\": {\"title\": \"Warning Reset Time\", \"type\": \"number\", \"default\": 600000}, \"kickMessage\": {\"title\": \"Kick Message\", \"type\": \"string\", \"default\": \"Sharing links is not allowed.\"}, \"banMessage\": {\"title\": \"Ban Message\", \"type\": \"string\", \"default\": \"You have been banned for sharing links. Ban duration: {duration} ms.\"}, \"noPunishmentMessage\": {\"title\": \"No Punishment Message\", \"type\": \"string\", \"default\": \"Please refrain from sharing links.\"}}}",
+      "uiSchema": "{}",
+      "commands": [],
+      "hooks": [
         {
-            "tag": "latest",
-            "description": "**Automatically block link sharing to prevent spam and promote safe communication.**\n\nThis module scans chat messages for links and applies configurable punishments (warnings, kicks, or bans) when links are shared.\n\n**Features:**\n- Regex-based URL detection\n- Warning and punishment system\n- Custom messages for violations\n- Configurable punishment and reset timing\n\n**Ideal For:**\n- Blocking phishing or spam links\n- Promoting safer communication environments",
-            "configSchema": "{\"$schema\": \"http://json-schema.org/draft-07/schema#\", \"type\": \"object\", \"additionalProperties\": false, \"properties\": {\"blockUrls\": {\"title\": \"Block URLs\", \"description\": \"Enable or disable URL blocking\", \"type\": \"boolean\", \"default\": true}, \"punishmentType\": {\"title\": \"Punishment Type\", \"description\": \"Action taken when a player sends a link\", \"type\": \"string\", \"enum\": [\"kick\", \"ban\", \"none\"], \"default\": \"kick\"}, \"banDuration\": {\"title\": \"Ban Duration\", \"type\": \"number\", \"default\": 300000}, \"warningsBeforePunishment\": {\"title\": \"Warnings Before Punishment\", \"type\": \"number\", \"default\": 1}, \"warningResetTime\": {\"title\": \"Warning Reset Time\", \"type\": \"number\", \"default\": 600000}, \"kickMessage\": {\"title\": \"Kick Message\", \"type\": \"string\", \"default\": \"Sharing links is not allowed.\"}, \"banMessage\": {\"title\": \"Ban Message\", \"type\": \"string\", \"default\": \"You have been banned for sharing links. Ban duration: {duration} ms.\"}, \"noPunishmentMessage\": {\"title\": \"No Punishment Message\", \"type\": \"string\", \"default\": \"Please refrain from sharing links.\"}}}",
-            "uiSchema": "{}",
-            "commands": [],
-            "hooks": [
-                {
-                    "function": "import { takaro, data, TakaroUserError, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n  const { gameServerId, player, pog } = data;\n  if (!pog || !player) return;\n  if (checkPermission(pog, 'link_blocker_immunity')) return;\n\n  const {\n    blockUrls,\n    punishmentType,\n    warningsBeforePunishment,\n    warningResetTime,\n    kickMessage,\n    banMessage,\n    noPunishmentMessage,\n    banDuration\n  } = data.module.userConfig;\n\n  if (!blockUrls) return;\n\n  const message = data.eventData.msg.toLowerCase();\n  const urlRegex = /https?:\\/\\/\\S+|www\\.\\S+/g;\n  if (!urlRegex.test(message)) return;\n\n  const existingVariable = await takaro.variable.variableControllerSearch({\n    filters: {\n      playerId: [player.id],\n      key: ['linkWarnings'],\n    },\n  });\n\n  let currentWarnings = existingVariable.data.data[0]\n    ? parseInt(existingVariable.data.data[0].value, 10)\n    : 0;\n\n  currentWarnings++;\n  const now = new Date();\n  const warningExpireTime = new Date(now.getTime() + warningResetTime);\n\n  let warningText = `You have ${currentWarnings}/${warningsBeforePunishment} warnings. `;\n\n  if (punishmentType === 'kick') {\n    warningText += kickMessage;\n  } else if (punishmentType === 'ban') {\n    warningText += banMessage.replace('{duration}', banDuration);\n  } else {\n    warningText += noPunishmentMessage;\n  }\n\n  if (currentWarnings >= warningsBeforePunishment && punishmentType !== 'none') {\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerDelete(existingVariable.data.data[0].id);\n    }\n\n    if (punishmentType === 'kick') {\n      await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n        reason: 'Shared a prohibited link.',\n      });\n    } else if (punishmentType === 'ban') {\n      const expiresAt = new Date(now.getTime() + banDuration);\n      await takaro.player.banControllerCreate({\n        gameServerId,\n        playerId: player.id,\n        until: expiresAt,\n        reason: 'Shared a prohibited link.',\n      });\n    }\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: `${player.name} has been ${punishmentType}ed for sharing links.`,\n    });\n\n  } else {\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: warningText,\n      opts: {\n        recipient: {\n          gameId: pog.gameId,\n        },\n      },\n    });\n\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerUpdate(existingVariable.data.data[0].id, {\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    } else {\n      await takaro.variable.variableControllerCreate({\n        playerId: player.id,\n        key: 'linkWarnings',\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    }\n  }\n}\n\nawait main();",
-                    "name": "linkChecker",
-                    "description": null,
-                    "eventType": "chat-message",
-                    "regex": null
-                }
-            ],
-            "cronJobs": [],
-            "functions": [],
-            "permissions": [
-                {
-                    "canHaveCount": false,
-                    "description": "Grants immunity from link blocking.",
-                    "permission": "link_blocker_immunity",
-                    "friendlyName": "InternetLinkBlocker_Immunity"
-                }
-            ]
-        },
-        {
-            "tag": "0.0.1",
-            "description": "**Automatically block link sharing to prevent spam and promote safe communication.**\n\nThis module scans chat messages for links and applies configurable punishments (warnings, kicks, or bans) when links are shared.\n\n**Features:**\n- Regex-based URL detection\n- Warning and punishment system\n- Custom messages for violations\n- Configurable punishment and reset timing\n\n**Ideal For:**\n- Blocking phishing or spam links\n- Promoting safer communication environments",
-            "configSchema": "{\"$schema\": \"http://json-schema.org/draft-07/schema#\", \"type\": \"object\", \"additionalProperties\": false, \"properties\": {\"blockUrls\": {\"title\": \"Block URLs\", \"description\": \"Enable or disable URL blocking\", \"type\": \"boolean\", \"default\": true}, \"punishmentType\": {\"title\": \"Punishment Type\", \"description\": \"Action taken when a player sends a link\", \"type\": \"string\", \"enum\": [\"kick\", \"ban\", \"none\"], \"default\": \"kick\"}, \"banDuration\": {\"title\": \"Ban Duration\", \"type\": \"number\", \"default\": 300000}, \"warningsBeforePunishment\": {\"title\": \"Warnings Before Punishment\", \"type\": \"number\", \"default\": 1}, \"warningResetTime\": {\"title\": \"Warning Reset Time\", \"type\": \"number\", \"default\": 600000}, \"kickMessage\": {\"title\": \"Kick Message\", \"type\": \"string\", \"default\": \"Sharing links is not allowed.\"}, \"banMessage\": {\"title\": \"Ban Message\", \"type\": \"string\", \"default\": \"You have been banned for sharing links. Ban duration: {duration} ms.\"}, \"noPunishmentMessage\": {\"title\": \"No Punishment Message\", \"type\": \"string\", \"default\": \"Please refrain from sharing links.\"}}}",
-            "uiSchema": "{}",
-            "commands": [],
-            "hooks": [
-                {
-                    "function": "import { takaro, data, TakaroUserError, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n  const { gameServerId, player, pog } = data;\n  if (!pog || !player) return;\n  if (checkPermission(pog, 'link_blocker_immunity')) return;\n\n  const {\n    blockUrls,\n    punishmentType,\n    warningsBeforePunishment,\n    warningResetTime,\n    kickMessage,\n    banMessage,\n    noPunishmentMessage,\n    banDuration\n  } = data.module.userConfig;\n\n  if (!blockUrls) return;\n\n  const message = data.eventData.msg.toLowerCase();\n  const urlRegex = /https?:\\/\\/\\S+|www\\.\\S+/g;\n  if (!urlRegex.test(message)) return;\n\n  const existingVariable = await takaro.variable.variableControllerSearch({\n    filters: {\n      playerId: [player.id],\n      key: ['linkWarnings'],\n    },\n  });\n\n  let currentWarnings = existingVariable.data.data[0]\n    ? parseInt(existingVariable.data.data[0].value, 10)\n    : 0;\n\n  currentWarnings++;\n  const now = new Date();\n  const warningExpireTime = new Date(now.getTime() + warningResetTime);\n\n  let warningText = `You have ${currentWarnings}/${warningsBeforePunishment} warnings. `;\n\n  if (punishmentType === 'kick') {\n    warningText += kickMessage;\n  } else if (punishmentType === 'ban') {\n    warningText += banMessage.replace('{duration}', banDuration);\n  } else {\n    warningText += noPunishmentMessage;\n  }\n\n  if (currentWarnings >= warningsBeforePunishment && punishmentType !== 'none') {\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerDelete(existingVariable.data.data[0].id);\n    }\n\n    if (punishmentType === 'kick') {\n      await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n        reason: 'Shared a prohibited link.',\n      });\n    } else if (punishmentType === 'ban') {\n      const expiresAt = new Date(now.getTime() + banDuration);\n      await takaro.player.banControllerCreate({\n        gameServerId,\n        playerId: player.id,\n        until: expiresAt,\n        reason: 'Shared a prohibited link.',\n      });\n    }\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: `${player.name} has been ${punishmentType}ed for sharing links.`,\n    });\n\n  } else {\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: warningText,\n      opts: {\n        recipient: {\n          gameId: pog.gameId,\n        },\n      },\n    });\n\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerUpdate(existingVariable.data.data[0].id, {\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    } else {\n      await takaro.variable.variableControllerCreate({\n        playerId: player.id,\n        key: 'linkWarnings',\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    }\n  }\n}\n\nawait main();",
-                    "name": "linkChecker",
-                    "description": null,
-                    "eventType": "chat-message",
-                    "regex": null
-                }
-            ],
-            "cronJobs": [],
-            "functions": [],
-            "permissions": [
-                {
-                    "canHaveCount": false,
-                    "description": "Grants immunity from link blocking.",
-                    "permission": "link_blocker_immunity",
-                    "friendlyName": "InternetLinkBlocker_Immunity"
-                }
-            ]
+          "function": "import { takaro, data, TakaroUserError, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n  const { gameServerId, player, pog } = data;\n  if (!pog || !player) return;\n  if (checkPermission(pog, 'link_blocker_immunity')) return;\n\n  const {\n    blockUrls,\n    punishmentType,\n    warningsBeforePunishment,\n    warningResetTime,\n    kickMessage,\n    banMessage,\n    noPunishmentMessage,\n    banDuration\n  } = data.module.userConfig;\n\n  if (!blockUrls) return;\n\n  const message = data.eventData.msg.toLowerCase();\n  const urlRegex = /https?:\\/\\/\\S+|www\\.\\S+/g;\n  if (!urlRegex.test(message)) return;\n\n  const existingVariable = await takaro.variable.variableControllerSearch({\n    filters: {\n      playerId: [player.id],\n      key: ['linkWarnings'],\n    },\n  });\n\n  let currentWarnings = existingVariable.data.data[0]\n    ? parseInt(existingVariable.data.data[0].value, 10)\n    : 0;\n\n  currentWarnings++;\n  const now = new Date();\n  const warningExpireTime = new Date(now.getTime() + warningResetTime);\n\n  let warningText = `You have ${currentWarnings}/${warningsBeforePunishment} warnings. `;\n\n  if (punishmentType === 'kick') {\n    warningText += kickMessage;\n  } else if (punishmentType === 'ban') {\n    warningText += banMessage.replace('{duration}', banDuration);\n  } else {\n    warningText += noPunishmentMessage;\n  }\n\n  if (currentWarnings >= warningsBeforePunishment && punishmentType !== 'none') {\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerDelete(existingVariable.data.data[0].id);\n    }\n\n    if (punishmentType === 'kick') {\n      await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n        reason: 'Shared a prohibited link.',\n      });\n    } else if (punishmentType === 'ban') {\n      const expiresAt = new Date(now.getTime() + banDuration);\n      await takaro.player.banControllerCreate({\n        gameServerId,\n        playerId: player.id,\n        until: expiresAt,\n        reason: 'Shared a prohibited link.',\n      });\n    }\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: `${player.name} has been ${punishmentType}ed for sharing links.`,\n    });\n\n  } else {\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: warningText,\n      opts: {\n        recipient: {\n          gameId: pog.gameId,\n        },\n      },\n    });\n\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerUpdate(existingVariable.data.data[0].id, {\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    } else {\n      await takaro.variable.variableControllerCreate({\n        playerId: player.id,\n        key: 'linkWarnings',\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    }\n  }\n}\n\nawait main();",
+          "name": "linkChecker",
+          "description": null,
+          "eventType": "chat-message",
+          "regex": null
         }
-    ],
-    "takaroVersion": "v0.2.1"
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Grants immunity from link blocking.",
+          "permission": "link_blocker_immunity",
+          "friendlyName": "InternetLinkBlocker_Immunity"
+        }
+      ]
+    },
+    {
+      "tag": "0.0.1",
+      "description": "**Automatically block link sharing to prevent spam and promote safe communication.**\n\nThis module scans chat messages for links and applies configurable punishments (warnings, kicks, or bans) when links are shared.\n\n**Features:**\n- Regex-based URL detection\n- Warning and punishment system\n- Custom messages for violations\n- Configurable punishment and reset timing\n\n**Ideal For:**\n- Blocking phishing or spam links\n- Promoting safer communication environments",
+      "configSchema": "{\"$schema\": \"http://json-schema.org/draft-07/schema#\", \"type\": \"object\", \"additionalProperties\": false, \"properties\": {\"blockUrls\": {\"title\": \"Block URLs\", \"description\": \"Enable or disable URL blocking\", \"type\": \"boolean\", \"default\": true}, \"punishmentType\": {\"title\": \"Punishment Type\", \"description\": \"Action taken when a player sends a link\", \"type\": \"string\", \"enum\": [\"kick\", \"ban\", \"none\"], \"default\": \"kick\"}, \"banDuration\": {\"title\": \"Ban Duration\", \"type\": \"number\", \"default\": 300000}, \"warningsBeforePunishment\": {\"title\": \"Warnings Before Punishment\", \"type\": \"number\", \"default\": 1}, \"warningResetTime\": {\"title\": \"Warning Reset Time\", \"type\": \"number\", \"default\": 600000}, \"kickMessage\": {\"title\": \"Kick Message\", \"type\": \"string\", \"default\": \"Sharing links is not allowed.\"}, \"banMessage\": {\"title\": \"Ban Message\", \"type\": \"string\", \"default\": \"You have been banned for sharing links. Ban duration: {duration} ms.\"}, \"noPunishmentMessage\": {\"title\": \"No Punishment Message\", \"type\": \"string\", \"default\": \"Please refrain from sharing links.\"}}}",
+      "uiSchema": "{}",
+      "commands": [],
+      "hooks": [
+        {
+          "function": "import { takaro, data, TakaroUserError, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n  const { gameServerId, player, pog } = data;\n  if (!pog || !player) return;\n  if (checkPermission(pog, 'link_blocker_immunity')) return;\n\n  const {\n    blockUrls,\n    punishmentType,\n    warningsBeforePunishment,\n    warningResetTime,\n    kickMessage,\n    banMessage,\n    noPunishmentMessage,\n    banDuration\n  } = data.module.userConfig;\n\n  if (!blockUrls) return;\n\n  const message = data.eventData.msg.toLowerCase();\n  const urlRegex = /https?:\\/\\/\\S+|www\\.\\S+/g;\n  if (!urlRegex.test(message)) return;\n\n  const existingVariable = await takaro.variable.variableControllerSearch({\n    filters: {\n      playerId: [player.id],\n      key: ['linkWarnings'],\n    },\n  });\n\n  let currentWarnings = existingVariable.data.data[0]\n    ? parseInt(existingVariable.data.data[0].value, 10)\n    : 0;\n\n  currentWarnings++;\n  const now = new Date();\n  const warningExpireTime = new Date(now.getTime() + warningResetTime);\n\n  let warningText = `You have ${currentWarnings}/${warningsBeforePunishment} warnings. `;\n\n  if (punishmentType === 'kick') {\n    warningText += kickMessage;\n  } else if (punishmentType === 'ban') {\n    warningText += banMessage.replace('{duration}', banDuration);\n  } else {\n    warningText += noPunishmentMessage;\n  }\n\n  if (currentWarnings >= warningsBeforePunishment && punishmentType !== 'none') {\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerDelete(existingVariable.data.data[0].id);\n    }\n\n    if (punishmentType === 'kick') {\n      await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n        reason: 'Shared a prohibited link.',\n      });\n    } else if (punishmentType === 'ban') {\n      const expiresAt = new Date(now.getTime() + banDuration);\n      await takaro.player.banControllerCreate({\n        gameServerId,\n        playerId: player.id,\n        until: expiresAt,\n        reason: 'Shared a prohibited link.',\n      });\n    }\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: `${player.name} has been ${punishmentType}ed for sharing links.`,\n    });\n\n  } else {\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n      message: warningText,\n      opts: {\n        recipient: {\n          gameId: pog.gameId,\n        },\n      },\n    });\n\n    if (existingVariable.data.data.length) {\n      await takaro.variable.variableControllerUpdate(existingVariable.data.data[0].id, {\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    } else {\n      await takaro.variable.variableControllerCreate({\n        playerId: player.id,\n        key: 'linkWarnings',\n        value: currentWarnings.toString(),\n        expiresAt: warningExpireTime\n      });\n    }\n  }\n}\n\nawait main();",
+          "name": "linkChecker",
+          "description": null,
+          "eventType": "chat-message",
+          "regex": null
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Grants immunity from link blocking.",
+          "permission": "link_blocker_immunity",
+          "friendlyName": "InternetLinkBlocker_Immunity"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.2.1"
 }
