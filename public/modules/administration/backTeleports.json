@@ -1,0 +1,76 @@
+{
+  "name": "backTeleports",
+  "versions": [
+    {
+      "tag": "0.0.1",
+      "description": "look back",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "// commands/back.js\nimport { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, gameServerId, module: mod } = data;\n\n    if (!checkPermission(pog, 'BACK_TELEPORT_USE')) {\n        throw new TakaroUserError('You do not have permission to use back teleport.');\n    }\n\n    // Get back location\n    const backVar = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['back_location'],\n            gameServerId: [gameServerId],\n            playerId: [pog.playerId],\n            moduleId: [mod.moduleId],\n        },\n    });\n\n    if (backVar.data.data.length === 0) {\n        throw new TakaroUserError('No previous location found. Teleport somewhere first to create a back location.');\n    }\n\n    const backLocation = JSON.parse(backVar.data.data[0].value);\n\n    // Teleport to back location\n    await takaro.gameserver.gameServerControllerTeleportPlayer(gameServerId, pog.playerId, {\n        x: backLocation.x,\n        y: backLocation.y,\n        z: backLocation.z,\n    });\n\n    await data.player.pm('Teleported back to your previous location!');\n}\n\nawait main();",
+          "name": "back",
+          "description": null,
+          "trigger": "back",
+          "helpText": "No help text available",
+          "arguments": []
+        }
+      ],
+      "hooks": [
+        {
+          "function": "// hooks/captureTeleportLocation.js\nimport { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n  const { pog, gameServerId, module: mod, eventData } = data;\n\n  try {\n    const chatMessage = eventData.msg;\n    const prefix = (await takaro.settings.settingsControllerGetOne('commandPrefix', gameServerId)).data.data.value;\n\n    // Check if this is a teleport command by looking at the chat message\n    if (!chatMessage.startsWith(prefix)) {\n      return; // Not a command\n    }\n\n    // Remove prefix and parse command\n    const commandPart = chatMessage.slice(prefix.length).trim();\n    const commandArgs = commandPart.split(' ');\n    const commandName = commandArgs[0].toLowerCase();\n\n    // Only capture location for teleport commands\n    if (commandName !== 'tp' && commandName !== 'teleport') {\n      return; // Not a teleport command\n    }\n\n    console.log('Teleport command detected, saving current location');\n    console.log('Current player position:', { x: pog.positionX, y: pog.positionY, z: pog.positionZ });\n\n    // Save the player's current location before they teleport\n    const previousLocation = {\n      x: pog.positionX,\n      y: pog.positionY,\n      z: pog.positionZ,\n      timestamp: new Date().toISOString(),\n    };\n\n    console.log('Saving location:', previousLocation);\n\n    // Check if back location already exists\n    const backVar = await takaro.variable.variableControllerSearch({\n      filters: {\n        key: ['back_location'],\n        gameServerId: [gameServerId],\n        playerId: [pog.playerId],\n        moduleId: [mod.moduleId],\n      },\n    });\n\n    if (backVar.data.data.length > 0) {\n      console.log('Updating existing back location variable');\n      await takaro.variable.variableControllerUpdate(backVar.data.data[0].id, {\n        value: JSON.stringify(previousLocation),\n      });\n    } else {\n      console.log('Creating new back location variable');\n      await takaro.variable.variableControllerCreate({\n        key: 'back_location',\n        value: JSON.stringify(previousLocation),\n        gameServerId,\n        moduleId: mod.moduleId,\n        playerId: pog.playerId,\n      });\n    }\n\n    console.log('Successfully saved back location');\n  } catch (error) {\n    console.error('Failed to capture pre-teleport location:', error);\n  }\n}\n\nawait main();",
+          "name": "captureTeleportLocation",
+          "description": null,
+          "eventType": "chat-message",
+          "regex": "home"
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "BACK_TELEPORT_USE",
+          "permission": "BACK_TELEPORT_USE",
+          "friendlyName": "BACK_TELEPORT_USE"
+        }
+      ]
+    },
+    {
+      "tag": "latest",
+      "description": "This command will make it possible for the player when they teleport to home, to save their last location, so that they can do the back command and get teleported back to the previous location.\n\nDo note it  checks for the word HOME to save the coordinates! you can change it in the hook config.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "// commands/back.js\nimport { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, gameServerId, module: mod } = data;\n\n    if (!checkPermission(pog, 'BACK_TELEPORT_USE')) {\n        throw new TakaroUserError('You do not have permission to use back teleport.');\n    }\n\n    // Get back location\n    const backVar = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['back_location'],\n            gameServerId: [gameServerId],\n            playerId: [pog.playerId],\n            moduleId: [mod.moduleId],\n        },\n    });\n\n    if (backVar.data.data.length === 0) {\n        throw new TakaroUserError('No previous location found. Teleport somewhere first to create a back location.');\n    }\n\n    const backLocation = JSON.parse(backVar.data.data[0].value);\n\n    // Teleport to back location\n    await takaro.gameserver.gameServerControllerTeleportPlayer(gameServerId, pog.playerId, {\n        x: backLocation.x,\n        y: backLocation.y,\n        z: backLocation.z,\n    });\n\n    await data.player.pm('Teleported back to your previous location!');\n}\n\nawait main();",
+          "name": "back",
+          "description": null,
+          "trigger": "back",
+          "helpText": "No help text available",
+          "arguments": []
+        }
+      ],
+      "hooks": [
+        {
+          "function": "// hooks/captureTeleportLocation.js\nimport { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n  const { pog, gameServerId, module: mod, eventData } = data;\n\n  try {\n    const chatMessage = eventData.msg;\n    const prefix = (await takaro.settings.settingsControllerGetOne('commandPrefix', gameServerId)).data.data.value;\n\n    // Check if this is a teleport command by looking at the chat message\n    if (!chatMessage.startsWith(prefix)) {\n      return; // Not a command\n    }\n\n    // Remove prefix and parse command\n    const commandPart = chatMessage.slice(prefix.length).trim();\n    const commandArgs = commandPart.split(' ');\n    const commandName = commandArgs[0].toLowerCase();\n\n    // Only capture location for teleport commands\n    if (commandName !== 'tp' && commandName !== 'teleport') {\n      return; // Not a teleport command\n    }\n\n    console.log('Teleport command detected, saving current location');\n    console.log('Current player position:', { x: pog.positionX, y: pog.positionY, z: pog.positionZ });\n\n    // Save the player's current location before they teleport\n    const previousLocation = {\n      x: pog.positionX,\n      y: pog.positionY,\n      z: pog.positionZ,\n      timestamp: new Date().toISOString(),\n    };\n\n    console.log('Saving location:', previousLocation);\n\n    // Check if back location already exists\n    const backVar = await takaro.variable.variableControllerSearch({\n      filters: {\n        key: ['back_location'],\n        gameServerId: [gameServerId],\n        playerId: [pog.playerId],\n        moduleId: [mod.moduleId],\n      },\n    });\n\n    if (backVar.data.data.length > 0) {\n      console.log('Updating existing back location variable');\n      await takaro.variable.variableControllerUpdate(backVar.data.data[0].id, {\n        value: JSON.stringify(previousLocation),\n      });\n    } else {\n      console.log('Creating new back location variable');\n      await takaro.variable.variableControllerCreate({\n        key: 'back_location',\n        value: JSON.stringify(previousLocation),\n        gameServerId,\n        moduleId: mod.moduleId,\n        playerId: pog.playerId,\n      });\n    }\n\n    console.log('Successfully saved back location');\n  } catch (error) {\n    console.error('Failed to capture pre-teleport location:', error);\n  }\n}\n\nawait main();",
+          "name": "captureTeleportLocation",
+          "description": "log chat message",
+          "eventType": "chat-message",
+          "regex": "home"
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "BACK_TELEPORT_USE",
+          "permission": "BACK_TELEPORT_USE",
+          "friendlyName": "BACK_TELEPORT_USE"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.3.3"
+}
