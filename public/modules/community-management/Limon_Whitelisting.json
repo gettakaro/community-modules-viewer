@@ -1,0 +1,58 @@
+{
+  "name": "Limon_Whitelisting",
+  "versions": [
+    {
+      "tag": "0.0.1",
+      "description": "**Restrict server access to specific players with a simple whitelist system.**\n\nThe Whitelist module gives you complete control over who can join your server by using Takaro's powerful permission system.\n\n* **Permission-based access:** Only players with the 'Whitelist Access' permission can join the server.\n* **Customizable kick message:** Set what rejected players see when attempting to connect.\n* **Role integration:** Works seamlessly with Takaro's role system for easy management.\n* **Global or per-server:** Apply whitelist roles to specific servers or globally across all servers.\n\n**Key Features:**\n\n![moduleoverview](https://raw.githubusercontent.com/gettakaro/community-modules-viewer/refs/heads/main/images/whitelisting/whitelistingrole.png)\n\n* Simple setup - just assign permissions to roles\n* No complex configuration needed\n* Works across all supported game types\n* Instantly denies access to unauthorized players\n\n**How to use:**\n\n1. Install the module on your server\n2. Configure the kick message\n3. Create or edit roles with the 'Whitelist Access' permission\n4. Assign roles to players either globally or per server\n\n![role assignment](https://raw.githubusercontent.com/gettakaro/community-modules-viewer/refs/heads/main/images/whitelisting/assignRoleGlobal.png)\n\nPlayers without the required permission will receive your custom message when they attempt to join:\n\n![kicked message](https://raw.githubusercontent.com/gettakaro/community-modules-viewer/refs/heads/main/images/whitelisting/whitelistkickmessage.png)\n\n**Perfect for:**\n* Private servers for friends and communities\n* Premium/VIP game servers\n* Testing environments\n* Scheduled events with limited participation\n* Temporarily restricting access during maintenance",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"kickMessage\":{\"title\":\"kickMessage\",\"description\":\"Message to display to players who are kicked for not having the required role.\",\"default\":\"You do not have permission to join this server.\",\"type\":\"string\"}}}",
+      "uiSchema": "{}",
+      "commands": [],
+      "hooks": [
+        {
+          "function": "import { takaro, data, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, module: mod } = data;\n\n    // If player has whitelist permission, allow them to stay\n    if (checkPermission(data.pog, 'WHITELIST_ACCESS')) {\n        return;\n    }\n\n    // Player doesn't have permission, kick them\n    const kickReason = mod.userConfig.kickMessage || 'You do not have whitelist access';\n\n    await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n        reason: kickReason\n    });\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `${player.name} was kicked: not on the whitelist`\n    });\n}\n\nawait main();",
+          "name": "whitelisting",
+          "description": null,
+          "eventType": "player-connected",
+          "regex": ""
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Players with this permission can join the whitelisted server.",
+          "permission": "WHITELIST_ACCESS",
+          "friendlyName": "Whitelist Access"
+        }
+      ]
+    },
+    {
+      "tag": "latest",
+      "description": "**Restrict server access to specific players with a simple whitelist system.**\n\nThe Whitelist module gives you complete control over who can join your server by using Takaro's powerful permission system.\n\n* **Permission-based access:** Only players with the 'Whitelist Access' permission can join the server.\n* **Customizable kick message:** Set what rejected players see when attempting to connect.\n* **Role integration:** Works seamlessly with Takaro's role system for easy management.\n* **Global or per-server:** Apply whitelist roles to specific servers or globally across all servers.\n\n**Key Features:**\n\n![moduleoverview](https://raw.githubusercontent.com/gettakaro/community-modules-viewer/refs/heads/main/images/whitelisting/whitelistingrole.png)\n\n* Simple setup - just assign permissions to roles\n* No complex configuration needed\n* Works across all supported game types\n* Instantly denies access to unauthorized players\n\n**How to use:**\n\n1. Install the module on your server\n2. Configure the kick message\n3. Create or edit roles with the 'Whitelist Access' permission\n4. Assign roles to players either globally or per server\n\n![role assignment](https://raw.githubusercontent.com/gettakaro/community-modules-viewer/refs/heads/main/images/whitelisting/assignRoleGlobal.png)\n\nPlayers without the required permission will receive your custom message when they attempt to join:\n\n![kicked message](https://raw.githubusercontent.com/gettakaro/community-modules-viewer/refs/heads/main/images/whitelisting/whitelistkickmessage.png)\n\n**Perfect for:**\n* Private servers for friends and communities\n* Premium/VIP game servers\n* Testing environments\n* Scheduled events with limited participation\n* Temporarily restricting access during maintenance",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"kickMessage\":{\"title\":\"kickMessage\",\"description\":\"Message to display to players who are kicked for not having the required role.\",\"default\":\"You do not have permission to join this server.\",\"type\":\"string\"}}}",
+      "uiSchema": "{}",
+      "commands": [],
+      "hooks": [
+        {
+          "function": "import { takaro, data, checkPermission } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, module: mod } = data;\n\n    // If player has whitelist permission, allow them to stay\n    if (checkPermission(data.pog, 'WHITELIST_ACCESS')) {\n        return;\n    }\n\n    // Player doesn't have permission, kick them\n    const kickReason = mod.userConfig.kickMessage || 'You do not have whitelist access';\n\n    await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, {\n        reason: kickReason\n    });\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `${player.name} was kicked: not on the whitelist`\n    });\n}\n\nawait main();",
+          "name": "whitelisting",
+          "description": "checkPlayerRole",
+          "eventType": "player-connected",
+          "regex": ""
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Players with this permission can join the whitelisted server.",
+          "permission": "WHITELIST_ACCESS",
+          "friendlyName": "Whitelist Access"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "main"
+}
