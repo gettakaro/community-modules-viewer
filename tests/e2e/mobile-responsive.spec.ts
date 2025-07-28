@@ -143,7 +143,6 @@ test.describe('Mobile Responsiveness', () => {
       );
       await expect(categoryFilters).toBeVisible();
     });
-
   });
 
   test.describe('Tablet Device Tests', () => {
