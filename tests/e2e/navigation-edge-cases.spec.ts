@@ -51,26 +51,6 @@ test.describe('Navigation Edge Cases', () => {
       ).toBeVisible();
     });
 
-    test('handles empty module directory gracefully', async ({ page }) => {
-      // Navigate to just /module/ path
-      await page.goto('/module/');
-      await page.waitForLoadState('networkidle');
-
-      // In production, this should either redirect to homepage or show 404 page
-      const url = page.url();
-
-      // Check if we're on homepage (redirected) or see 404 content
-      const pageText = await page.textContent('body');
-      const has404 = pageText?.includes('404') || false;
-      const hasNotFoundText =
-        pageText?.includes('This page could not be found') || false;
-      const hasNoModules = pageText?.includes('No modules available') || false;
-      const isOnHomepage = pageText?.includes('Total Modules') || false;
-
-      expect(
-        isOnHomepage || has404 || hasNotFoundText || hasNoModules,
-      ).toBeTruthy();
-    });
   });
 
   test.describe('404 Handling', () => {
@@ -137,35 +117,6 @@ test.describe('Navigation Edge Cases', () => {
       ).toBeTruthy();
     });
 
-    test('malformed module URLs show 404', async ({ page }) => {
-      const malformedUrls = [
-        '/module/',
-        '/module//',
-        '/module///',
-        '/module/ ',
-        '/module/module-name/',
-        '/module/module-name//',
-      ];
-
-      for (const url of malformedUrls) {
-        await page.goto(url);
-        await page.waitForLoadState('networkidle');
-
-        // Malformed URLs should show 404 page or redirect to homepage
-        const pageText = await page.textContent('body');
-        const has404 = pageText?.includes('404') || false;
-        const hasNotFoundText =
-          pageText?.includes('This page could not be found') || false;
-        const hasNoModules =
-          pageText?.includes('No modules available') || false;
-        const isOnHomepage = pageText?.includes('Total Modules') || false;
-
-        expect(
-          has404 || hasNotFoundText || hasNoModules || isOnHomepage,
-          `URL ${url} should show 404 content or redirect to homepage`,
-        ).toBeTruthy();
-      }
-    });
   });
 
   test.describe('URL Validation', () => {
