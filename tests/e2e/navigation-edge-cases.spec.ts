@@ -50,7 +50,6 @@ test.describe('Navigation Edge Cases', () => {
         page.locator('[data-testid="module-details"]'),
       ).toBeVisible();
     });
-
   });
 
   test.describe('404 Handling', () => {
@@ -116,7 +115,6 @@ test.describe('Navigation Edge Cases', () => {
         has404 || hasNotFoundText || hasNoModules || isOnHomepage,
       ).toBeTruthy();
     });
-
   });
 
   test.describe('URL Validation', () => {
