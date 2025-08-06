@@ -11,7 +11,8 @@
       "Bash(ls:*)",
       "Bash(npm run format:*)",
       "Bash(find:*)",
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

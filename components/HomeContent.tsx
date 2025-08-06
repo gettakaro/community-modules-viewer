@@ -25,8 +25,8 @@ export function HomeContent({ modules }: HomeContentProps) {
             </h1>
             <p className="text-lg text-takaro-text-secondary mb-6 max-w-3xl">
               Browse and explore Takaro modules from the community and built-in
-              collections. Use the sidebar to search, filter, and navigate between
-              modules.
+              collections. Use the sidebar to search, filter, and navigate
+              between modules.
             </p>
 
             {modules.length > 0 && (
@@ -177,7 +177,9 @@ export function HomeContent({ modules }: HomeContentProps) {
                           onClick={() => handleCategoryClick(category)}
                         >
                           <div className="flex items-start justify-between mb-3">
-                            <div className="text-2xl lg:text-3xl">{info.icon}</div>
+                            <div className="text-2xl lg:text-3xl">
+                              {info.icon}
+                            </div>
                             <div className="text-xl lg:text-2xl font-bold text-takaro-primary">
                               {stats.count}
                             </div>
@@ -232,7 +234,9 @@ export function HomeContent({ modules }: HomeContentProps) {
                   />
                 </svg>
               </div>
-              <p className="text-xl lg:text-2xl font-semibold text-takaro-text-primary mb-2">No modules found</p>
+              <p className="text-xl lg:text-2xl font-semibold text-takaro-text-primary mb-2">
+                No modules found
+              </p>
               <p className="text-sm lg:text-base text-takaro-text-muted">
                 There are no modules available to display.
               </p>

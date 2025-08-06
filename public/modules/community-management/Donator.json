@@ -1,9 +1,7 @@
 {
   "name": "Donator",
   "author": "meebob",
-  "supportedGames": [
-    "all"
-  ],
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",

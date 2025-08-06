@@ -764,7 +764,7 @@ export function MobileMenuButton({
         ${className}
       `}
       style={{
-        left: isOpen ? 'calc(288px + 1rem)' : '1rem'
+        left: isOpen ? 'calc(288px + 1rem)' : '1rem',
       }}
       aria-label={isOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={isOpen}

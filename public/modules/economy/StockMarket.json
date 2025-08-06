@@ -1,9 +1,7 @@
 {
   "name": "StockMarket",
   "author": "limon",
-  "supportedGames": [
-    "7 Days to Die"
-  ],
+  "supportedGames": ["7 Days to Die"],
   "versions": [
     {
       "tag": "latest",
