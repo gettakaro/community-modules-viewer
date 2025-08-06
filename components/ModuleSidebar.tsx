@@ -102,7 +102,7 @@ export function ModuleSidebar({
       }
       // Don't load category filter from localStorage if external control is provided
       // The external controller (context) will handle persistence
-      if (!externalCategoryFilter) {
+      if (externalCategoryFilter == null) {
         const savedCategoryFilter = localStorage.getItem(
           'module-category-filter',
         );
