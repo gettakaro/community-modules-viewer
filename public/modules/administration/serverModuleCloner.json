@@ -1,5 +1,7 @@
 {
   "name": "serverModuleCloner",
+  "author": "limon",
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",

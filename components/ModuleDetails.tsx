@@ -10,6 +10,11 @@ import { FunctionsSection } from './FunctionsSection';
 import { PermissionsSection } from './PermissionsSection';
 import { exportModuleAsJSON } from '@/utils/exportUtils';
 import { MarkdownRenderer } from './MarkdownRenderer';
+import {
+  getModuleAuthor,
+  getModuleSupportedGame,
+  formatAuthorName,
+} from '@/utils/moduleUtils';
 
 export interface ModuleDetailsProps {
   /** Module data to display */
@@ -173,6 +178,10 @@ export function ModuleDetails({
     builtin: 'badge-takaro-secondary',
   };
 
+  // Get author and supported game
+  const author = getModuleAuthor(module);
+  const supportedGame = getModuleSupportedGame(module);
+
   return (
     <div data-testid="module-details" className={`space-y-6 ${className}`}>
       {/* Module Header */}
@@ -182,6 +191,59 @@ export function ModuleDetails({
             <h1 className="text-xl sm:text-2xl font-bold text-takaro-text-primary mb-2">
               {module.name}
             </h1>
+
+            {/* Author and Supported Game Info */}
+            <div className="flex flex-col sm:flex-row gap-2 mb-3">
+              {author && (
+                <div className="flex items-center gap-1">
+                  <svg
+                    className="w-4 h-4 text-takaro-text-muted"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  <span className="text-sm text-takaro-text-muted">
+                    by{' '}
+                    <span className="text-takaro-text-secondary font-medium">
+                      {formatAuthorName(author)}
+                    </span>
+                  </span>
+                </div>
+              )}
+              {supportedGame && (
+                <div className="flex items-center gap-1">
+                  <svg
+                    className="w-4 h-4 text-takaro-text-muted"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span className="text-sm text-takaro-text-muted">
+                    for{' '}
+                    <span className="text-takaro-text-secondary font-medium">
+                      {supportedGame}
+                    </span>
+                  </span>
+                </div>
+              )}
+            </div>
+
             {currentVersion.description && (
               <MarkdownRenderer
                 content={currentVersion.description}

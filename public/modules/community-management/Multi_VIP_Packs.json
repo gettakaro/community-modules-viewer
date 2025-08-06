@@ -1,5 +1,7 @@
 {
   "name": "Multi_VIP_Packs",
+  "author": "MeeBob",
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",

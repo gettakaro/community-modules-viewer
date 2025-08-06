@@ -1,5 +1,9 @@
 {
   "name": "7dtd_triviaTime",
+  "author": "limon",
+  "supportedGames": [
+    "7 Days to Die"
+  ],
   "versions": [
     {
       "tag": "latest",

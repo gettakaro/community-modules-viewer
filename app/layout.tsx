@@ -39,8 +39,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="takaro" className="dark">
-      <body className="bg-takaro-background text-white min-h-screen antialiased">
-        <div className="min-h-screen bg-gradient-to-br from-takaro-background via-takaro-background to-gray-900">
+      <body className="bg-takaro-background text-white min-h-screen antialiased overflow-x-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-takaro-background via-takaro-background to-gray-900 overflow-x-hidden">
           {children}
         </div>
       </body>

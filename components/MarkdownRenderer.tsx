@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import {
   ReactNode,
@@ -86,9 +86,9 @@ export function MarkdownRenderer({
 
       // Paragraph
       p: ({ children, ...props }: HTMLAttributes<HTMLParagraphElement>) => (
-        <p {...props} className="text-takaro-text-secondary mb-3 last:mb-0">
+        <div {...props} className="text-takaro-text-secondary mb-3 last:mb-0">
           {children}
-        </p>
+        </div>
       ),
 
       // Lists
@@ -149,16 +149,18 @@ export function MarkdownRenderer({
         }
 
         return (
-          <code
-            {...props}
-            className="block p-4 rounded bg-takaro-card border border-takaro-border text-sm font-mono overflow-x-auto text-takaro-text-primary"
-          >
-            {children}
-          </code>
+          <div className="mb-3 overflow-x-auto">
+            <code
+              {...props}
+              className="block p-4 rounded bg-takaro-card border border-takaro-border text-sm font-mono text-takaro-text-primary min-w-full whitespace-pre"
+            >
+              {children}
+            </code>
+          </div>
         );
       },
       pre: ({ children, ...props }: HTMLAttributes<HTMLPreElement>) => (
-        <pre {...props} className="mb-3 overflow-hidden rounded">
+        <pre {...props} className="mb-3 rounded">
           {children}
         </pre>
       ),

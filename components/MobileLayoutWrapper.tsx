@@ -23,7 +23,7 @@ function MobileLayoutWrapperInner({
   const { categoryFilter, setCategoryFilter } = useCategoryFilter();
 
   return (
-    <div className="min-h-screen bg-takaro-background">
+    <div className="min-h-screen bg-takaro-background overflow-x-hidden">
       {/* Mobile Menu Button */}
       <MobileMenuButton
         isOpen={isMobileOpen}

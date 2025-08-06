@@ -15,41 +15,45 @@ export function HomeContent({ modules }: HomeContentProps) {
   };
 
   return (
-    <div>
-      <main className="container mx-auto p-8">
-        <div className="card-takaro max-w-2xl">
-          <h1 className="text-4xl font-bold text-takaro-text-primary mb-4">
-            Community Modules Viewer
-          </h1>
-          <p className="text-takaro-text-secondary mb-6">
-            Browse and explore Takaro modules from the community and built-in
-            collections. Use the sidebar to search, filter, and navigate between
-            modules.
-          </p>
+    <div className="w-full">
+      <main className="w-full max-w-none px-4 py-6 lg:px-8">
+        <div className="w-full">
+          {/* Hero Section */}
+          <div className="card-takaro mb-8 p-6 lg:p-8">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-takaro-text-primary mb-4">
+              Community Modules Viewer
+            </h1>
+            <p className="text-lg text-takaro-text-secondary mb-6 max-w-3xl">
+              Browse and explore Takaro modules from the community and built-in
+              collections. Use the sidebar to search, filter, and navigate between
+              modules.
+            </p>
 
-          {modules.length > 0 ? (
-            <div className="space-y-6">
-              {/* Statistics */}
-              <div className="stat-card bg-takaro-card-hover p-4 rounded-lg max-w-xs">
-                <div className="text-2xl font-bold text-takaro-primary">
+            {modules.length > 0 && (
+              <div className="stat-card bg-takaro-card-hover p-4 rounded-lg inline-block">
+                <div className="text-3xl font-bold text-takaro-primary">
                   {modules.length}
                 </div>
                 <div className="text-sm text-takaro-text-muted">
                   Total Modules
                 </div>
               </div>
+            )}
+          </div>
 
+          {modules.length > 0 ? (
+            <div className="space-y-8">
               {/* Categories Overview */}
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <h2
-                  className="text-2xl font-semibold text-takaro-text-primary"
+                  className="text-2xl lg:text-3xl font-semibold text-takaro-text-primary"
                   data-testid="category-section-title"
                 >
                   Browse by Category
                 </h2>
 
                 <div
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 lg:gap-6"
                   data-testid="category-cards-grid"
                 >
                   {(() => {
@@ -168,24 +172,24 @@ export function HomeContent({ modules }: HomeContentProps) {
                       return (
                         <div
                           key={category}
-                          className="card-takaro card-takaro-hover p-6 cursor-pointer group"
+                          className="card-takaro card-takaro-hover p-4 lg:p-6 cursor-pointer group h-full flex flex-col"
                           data-testid={`category-card-${category}`}
                           onClick={() => handleCategoryClick(category)}
                         >
                           <div className="flex items-start justify-between mb-3">
-                            <div className="text-3xl">{info.icon}</div>
-                            <div className="text-2xl font-bold text-takaro-primary">
+                            <div className="text-2xl lg:text-3xl">{info.icon}</div>
+                            <div className="text-xl lg:text-2xl font-bold text-takaro-primary">
                               {stats.count}
                             </div>
                           </div>
-                          <h3 className="text-lg font-semibold text-takaro-text-primary mb-2 group-hover:text-takaro-primary transition-colors">
+                          <h3 className="text-base lg:text-lg font-semibold text-takaro-text-primary mb-2 group-hover:text-takaro-primary transition-colors">
                             {info.name}
                           </h3>
-                          <p className="text-sm text-takaro-text-secondary mb-4">
+                          <p className="text-xs lg:text-sm text-takaro-text-secondary mb-4 flex-grow">
                             {info.description}
                           </p>
                           {stats.count > 0 && (
-                            <div className="text-xs text-takaro-text-muted">
+                            <div className="text-xs text-takaro-text-muted mt-auto">
                               Popular:{' '}
                               {stats.modules
                                 .slice(0, 2)
@@ -205,17 +209,17 @@ export function HomeContent({ modules }: HomeContentProps) {
                 </div>
               </div>
 
-              <div className="text-sm text-takaro-text-muted border-t border-takaro-border pt-4">
-                Select a module from the sidebar to view its details,
+              <div className="text-sm lg:text-base text-takaro-text-muted border-t border-takaro-border pt-6 mt-8">
+                💡 Select a module from the sidebar to view its details,
                 configuration, commands, and more. Use the category filters to
                 find modules that fit your server's needs.
               </div>
             </div>
           ) : (
-            <div className="text-center py-8">
+            <div className="card-takaro text-center py-12">
               <div className="text-takaro-text-muted mb-4">
                 <svg
-                  className="w-16 h-16 mx-auto opacity-50"
+                  className="w-20 h-20 mx-auto opacity-50"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -228,8 +232,8 @@ export function HomeContent({ modules }: HomeContentProps) {
                   />
                 </svg>
               </div>
-              <p className="text-lg">No modules found</p>
-              <p className="text-sm text-takaro-text-muted mt-2">
+              <p className="text-xl lg:text-2xl font-semibold text-takaro-text-primary mb-2">No modules found</p>
+              <p className="text-sm lg:text-base text-takaro-text-muted">
                 There are no modules available to display.
               </p>
             </div>
