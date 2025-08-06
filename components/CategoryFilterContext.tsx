@@ -16,21 +16,27 @@ export function CategoryFilterProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // Initialize from localStorage if available
-  const [categoryFilter, setCategoryFilter] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      const savedFilter = localStorage.getItem('module-category-filter');
-      return savedFilter || 'all';
-    }
-    return 'all';
-  });
+  // Initialize with default value
+  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Save to localStorage when filter changes
+  // Load from localStorage after hydration
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const savedFilter = localStorage.getItem('module-category-filter');
+      if (savedFilter) {
+        setCategoryFilter(savedFilter);
+      }
+      setIsHydrated(true);
+    }
+  }, []);
+
+  // Save to localStorage when filter changes (only after hydration)
+  useEffect(() => {
+    if (isHydrated && typeof window !== 'undefined') {
       localStorage.setItem('module-category-filter', categoryFilter);
     }
-  }, [categoryFilter]);
+  }, [categoryFilter, isHydrated]);
 
   return (
     <CategoryFilterContext.Provider
