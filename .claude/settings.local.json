@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run typecheck:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run docker:dev:*)",
+      "Bash(mv:*)",
+      "Bash(node:*)",
+      "Bash(curl:*)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "Bash(npm run format:*)",
+      "Bash(find:*)",
+      "Bash(npx tsx:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

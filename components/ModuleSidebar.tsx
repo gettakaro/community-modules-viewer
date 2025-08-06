@@ -4,6 +4,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { ModuleWithMeta } from '@/lib/types';
 import { ModuleCard } from './ModuleCard';
+import {
+  getModuleAuthor,
+  getModuleSupportedGame,
+  getUniqueAuthors,
+  getUniqueSupportedGames,
+  formatAuthorName,
+} from '@/utils/moduleUtils';
 
 export interface ModuleSidebarProps {
   /** Array of modules to display */
@@ -38,6 +45,9 @@ export function ModuleSidebar({
   const [searchTerm, setSearchTerm] = useState('');
   const [internalCategoryFilter, setInternalCategoryFilter] =
     useState<string>('all');
+  const [authorFilter, setAuthorFilter] = useState<string>('all');
+  const [gameFilter, setGameFilter] = useState<string>('all');
+  const [isHydrated, setIsHydrated] = useState(false);
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(
     new Set(),
   );
@@ -92,13 +102,23 @@ export function ModuleSidebar({
       }
       // Don't load category filter from localStorage if external control is provided
       // The external controller (context) will handle persistence
-      if (!externalCategoryFilter) {
+      if (externalCategoryFilter == null) {
         const savedCategoryFilter = localStorage.getItem(
           'module-category-filter',
         );
         if (savedCategoryFilter) {
           setInternalCategoryFilter(savedCategoryFilter);
         }
+      }
+
+      // Load author and game filters
+      const savedAuthorFilter = localStorage.getItem('module-author-filter');
+      const savedGameFilter = localStorage.getItem('module-game-filter');
+      if (savedAuthorFilter) {
+        setAuthorFilter(savedAuthorFilter);
+      }
+      if (savedGameFilter) {
+        setGameFilter(savedGameFilter);
       }
       if (savedCollapsedCategories) {
         try {
@@ -116,6 +136,9 @@ export function ModuleSidebar({
       if (window.innerWidth < 768) {
         setIsMobileOpen(false);
       }
+
+      // Mark as hydrated after loading from localStorage
+      setIsHydrated(true);
     }
   }, [setIsMobileOpen, externalCategoryFilter]);
 
@@ -131,6 +154,19 @@ export function ModuleSidebar({
       localStorage.setItem('module-category-filter', categoryFilter);
     }
   }, [categoryFilter, externalCategoryFilter]);
+
+  // Save author and game filter state to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('module-author-filter', authorFilter);
+    }
+  }, [authorFilter]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('module-game-filter', gameFilter);
+    }
+  }, [gameFilter]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -151,11 +187,32 @@ export function ModuleSidebar({
   const filteredModules = useMemo(() => {
     let filtered = modules;
 
+    // Only apply filters after hydration to prevent SSR/client mismatch
+    if (!isHydrated) {
+      return filtered.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
     // Filter by category
     if (categoryFilter !== 'all') {
       filtered = filtered.filter(
         (module) => module.category === categoryFilter,
       );
+    }
+
+    // Filter by author
+    if (authorFilter !== 'all') {
+      filtered = filtered.filter((module) => {
+        const author = getModuleAuthor(module);
+        return author === authorFilter;
+      });
+    }
+
+    // Filter by supported game
+    if (gameFilter !== 'all') {
+      filtered = filtered.filter((module) => {
+        const game = getModuleSupportedGame(module);
+        return game === gameFilter;
+      });
     }
 
     // Filter by search term
@@ -167,12 +224,27 @@ export function ModuleSidebar({
           version.description?.toLowerCase().includes(term),
         );
         const categoryMatch = module.category?.toLowerCase().includes(term);
-        return nameMatch || descMatch || categoryMatch;
+        const authorMatch = getModuleAuthor(module)
+          ?.toLowerCase()
+          .includes(term);
+        const gameMatch = getModuleSupportedGame(module)
+          ?.toLowerCase()
+          .includes(term);
+        return (
+          nameMatch || descMatch || categoryMatch || authorMatch || gameMatch
+        );
       });
     }
 
     return filtered.sort((a, b) => a.name.localeCompare(b.name));
-  }, [modules, searchTerm, categoryFilter]);
+  }, [
+    modules,
+    searchTerm,
+    categoryFilter,
+    authorFilter,
+    gameFilter,
+    isHydrated,
+  ]);
 
   // Group modules by category
   const modulesByCategory = useMemo(() => {
@@ -223,15 +295,19 @@ export function ModuleSidebar({
 
   // Calculate statistics
   const stats = useMemo(() => {
-    // Get unique categories
+    // Get unique categories, authors, and games
     const categories = new Set(
       modules.map((m) => m.category || 'Uncategorized'),
     );
+    const authors = getUniqueAuthors(modules);
+    const games = getUniqueSupportedGames(modules);
 
     return {
       total: modules.length,
       filtered: filteredModules.length,
       categories: Array.from(categories),
+      authors,
+      games,
     };
   }, [modules, filteredModules]);
 
@@ -294,9 +370,11 @@ export function ModuleSidebar({
   const clearSearch = () => {
     // Clear search first
     setSearchTerm('');
-    // Then clear filter in next tick
+    // Then clear all filters in next tick
     setTimeout(() => {
       setCategoryFilter('all');
+      setAuthorFilter('all');
+      setGameFilter('all');
     }, 0);
   };
 
@@ -372,14 +450,18 @@ export function ModuleSidebar({
                 data-testid="search-results-count"
               >
                 {stats.filtered} of {stats.total} modules
-                {(searchTerm || categoryFilter !== 'all') && (
-                  <button
-                    onClick={clearSearch}
-                    className="ml-2 text-takaro-primary hover:text-takaro-primary-hover"
-                  >
-                    Clear
-                  </button>
-                )}
+                {isHydrated &&
+                  (searchTerm ||
+                    categoryFilter !== 'all' ||
+                    authorFilter !== 'all' ||
+                    gameFilter !== 'all') && (
+                    <button
+                      onClick={clearSearch}
+                      className="ml-2 text-takaro-primary hover:text-takaro-primary-hover"
+                    >
+                      Clear
+                    </button>
+                  )}
               </div>
             </div>
           )}
@@ -480,6 +562,84 @@ export function ModuleSidebar({
               </div>
             </div>
 
+            {/* Author Filter */}
+            {stats.authors.length > 1 && (
+              <div className="sidebar-filter">
+                <div className="mb-2 text-xs font-semibold text-takaro-text-primary">
+                  Authors
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  <button
+                    onClick={() => setAuthorFilter('all')}
+                    className={`btn btn-xs ${
+                      authorFilter === 'all'
+                        ? 'btn-takaro-primary'
+                        : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
+                    }`}
+                  >
+                    All
+                  </button>
+                  {stats.authors.map((author) => {
+                    const count = modules.filter(
+                      (m) => getModuleAuthor(m) === author,
+                    ).length;
+                    return (
+                      <button
+                        key={author}
+                        onClick={() => setAuthorFilter(author)}
+                        className={`btn btn-xs ${
+                          authorFilter === author
+                            ? 'btn-takaro-primary'
+                            : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
+                        }`}
+                      >
+                        {formatAuthorName(author)} ({count})
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Supported Game Filter */}
+            {stats.games.length > 1 && (
+              <div className="sidebar-filter">
+                <div className="mb-2 text-xs font-semibold text-takaro-text-primary">
+                  Supported Games
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  <button
+                    onClick={() => setGameFilter('all')}
+                    className={`btn btn-xs ${
+                      gameFilter === 'all'
+                        ? 'btn-takaro-primary'
+                        : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
+                    }`}
+                  >
+                    All
+                  </button>
+                  {stats.games.map((game) => {
+                    const count = modules.filter(
+                      (m) => getModuleSupportedGame(m) === game,
+                    ).length;
+                    return (
+                      <button
+                        key={game}
+                        onClick={() => setGameFilter(game)}
+                        className={`btn btn-xs ${
+                          gameFilter === game
+                            ? 'btn-takaro-primary'
+                            : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
+                        }`}
+                      >
+                        {game} ({count})
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Module List */}
             <div className="sidebar-modules">
               {Object.keys(modulesByCategory).length === 0 ? (
@@ -498,7 +658,11 @@ export function ModuleSidebar({
                     />
                   </svg>
                   <div className="text-sm">
-                    {searchTerm || categoryFilter !== 'all'
+                    {isHydrated &&
+                    (searchTerm ||
+                      categoryFilter !== 'all' ||
+                      authorFilter !== 'all' ||
+                      gameFilter !== 'all')
                       ? 'No modules match your filters'
                       : 'No modules available'}
                   </div>
@@ -594,11 +758,14 @@ export function MobileMenuButton({
     <button
       onClick={onToggle}
       className={`
-        fixed top-4 left-4 z-[60] p-3 bg-takaro-card border border-takaro-border rounded-lg
+        fixed top-4 z-[60] p-3 bg-takaro-card border border-takaro-border rounded-lg
         shadow-lg md:hidden transition-all duration-300 hover:bg-takaro-card-hover
-        ${isOpen ? 'left-72' : 'left-4'}
+        ${isOpen ? 'left-80' : 'left-4'}
         ${className}
       `}
+      style={{
+        left: isOpen ? 'calc(288px + 1rem)' : '1rem',
+      }}
       aria-label={isOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={isOpen}
     >

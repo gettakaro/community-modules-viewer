@@ -144,7 +144,7 @@ test.describe('Community Modules Viewer', () => {
 
   test('module export functionality', async ({ page }) => {
     // Navigate to a community module page (not built-in)
-    await page.goto('/module/7dtdStockMarket');
+    await page.goto('/module/StockMarket');
 
     // Wait for page to load
     await expect(page.locator('[data-testid="module-details"]')).toBeVisible();
@@ -196,7 +196,7 @@ test.describe('Community Modules Viewer', () => {
 
     // Check that cards show module counts
     const antiCheatCount = await antiCheatCard
-      .locator('.text-2xl')
+      .locator('.text-xl')
       .textContent();
     expect(Number(antiCheatCount)).toBeGreaterThan(0);
   });

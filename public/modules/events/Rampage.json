@@ -1,0 +1,35 @@
+{
+  "name": "Rampage",
+  "author": "Mad",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "A permission-based combat module that teleports players to a designated arena and spawns waves of hostile entities for intense PvE challenges.\nKey Features\n\nPermission-Gated Access: Only players with RAMPAGE_PERMISSION can activate\nArena Teleportation: Instantly transports players to configured combat coordinates\nRandom Entity Spawning: Spawns configurable entities around the arena with random positioning\nHealth Boosts: Provides temporary health increases during combat\nServer Announcements: Broadcasts rampage notifications to all players\n\nConfiguration\n\nSet custom arena coordinates (X, Y, Z)\nDefine which entities spawn during rampage mode\nControl access through Takaro's permission system\n\nPerfect for PvE challenges, special events, and rewarding VIP players with exclusive combat content.RetryClaude can make mistakes. Please double-check responses.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[\"rLocationX\",\"rLocationY\",\"spawnEntities\"],\"additionalProperties\":false,\"properties\":{\"rLocationX\":{\"title\":\"rLocationX\",\"description\":\"Teleport player location x\",\"type\":\"string\"},\"rLocationY\":{\"title\":\"rLocationY\",\"description\":\"Height of teleport\",\"type\":\"string\"},\"rLocationZ\":{\"title\":\"rLocationZ\",\"description\":\"Teleport player location z\",\"type\":\"string\"},\"spawnEntities\":{\"title\":\"spawnEntities\",\"description\":\"List of Bosses/zombies to spawn\",\"default\":[],\"type\":\"array\",\"items\":{\"type\":\"string\"},\"minItems\":1,\"maxItems\":100,\"uniqueItems\":true}}}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { data, checkPermission, TakaroUserError, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { player, pog, gameServerId } = data;\n\n    if (!checkPermission(pog, 'RAMPAGE_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use this command.');\n    }\n\n    // Announce Arena\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `[FFFF33] ${player.name} is on a RAMPAGE![-]`,\n    });\n\n    // These variables must match the 'properties' defined in your module's configSchema.\n    const rLocationX = Number(data.module.userConfig.rLocationX);\n    const rLocationY = Number(data.module.userConfig.rLocationY);\n    const rLocationZ = Number(data.module.userConfig.rLocationZ);\n\n    await takaro.gameserver.gameServerControllerTeleportPlayer(gameServerId, pog.playerId, {\n        x: rLocationX,\n        y: rLocationY,\n        z: rLocationZ,\n    });\n\n    // --- Entity Spawning Loop ---\n\n    // Get the array of entities to spawn from the module's user configuration.\n    const entitiesToSpawn = data.module.userConfig.spawnEntities;\n\n    // Check if the array exists and has items in it.\n    if (!Array.isArray(entitiesToSpawn) || entitiesToSpawn.length === 0) {\n        console.log('spawnEntities array is empty or not configured. Skipping entity spawn.');\n        return;\n    }\n\n    await player.pm('Spawning entities...');\n\n    // Loop through each entity name in the configured array.\n    for (const entity of entitiesToSpawn) {\n        // Generate a random offset between -10 and 10 for both X and Z coordinates.\n        const offsetX = Math.floor(Math.random() * 21) - 10;\n        const offsetZ = Math.floor(Math.random() * 21) - 10;\n\n        // Calculate the final spawn coordinates.\n        const spawnX = rLocationX + offsetX;\n        const spawnZ = rLocationZ + offsetZ;\n\n        // Construct the command to spawn the entity.\n        const commandToExecute = `sea \"${entity}\" ${spawnX} 51 ${spawnZ}`;\n\n        console.log(`Executing spawn command: ${commandToExecute}`);\n\n        // Execute the command to spawn the entity.\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: commandToExecute,\n        });\n\n        // Execute the 'th' command in every loop iteration.\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `th EOS_${player.epicOnlineServicesId} 10`,\n        });\n    }\n}\n\nawait main();\n",
+          "name": "rampage",
+          "description": "Calls in a crazy fight! Don't go alone",
+          "trigger": "rampage",
+          "helpText": "Calls in a crazy fight! Don't go alone",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Rampaage module",
+          "permission": "RAMPAGE_PERMISSION",
+          "friendlyName": "Rampage"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.3.3"
+}

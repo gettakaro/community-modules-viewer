@@ -1,0 +1,41 @@
+{
+  "name": "BetterBloodMoons",
+  "author": "Mad",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Provides commands to easily enable or disable 'Better Blood Moons' settings on a 7 Days to Die server, automating the configuration changes typically done manually via XML editing.\n\n  ## Key Functionality\n\n  * **Enable Better Blood Moons:** The `/BBM` command automatically sets the necessary server commands to activate 'Better Blood Moons'. It also provides a reminder about a recommended XML setting change.\n  * **Disable Better Blood Moons:** The `/BBMoff` command reverts the server settings to their default, effectively disabling 'Better Blood Moons'. It also provides a reminder about reverting the XML setting if changed.\n  * **Simplified Management:** This module eliminates the need for manual editing of the `CPMsettings.xml` file, reducing the risk of errors and making it easier to switch between default and enhanced Blood Moon settings.\n  * **Permission Control:** Access to the `/BBM` and `/BBMoff` commands is controlled by a dedicated permission.\n\n  ## How to Use\n\n  1.  **Installation:** Install the module on your Takaro instance.\n  2.  **Configuration:** (Optional) No configuration is typically needed for this module.\n  3.  **Permissions:** Grant the `BETTER_BLOOD_MOONS` permission to the user roles or players who should be able to use the `/BBM` and `/BBMoff` commands.\n  4.  **In-Game Usage:**\n      * `/BBM`: Executes the commands to enable 'Better Blood Moons' and displays a recommended XML setting.\n      * `/BBMoff`: Executes the commands to disable 'Better Blood Moons' and displays a reminder about the XML setting.\n\n  ## Important Considerations\n\n  * **CPM Mod Dependency:** This module is designed to work in conjunction with the 'CPM' (Custom Prefabs Mod) for 7 Days to Die. Ensure that CPM is installed and configured on your server.\n  * **XML Setting Awareness:** The module provides reminders about a specific setting (`BloodmoonSpawner_DespawnAllOnStart`) in the `CPMsettings.xml` file. While the module automates other settings, this XML setting might need manual adjustment for optimal behavior.\n  * **Permission Management:** Control access to the module's commands using the provided permission to prevent unintended changes to Blood Moon settings.\n",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'BBM_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the Better Blood Moons commmand.');\n    }\n\n    await pog.pm(`[70FE02]It is recommended to change the CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to [CC6CE7]false[-]`);\n\n\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsOverrideVanillaSpawner false`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAdjustForOnlinePlayers false`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsEnemyCount 0`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAddMaxAlive 0`,\n    });\n\n\n\n    await pog.pm(`[ADDFB3]Better Blood Moons have been turned off.[-]`);\n}\nawait main();",
+          "name": "BBMoff",
+          "trigger": "BBMoff",
+          "helpText": "Run this command to set Better Blood Moons to default. If you changed the CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to true, set it back to false",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'BBM_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the Better Blood Moons commmand.');\n    }\n\n    await pog.pm(`[70FE02]It is recommended to change the CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to [CC6CE7]true[-]`);\n\n\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsOverrideVanillaSpawner true`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAdjustForOnlinePlayers true`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsEnemyCount 6`,\n    });\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `bmsAddMaxAlive 40`,\n    });\n\n\n\n    await pog.pm(`[ADDFB3]The rest of the recommended settings will be handled by this command... [CC6CE7]Enjoy![-]`);\n}\nawait main();",
+          "name": "BBM",
+          "trigger": "BBM",
+          "helpText": "[FF6D6A]Run this command to set Better Blood Moons to default. If you change dthe CPMsettings.xml line BloodmoonSpawner_DespawnAllOnStart to true, set it back to false,",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Blood Moons",
+          "permission": "BETTER_BLOOD_MOONS",
+          "friendlyName": "Better Blood Moons"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "main"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Donator",
+  "author": "meebob",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "# MeeBob_Donator: Premium VIP Kit System\n\nThe **MeeBob_Donator** module enhances your gaming server with a comprehensive VIP rewards system, designed to recognize and reward your most valuable players. This powerful Takaro module creates an exclusive experience by distributing customizable item packages to players with VIP status.\n\n## Key Benefits:\n- **Seamless VIP Recognition**: Automatically identifies players with VIP permissions\n- **Configurable Item Bundles**: Customize exactly what items, qualities, and quantities VIP players receive\n- **Anti-Abuse Protection**: One-time redemption system prevents multiple claims\n- **Personalized Welcome Messages**: Greet players with custom messages when they connect\n- **Easy Administration**: Simple configuration through JSON schema\n\n## Features:\n* Permission-based access control\n* One-time redemption functionality per server\n* Customizable welcome messages\n* Automated item delivery system\n* Quality and quantity settings for each item\n\nPerfect for server owners looking to monetize through donations while providing tangible in-game benefits to supporters.",
+
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"vipkit\":{\"title\":\"Items\",\"description\":\"VIP Items\",\"x-component\":\"item\",\"type\":\"array\",\"uniqueItems\":true,\"items\":{\"type\":\"object\",\"title\":\"Item\",\"properties\":{\"item\":{\"type\":\"string\",\"title\":\"Item\"},\"amount\":{\"type\":\"number\",\"title\":\"Amount\"},\"quality\":{\"type\":\"string\",\"title\":\"Quality\"}}}}}}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data, TakaroUserError, checkPermission } from '@takaro/helpers';\n\nconst VARIABLE_KEY = 't_vipkit_lock';\n\nasync function main() {\n    const { pog, gameServerId } = data;\n\n    // Check if player has the VIP_KIT_PERMISSION\n    if (!checkPermission(pog, 'VIP_KIT_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the VIP kit. This command requires VIP status.');\n    }\n\n    const items = data.module.userConfig.vipkit;\n    if (!items || items.length === 0) {\n        throw new TakaroUserError('No VIP kit items configured. Please ask your server administrator to configure this.');\n    }\n\n    const vipKitLockRes = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: [VARIABLE_KEY],\n            gameServerId: [gameServerId],\n            playerId: [data.player.id],\n        },\n    });\n\n    if (vipKitLockRes.data.data.length > 0) {\n        throw new TakaroUserError('You already used VIP kit on this server');\n    }\n\n    await data.player.pm('You are about to receive your VIP kit...');\n\n    const itemRecords = (await takaro.item.itemControllerSearch({ filters: { id: items.map((_) => _.item) } })).data.data;\n    const fullItems = items.map((item) => {\n        const itemRecord = itemRecords.find((record) => record.id === item.item);\n        if (!itemRecord) {\n            throw new TakaroUserError(`Item with ID ${item.item} not found.`);\n        }\n        return {\n            code: itemRecord.code,\n            quality: item.quality,\n            amount: item.amount,\n        };\n    });\n\n    await Promise.all(fullItems.map(async (item) => {\n        return takaro.gameserver.gameServerControllerGiveItem(gameServerId, data.player.id, {\n            name: item.code,\n            quality: item.quality ?? '',\n            amount: item.amount,\n        });\n    }));\n\n    await takaro.variable.variableControllerCreate({\n        key: VARIABLE_KEY,\n        value: '1',\n        gameServerId: gameServerId,\n        playerId: data.player.id,\n    });\n\n    await data.player.pm(`Gave ${items.length} VIP items, enjoy!`);\n}\n\nawait main();",
+          "name": "vipkit",
+          "trigger": "vipkit",
+          "helpText": "VIP Items",
+          "arguments": []
+        }
+      ],
+      "hooks": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\nasync function main() {\n    const { player } = data;\n    const rawMessage = data.module.userConfig.message;\n    const message = rawMessage.replace('{player}', player.name);\n    await takaro.gameserver.gameServerControllerSendMessage(data.gameServerId, {\n        message,\n    });\n\n}\nawait main();\n//# sourceMappingURL=playerConnected.js.map",
+          "name": "PlayerConnected",
+          "eventType": "player-connected"
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Vip Items",
+          "permission": "VIP_KIT_PERMISSION",
+          "friendlyName": "VIP Kit"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "main"
+}
