@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Takaro Discord Community
+    url: https://aka.takaro.io/discord
+    about: Get help from the community, discuss modules, and share ideas
+  - name: Takaro Documentation
+    url: https://docs.takaro.io
+    about: Check the official documentation for module development guides

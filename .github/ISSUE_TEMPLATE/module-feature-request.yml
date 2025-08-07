@@ -1,0 +1,54 @@
+name: Module Feature Request
+description: Request a new module or feature for an existing module
+title: "[Feature] "
+labels: ["enhancement", "module-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for a new module or feature? We'd love to hear it!
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Request Type
+      description: Is this for a new module or an existing one?
+      options:
+        - New module
+        - Feature for existing module
+    validations:
+      required: true
+
+  - type: input
+    id: module_name
+    attributes:
+      label: Module Name
+      description: Name of existing module, or suggested name for new module
+      placeholder: e.g., Limon_8ball or MyNewModule
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What would you like?
+      description: Describe the feature or module you want
+      placeholder: I'd like a module that...
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Why is this needed?
+      description: Help us understand why this would be useful
+      placeholder: This would help because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Additional information (optional)
+      description: Any other details, examples, or mockups
+      placeholder: You can add more context here...
