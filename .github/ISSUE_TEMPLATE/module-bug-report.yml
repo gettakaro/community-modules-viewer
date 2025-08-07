@@ -1,146 +1,44 @@
 name: Module Bug Report
-description: Report a bug or issue with a Takaro module
+description: Report a bug with a Takaro module
 title: "[Bug] "
 labels: ["bug", "module-issue"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a module bug! Please fill out the information below to help us understand and fix the issue.
+        Thanks for reporting a bug! Please provide some basic information to help us fix it.
 
   - type: input
     id: module_name
     attributes:
       label: Module Name
-      description: Name of the module experiencing the issue
-      placeholder: e.g., Limon_8ball, Mad_BlackJack, etc.
-    validations:
-      required: true
-
-  - type: input
-    id: module_version
-    attributes:
-      label: Module Version
-      description: Version of the module (check the module details page)
-      placeholder: e.g., 1.0.0, latest
-    validations:
-      required: true
-
-  - type: dropdown
-    id: game_type
-    attributes:
-      label: Game Server Type
-      description: Which game server are you using this module with?
-      options:
-        - 7 Days to Die
-        - Rust
-        - All/General
-        - Other (please specify in description)
-    validations:
-      required: true
-
-  - type: input
-    id: takaro_version
-    attributes:
-      label: Takaro Version
-      description: Version of Takaro you're running
-      placeholder: e.g., 0.5.0
+      description: Which module has the issue?
+      placeholder: e.g., Limon_8ball, Mad_BlackJack
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Bug Description
-      description: Clear and concise description of the bug
-      placeholder: Describe what's happening...
+      label: What happened?
+      description: Describe the bug you encountered
+      placeholder: Tell us what went wrong...
     validations:
       required: true
 
   - type: textarea
     id: steps_to_reproduce
     attributes:
-      label: Steps to Reproduce
-      description: Steps to reproduce the behavior
+      label: How to reproduce (optional)
+      description: If possible, tell us how to trigger this bug
       placeholder: |
-        1. Install module with configuration...
-        2. Player uses command...
-        3. Error occurs...
-      value: |
-        1. 
-        2. 
-        3. 
-    validations:
-      required: true
+        1. Use command /example
+        2. Wait for response
+        3. Error occurs
 
   - type: textarea
-    id: expected_behavior
+    id: additional_info
     attributes:
-      label: Expected Behavior
-      description: What you expected to happen
-      placeholder: The command should...
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual_behavior
-    attributes:
-      label: Actual Behavior
-      description: What actually happened
-      placeholder: Instead, the command...
-    validations:
-      required: true
-
-  - type: textarea
-    id: error_messages
-    attributes:
-      label: Error Messages/Logs
-      description: Any error messages or relevant log entries
-      render: shell
-      placeholder: |
-        Paste any error messages or logs here.
-        Please remove any sensitive information like API keys or passwords.
-
-  - type: textarea
-    id: module_config
-    attributes:
-      label: Module Configuration
-      description: Your module configuration (remove sensitive data)
-      render: json
-      placeholder: |
-        {
-          "sendMessage": "serverMessage",
-          "responses": ["..."]
-        }
-
-  - type: dropdown
-    id: frequency
-    attributes:
-      label: How often does this happen?
-      options:
-        - Always
-        - Often (more than 50% of the time)
-        - Sometimes (less than 50% of the time)
-        - Rarely
-        - Only happened once
-    validations:
-      required: true
-
-  - type: textarea
-    id: additional_context
-    attributes:
-      label: Additional Context
-      description: Any other context, screenshots, or information about the problem
-      placeholder: You can drag and drop images here
-
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: Checklist
-      options:
-        - label: I have searched existing issues to ensure this hasn't been reported
-          required: true
-        - label: I have tested with the latest version of the module
-          required: false
-        - label: I have checked the module documentation for known issues
-          required: false
+      label: Error messages or screenshots (optional)
+      description: Any errors, logs, or screenshots that might help
+      placeholder: Paste error messages or drag images here...
