@@ -1,0 +1,78 @@
+{
+  "name": "DiedTeleport",
+  "author": "Limon",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Allows players to use /died command to return to their last death location. Automatically captures death locations and provides teleportation back.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"deathLocationExpiration\":{\"type\":\"number\",\"default\":3600,\"minimum\":60,\"maximum\":86400,\"description\":\"How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours\"}},\"additionalProperties\":false}",
+      "uiSchema": "{\"deathLocationExpiration\":{\"ui:help\":\"Prevents abuse by automatically expiring old death locations. Players won't be able to teleport to deaths older than this duration.\"}}",
+      "commands": [
+        {
+          "function": "import { data, takaro, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, player, pog, module } = data;\n    \n    console.log(`Player ${player.name} requested teleport to death location`);\n    \n    try {\n        // Get the death location\n        const deathVar = await takaro.variable.variableControllerSearch({\n            filters: {\n                key: ['death_location'],\n                gameServerId: [gameServerId],\n                playerId: [player.id],\n                moduleId: [module.moduleId]\n            }\n        });\n\n        if (deathVar.data.data.length === 0) {\n            throw new TakaroUserError('No death location found. You need to die at least once to use this command.');\n        }\n\n        const deathLocation = JSON.parse(deathVar.data.data[0].value);\n        \n        // Get expiration duration from module config\n        const expirationDuration = module.userConfig?.deathLocationExpiration || 3600; // Default 1 hour\n        \n        // Check if the death location has expired\n        if (deathLocation.timestamp) {\n            const deathTime = new Date(deathLocation.timestamp);\n            const currentTime = new Date();\n            const elapsedSeconds = (currentTime - deathTime) / 1000;\n            \n            if (elapsedSeconds > expirationDuration) {\n                const expirationMinutes = Math.floor(expirationDuration / 60);\n                throw new TakaroUserError(`Your death location has expired. Death locations expire after ${expirationMinutes} minutes.`);\n            }\n            \n            // Show remaining time\n            const remainingSeconds = Math.floor(expirationDuration - elapsedSeconds);\n            const remainingMinutes = Math.floor(remainingSeconds / 60);\n            const remainingSecondsOnly = remainingSeconds % 60;\n            \n            console.log(`Death location is still valid for ${remainingMinutes}m ${remainingSecondsOnly}s`);\n        }\n\n        // Teleport the player\n        await takaro.gameserver.gameServerControllerTeleportPlayer(gameServerId, player.id, {\n            x: deathLocation.x,\n            y: deathLocation.y,\n            z: deathLocation.z,\n            dimension: deathLocation.dimension\n        });\n\n        await pog.pm('Teleported to your death location!');\n        \n        console.log(`Player ${player.name} teleported to death location: ${JSON.stringify(deathLocation)}`);\n        \n    } catch (error) {\n        if (error instanceof TakaroUserError) {\n            throw error;\n        }\n        console.error('Error in died command:', error);\n        throw new TakaroUserError('Failed to teleport to death location. Please try again.');\n    }\n}\n\nawait main();",
+          "name": "died",
+          "description": "Allows players to return to their last death location using the /died command",
+          "trigger": "died",
+          "helpText": "Teleports you back to your last death location",
+          "arguments": []
+        }
+      ],
+      "hooks": [
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, eventData, player, module } = data;\n    \n    console.log('Player death event captured:', JSON.stringify(eventData, null, 2));\n    \n    if (!player) {\n        console.log('No player data available in death event');\n        return;\n    }\n\n    // Extract position from the correct location in eventData\n    const position = eventData.position;\n    \n    if (!position || typeof position.x === 'undefined' || typeof position.y === 'undefined' || typeof position.z === 'undefined') {\n        console.log('Death event missing position data:', position);\n        return;\n    }\n\n    // Store the death location in variables\n    const deathLocation = {\n        x: position.x,\n        y: position.y,\n        z: position.z,\n        dimension: null, // 7DTD doesn't seem to provide dimension info\n        timestamp: new Date().toISOString()\n    };\n\n    try {\n        // Try to find existing death location variable for this player\n        const existingVar = await takaro.variable.variableControllerSearch({\n            filters: {\n                key: ['death_location'],\n                gameServerId: [gameServerId],\n                playerId: [player.id],\n                moduleId: [module.moduleId]\n            }\n        });\n\n        if (existingVar.data.data.length > 0) {\n            // Update existing death location\n            await takaro.variable.variableControllerUpdate(existingVar.data.data[0].id, {\n                value: JSON.stringify(deathLocation)\n            });\n        } else {\n            // Create new death location variable\n            await takaro.variable.variableControllerCreate({\n                key: 'death_location',\n                value: JSON.stringify(deathLocation),\n                gameServerId,\n                playerId: player.id,\n                moduleId: module.moduleId\n            });\n        }\n\n        console.log(`Death location saved for player ${player.name}: ${JSON.stringify(deathLocation)}`);\n    } catch (error) {\n        console.error('Error saving death location:', error);\n    }\n}\n\nawait main();",
+          "name": "Death Location Capture",
+          "description": "Captures the player's location when they die and stores it for the /died command",
+          "eventType": "player-death",
+          "regex": ".*"
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Allows the player to use the /died command to return to their death location",
+          "permission": "DIED_TELEPORT_USE",
+          "friendlyName": "Use Died Teleport"
+        }
+      ]
+    },
+    {
+      "tag": "0.0.1",
+      "description": "Allows players to use /died command to return to their last death location. Automatically captures death locations and provides teleportation back.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"deathLocationExpiration\":{\"type\":\"number\",\"default\":3600,\"minimum\":60,\"maximum\":86400,\"description\":\"How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours\"}},\"additionalProperties\":false}",
+      "uiSchema": "{\"deathLocationExpiration\":{\"ui:help\":\"Prevents abuse by automatically expiring old death locations. Players won't be able to teleport to deaths older than this duration.\"}}",
+      "commands": [
+        {
+          "function": "import { data, takaro, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, player, pog, module } = data;\n    \n    console.log(`Player ${player.name} requested teleport to death location`);\n    \n    try {\n        // Get the death location\n        const deathVar = await takaro.variable.variableControllerSearch({\n            filters: {\n                key: ['death_location'],\n                gameServerId: [gameServerId],\n                playerId: [player.id],\n                moduleId: [module.moduleId]\n            }\n        });\n\n        if (deathVar.data.data.length === 0) {\n            throw new TakaroUserError('No death location found. You need to die at least once to use this command.');\n        }\n\n        const deathLocation = JSON.parse(deathVar.data.data[0].value);\n        \n        // Get expiration duration from module config\n        const expirationDuration = module.userConfig?.deathLocationExpiration || 3600; // Default 1 hour\n        \n        // Check if the death location has expired\n        if (deathLocation.timestamp) {\n            const deathTime = new Date(deathLocation.timestamp);\n            const currentTime = new Date();\n            const elapsedSeconds = (currentTime - deathTime) / 1000;\n            \n            if (elapsedSeconds > expirationDuration) {\n                const expirationMinutes = Math.floor(expirationDuration / 60);\n                throw new TakaroUserError(`Your death location has expired. Death locations expire after ${expirationMinutes} minutes.`);\n            }\n            \n            // Show remaining time\n            const remainingSeconds = Math.floor(expirationDuration - elapsedSeconds);\n            const remainingMinutes = Math.floor(remainingSeconds / 60);\n            const remainingSecondsOnly = remainingSeconds % 60;\n            \n            console.log(`Death location is still valid for ${remainingMinutes}m ${remainingSecondsOnly}s`);\n        }\n\n        // Teleport the player\n        await takaro.gameserver.gameServerControllerTeleportPlayer(gameServerId, player.id, {\n            x: deathLocation.x,\n            y: deathLocation.y,\n            z: deathLocation.z,\n            dimension: deathLocation.dimension\n        });\n\n        await pog.pm('Teleported to your death location!');\n        \n        console.log(`Player ${player.name} teleported to death location: ${JSON.stringify(deathLocation)}`);\n        \n    } catch (error) {\n        if (error instanceof TakaroUserError) {\n            throw error;\n        }\n        console.error('Error in died command:', error);\n        throw new TakaroUserError('Failed to teleport to death location. Please try again.');\n    }\n}\n\nawait main();",
+          "name": "died",
+          "description": null,
+          "trigger": "died",
+          "helpText": "Teleports you back to your last death location",
+          "arguments": []
+        }
+      ],
+      "hooks": [
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, eventData, player, module } = data;\n    \n    console.log('Player death event captured:', JSON.stringify(eventData, null, 2));\n    \n    if (!player) {\n        console.log('No player data available in death event');\n        return;\n    }\n\n    // Extract position from the correct location in eventData\n    const position = eventData.position;\n    \n    if (!position || typeof position.x === 'undefined' || typeof position.y === 'undefined' || typeof position.z === 'undefined') {\n        console.log('Death event missing position data:', position);\n        return;\n    }\n\n    // Store the death location in variables\n    const deathLocation = {\n        x: position.x,\n        y: position.y,\n        z: position.z,\n        dimension: null, // 7DTD doesn't seem to provide dimension info\n        timestamp: new Date().toISOString()\n    };\n\n    try {\n        // Try to find existing death location variable for this player\n        const existingVar = await takaro.variable.variableControllerSearch({\n            filters: {\n                key: ['death_location'],\n                gameServerId: [gameServerId],\n                playerId: [player.id],\n                moduleId: [module.moduleId]\n            }\n        });\n\n        if (existingVar.data.data.length > 0) {\n            // Update existing death location\n            await takaro.variable.variableControllerUpdate(existingVar.data.data[0].id, {\n                value: JSON.stringify(deathLocation)\n            });\n        } else {\n            // Create new death location variable\n            await takaro.variable.variableControllerCreate({\n                key: 'death_location',\n                value: JSON.stringify(deathLocation),\n                gameServerId,\n                playerId: player.id,\n                moduleId: module.moduleId\n            });\n        }\n\n        console.log(`Death location saved for player ${player.name}: ${JSON.stringify(deathLocation)}`);\n    } catch (error) {\n        console.error('Error saving death location:', error);\n    }\n}\n\nawait main();",
+          "name": "Death Location Capture",
+          "description": null,
+          "eventType": "player-death",
+          "regex": ".*"
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Allows the player to use the /died command to return to their death location",
+          "permission": "DIED_TELEPORT_USE",
+          "friendlyName": "Use Died Teleport"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "main"
+}
