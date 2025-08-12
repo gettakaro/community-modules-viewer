@@ -12,7 +12,9 @@
       "Bash(npm run format:*)",
       "Bash(find:*)",
       "Bash(npx tsx:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
