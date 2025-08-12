@@ -1,9 +1,7 @@
 {
   "name": "dynamiccronjobs",
   "author": "Limon",
-  "supportedGames": [
-    "all"
-  ],
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",

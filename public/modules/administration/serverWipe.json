@@ -1,9 +1,7 @@
 {
   "name": "serverWipe",
   "author": "Mad",
-  "supportedGames": [
-    "all"
-  ],
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",
