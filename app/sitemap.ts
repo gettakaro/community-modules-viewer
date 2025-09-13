@@ -19,21 +19,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Add module pages
-  for (const module of modules) {
+  for (const mod of modules) {
     // Module main page (redirects to latest version)
     urls.push({
-      url: `${SITE_URL}/module/${encodeURIComponent(module.name)}`,
+      url: `${SITE_URL}/module/${encodeURIComponent(mod.name)}`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     });
 
     // Module version pages
-    if (module.versions && Array.isArray(module.versions)) {
-      for (const version of module.versions) {
+    if (mod.versions && Array.isArray(mod.versions)) {
+      for (const version of mod.versions) {
         if (version.tag) {
           urls.push({
-            url: `${SITE_URL}/module/${encodeURIComponent(module.name)}/${encodeURIComponent(version.tag)}`,
+            url: `${SITE_URL}/module/${encodeURIComponent(mod.name)}/${encodeURIComponent(version.tag)}`,
             lastModified: currentDate,
             changeFrequency: 'monthly',
             priority: 0.7,
