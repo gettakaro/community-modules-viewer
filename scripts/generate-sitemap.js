@@ -54,7 +54,9 @@ async function loadAllModules() {
   try {
     await fs.access(builtinDir);
     const files = await fs.readdir(builtinDir);
-    const jsonFiles = files.filter(file => file.endsWith('.json') && file !== 'index.json');
+    const jsonFiles = files.filter(
+      (file) => file.endsWith('.json') && file !== 'index.json',
+    );
 
     for (const file of jsonFiles) {
       try {
@@ -63,7 +65,9 @@ async function loadAllModules() {
         const moduleData = JSON.parse(content);
         if (moduleData.name && moduleData.versions) {
           // Check if module already exists (community modules take precedence)
-          const existingIndex = modules.findIndex(m => m.name === moduleData.name);
+          const existingIndex = modules.findIndex(
+            (m) => m.name === moduleData.name,
+          );
           if (existingIndex === -1) {
             modules.push(moduleData);
           }
@@ -73,7 +77,9 @@ async function loadAllModules() {
       }
     }
   } catch (error) {
-    console.info('No built-in modules found (this is normal if not fetched yet)');
+    console.info(
+      'No built-in modules found (this is normal if not fetched yet)',
+    );
   }
 
   return modules;
@@ -173,7 +179,7 @@ async function generateSitemap() {
 
 // Run if called directly
 if (require.main === module) {
-  generateSitemap().catch(error => {
+  generateSitemap().catch((error) => {
     console.error('Fatal error:', error);
     process.exit(1);
   });
