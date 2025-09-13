@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { loadAllModules } from '@/utils/moduleLoader';
 
+export const dynamic = 'force-static';
+
 const SITE_URL = 'https://modules.takaro.io';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
