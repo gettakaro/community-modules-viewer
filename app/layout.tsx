@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Community Modules Viewer',
@@ -39,9 +40,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="takaro" className="dark">
-      <body className="bg-takaro-background text-white min-h-screen antialiased overflow-x-hidden">
-        <div className="min-h-screen bg-gradient-to-br from-takaro-background via-takaro-background to-gray-900 overflow-x-hidden">
-          {children}
+      <body className="bg-takaro-background text-white min-h-screen antialiased overflow-x-hidden flex flex-col">
+        <div className="min-h-screen bg-gradient-to-br from-takaro-background via-takaro-background to-gray-900 overflow-x-hidden flex flex-col">
+          <div className="flex-1">{children}</div>
+          <Footer />
         </div>
       </body>
     </html>
