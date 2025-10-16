@@ -19,14 +19,12 @@
             {
               "name": "playerName",
               "type": "string",
-              "defaultValue": null,
               "helpText": "Name of the player to buff",
               "position": 0
             },
             {
               "name": "packageName",
               "type": "string",
-              "defaultValue": null,
               "helpText": "Name of the buff package to apply",
               "position": 1
             }
@@ -42,7 +40,6 @@
             {
               "name": "playerName",
               "type": "string",
-              "defaultValue": null,
               "helpText": "Name of the player to debuff",
               "position": 0
             },

@@ -237,7 +237,7 @@ export function PermissionsSection({
       <div className="space-y-4">
         <h2
           id="permissions-section-title"
-          className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
+          className="text-base font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
         >
           Permissions ({permissions.length})
         </h2>
@@ -255,7 +255,7 @@ export function PermissionsSection({
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 text-takaro-text-primary">
                 {getGroupIcon(group)}
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-base font-semibold">
                   {group === 'General'
                     ? 'General Permissions'
                     : `${group} Permissions`}
@@ -280,7 +280,7 @@ export function PermissionsSection({
                     <div className="flex-1 min-w-0">
                       <h4
                         id={`permission-${group}-${index}-title`}
-                        className="text-lg font-semibold text-takaro-text-primary"
+                        className="text-base font-semibold text-takaro-text-primary"
                       >
                         {permission.friendlyName}
                       </h4>

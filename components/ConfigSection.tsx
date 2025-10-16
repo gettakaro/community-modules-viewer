@@ -154,7 +154,7 @@ export function ConfigSection({
         <div className="flex items-center justify-between">
           <h2
             id="config-section-title"
-            className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
+            className="text-base font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
           >
             Configuration
           </h2>

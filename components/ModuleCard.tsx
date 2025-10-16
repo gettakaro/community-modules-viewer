@@ -60,7 +60,7 @@ export function ModuleCard({
     >
       {/* Header with name and badges */}
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-lg font-semibold text-takaro-text-primary truncate flex-1 mr-2">
+        <h3 className="text-base font-semibold text-takaro-text-primary truncate flex-1 mr-2">
           {module.name}
         </h3>
         {/* Only show badges if not in sidebar */}
