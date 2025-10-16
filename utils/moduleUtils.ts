@@ -73,7 +73,7 @@ export function getUniqueAuthors(modules: ModuleWithMeta[]): string[] {
 
   // Return sorted by the original (display) names
   return Array.from(authorMap.values()).sort((a, b) =>
-    a.toLowerCase().localeCompare(b.toLowerCase())
+    a.toLowerCase().localeCompare(b.toLowerCase()),
   );
 }
 
