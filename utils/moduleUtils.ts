@@ -50,18 +50,31 @@ export function formatAuthorName(author: string): string {
 
 /**
  * Get all unique authors from a list of modules
+ * Normalizes author names (case-insensitive, trimmed) to prevent duplicates
+ * like "limon" and "Limon" from appearing as separate authors
  */
 export function getUniqueAuthors(modules: ModuleWithMeta[]): string[] {
-  const authors = new Set<string>();
+  // Map of normalized name -> original name (to preserve casing)
+  const authorMap = new Map<string, string>();
 
   modules.forEach((module) => {
     const author = getModuleAuthor(module);
     if (author) {
-      authors.add(author);
+      // Normalize: lowercase and trim spaces
+      const normalized = author.toLowerCase().trim();
+
+      // Only add if we haven't seen this normalized version before
+      // This preserves the first encountered capitalization
+      if (!authorMap.has(normalized)) {
+        authorMap.set(normalized, author);
+      }
     }
   });
 
-  return Array.from(authors).sort((a, b) => a.localeCompare(b));
+  // Return sorted by the original (display) names
+  return Array.from(authorMap.values()).sort((a, b) =>
+    a.toLowerCase().localeCompare(b.toLowerCase())
+  );
 }
 
 /**

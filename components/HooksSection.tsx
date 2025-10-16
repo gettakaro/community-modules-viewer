@@ -256,7 +256,7 @@ export function HooksSection({
       <div className="space-y-4">
         <h2
           id="hooks-section-title"
-          className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
+          className="text-base font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
         >
           Hooks ({hooks.length})
         </h2>
@@ -274,7 +274,7 @@ export function HooksSection({
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 text-takaro-text-primary">
                 {getCategoryIcon(category)}
-                <h3 className="text-lg font-semibold">{category}</h3>
+                <h3 className="text-base font-semibold">{category}</h3>
               </div>
               <span className="badge-takaro-secondary text-xs">
                 {groupedHooks[category].length} hook
@@ -296,7 +296,7 @@ export function HooksSection({
                       <div className="flex-1 min-w-0">
                         <h4
                           id={`hook-${category}-${index}-title`}
-                          className="text-lg font-semibold text-takaro-text-primary truncate"
+                          className="text-base font-semibold text-takaro-text-primary truncate"
                         >
                           {hook.name}
                         </h4>

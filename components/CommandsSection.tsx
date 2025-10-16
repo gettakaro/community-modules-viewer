@@ -100,7 +100,7 @@ export function CommandsSection({
       <div className="space-y-4">
         <h2
           id="commands-section-title"
-          className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
+          className="text-base font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
         >
           Commands ({commands.length})
         </h2>
@@ -124,7 +124,7 @@ export function CommandsSection({
                 <div className="flex-1 min-w-0">
                   <h3
                     id={`command-${index}-title`}
-                    className="text-lg font-semibold text-takaro-text-primary truncate"
+                    className="text-base font-semibold text-takaro-text-primary truncate"
                   >
                     {command.name}
                   </h3>

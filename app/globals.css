@@ -80,6 +80,7 @@
   h6 {
     @apply text-takaro-text-primary font-semibold;
     line-height: 1.2;
+    font-size: inherit; /* Prevent browser default heading sizes */
   }
 
   p {
@@ -192,7 +193,8 @@
   }
 
   .module-card-sidebar h3 {
-    @apply text-base;
+    @apply text-base !important;
+    font-size: 1rem !important;
   }
 
   .module-card-sidebar p {

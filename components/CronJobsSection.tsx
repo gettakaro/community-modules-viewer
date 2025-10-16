@@ -240,7 +240,7 @@ export function CronJobsSection({
       <div className="space-y-4">
         <h2
           id="cronjobs-section-title"
-          className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
+          className="text-base font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
         >
           Scheduled Jobs ({cronJobs.length})
         </h2>
@@ -264,7 +264,7 @@ export function CronJobsSection({
                 <div className="flex-1 min-w-0">
                   <h3
                     id={`cronjob-${index}-title`}
-                    className="text-lg font-semibold text-takaro-text-primary truncate"
+                    className="text-base font-semibold text-takaro-text-primary truncate"
                   >
                     {cronJob.name}
                   </h3>

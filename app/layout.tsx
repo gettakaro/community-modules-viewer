@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     title: 'Community Modules Viewer',
     description: 'Browse and explore Takaro community and built-in modules',
   },
+  other: {
+    'darkreader-lock': '', // Disable Dark Reader to prevent hydration errors
+  },
 };
 
 export const viewport: Viewport = {

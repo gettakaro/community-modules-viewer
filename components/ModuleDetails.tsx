@@ -188,7 +188,7 @@ export function ModuleDetails({
       <div className="card-takaro">
         <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-4">
           <div className="flex-1 w-full sm:mr-4">
-            <h1 className="text-xl sm:text-2xl font-bold text-takaro-text-primary mb-2">
+            <h1 className="text-2xl font-bold text-takaro-text-primary mb-2">
               {module.name}
             </h1>
 
@@ -628,7 +628,7 @@ function SectionWrapper({
       >
         <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
           <svg
-            className="w-4 h-4 sm:w-5 sm:h-5 text-takaro-primary flex-shrink-0"
+            className="w-5 h-5 text-takaro-primary flex-shrink-0"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -636,7 +636,7 @@ function SectionWrapper({
           >
             {icons[icon]}
           </svg>
-          <h2 className="text-base sm:text-lg font-semibold text-takaro-text-primary truncate">
+          <h2 className="text-lg font-semibold text-takaro-text-primary truncate">
             {title}
           </h2>
           <span className="badge-takaro-secondary text-xs flex-shrink-0">
@@ -644,7 +644,7 @@ function SectionWrapper({
           </span>
         </div>
         <svg
-          className={`w-4 h-4 sm:w-5 sm:h-5 text-takaro-text-secondary transition-transform flex-shrink-0 ml-2 ${
+          className={`w-5 h-5 text-takaro-text-secondary transition-transform flex-shrink-0 ml-2 ${
             isCollapsed ? '' : 'rotate-180'
           }`}
           fill="none"

@@ -68,7 +68,7 @@ export function FunctionsSection({
       <div className="space-y-4">
         <h2
           id="functions-section-title"
-          className="text-xl font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
+          className="text-base font-semibold text-takaro-text-primary border-b border-takaro-border pb-2"
         >
           Functions ({functions.length})
         </h2>
@@ -92,7 +92,7 @@ export function FunctionsSection({
                 <div className="flex-1 min-w-0">
                   <h3
                     id={`function-${index}-title`}
-                    className="text-lg font-semibold text-takaro-text-primary truncate"
+                    className="text-base font-semibold text-takaro-text-primary truncate"
                   >
                     {func.name}
                   </h3>

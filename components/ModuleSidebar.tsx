@@ -199,11 +199,13 @@ export function ModuleSidebar({
       );
     }
 
-    // Filter by author
+    // Filter by author (case-insensitive)
     if (authorFilter !== 'all') {
       filtered = filtered.filter((module) => {
         const author = getModuleAuthor(module);
-        return author === authorFilter;
+        return (
+          author?.toLowerCase().trim() === authorFilter.toLowerCase().trim()
+        );
       });
     }
 
@@ -581,14 +583,17 @@ export function ModuleSidebar({
                   </button>
                   {stats.authors.map((author) => {
                     const count = modules.filter(
-                      (m) => getModuleAuthor(m) === author,
+                      (m) =>
+                        getModuleAuthor(m)?.toLowerCase().trim() ===
+                        author.toLowerCase().trim(),
                     ).length;
                     return (
                       <button
                         key={author}
                         onClick={() => setAuthorFilter(author)}
                         className={`btn btn-xs ${
-                          authorFilter === author
+                          authorFilter.toLowerCase().trim() ===
+                          author.toLowerCase().trim()
                             ? 'btn-takaro-primary'
                             : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
                         }`}
