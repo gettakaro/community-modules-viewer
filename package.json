@@ -45,6 +45,7 @@
   "dependencies": {
     "@playwright/test": "^1.53.2",
     "@takaro/apiclient": "^0.4.0",
+    "axios": "^1.12.2",
     "next": "^15.3.4",
     "prismjs": "^1.29.0",
     "react": "^19.1.0",

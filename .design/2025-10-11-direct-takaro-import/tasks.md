@@ -321,7 +321,7 @@ We're building a one-click module import feature that eliminates the manual down
 
 ### Tasks
 
-- [ ] Task 4.1: Add importModule method to TakaroApiClient
+- [x] Task 4.1: Add importModule method to TakaroApiClient
   - **Output**: API client can import modules
   - **Files**: `utils/takaroApi.ts`
   - **Verify**: Method exports and type-checks correctly
@@ -338,7 +338,7 @@ We're building a one-click module import feature that eliminates the manual down
   }
   ```
 
-- [ ] Task 4.2: Create module data transformer
+- [x] Task 4.2: Create module data transformer
   - **Depends on**: 4.1
   - **Output**: Transform viewer format to API format
   - **Files**: `utils/moduleTransform.ts` (new file)
@@ -360,7 +360,7 @@ We're building a one-click module import feature that eliminates the manual down
   }
   ```
 
-- [ ] Task 4.3: Add import handler to ModuleDetails
+- [x] Task 4.3: Add import handler to ModuleDetails
   - **Depends on**: 4.1, 4.2
   - **Output**: Click handler that imports module
   - **Files**: `components/ModuleDetails.tsx`
@@ -418,7 +418,7 @@ We're building a one-click module import feature that eliminates the manual down
   }
   ```
 
-- [ ] Task 4.4: Update button to show importing state
+- [x] Task 4.4: Update button to show importing state
   - **Depends on**: 4.3
   - **Output**: Button shows spinner during import
   - **Files**: `components/ModuleDetails.tsx`
@@ -443,7 +443,7 @@ We're building a one-click module import feature that eliminates the manual down
   )}
   ```
 
-- [ ] Task 4.5: Write tests for import functionality
+- [x] Task 4.5: Write tests for import functionality
   - **Depends on**: 4.4
   - **Output**: Test coverage for import flow
   - **Files**: `utils/takaroApi.test.ts`, `components/ModuleDetails.test.tsx`
@@ -467,9 +467,9 @@ We're building a one-click module import feature that eliminates the manual down
 
 ### Phase 4 Checkpoint
 
-- [ ] Run lint: `npm run lint`
-- [ ] Run typecheck: `npm run typecheck`
-- [ ] Run tests: `npm run test:unit`
+- [x] Run lint: `npm run lint`
+- [x] Run typecheck: `npm run typecheck`
+- [x] Run tests: `npm run test:unit`
 - [ ] Manual verification: Click import button, see loading toast → success toast
 - [ ] Manual verification: Check Takaro dashboard to confirm module imported
 - [ ] **Demo ready**: Full import flow working with toast notifications

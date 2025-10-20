@@ -15,7 +15,9 @@ import {
   getModuleSupportedGame,
   formatAuthorName,
 } from '@/utils/moduleUtils';
-import { checkAuthStatus } from '@/utils/takaroApi';
+import { checkAuthStatus, importModule } from '@/utils/takaroApi';
+import { transformModuleForApi } from '@/utils/moduleTransform';
+import { toast } from 'react-hot-toast';
 
 export interface ModuleDetailsProps {
   /** Module data to display */
@@ -51,6 +53,13 @@ export function ModuleDetails({
 
   // Auth state management
   const [authState, setAuthState] = useState<AuthState>('loading');
+
+  // Import state management
+  const [importing, setImporting] = useState(false);
+  const [_importedModuleId, setImportedModuleId] = useState<string | null>(
+    null,
+  );
+  const [_showInstallModal, setShowInstallModal] = useState(false);
 
   // Section collapse state management
   const [collapsedSections, setCollapsedSections] = useState<
@@ -126,6 +135,51 @@ export function ModuleDetails({
   const handleExportAllVersions = async () => {
     await exportModuleAsJSON(module);
     setExportMenuOpen(false);
+  };
+
+  // Import functionality
+  const handleImportClick = async () => {
+    if (module.source === 'builtin') {
+      return; // Button already disabled
+    }
+
+    setImporting(true);
+    const toastId = toast.loading('Importing module...');
+
+    try {
+      // Fetch module JSON from the same source as export uses
+      const pathMatch = module.path?.match(/public\/modules\/(.*\.json)$/);
+      if (!pathMatch) {
+        throw new Error('Invalid module path');
+      }
+
+      const response = await fetch(`/modules/${pathMatch[1]}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch module data');
+      }
+
+      const moduleJson = await response.json();
+      const transformedData = transformModuleForApi(moduleJson);
+
+      // Import to Takaro
+      const result = await importModule(transformedData);
+
+      if (result.success) {
+        toast.success('Module imported successfully!', { id: toastId });
+        setImportedModuleId(result.id || null);
+        // Phase 5 will add modal here
+        setShowInstallModal(true);
+      } else {
+        toast.error(`Import failed: ${result.error}`, { id: toastId });
+      }
+    } catch (error: unknown) {
+      const err = error as { message?: string };
+      toast.error(`Import failed: ${err.message || 'Unknown error'}`, {
+        id: toastId,
+      });
+    } finally {
+      setImporting(false);
+    }
   };
 
   // Calculate section availability and counts
@@ -360,24 +414,42 @@ export function ModuleDetails({
 
               {module.source !== 'builtin' && authState === 'authenticated' && (
                 <button
+                  onClick={handleImportClick}
+                  disabled={importing}
                   className="btn btn-ghost btn-sm"
-                  title="Import module to Takaro"
+                  title={importing ? 'Importing...' : 'Import module to Takaro'}
                   data-testid="import-button-active"
                   aria-label="Import module to Takaro"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                    />
-                  </svg>
+                  {importing ? (
+                    <svg
+                      className="w-5 h-5 animate-spin"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      />
+                    </svg>
+                  )}
                   Import to Takaro
                 </button>
               )}

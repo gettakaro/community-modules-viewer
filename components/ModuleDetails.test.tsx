@@ -9,9 +9,20 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { ModuleDetails } from './ModuleDetails';
 import { ModuleWithMeta } from '@/lib/types';
 import * as takaroApi from '@/utils/takaroApi';
+import { toast } from 'react-hot-toast';
 
 // Mock the takaroApi module
 vi.mock('@/utils/takaroApi');
+
+// Mock react-hot-toast
+vi.mock('react-hot-toast', () => ({
+  toast: {
+    loading: vi.fn().mockReturnValue('toast-id'),
+    success: vi.fn(),
+    error: vi.fn(),
+  },
+  Toaster: () => null,
+}));
 
 // Mock test data
 const mockCommunityModule: ModuleWithMeta = {
@@ -285,6 +296,189 @@ describe('ModuleDetails Import Button', () => {
       await waitFor(() => {
         expect(screen.getByTestId('import-button-active')).toBeInTheDocument();
         expect(screen.getByTestId('export-button')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('Import functionality (Phase 4)', () => {
+    beforeEach(() => {
+      // Mock fetch for module JSON
+      global.fetch = vi.fn();
+
+      // Clear mock toast calls
+      vi.clearAllMocks();
+
+      // Mock console.log to avoid test output noise
+      vi.spyOn(console, 'log').mockImplementation(() => {});
+    });
+
+    it('calls handleImportClick when import button is clicked', async () => {
+      vi.spyOn(takaroApi, 'checkAuthStatus').mockResolvedValue({
+        isAuthenticated: true,
+        user: {
+          id: 'test-user-id',
+          name: 'Test User',
+          email: 'test@example.com',
+        },
+      });
+
+      // Mock fetch to return module JSON
+      (global.fetch as any).mockResolvedValue({
+        ok: true,
+        json: async () => mockCommunityModule,
+      });
+
+      // Mock importModule to succeed
+      vi.spyOn(takaroApi, 'importModule').mockResolvedValue({
+        success: true,
+        id: 'imported-module-123',
+      });
+
+      const { getByTestId } = render(
+        <ModuleDetails module={mockCommunityModule} />,
+      );
+
+      // Wait for auth check to complete
+      await waitFor(() => {
+        expect(getByTestId('import-button-active')).toBeInTheDocument();
+      });
+
+      // Click the import button
+      const importButton = getByTestId('import-button-active');
+      importButton.click();
+
+      // Verify importModule was called
+      await waitFor(() => {
+        expect(takaroApi.importModule).toHaveBeenCalled();
+      });
+    });
+
+    it('shows loading toast during import', async () => {
+      vi.spyOn(takaroApi, 'checkAuthStatus').mockResolvedValue({
+        isAuthenticated: true,
+        user: { id: 'test', name: 'Test', email: 'test@test.com' },
+      });
+
+      (global.fetch as any).mockResolvedValue({
+        ok: true,
+        json: async () => mockCommunityModule,
+      });
+
+      vi.spyOn(takaroApi, 'importModule').mockImplementation(
+        () =>
+          new Promise((resolve) => {
+            setTimeout(() => resolve({ success: true, id: 'test-id' }), 100);
+          }),
+      );
+
+      const { getByTestId } = render(
+        <ModuleDetails module={mockCommunityModule} />,
+      );
+
+      await waitFor(() => {
+        expect(getByTestId('import-button-active')).toBeInTheDocument();
+      });
+
+      getByTestId('import-button-active').click();
+
+      await waitFor(() => {
+        expect(toast.loading).toHaveBeenCalledWith('Importing module...');
+      });
+    });
+
+    it('shows success toast on successful import', async () => {
+      vi.spyOn(takaroApi, 'checkAuthStatus').mockResolvedValue({
+        isAuthenticated: true,
+        user: { id: 'test', name: 'Test', email: 'test@test.com' },
+      });
+
+      (global.fetch as any).mockResolvedValue({
+        ok: true,
+        json: async () => mockCommunityModule,
+      });
+
+      vi.spyOn(takaroApi, 'importModule').mockResolvedValue({
+        success: true,
+        id: 'imported-module-123',
+      });
+
+      const { getByTestId } = render(
+        <ModuleDetails module={mockCommunityModule} />,
+      );
+
+      await waitFor(() => {
+        expect(getByTestId('import-button-active')).toBeInTheDocument();
+      });
+
+      getByTestId('import-button-active').click();
+
+      await waitFor(() => {
+        expect(toast.success).toHaveBeenCalledWith(
+          'Module imported successfully!',
+          { id: 'toast-id' },
+        );
+      });
+    });
+
+    it('shows error toast on failed import', async () => {
+      vi.spyOn(takaroApi, 'checkAuthStatus').mockResolvedValue({
+        isAuthenticated: true,
+        user: { id: 'test', name: 'Test', email: 'test@test.com' },
+      });
+
+      (global.fetch as any).mockResolvedValue({
+        ok: true,
+        json: async () => mockCommunityModule,
+      });
+
+      vi.spyOn(takaroApi, 'importModule').mockResolvedValue({
+        success: false,
+        error: 'Validation failed',
+      });
+
+      const { getByTestId } = render(
+        <ModuleDetails module={mockCommunityModule} />,
+      );
+
+      await waitFor(() => {
+        expect(getByTestId('import-button-active')).toBeInTheDocument();
+      });
+
+      getByTestId('import-button-active').click();
+
+      await waitFor(() => {
+        expect(toast.error).toHaveBeenCalledWith(
+          'Import failed: Validation failed',
+          { id: 'toast-id' },
+        );
+      });
+    });
+
+    it('handles fetch errors gracefully', async () => {
+      vi.spyOn(takaroApi, 'checkAuthStatus').mockResolvedValue({
+        isAuthenticated: true,
+        user: { id: 'test', name: 'Test', email: 'test@test.com' },
+      });
+
+      (global.fetch as any).mockResolvedValue({
+        ok: false,
+      });
+
+      const { getByTestId } = render(
+        <ModuleDetails module={mockCommunityModule} />,
+      );
+
+      await waitFor(() => {
+        expect(getByTestId('import-button-active')).toBeInTheDocument();
+      });
+
+      getByTestId('import-button-active').click();
+
+      await waitFor(() => {
+        expect(toast.error).toHaveBeenCalledWith(
+          'Import failed: Failed to fetch module data',
+          { id: 'toast-id' },
+        );
       });
     });
   });
