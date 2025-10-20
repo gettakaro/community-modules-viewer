@@ -22,7 +22,13 @@
       "Bash(gh label:*)",
       "Bash(gh pr checks:*)",
       "Bash(gh run view:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(docker compose:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run test:unit:*)",
+      "Bash(timeout 5 npm run test:unit:watch:*)",
+      "Bash(git rm:*)"
     ],
     "deny": []
   }
