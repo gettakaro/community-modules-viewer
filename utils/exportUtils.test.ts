@@ -1,23 +1,16 @@
-import {
-  describe,
-  it,
-  expect,
-  jest,
-  beforeEach,
-  afterEach,
-} from '@jest/globals';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { exportModuleAsJSON } from './exportUtils';
 import { ModuleWithMeta } from '@/lib/types';
 
 // Mock DOM APIs
-const mockCreateElement = jest.fn();
-const mockAppendChild = jest.fn();
-const mockRemoveChild = jest.fn();
-const mockCreateObjectURL = jest.fn();
-const mockRevokeObjectURL = jest.fn();
-const mockBlob = jest.fn();
-const mockAlert = jest.fn();
-const mockFetch = jest.fn() as jest.MockedFunction<typeof fetch>;
+const mockCreateElement = vi.fn();
+const mockAppendChild = vi.fn();
+const mockRemoveChild = vi.fn();
+const mockCreateObjectURL = vi.fn();
+const mockRevokeObjectURL = vi.fn();
+const mockBlob = vi.fn();
+const mockAlert = vi.fn();
+const mockFetch = vi.fn() as ReturnType<typeof vi.fn>;
 
 // Mock implementations
 document.createElement = mockCreateElement as any;
@@ -118,7 +111,7 @@ const mockRawModuleJson = {
 };
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 
   // Setup default implementations
   mockCreateObjectURL.mockReturnValue('blob:mock-url');
@@ -128,7 +121,7 @@ beforeEach(() => {
   mockCreateElement.mockReturnValue({
     href: '',
     download: '',
-    click: jest.fn(),
+    click: vi.fn(),
   });
 
   // Default fetch implementation
@@ -168,7 +161,7 @@ describe('exportUtils', () => {
       const mockElement = {
         href: '',
         download: '',
-        click: jest.fn(),
+        click: vi.fn(),
       };
       mockCreateElement.mockReturnValue(mockElement);
 
@@ -200,10 +193,8 @@ describe('exportUtils', () => {
       await exportModuleAsJSON(mockCommunityModule, version);
 
       // Verify the blob content contains only the specified version
-      const blobCallArgs = (mockBlob as jest.Mock).mock.calls[0] as [
-        string[],
-        object,
-      ];
+      const blobCallArgs = (mockBlob as ReturnType<typeof vi.fn>).mock
+        .calls[0] as [string[], object];
       const jsonContent = blobCallArgs[0][0];
       const exportedData = JSON.parse(jsonContent);
 
@@ -216,7 +207,7 @@ describe('exportUtils', () => {
       const mockElement = {
         href: '',
         download: '',
-        click: jest.fn(),
+        click: vi.fn(),
       };
       mockCreateElement.mockReturnValue(mockElement);
 

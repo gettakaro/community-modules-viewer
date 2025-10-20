@@ -1,4 +1,4 @@
-import { describe, it, expect, jest, beforeEach } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { normalizeModules } from './moduleLoader';
 import { ModuleWithMeta } from '@/lib/types';
 
