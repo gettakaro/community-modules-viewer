@@ -310,6 +310,14 @@ describe('ModuleDetails Import Button', () => {
 
       // Mock console.log to avoid test output noise
       vi.spyOn(console, 'log').mockImplementation(() => {});
+
+      // Mock getGameServers for InstallModuleModal
+      vi.spyOn(takaroApi, 'getGameServers').mockResolvedValue({
+        success: true,
+        servers: [
+          { id: 'server-1', name: 'Test Server', gameType: '7d2d' },
+        ],
+      });
     });
 
     it('calls handleImportClick when import button is clicked', async () => {

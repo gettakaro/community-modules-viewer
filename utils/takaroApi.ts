@@ -49,10 +49,16 @@ function getClient(): Client {
 export async function checkAuthStatus(): Promise<AuthCheckResult> {
   try {
     const client = getClient();
-    const user = await client.user.userControllerMe();
+    const response = await client.user.userControllerMe();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const user = response.data as any;
     return {
       isAuthenticated: true,
-      user: user.data,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
     };
   } catch (error: unknown) {
     const err = error as { response?: { status?: number } };
@@ -76,13 +82,23 @@ export async function importModule(
 ): Promise<ImportResult> {
   try {
     const client = getClient();
-    const result = await client.module.moduleControllerImport(moduleData);
+    const response = await client.module.moduleControllerImport(moduleData);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = response.data as any;
+
+    // Debug logging
+    console.log('[importModule] Full response:', response);
+    console.log('[importModule] Response.data:', result);
+    console.log('[importModule] Extracted ID:', result.id);
+    console.log('[importModule] ID type:', typeof result.id);
+
     return {
       success: true,
-      id: result.data?.id,
+      id: result.id,
     };
   } catch (error: unknown) {
     const err = error as { message?: string };
+    console.error('[importModule] Error:', error);
     return {
       success: false,
       error: err.message || 'Import failed',
@@ -98,10 +114,17 @@ export async function importModule(
 export async function getGameServers(): Promise<GameServerResult> {
   try {
     const client = getClient();
-    const servers = await client.gameserver.gameServerControllerSearch();
+    const response = await client.gameserver.gameServerControllerSearch();
+    const serverList = response.data?.data || [];
+    // Map API response to our GameServer type
+    const servers = serverList.map((server) => ({
+      id: server.id,
+      name: server.name,
+      gameType: server.type, // API uses 'type' field
+    }));
     return {
       success: true,
-      servers: servers.data?.data,
+      servers,
     };
   } catch (error: unknown) {
     const err = error as { message?: string };

@@ -18,6 +18,7 @@ import {
 import { checkAuthStatus, importModule } from '@/utils/takaroApi';
 import { transformModuleForApi } from '@/utils/moduleTransform';
 import { toast } from 'react-hot-toast';
+import { InstallModuleModal } from './InstallModuleModal';
 
 export interface ModuleDetailsProps {
   /** Module data to display */
@@ -56,10 +57,8 @@ export function ModuleDetails({
 
   // Import state management
   const [importing, setImporting] = useState(false);
-  const [_importedModuleId, setImportedModuleId] = useState<string | null>(
-    null,
-  );
-  const [_showInstallModal, setShowInstallModal] = useState(false);
+  const [importedModuleId, setImportedModuleId] = useState<string | null>(null);
+  const [showInstallModal, setShowInstallModal] = useState(false);
 
   // Section collapse state management
   const [collapsedSections, setCollapsedSections] = useState<
@@ -105,6 +104,15 @@ export function ModuleDetails({
     checkAuth();
   }, []);
 
+  // Debug: Log modal state changes
+  useEffect(() => {
+    console.log('[ModuleDetails] Modal state changed:', {
+      showInstallModal,
+      importedModuleId,
+      shouldRender: showInstallModal && importedModuleId,
+    });
+  }, [showInstallModal, importedModuleId]);
+
   // Click outside handler for export menu
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -139,45 +147,78 @@ export function ModuleDetails({
 
   // Import functionality
   const handleImportClick = async () => {
+    console.log('[handleImportClick] 🚀 FUNCTION CALLED');
+    console.log('[handleImportClick] Module:', module.name, 'Source:', module.source);
+
     if (module.source === 'builtin') {
+      console.log('[handleImportClick] ⚠️ Early return: builtin module');
       return; // Button already disabled
     }
 
+    console.log('[handleImportClick] ✓ Passed builtin check');
+
     setImporting(true);
+    console.log('[handleImportClick] ✓ Set importing to true');
+
     const toastId = toast.loading('Importing module...');
+    console.log('[handleImportClick] ✓ Toast shown, ID:', toastId);
 
     try {
       // Fetch module JSON from the same source as export uses
+      console.log('[handleImportClick] 📦 Starting fetch, module.path:', module.path);
       const pathMatch = module.path?.match(/public\/modules\/(.*\.json)$/);
+      console.log('[handleImportClick] Path match result:', pathMatch);
+
       if (!pathMatch) {
         throw new Error('Invalid module path');
       }
 
-      const response = await fetch(`/modules/${pathMatch[1]}`);
+      const fetchUrl = `/modules/${pathMatch[1]}`;
+      console.log('[handleImportClick] 🌐 Fetching from:', fetchUrl);
+
+      const response = await fetch(fetchUrl);
+      console.log('[handleImportClick] ✓ Fetch response status:', response.status, response.ok);
+
       if (!response.ok) {
         throw new Error('Failed to fetch module data');
       }
 
       const moduleJson = await response.json();
+      console.log('[handleImportClick] ✓ Parsed JSON, keys:', Object.keys(moduleJson));
+
       const transformedData = transformModuleForApi(moduleJson);
+      console.log('[handleImportClick] ✓ Transformed data:', transformedData);
 
       // Import to Takaro
+      console.log('[handleImportClick] 🚀 Calling importModule API...');
       const result = await importModule(transformedData);
+      console.log('[handleImportClick] ✓ Import API returned:', result);
 
       if (result.success) {
+        // Debug logging
+        console.log('[ModuleDetails] Import result:', result);
+        console.log('[ModuleDetails] Module ID:', result.id);
+        console.log('[ModuleDetails] ID is truthy?', !!result.id);
+
         toast.success('Module imported successfully!', { id: toastId });
         setImportedModuleId(result.id || null);
-        // Phase 5 will add modal here
         setShowInstallModal(true);
+
+        // Debug state after setting
+        console.log('[ModuleDetails] Set importedModuleId to:', result.id || null);
+        console.log('[ModuleDetails] Set showInstallModal to: true');
       } else {
         toast.error(`Import failed: ${result.error}`, { id: toastId });
       }
     } catch (error: unknown) {
       const err = error as { message?: string };
+      console.error('[handleImportClick] ❌ ERROR CAUGHT:', error);
+      console.error('[handleImportClick] Error message:', err.message);
       toast.error(`Import failed: ${err.message || 'Unknown error'}`, {
         id: toastId,
       });
     } finally {
+      console.log('[handleImportClick] 🏁 Finally block, setting importing to false');
       setImporting(false);
     }
   };
@@ -414,7 +455,12 @@ export function ModuleDetails({
 
               {module.source !== 'builtin' && authState === 'authenticated' && (
                 <button
-                  onClick={handleImportClick}
+                  onClick={(e) => {
+                    console.log('[Button] 🖱️ IMPORT BUTTON CLICKED!', e);
+                    console.log('[Button] importing state:', importing);
+                    console.log('[Button] button disabled?:', e.currentTarget.disabled);
+                    handleImportClick();
+                  }}
                   disabled={importing}
                   className="btn btn-ghost btn-sm"
                   title={importing ? 'Importing...' : 'Import module to Takaro'}
@@ -737,6 +783,16 @@ export function ModuleDetails({
             </div>
           </div>
         )}
+
+      {/* Install Module Modal */}
+      {showInstallModal && importedModuleId && (
+        <InstallModuleModal
+          isOpen={showInstallModal}
+          onClose={() => setShowInstallModal(false)}
+          moduleId={importedModuleId}
+          moduleVersion={currentVersion.tag}
+        />
+      )}
     </div>
   );
 }

@@ -115,7 +115,12 @@ describe('TakaroApiClient', () => {
 
   describe('getGameServers', () => {
     it('calls gameServerControllerSearch and returns server list', async () => {
-      const mockServers = [
+      const mockApiServers = [
+        { id: 'server-1', name: 'Test Server 1', type: '7d2d' },
+        { id: 'server-2', name: 'Test Server 2', type: 'rust' },
+      ];
+
+      const expectedServers = [
         { id: 'server-1', name: 'Test Server 1', gameType: '7d2d' },
         { id: 'server-2', name: 'Test Server 2', gameType: 'rust' },
       ];
@@ -123,7 +128,7 @@ describe('TakaroApiClient', () => {
       mockClientInstance.gameserver.gameServerControllerSearch.mockResolvedValue(
         {
           data: {
-            data: mockServers,
+            data: mockApiServers,
           },
         },
       );
@@ -131,7 +136,7 @@ describe('TakaroApiClient', () => {
       const result = await getGameServers();
 
       expect(result.success).toBe(true);
-      expect(result.servers).toEqual(mockServers);
+      expect(result.servers).toEqual(expectedServers);
       expect(
         mockClientInstance.gameserver.gameServerControllerSearch,
       ).toHaveBeenCalled();
