@@ -49,3 +49,5 @@ node_modules/
 # Built-in modules (fetched at build time)
 /data/builtin-modules/*.json
 !/data/builtin-modules/README.md
+
+.claude

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Footer } from '@/components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Community Modules Viewer',
@@ -45,6 +46,7 @@ export default function RootLayout({
           <div className="flex-1">{children}</div>
           <Footer />
         </div>
+        <Toaster position="top-right" />
       </body>
     </html>
   );
