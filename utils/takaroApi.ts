@@ -89,12 +89,13 @@ export async function importModule(
     // Debug logging
     console.log('[importModule] Full response:', response);
     console.log('[importModule] Response.data:', result);
-    console.log('[importModule] Extracted ID:', result.id);
-    console.log('[importModule] ID type:', typeof result.id);
+    console.log('[importModule] Nested data:', result.data);
+    console.log('[importModule] Extracted ID:', result.data?.id);
+    console.log('[importModule] ID type:', typeof result.data?.id);
 
     return {
       success: true,
-      id: result.id,
+      id: result.data?.id,
     };
   } catch (error: unknown) {
     const err = error as { message?: string };
