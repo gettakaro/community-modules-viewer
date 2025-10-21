@@ -6,7 +6,7 @@ We're building a one-click module import feature that eliminates the manual down
 
 **Approach**: 6 phases from minimal skeleton to full-featured implementation with error handling and testing.
 
-**Key Technologies**: `@takaro/apiclient`, `react-hot-toast`, `next-runtime-env`
+**Key Technologies**: `@takaro/apiclient`, `react-hot-toast`
 
 ---
 
@@ -18,12 +18,12 @@ We're building a one-click module import feature that eliminates the manual down
 ### Tasks
 
 - [x] Task 1.1: Install npm dependencies
-  - **Output**: Three new packages added to package.json
+  - **Output**: Two new packages added to package.json
   - **Files**: `package.json`
   - **Verify**: `npm install` completes successfully
 
   ```bash
-  npm install @takaro/apiclient react-hot-toast next-runtime-env
+  npm install @takaro/apiclient react-hot-toast
   ```
 
 - [x] Task 1.2: Create environment configuration file
@@ -35,29 +35,15 @@ We're building a one-click module import feature that eliminates the manual down
   ```bash
   # Content:
   # Takaro API Configuration
-  # Runtime configurable via next-runtime-env
+  # Set at build time via process.env
   NEXT_PUBLIC_TAKARO_API_URL=https://api.takaro.io
 
   # For local development with Takaro dev instance
   # NEXT_PUBLIC_TAKARO_API_URL=http://localhost:13000
   ```
 
-- [x] Task 1.3: Add PublicEnvScript to layout
+- [x] Task 1.3: Add Toaster component to layout
   - **Depends on**: 1.1
-  - **Output**: Runtime environment configuration enabled
-  - **Files**: `app/layout.tsx`
-  - **Verify**: Import statement and <PublicEnvScript /> in <head>
-
-  ```typescript
-  // Add imports:
-  import { PublicEnvScript } from 'next-runtime-env';
-
-  // Add inside <head> tag:
-  <PublicEnvScript />
-  ```
-
-- [x] Task 1.4: Add Toaster component to layout
-  - **Depends on**: 1.1, 1.3
   - **Output**: Toast notifications UI ready
   - **Files**: `app/layout.tsx`
   - **Verify**: Toaster component renders at top-right
@@ -70,8 +56,8 @@ We're building a one-click module import feature that eliminates the manual down
   <Toaster position="top-right" />
   ```
 
-- [ ] Task 1.5: Test toast notifications
-  - **Depends on**: 1.4
+- [ ] Task 1.4: Test toast notifications
+  - **Depends on**: 1.3
   - **Output**: Confirmation toasts work
   - **Files**: Temporary test in any component
   - **Verify**: Toast appears when triggered
@@ -87,7 +73,7 @@ We're building a one-click module import feature that eliminates the manual down
 - [ ] Run build: `npm run build`
 - [ ] Run dev server: `npm run docker:dev`
 - [ ] Manual verification: Visit any page, see no console errors related to new packages
-- [ ] **Demo ready**: Show toast notification appearing, env var accessible via `env()`
+- [ ] **Demo ready**: Show toast notification appearing, env var accessible via `process.env.NEXT_PUBLIC_*`
 
 ---
 
@@ -142,26 +128,27 @@ We're building a one-click module import feature that eliminates the manual down
 
   ```typescript
   import { Client } from '@takaro/apiclient';
-  import { env } from 'next-runtime-env';
   import { AuthCheckResult } from '@/lib/types';
 
   let clientInstance: Client | null = null;
 
   function getApiUrl(): string {
-    return env('NEXT_PUBLIC_TAKARO_API_URL') || 'https://api.takaro.io';
+    return process.env.NEXT_PUBLIC_TAKARO_API_URL || 'https://api.takaro.io';
   }
 
-  async function getClient(): Promise<Client> {
+  function getClient(): Client {
     if (!clientInstance) {
-      clientInstance = new Client({ url: getApiUrl() });
-      await clientInstance.login();
+      clientInstance = new Client({
+        url: getApiUrl(),
+        auth: {}, // Cookie-based auth, browser sends cookies automatically
+      });
     }
     return clientInstance;
   }
 
   export async function checkAuthStatus(): Promise<AuthCheckResult> {
     try {
-      const client = await getClient();
+      const client = getClient();
       const user = await client.user.meController();
       return { isAuthenticated: true, user: user.data };
     } catch (error: any) {
@@ -329,7 +316,7 @@ We're building a one-click module import feature that eliminates the manual down
   ```typescript
   export async function importModule(moduleData: any): Promise<ImportResult> {
     try {
-      const client = await getClient();
+      const client = getClient();
       const result = await client.module.moduleControllerImport(moduleData);
       return { success: true, id: result.data.id };
     } catch (error: any) {
@@ -491,7 +478,7 @@ We're building a one-click module import feature that eliminates the manual down
   ```typescript
   export async function getGameServers(): Promise<GameServerResult> {
     try {
-      const client = await getClient();
+      const client = getClient();
       const servers = await client.gameServer.gameServerControllerSearch();
       return { success: true, servers: servers.data };
     } catch (error: any) {

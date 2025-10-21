@@ -35,7 +35,7 @@ Cookie-based authentication in browser applications allows seamless API integrat
 
 #### Functional Requirements
 
-- **REQ-001**: The system SHALL provide a runtime-configurable Takaro API URL via `NEXT_PUBLIC_TAKARO_API_URL` environment variable using `next-runtime-env`
+- **REQ-001**: The system SHALL provide a build-time-configurable Takaro API URL via `NEXT_PUBLIC_TAKARO_API_URL` environment variable
 - **REQ-002**: WHEN the component mounts THEN the system SHALL check user authentication status via `client.user.meController()` method
 - **REQ-003**: WHEN user is not authenticated THEN the import button SHALL be disabled with tooltip explaining requirement
 - **REQ-004**: WHEN user is authenticated THEN the import button SHALL be enabled and clickable
@@ -72,7 +72,7 @@ Cookie-based authentication in browser applications allows seamless API integrat
 
 - Must use `@takaro/apiclient` npm package for API communication
 - Authentication relies on existing Takaro session cookies (no custom auth flow)
-- API URL must be configurable at runtime for different deployment environments
+- API URL must be configurable at build time for different deployment environments
 - Must work within Next.js 15.3.4 App Router architecture
 - Cannot modify Takaro API backend or authentication mechanism
 - CORS policy must allow requests from Community Modules Viewer domain
@@ -324,10 +324,10 @@ const servers = await client.gameServer.gameServerControllerSearch();
 | `utils/takaroApi.ts`                | **Create** | New API client wrapper for `@takaro/apiclient` using resource-specific methods              |
 | `components/ModuleDetails.tsx`      | **Extend** | Add import button, auth state, modal trigger; extends export functionality at lines 265-350 |
 | `components/InstallModuleModal.tsx` | **Create** | New modal for server selection and installation link generation                             |
-| `app/layout.tsx`                    | **Extend** | Add `PublicEnvScript` from `next-runtime-env` and `Toaster` from `react-hot-toast`          |
+| `app/layout.tsx`                    | **Extend** | Add `Toaster` from `react-hot-toast`                                                        |
 | `utils/exportUtils.ts`              | **Keep**   | Preserve as fallback; no changes needed                                                     |
-| `.env.example`                      | **Create** | Document `NEXT_PUBLIC_TAKARO_API_URL` and `next-runtime-env` usage                          |
-| `package.json`                      | **Extend** | Add `@takaro/apiclient`, `react-hot-toast`, `next-runtime-env` dependencies                 |
+| `.env.example`                      | **Create** | Document `NEXT_PUBLIC_TAKARO_API_URL` build-time environment variable                       |
+| `package.json`                      | **Extend** | Add `@takaro/apiclient`, `react-hot-toast` dependencies                                     |
 | `utils/moduleTransform.ts`          | **Create** | Minimal transformation (community modules are API-compatible)                               |
 
 ### Code to Remove
@@ -345,33 +345,34 @@ Purpose: Wrapper around `@takaro/apiclient` providing auth check, import, and se
 Integration approach:
 
 - Uses `@takaro/apiclient` Client class with resource-specific methods
-- Reads API URL from `env('NEXT_PUBLIC_TAKARO_API_URL')` via `next-runtime-env`
+- Reads API URL from `process.env.NEXT_PUBLIC_TAKARO_API_URL` at build time
 - Returns typed responses for error handling
-- Manages client login and session cookies
+- Manages client session using browser cookies
 
-> **Decision**: Use `next-runtime-env` for runtime configuration
-> **Rationale**: Enables "build once, deploy many" Docker pattern; allows API URL changes without rebuilding
+> **Decision**: Use build-time environment variables via `process.env`
+> **Rationale**: Simpler implementation, no additional dependencies; acceptable to rebuild for environment changes
 
 Example logic (pseudocode):
 
 ```
 import { Client } from '@takaro/apiclient'
-import { env } from 'next-runtime-env'
 
 function getApiUrl():
-  return env('NEXT_PUBLIC_TAKARO_API_URL') or 'https://api.takaro.io'
+  return process.env.NEXT_PUBLIC_TAKARO_API_URL or 'https://api.takaro.io'
 
 let clientInstance = null
 
-async function getClient():
+function getClient():
   if not clientInstance:
-    clientInstance = new Client({ url: getApiUrl() })
-    await clientInstance.login()  // Establish session
+    clientInstance = new Client({
+      url: getApiUrl(),
+      auth: {}  // Cookie-based auth, browser sends cookies automatically
+    })
   return clientInstance
 
 async function checkAuthStatus():
   try:
-    client = await getClient()
+    client = getClient()
     user = await client.user.meController()
     return { isAuthenticated: true, user: user.data }
   catch error:
@@ -382,7 +383,7 @@ async function checkAuthStatus():
 
 async function importModule(moduleData):
   try:
-    client = await getClient()
+    client = getClient()
     result = await client.module.moduleControllerImport(moduleData)
     return { success: true, id: result.data.id }
   catch error:
@@ -390,7 +391,7 @@ async function importModule(moduleData):
 
 async function getGameServers():
   try:
-    client = await getClient()
+    client = getClient()
     servers = await client.gameServer.gameServerControllerSearch()
     return { success: true, servers: servers.data }
   catch error:
@@ -638,7 +639,7 @@ export type AuthState = 'loading' | 'authenticated' | 'unauthenticated';
 
 ```bash
 # Takaro API Configuration
-# Runtime configurable via next-runtime-env
+# Set at build time via process.env
 NEXT_PUBLIC_TAKARO_API_URL=https://api.takaro.io
 
 # For local development with Takaro dev instance
@@ -648,15 +649,11 @@ NEXT_PUBLIC_TAKARO_API_URL=https://api.takaro.io
 **`app/layout.tsx`** - Extend Existing:
 
 ```typescript
-import { PublicEnvScript } from 'next-runtime-env';
 import { Toaster } from 'react-hot-toast';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <PublicEnvScript />  {/* Add for runtime env */}
-      </head>
       <body>
         {children}
         <Toaster position="top-right" />  {/* Add for toast notifications */}
@@ -672,8 +669,7 @@ export default function RootLayout({ children }) {
 {
   "dependencies": {
     "@takaro/apiclient": "latest",
-    "react-hot-toast": "^2.4.1",
-    "next-runtime-env": "^3.2.2"
+    "react-hot-toast": "^2.4.1"
   }
 }
 ```
@@ -801,18 +797,18 @@ test('import failure shows error toast and keeps export available', async ({
 
 **Phase 1: Development & Testing** (Week 1)
 
-- Install `@takaro/apiclient`, `react-hot-toast`, `next-runtime-env` dependencies
+- Install `@takaro/apiclient`, `react-hot-toast` dependencies
 - Implement `TakaroApiClient` with resource-specific methods and unit tests
 - Create `InstallModuleModal` component with tests
 - Add auth state management and import button to `ModuleDetails`
-- Integrate toast notifications and runtime env configuration
+- Integrate toast notifications and build-time env configuration
 - Write component and integration tests
 - Test with local Takaro dev instance (CORS=\*)
 
 **Phase 2: Staging Deployment** (Week 2)
 
 - Deploy to staging environment
-- Configure `NEXT_PUBLIC_TAKARO_API_URL` for staging via runtime env
+- Build with `NEXT_PUBLIC_TAKARO_API_URL` for staging environment
 - Coordinate with backend team for staging CORS whitelist
 - Manual testing with real Takaro staging API
 - Test full flow: auth → import → server selection → install link
@@ -823,7 +819,7 @@ test('import failure shows error toast and keeps export available', async ({
 
 - Coordinate with backend team to whitelist `community-modules.takaro.io` in CORS
 - Deploy to production
-- Configure production API URL via `next-runtime-env`
+- Build with production API URL via `NEXT_PUBLIC_TAKARO_API_URL`
 - Monitor error rates and user feedback via toast error patterns
 - Track metrics: import success rate, server selection rate, install link click-through
 - Collect analytics on conversion funnel (view → import → select server → install)
@@ -896,7 +892,7 @@ test('import failure shows error toast and keeps export available', async ({
 
 13. [next-runtime-env - npm](https://www.npmjs.com/package/next-runtime-env) - npm Package Documentation
     - Summary: Next.js runtime environment configuration for "build once, deploy many" pattern
-    - Key takeaway: Enables true runtime config with `PublicEnvScript` component; compatible with Next.js 14+ App Router
+    - Key takeaway: Not used in final implementation; opted for simpler build-time configuration via `process.env`
 
 14. [@takaro/apiclient Documentation](https://docs.takaro.io/api-docs/modules/_takaro_apiclient.html) - Takaro Official Documentation
     - Summary: API client library with resource-specific controller methods
@@ -911,7 +907,7 @@ test('import failure shows error toast and keeps export available', async ({
 - **React hooks for auth state** from [9]: useState + useEffect pattern for component-level auth management (check once on mount)
 - **Button state patterns** from [5]: Clear visual feedback for loading, disabled (with tooltip), and active states
 - **@takaro/apiclient resource methods** from [14]: Use typed controller methods for type safety and IDE support
-- **Runtime configuration** from [13]: `next-runtime-env` enables "build once, deploy many" Docker pattern
+- **Build-time configuration** from [11]: Next.js `NEXT_PUBLIC_*` environment variables for API URL configuration
 - **Toast notifications** from [12]: `react-hot-toast` for non-intrusive async operation feedback
 
 **Anti-Patterns Avoided**:
@@ -926,7 +922,6 @@ test('import failure shows error toast and keeps export available', async ({
 
 - **@takaro/apiclient** from [14]: Required per specification; provides typed API client with controller methods
 - **react-hot-toast** from [12]: Lightweight (~14KB), modern, accessible toast notifications
-- **next-runtime-env** from [13]: True runtime config for Docker deployments
 
 **Standards Compliance**:
 
