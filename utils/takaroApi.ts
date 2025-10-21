@@ -24,6 +24,17 @@ function getApiUrl(): string {
 }
 
 /**
+ * Get the configured Takaro Dashboard URL
+ * Uses build-time environment variable from process.env
+ */
+export function getDashboardUrl(): string {
+  return (
+    process.env.NEXT_PUBLIC_TAKARO_DASHBOARD_URL ||
+    'https://dashboard.takaro.io'
+  );
+}
+
+/**
  * Get or create Takaro API client instance
  * Uses cookie-based authentication from existing browser session
  * No explicit login needed - cookies are sent automatically by browser
@@ -86,20 +97,12 @@ export async function importModule(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = response.data as any;
 
-    // Debug logging
-    console.log('[importModule] Full response:', response);
-    console.log('[importModule] Response.data:', result);
-    console.log('[importModule] Nested data:', result.data);
-    console.log('[importModule] Extracted ID:', result.data?.id);
-    console.log('[importModule] ID type:', typeof result.data?.id);
-
     return {
       success: true,
       id: result.data?.id,
     };
   } catch (error: unknown) {
     const err = error as { message?: string };
-    console.error('[importModule] Error:', error);
     return {
       success: false,
       error: err.message || 'Import failed',

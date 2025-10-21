@@ -83,7 +83,9 @@ describe('TakaroApiClient', () => {
     it('calls moduleControllerImport and returns success with module ID', async () => {
       mockClientInstance.module.moduleControllerImport.mockResolvedValue({
         data: {
-          id: 'module-456',
+          data: {
+            id: 'module-456',
+          },
         },
       });
 

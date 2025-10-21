@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { getGameServers } from '@/utils/takaroApi';
+import { getGameServers, getDashboardUrl } from '@/utils/takaroApi';
 import type { GameServer } from '@/lib/types';
 
 interface InstallModuleModalProps {
@@ -42,7 +42,8 @@ export function InstallModuleModal({
   function handleInstallClick() {
     if (!selectedServerId) return;
 
-    const installUrl = `https://dashboard.takaro.io/gameserver/${selectedServerId}/modules/${moduleId}/${moduleVersion}/install`;
+    const dashboardUrl = getDashboardUrl();
+    const installUrl = `${dashboardUrl}/gameserver/${selectedServerId}/modules/${moduleId}/${moduleVersion}/install`;
     window.open(installUrl, '_blank');
     onClose();
   }
@@ -127,7 +128,7 @@ export function InstallModuleModal({
                   No game servers found. Create a server in Takaro first.
                 </p>
                 <a
-                  href="https://dashboard.takaro.io"
+                  href={getDashboardUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-takaro-accent hover:underline"

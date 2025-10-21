@@ -314,9 +314,7 @@ describe('ModuleDetails Import Button', () => {
       // Mock getGameServers for InstallModuleModal
       vi.spyOn(takaroApi, 'getGameServers').mockResolvedValue({
         success: true,
-        servers: [
-          { id: 'server-1', name: 'Test Server', gameType: '7d2d' },
-        ],
+        servers: [{ id: 'server-1', name: 'Test Server', gameType: '7d2d' }],
       });
     });
 

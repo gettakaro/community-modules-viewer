@@ -34,6 +34,10 @@ const mockGameServers: GameServer[] = [
 describe('InstallModuleModal', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // Mock getDashboardUrl to return default URL
+    vi.spyOn(takaroApi, 'getDashboardUrl').mockReturnValue(
+      'https://dashboard.takaro.io',
+    );
   });
 
   it('does not render when isOpen is false', () => {
