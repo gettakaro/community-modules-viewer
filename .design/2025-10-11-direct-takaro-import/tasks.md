@@ -483,7 +483,7 @@ We're building a one-click module import feature that eliminates the manual down
 
 ### Tasks
 
-- [ ] Task 5.1: Add getGameServers method to TakaroApiClient
+- [x] Task 5.1: Add getGameServers method to TakaroApiClient
   - **Output**: API client can fetch user's game servers
   - **Files**: `utils/takaroApi.ts`
   - **Verify**: Method returns server list
@@ -503,7 +503,7 @@ We're building a one-click module import feature that eliminates the manual down
   }
   ```
 
-- [ ] Task 5.2: Create InstallModuleModal component skeleton
+- [x] Task 5.2: Create InstallModuleModal component skeleton
   - **Depends on**: 5.1
   - **Output**: Basic modal structure
   - **Files**: `components/InstallModuleModal.tsx` (new file)
@@ -572,7 +572,7 @@ We're building a one-click module import feature that eliminates the manual down
   }
   ```
 
-- [ ] Task 5.3: Add modal UI with server dropdown
+- [x] Task 5.3: Add modal UI with server dropdown
   - **Depends on**: 5.2
   - **Output**: Complete modal with server selection
   - **Files**: `components/InstallModuleModal.tsx`
@@ -634,7 +634,7 @@ We're building a one-click module import feature that eliminates the manual down
   )}
   ```
 
-- [ ] Task 5.4: Integrate modal into ModuleDetails
+- [x] Task 5.4: Integrate modal into ModuleDetails
   - **Depends on**: 5.3
   - **Output**: Modal opens after successful import
   - **Files**: `components/ModuleDetails.tsx`
@@ -665,7 +665,7 @@ We're building a one-click module import feature that eliminates the manual down
   )}
   ```
 
-- [ ] Task 5.5: Write tests for InstallModuleModal
+- [x] Task 5.5: Write tests for InstallModuleModal
   - **Depends on**: 5.4
   - **Output**: Test coverage for modal component
   - **Files**: `components/InstallModuleModal.test.tsx` (new file)
@@ -685,9 +685,9 @@ We're building a one-click module import feature that eliminates the manual down
 
 ### Phase 5 Checkpoint
 
-- [ ] Run lint: `npm run lint`
-- [ ] Run typecheck: `npm run typecheck`
-- [ ] Run tests: `npm run test:unit`
+- [x] Run lint: `npm run lint`
+- [x] Run typecheck: `npm run typecheck`
+- [x] Run tests: `npm run test:unit`
 - [ ] Manual verification: Import module → modal opens → select server → install link opens
 - [ ] Manual verification: Modal shows "Install Later" button that closes modal
 - [ ] **Demo ready**: Full flow from import to installation link generation
