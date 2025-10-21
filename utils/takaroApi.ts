@@ -82,7 +82,38 @@ export async function checkAuthStatus(): Promise<AuthCheckResult> {
 }
 
 /**
+ * Find module by name in user's Takaro account
+ *
+ * @param moduleName - Name of the module to search for
+ * @returns Module ID if found, null otherwise
+ */
+async function findModuleByName(moduleName: string): Promise<string | null> {
+  try {
+    const client = getClient();
+    const response = await client.module.moduleControllerSearch({
+      filters: {
+        name: [moduleName],
+      },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const modules = (response.data as any)?.data || [];
+
+    if (modules.length > 0) {
+      return modules[0].id;
+    }
+
+    return null;
+  } catch (error: unknown) {
+    // If search fails, return null to proceed with import attempt
+    console.error('Module search failed:', error);
+    return null;
+  }
+}
+
+/**
  * Import module to Takaro via API
+ * First checks if module already exists to prevent duplicates
  *
  * @param moduleData - Module data in Takaro API format
  * @returns Import result with module ID on success
@@ -92,6 +123,18 @@ export async function importModule(
   moduleData: any,
 ): Promise<ImportResult> {
   try {
+    // First, check if module already exists
+    const existingModuleId = await findModuleByName(moduleData.name);
+
+    if (existingModuleId) {
+      return {
+        success: true,
+        id: existingModuleId,
+        alreadyExists: true,
+      };
+    }
+
+    // Module doesn't exist, proceed with import
     const client = getClient();
     const response = await client.module.moduleControllerImport(moduleData);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -100,6 +143,7 @@ export async function importModule(
     return {
       success: true,
       id: result.data?.id,
+      alreadyExists: false,
     };
   } catch (error: unknown) {
     const err = error as { message?: string };

@@ -443,6 +443,7 @@ export interface ImportResult {
   success: boolean;
   id?: string;
   error?: string;
+  alreadyExists?: boolean;
 }
 
 /**

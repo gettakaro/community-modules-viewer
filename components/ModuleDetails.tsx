@@ -15,7 +15,11 @@ import {
   getModuleSupportedGame,
   formatAuthorName,
 } from '@/utils/moduleUtils';
-import { checkAuthStatus, importModule } from '@/utils/takaroApi';
+import {
+  checkAuthStatus,
+  importModule,
+  getDashboardUrl,
+} from '@/utils/takaroApi';
 import { transformModuleForApi } from '@/utils/moduleTransform';
 import { toast } from 'react-hot-toast';
 import { InstallModuleModal } from './InstallModuleModal';
@@ -164,7 +168,13 @@ export function ModuleDetails({
       const result = await importModule(transformedData);
 
       if (result.success) {
-        toast.success('Module imported successfully!', { id: toastId });
+        if (result.alreadyExists) {
+          toast.success('Module already imported to your account!', {
+            id: toastId,
+          });
+        } else {
+          toast.success('Module imported successfully!', { id: toastId });
+        }
         setImportedModuleId(result.id || null);
         setShowInstallModal(true);
       } else {
@@ -178,6 +188,45 @@ export function ModuleDetails({
     } finally {
       setImporting(false);
     }
+  };
+
+  // Handle click on unauthenticated import button
+  const handleUnauthenticatedClick = () => {
+    const dashboardUrl = getDashboardUrl();
+    toast(
+      (t) => (
+        <div className="flex flex-col gap-2">
+          <p className="font-medium">Login Required</p>
+          <p className="text-sm text-takaro-text-secondary">
+            You need to log in to your Takaro account to import modules.
+          </p>
+          <a
+            href={`${dashboardUrl}/login`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-takaro-primary hover:underline"
+            onClick={() => toast.dismiss(t.id)}
+          >
+            Open Takaro Login →
+          </a>
+        </div>
+      ),
+      {
+        duration: 6000,
+        icon: '🔒',
+      },
+    );
+  };
+
+  // Handle click on built-in module import button
+  const handleBuiltinClick = () => {
+    toast(
+      "Built-in modules are pre-installed in all Takaro instances. You don't need to import them!",
+      {
+        duration: 4000,
+        icon: 'ℹ️',
+      },
+    );
   };
 
   // Calculate section availability and counts
@@ -361,11 +410,10 @@ export function ModuleDetails({
 
               {module.source === 'builtin' && authState !== 'loading' && (
                 <button
-                  disabled
-                  className="btn btn-ghost btn-sm opacity-50"
-                  title="Built-in modules are already available in Takaro"
+                  onClick={handleBuiltinClick}
+                  className="btn btn-ghost btn-sm opacity-50 cursor-help hover:opacity-60 transition-opacity"
                   data-testid="import-button-builtin"
-                  aria-label="Import disabled for built-in modules"
+                  aria-label="Click to learn why this module cannot be imported"
                 >
                   <svg
                     className="w-5 h-5"
@@ -387,11 +435,10 @@ export function ModuleDetails({
               {module.source !== 'builtin' &&
                 authState === 'unauthenticated' && (
                   <button
-                    disabled
-                    className="btn btn-ghost btn-sm opacity-50"
-                    title="Please log in to your Takaro account first"
+                    onClick={handleUnauthenticatedClick}
+                    className="btn btn-ghost btn-sm opacity-50 cursor-help hover:opacity-60 transition-opacity"
                     data-testid="import-button-unauthenticated"
-                    aria-label="Import requires authentication"
+                    aria-label="Click to see login instructions"
                   >
                     <svg
                       className="w-5 h-5"
