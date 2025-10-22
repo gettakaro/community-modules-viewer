@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Footer } from '@/components/Footer';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Community Modules Viewer',
@@ -48,6 +49,31 @@ export default function RootLayout({
           <div className="flex-1">{children}</div>
           <Footer />
         </div>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            // Default styling for all toasts to match Takaro dark theme
+            style: {
+              background: 'var(--takaro-card)',
+              color: 'var(--takaro-text-primary)',
+              border: '1px solid var(--takaro-border)',
+            },
+            // Success toasts
+            success: {
+              iconTheme: {
+                primary: 'var(--takaro-primary)',
+                secondary: 'var(--takaro-card)',
+              },
+            },
+            // Error toasts
+            error: {
+              iconTheme: {
+                primary: '#ef4444',
+                secondary: 'var(--takaro-card)',
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );

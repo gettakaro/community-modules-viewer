@@ -419,3 +419,52 @@ export function formatValidationError(
 
   return `Validation failed in ${source}: ${issues}`;
 }
+
+/**
+ * Takaro API Client Types
+ */
+
+/**
+ * Auth check result from Takaro API
+ */
+export interface AuthCheckResult {
+  isAuthenticated: boolean;
+  user?: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
+
+/**
+ * Module import result from Takaro API
+ */
+export interface ImportResult {
+  success: boolean;
+  id?: string;
+  error?: string;
+  alreadyExists?: boolean;
+}
+
+/**
+ * Game server result from Takaro API
+ */
+export interface GameServerResult {
+  success: boolean;
+  servers?: GameServer[];
+  error?: string;
+}
+
+/**
+ * Game server information
+ */
+export interface GameServer {
+  id: string;
+  name: string;
+  gameType: string;
+}
+
+/**
+ * Authentication state for UI
+ */
+export type AuthState = 'loading' | 'authenticated' | 'unauthenticated';
