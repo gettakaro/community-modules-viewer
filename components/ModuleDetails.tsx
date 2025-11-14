@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { ModuleWithMeta, AuthState } from '@/lib/types';
+import { ModuleWithMeta, AuthState, ChangelogEntry } from '@/lib/types';
 import { ConfigSection } from './ConfigSection';
 import { CommandsSection } from './CommandsSection';
 import { HooksSection } from './HooksSection';
@@ -33,6 +33,8 @@ export interface ModuleDetailsProps {
   onVersionChange?: (version: string) => void;
   /** Additional CSS classes */
   className?: string;
+  /** Changelog entries for this module */
+  moduleChanges?: ChangelogEntry[];
 }
 
 /**
@@ -44,6 +46,7 @@ export function ModuleDetails({
   selectedVersion,
   onVersionChange,
   className = '',
+  moduleChanges = [],
 }: ModuleDetailsProps) {
   // Find the current version to display
   const currentVersion = useMemo(() => {
@@ -74,6 +77,7 @@ export function ModuleDetails({
     cronJobs: false,
     functions: false,
     permissions: false,
+    changelog: false,
   });
 
   const toggleSection = (sectionName: string) => {
@@ -658,6 +662,48 @@ export function ModuleDetails({
           </div>
         )}
       </div>
+
+      {/* Change History Section */}
+      {moduleChanges && moduleChanges.length > 0 && (
+        <SectionWrapper
+          title="Change History"
+          icon="history"
+          isCollapsed={collapsedSections.changelog}
+          onToggle={() => toggleSection('changelog')}
+          count={moduleChanges.length}
+        >
+          <div className="space-y-4">
+            {moduleChanges.map((change, index) => {
+              const formattedDate = new Date(change.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              });
+
+              return (
+                <div key={`${change.commitHash}-${index}`} className="card-takaro-hover p-4">
+                  <div className="flex items-start justify-between gap-4 mb-2">
+                    <div className="flex items-center gap-2">
+                      <h4 className="font-semibold text-takaro-text-primary">
+                        {change.title}
+                      </h4>
+                      {change.isNew && (
+                        <span className="badge badge-success badge-sm">NEW</span>
+                      )}
+                    </div>
+                    <div className="text-sm text-takaro-text-muted whitespace-nowrap">
+                      {formattedDate}
+                    </div>
+                  </div>
+                  <p className="text-sm text-takaro-text-secondary">
+                    {change.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </SectionWrapper>
+      )}
 
       {/* Configuration Section */}
       {sectionStats?.config.available && (

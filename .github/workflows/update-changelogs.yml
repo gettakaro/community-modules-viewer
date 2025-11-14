@@ -1,0 +1,50 @@
+name: Update Changelogs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/modules/**/*.json'
+
+permissions:
+  contents: write
+
+jobs:
+  update-changelogs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full git history for changelog generation
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate changelogs
+        run: npm run generate:changelog
+
+      - name: Check for changelog changes
+        id: check_changes
+        run: |
+          git diff --quiet data/changelogs.json data/changelog-raw.json || echo "has_changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changelog updates
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/changelogs.json data/changelog-raw.json
+          git commit -m "chore: update changelogs [skip ci]"
+          git push
+
+      - name: No changes detected
+        if: steps.check_changes.outputs.has_changes != 'true'
+        run: echo "No changelog updates needed"
