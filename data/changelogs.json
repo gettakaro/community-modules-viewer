@@ -4,11 +4,56 @@
       "moduleName": "arenaModule",
       "category": "events",
       "date": "2025-11-14T16:27:43+01:00",
-      "title": "Module Updated",
-      "description": "Updated to version 1.0.1.",
+      "title": "Updated 9 Commands",
+      "description": "Updated to version 1.0.1. Updated 9 command implementations.",
       "commitHash": "3a1a388a1c24212bbcb0d2ef31313903ad36bfc5",
       "isNew": false,
       "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "03 arena wait 5"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "04 arena wait 15"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "07 arena wait 85"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "11 arena wait 165"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "09 arena wait 125"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "06 arena wait 55"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "08 arena wait 95"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "10 arena wait 135"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "05 arena wait 45"
+        },
         {
           "type": "version",
           "action": "updated",
@@ -159,6 +204,22 @@
           "action": "updated",
           "name": "0.0.1",
           "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "serverWipe",
+      "category": "administration",
+      "date": "2025-08-12T21:17:12+02:00",
+      "title": "Command Update: wipe",
+      "description": "Updated 1 command implementation.",
+      "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+      "isNew": false,
+      "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "wipe"
         }
       ]
     },
@@ -572,8 +633,8 @@
       "moduleName": "CPMStaffCommands",
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
-      "title": "Updated 3 Commands",
-      "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`.",
+      "title": "Updated 4 Commands",
+      "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`. Updated 1 command implementation.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": false,
       "details": [
@@ -592,6 +653,11 @@
           "type": "command",
           "action": "removed",
           "name": "setwaypointpublic"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "avisit"
         },
         {
           "type": "version",
@@ -3056,11 +3122,56 @@
         "moduleName": "arenaModule",
         "category": "events",
         "date": "2025-11-14T16:27:43+01:00",
-        "title": "Module Updated",
-        "description": "Updated to version 1.0.1.",
+        "title": "Updated 9 Commands",
+        "description": "Updated to version 1.0.1. Updated 9 command implementations.",
         "commitHash": "3a1a388a1c24212bbcb0d2ef31313903ad36bfc5",
         "isNew": false,
         "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "03 arena wait 5"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "04 arena wait 15"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "07 arena wait 85"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "11 arena wait 165"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "09 arena wait 125"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "06 arena wait 55"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "08 arena wait 95"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "10 arena wait 135"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "05 arena wait 45"
+          },
           {
             "type": "version",
             "action": "updated",
@@ -3357,6 +3468,92 @@
             "type": "version",
             "action": "updated",
             "name": "0.0.1",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "serverWipe": [
+      {
+        "moduleName": "serverWipe",
+        "category": "administration",
+        "date": "2025-08-12T21:17:12+02:00",
+        "title": "Command Update: wipe",
+        "description": "Updated 1 command implementation.",
+        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+        "isNew": false,
+        "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "wipe"
+          }
+        ]
+      },
+      {
+        "moduleName": "serverWipe",
+        "category": "administration",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: serverWipe",
+        "description": "Updated to version latest. Added 2 commands: `wipecontinue`, `wipe`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "wipecontinue",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "wipe",
+            "description": "Wipe server data according to configuration"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "wipeHelpers.js"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "SERVER_WIPE",
+            "description": "Permission to wipe server"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "wipeCurrency",
+            "fieldType": "boolean",
+            "description": "Whether to reset all player currency during wipe"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "wipeTeleports",
+            "fieldType": "boolean",
+            "description": "Whether to delete all teleport locations during wipe."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "wipeStarterKitClaims",
+            "fieldType": "boolean",
+            "description": "wipeStarterKitClaims"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "globalAnnouncement",
+            "fieldType": "string",
+            "description": "Message to broadcast to all players after the wipe"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
             "previousVersion": "initial"
           }
         ]
@@ -3815,8 +4012,8 @@
         "moduleName": "CPMStaffCommands",
         "category": "administration",
         "date": "2025-08-06T21:22:19+02:00",
-        "title": "Updated 3 Commands",
-        "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`.",
+        "title": "Updated 4 Commands",
+        "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`. Updated 1 command implementation.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": false,
         "details": [
@@ -3835,6 +4032,11 @@
             "type": "command",
             "action": "removed",
             "name": "setwaypointpublic"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "avisit"
           },
           {
             "type": "version",
@@ -4019,76 +4221,6 @@
             "action": "added",
             "name": "drone Teleport",
             "eventType": "log"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "serverWipe": [
-      {
-        "moduleName": "serverWipe",
-        "category": "administration",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: serverWipe",
-        "description": "Updated to version latest. Added 2 commands: `wipecontinue`, `wipe`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "wipecontinue",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "wipe",
-            "description": "Wipe server data according to configuration"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "wipeHelpers.js"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "SERVER_WIPE",
-            "description": "Permission to wipe server"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "wipeCurrency",
-            "fieldType": "boolean",
-            "description": "Whether to reset all player currency during wipe"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "wipeTeleports",
-            "fieldType": "boolean",
-            "description": "Whether to delete all teleport locations during wipe."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "wipeStarterKitClaims",
-            "fieldType": "boolean",
-            "description": "wipeStarterKitClaims"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "globalAnnouncement",
-            "fieldType": "string",
-            "description": "Message to broadcast to all players after the wipe"
           },
           {
             "type": "version",
@@ -6179,5 +6311,5 @@
       }
     ]
   },
-  "generatedAt": "2025-11-14T15:47:12.626Z"
+  "generatedAt": "2025-11-14T15:50:12.939Z"
 }

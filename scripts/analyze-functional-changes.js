@@ -107,6 +107,18 @@ function analyzeCommands(before, after) {
     }
   });
 
+  // Updated commands (same name, different implementation)
+  after.forEach(cmdAfter => {
+    const cmdBefore = before.find(c => c.name === cmdAfter.name);
+    if (cmdBefore && cmdBefore.function !== cmdAfter.function) {
+      changes.push({
+        type: 'command',
+        action: 'updated',
+        name: cmdAfter.name
+      });
+    }
+  });
+
   return changes;
 }
 
@@ -134,6 +146,18 @@ function analyzeHooks(before, after) {
         type: 'hook',
         action: 'removed',
         name: hook.name
+      });
+    }
+  });
+
+  // Updated hooks (same name, different implementation)
+  after.forEach(hookAfter => {
+    const hookBefore = before.find(h => h.name === hookAfter.name);
+    if (hookBefore && hookBefore.function !== hookAfter.function) {
+      changes.push({
+        type: 'hook',
+        action: 'updated',
+        name: hookAfter.name
       });
     }
   });
@@ -340,11 +364,21 @@ function generateDescription(allChanges) {
     });
   }
 
-  // Handle updated items (like version changes)
+  // Handle updated items (version changes, command updates, etc.)
   if (updated.length > 0) {
+    const byType = {};
     updated.forEach(change => {
-      if (change.type === 'version') {
-        parts.unshift(`Updated to version ${change.name}`);
+      byType[change.type] = byType[change.type] || [];
+      byType[change.type].push(change);
+    });
+
+    Object.entries(byType).forEach(([type, items]) => {
+      if (type === 'version') {
+        parts.unshift(`Updated to version ${items[0].name}`);
+      } else if (type === 'command') {
+        parts.push(`Updated ${items.length} command implementation${items.length > 1 ? 's' : ''}`);
+      } else if (type === 'hook') {
+        parts.push(`Updated ${items.length} hook implementation${items.length > 1 ? 's' : ''}`);
       }
     });
   }
