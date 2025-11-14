@@ -34,6 +34,7 @@ function analyzeFunctionalChanges(before, after, moduleName) {
   const functionChanges = analyzeFunctions(beforeVersion.functions || [], afterVersion.functions || []);
   const permissionChanges = analyzePermissions(beforeVersion.permissions || [], afterVersion.permissions || []);
   const configChanges = analyzeConfig(beforeVersion.configSchema, afterVersion.configSchema);
+  const versionChanges = analyzeVersionTag(beforeVersion.tag, afterVersion.tag);
 
   // Collect all changes
   const allChanges = [
@@ -42,7 +43,8 @@ function analyzeFunctionalChanges(before, after, moduleName) {
     ...cronChanges,
     ...functionChanges,
     ...permissionChanges,
-    ...configChanges
+    ...configChanges,
+    ...versionChanges
   ];
 
   if (allChanges.length === 0) {
@@ -272,12 +274,29 @@ function analyzeConfig(beforeSchema, afterSchema) {
   return changes;
 }
 
+function analyzeVersionTag(beforeTag, afterTag) {
+  const changes = [];
+
+  // Check if version tag changed
+  if (beforeTag !== afterTag && afterTag) {
+    changes.push({
+      type: 'version',
+      action: 'updated',
+      name: afterTag,
+      previousVersion: beforeTag || 'initial'
+    });
+  }
+
+  return changes;
+}
+
 function generateDescription(allChanges) {
   const parts = [];
 
   // Group by type and action
   const added = allChanges.filter(c => c.action === 'added');
   const removed = allChanges.filter(c => c.action === 'removed');
+  const updated = allChanges.filter(c => c.action === 'updated');
 
   if (added.length > 0) {
     const byType = {};
@@ -317,6 +336,15 @@ function generateDescription(allChanges) {
         parts.push(`Removed ${items.length} hook${items.length > 1 ? 's' : ''}: ${items.map(i => `\`${i.name}\``).join(', ')}`);
       } else if (type === 'config') {
         parts.push(`Removed configuration option${items.length > 1 ? 's' : ''}: ${items.map(i => `\`${i.name}\``).join(', ')}`);
+      }
+    });
+  }
+
+  // Handle updated items (like version changes)
+  if (updated.length > 0) {
+    updated.forEach(change => {
+      if (change.type === 'version') {
+        parts.unshift(`Updated to version ${change.name}`);
       }
     });
   }
