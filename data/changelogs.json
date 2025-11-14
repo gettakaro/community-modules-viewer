@@ -1,11 +1,28 @@
 {
   "global": [
     {
+      "moduleName": "arenaModule",
+      "category": "events",
+      "date": "2025-11-14T16:27:43+01:00",
+      "title": "Module Updated",
+      "description": "Updated to version 1.0.1.",
+      "commitHash": "3a1a388a1c24212bbcb0d2ef31313903ad36bfc5",
+      "isNew": false,
+      "details": [
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.1",
+          "previousVersion": "1.0.0"
+        }
+      ]
+    },
+    {
       "moduleName": "BuffManager",
       "category": "economy",
       "date": "2025-10-16T08:45:43+02:00",
       "title": "New Module: BuffManager",
-      "description": "Added 3 commands: `buffplayer`, `debuffplayer`, `getbuff`. Added 1 hook: `Auto-Apply Buff Packages` (player-connected). Added 1 scheduled task: `check Buff Packages`. New permission: `BUFF_ADMIN`. New configuration options: `buffPackages`, `maintenanceEnabled`, `maintenanceInterval`.",
+      "description": "Updated to version latest. Added 3 commands: `buffplayer`, `debuffplayer`, `getbuff`. Added 1 hook: `Auto-Apply Buff Packages` (player-connected). Added 1 scheduled task: `check Buff Packages`. New permission: `BUFF_ADMIN`. New configuration options: `buffPackages`, `maintenanceEnabled`, `maintenanceInterval`.",
       "commitHash": "04b689656755a6613de145c38ee76dd736bb5e1a",
       "isNew": true,
       "details": [
@@ -65,6 +82,12 @@
           "name": "maintenanceInterval",
           "fieldType": "string",
           "description": "Cron expression for maintenance frequency (default: every 15 minutes)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -73,7 +96,7 @@
       "category": "PvP",
       "date": "2025-08-12T21:17:12+02:00",
       "title": "New Module: killEarner",
-      "description": "Added 1 command: `killstats`. Added 1 hook: `PvP Kill Detector` (player-death). New configuration options: `killReward`, `enableKillerMessages`, `enableVictimMessages`, `usePublicMessages`, `killerMessages`, `victimMessages`.",
+      "description": "Updated to version 0.0.1. Added 1 command: `killstats`. Added 1 hook: `PvP Kill Detector` (player-death). New configuration options: `killReward`, `enableKillerMessages`, `enableVictimMessages`, `usePublicMessages`, `killerMessages`, `victimMessages`.",
       "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
       "isNew": true,
       "details": [
@@ -130,6 +153,12 @@
           "name": "victimMessages",
           "fieldType": "array",
           "description": "Random messages for victims"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.1",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -138,7 +167,7 @@
       "category": "community-management",
       "date": "2025-08-12T21:17:12+02:00",
       "title": "New Module: DiedTeleport",
-      "description": "Added 1 command: `died`. Added 1 hook: `Death Location Capture` (player-death). New permission: `DIED_TELEPORT_USE`. New configuration option: `deathLocationExpiration`.",
+      "description": "Updated to version latest. Added 1 command: `died`. Added 1 hook: `Death Location Capture` (player-death). New permission: `DIED_TELEPORT_USE`. New configuration option: `deathLocationExpiration`.",
       "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
       "isNew": true,
       "details": [
@@ -166,6 +195,29 @@
           "name": "deathLocationExpiration",
           "fieldType": "number",
           "description": "How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "DynamicServerMessages",
+      "category": "community-management",
+      "date": "2025-08-12T21:17:12+02:00",
+      "title": "Module Updated",
+      "description": "Updated to version 0.0.1.",
+      "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+      "isNew": false,
+      "details": [
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.1",
+          "previousVersion": "latest"
         }
       ]
     },
@@ -174,7 +226,7 @@
       "category": "community-management",
       "date": "2025-08-12T21:17:12+02:00",
       "title": "New Module: dynamicCronjobs",
-      "description": "Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
+      "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
       "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
       "isNew": true,
       "details": [
@@ -190,6 +242,12 @@
           "name": "cronjobs",
           "fieldType": "array",
           "description": "List of cronjobs and their schedules"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -198,7 +256,7 @@
       "category": "community-management",
       "date": "2025-08-12T21:17:12+02:00",
       "title": "New Module: playerProgressionTracker",
-      "description": "Added 3 commands: `progression`, `claim`, `resetprogression`. Added 2 hooks: `Entity Kill XP` (entity-killed), `Player Connected Playtime` (player-connected). Added 1 scheduled task: `Active Player XP`. Added 3 functions: `grantRewards`, `calculateXPWithMultiplier`, `checkLevelUp`. New permissions: `XP_MULTIPLIER`, `PROGRESSION_ADMIN`. New configuration options: `levels`, `xpSettings`, `messages`.",
+      "description": "Updated to version 0.0.1. Added 3 commands: `progression`, `claim`, `resetprogression`. Added 2 hooks: `Entity Kill XP` (entity-killed), `Player Connected Playtime` (player-connected). Added 1 scheduled task: `Active Player XP`. Added 3 functions: `grantRewards`, `calculateXPWithMultiplier`, `checkLevelUp`. New permissions: `XP_MULTIPLIER`, `PROGRESSION_ADMIN`. New configuration options: `levels`, `xpSettings`, `messages`.",
       "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
       "isNew": true,
       "details": [
@@ -285,6 +343,12 @@
           "name": "messages",
           "fieldType": "object",
           "description": "Messages"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.1",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -293,7 +357,7 @@
       "category": "minigames",
       "date": "2025-08-12T21:17:12+02:00",
       "title": "New Module: horseRacing",
-      "description": "Added 8 commands: `horseLeaderboard`, `horseStats`, `startrace`, `lastRace`, `horses`, `nextRace`, `horseBet`, `mybets`. Added 1 hook: `test` (log). Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `HORSE_RACING_BET`, `HORSE_RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `Horses`.",
+      "description": "Updated to version latest. Added 8 commands: `horseLeaderboard`, `horseStats`, `startrace`, `lastRace`, `horses`, `nextRace`, `horseBet`, `mybets`. Added 1 hook: `test` (log). Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `HORSE_RACING_BET`, `HORSE_RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `Horses`.",
       "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
       "isNew": true,
       "details": [
@@ -400,6 +464,12 @@
           "name": "Horses",
           "fieldType": "array",
           "description": "List of horses that can race. Format: HorseName; Odds (whole number) - one horse per line"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -408,7 +478,7 @@
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: CPMCommands",
-      "description": "Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
+      "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -489,6 +559,12 @@
           "action": "added",
           "name": "VISIT_PERMISSION",
           "description": "Gives players permission to use the visit commmand"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -497,7 +573,7 @@
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "Updated 3 Commands",
-      "description": "Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`.",
+      "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": false,
       "details": [
@@ -516,6 +592,12 @@
           "type": "command",
           "action": "removed",
           "name": "setwaypointpublic"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "0.0.2"
         }
       ]
     },
@@ -524,7 +606,7 @@
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: HordeNightWarnings",
-      "description": "Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`, `enableDebugMessages`.",
+      "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`, `enableDebugMessages`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -595,6 +677,12 @@
           "name": "enableDebugMessages",
           "fieldType": "boolean",
           "description": "If enabled, the script will send debug messages to the specified debugChannel"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -603,7 +691,7 @@
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: RegionResetRandomiser",
-      "description": "Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
+      "description": "Updated to version latest. Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -653,6 +741,12 @@
           "name": "sendDebugMessages",
           "fieldType": "boolean",
           "description": "If enabled, debug messages will be sent to the debugChannel.\n\nThe listening channel for keyphrase triggering is specified separately in the hook, below."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -661,7 +755,7 @@
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: droneTeleports",
-      "description": "Added 1 command: `helps`. Added 1 hook: `drone Teleport` (log).",
+      "description": "Updated to version latest. Added 1 command: `helps`. Added 1 hook: `drone Teleport` (log).",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -676,6 +770,12 @@
           "action": "added",
           "name": "drone Teleport",
           "eventType": "log"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -684,7 +784,7 @@
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: serverWipe",
-      "description": "Added 2 commands: `wipecontinue`, `wipe`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
+      "description": "Updated to version latest. Added 2 commands: `wipecontinue`, `wipe`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -738,6 +838,12 @@
           "name": "globalAnnouncement",
           "fieldType": "string",
           "description": "Message to broadcast to all players after the wipe"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -746,7 +852,7 @@
       "category": "anti-cheat",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: AFKChecker",
-      "description": "Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
+      "description": "Updated to version 1.0.0. Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -803,6 +909,12 @@
           "name": "globalAnnouncement",
           "fieldType": "boolean",
           "description": "Whether to announce AFK warnings and kicks to all players on the server"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -811,7 +923,7 @@
       "category": "anti-cheat",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: ProfanityFilter",
-      "description": "Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
+      "description": "Updated to version latest. Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -896,6 +1008,12 @@
           "name": "swearJarAmount",
           "fieldType": "number",
           "description": "swearJarAmount"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -904,7 +1022,7 @@
       "category": "anti-cheat",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: VACChecker",
-      "description": "Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
+      "description": "Updated to version latest. Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -947,6 +1065,12 @@
           "name": "DaysThreshold",
           "fieldType": "string",
           "description": "Days Threshold"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -955,7 +1079,7 @@
       "category": "anti-cheat",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: linkBlocker",
-      "description": "Added 1 hook: `linkChecker` (chat-message). New permission: `link_blocker_immunity`. New configuration options: `blockUrls`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `noPunishmentMessage`.",
+      "description": "Updated to version latest. Added 1 hook: `linkChecker` (chat-message). New permission: `link_blocker_immunity`. New configuration options: `blockUrls`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `noPunishmentMessage`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1026,6 +1150,12 @@
           "name": "noPunishmentMessage",
           "fieldType": "string",
           "description": "No Punishment Message"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1034,7 +1164,7 @@
       "category": "community-management",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: Donator",
-      "description": "Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
+      "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1062,6 +1192,12 @@
           "name": "vipkit",
           "fieldType": "array",
           "description": "VIP Items"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1070,7 +1206,7 @@
       "category": "community-management",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: DynamicServerMessages",
-      "description": "Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
+      "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1086,6 +1222,12 @@
           "name": "cronjobs",
           "fieldType": "array",
           "description": "List of cronjobs and their schedules"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1094,7 +1236,7 @@
       "category": "community-management",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: VotingSystem",
-      "description": "Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
+      "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1173,6 +1315,12 @@
           "name": "fixedrewards",
           "fieldType": "array",
           "description": "All the items in this list will be given as a reward for the vote."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1181,7 +1329,7 @@
       "category": "community-management",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: Whitelisting",
-      "description": "Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
+      "description": "Updated to version 0.0.1. Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1203,6 +1351,12 @@
           "name": "kickMessage",
           "fieldType": "string",
           "description": "Message to display to players who are kicked for not having the required role."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.1",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1211,7 +1365,7 @@
       "category": "economy",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: GeneralstockMarket",
-      "description": "Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
+      "description": "Updated to version latest. Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1342,6 +1496,12 @@
           "name": "priceAlertThreshold",
           "fieldType": "number",
           "description": "Percentage change that triggers a market alert (10 = 10%)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1350,7 +1510,7 @@
       "category": "economy",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: PlaytimeReward",
-      "description": "Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
+      "description": "Updated to version latest. Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1412,6 +1572,12 @@
           "name": "rewardMessage",
           "fieldType": "string",
           "description": "Message with placeholders {minutes}, {currency}, {item}"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1420,7 +1586,7 @@
       "category": "economy",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: StockMarket",
-      "description": "Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
+      "description": "Updated to version latest. Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1558,6 +1724,12 @@
           "name": "marketNewsChannelId",
           "fieldType": "string",
           "description": "The ID of the Discord channel where market news messages should be posted. Leave empty to disable."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1566,7 +1738,7 @@
       "category": "economy",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: dailyRewardsItems",
-      "description": "Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
+      "description": "Updated to version 2.0.0. Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1666,6 +1838,12 @@
           "name": "maxItemChance",
           "fieldType": "number",
           "description": "Cap for total item chance after streak multiplier (1-100)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "2.0.0",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1674,7 +1852,7 @@
       "category": "events",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: BetterBloodMoons",
-      "description": "Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
+      "description": "Updated to version latest. Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1695,6 +1873,12 @@
           "action": "added",
           "name": "BETTER_BLOOD_MOONS",
           "description": "Blood Moons"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1703,7 +1887,7 @@
       "category": "events",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: Bosskills",
-      "description": "Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
+      "description": "Updated to version 1.0.0. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1726,6 +1910,12 @@
           "name": "announceDevourer",
           "fieldType": "string",
           "description": "Post in chat Boss Kill"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1734,7 +1924,7 @@
       "category": "events",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: Rampage",
-      "description": "Added 1 command: `rampage`. New permission: `RAMPAGE_PERMISSION`. New configuration options: `rLocationX`, `rLocationY`, `rLocationZ`, `spawnEntities`.",
+      "description": "Updated to version latest. Added 1 command: `rampage`. New permission: `RAMPAGE_PERMISSION`. New configuration options: `rLocationX`, `rLocationY`, `rLocationZ`, `spawnEntities`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1777,6 +1967,12 @@
           "name": "spawnEntities",
           "fieldType": "array",
           "description": "List of Bosses/zombies to spawn"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1785,7 +1981,7 @@
       "category": "events",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: arenaModule",
-      "description": "Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
+      "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -1914,6 +2110,12 @@
           "name": "fixedrewards",
           "fieldType": "array",
           "description": "All the items in this list will be given as a reward for completing the arena."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -1922,7 +2124,7 @@
       "category": "integration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: 7dtd_ChatBridge",
-      "description": "Added 6 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `resetRegions` (log), `serverStatusChange` (server-status-changed), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `includePartyChat`, `includeFriendsChat`, `filterCommands`, `commandPrefixes`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`, `showPlayerDetails`.",
+      "description": "Updated to version latest. Added 6 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `resetRegions` (log), `serverStatusChange` (server-status-changed), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `includePartyChat`, `includeFriendsChat`, `filterCommands`, `commandPrefixes`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`, `showPlayerDetails`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2042,6 +2244,12 @@
           "name": "showPlayerDetails",
           "fieldType": "boolean",
           "description": "Show Steam profile and Takaro profile links in join/leave notifications."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2050,7 +2258,7 @@
       "category": "integration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: Translator",
-      "description": "Added 6 commands: `setplayerlanguage`, `translate`, `toggletranslation`, `translateme`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `enabledByDefault`, `defaultLanguage`, `supportedLanguages`.",
+      "description": "Updated to version 1.0.0. Added 6 commands: `setplayerlanguage`, `translate`, `toggletranslation`, `translateme`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `enabledByDefault`, `defaultLanguage`, `supportedLanguages`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2136,6 +2344,12 @@
           "name": "supportedLanguages",
           "fieldType": "array",
           "description": "List of supported language codes for translation"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2144,7 +2358,7 @@
       "category": "integration",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: chatbridge",
-      "description": "Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
+      "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2220,6 +2434,12 @@
           "name": "monitoringChannelId",
           "fieldType": "string",
           "description": "Discord channel ID for monitoring messages (only used if monitoring is enabled)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2228,7 +2448,7 @@
       "category": "minigames",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: 8ball",
-      "description": "Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
+      "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2257,6 +2477,12 @@
           "name": "responses",
           "fieldType": "array",
           "description": "Here you can edit the responses of the 8ball command. \n"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2265,7 +2491,7 @@
       "category": "minigames",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: BlackJack",
-      "description": "Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
+      "description": "Updated to version 0.0.1. Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2292,6 +2518,12 @@
           "action": "added",
           "name": "BJhit",
           "description": "No help text available"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.1",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2300,7 +2532,7 @@
       "category": "minigames",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: Hangman",
-      "description": "Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
+      "description": "Updated to version latest. Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2425,6 +2657,12 @@
           "name": "hostingFee",
           "fieldType": "number",
           "description": "Cost to create and host a new Hangman game"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2433,7 +2671,7 @@
       "category": "minigames",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: Roulette",
-      "description": "Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
+      "description": "Updated to version latest. Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2499,6 +2737,12 @@
           "name": "houseEdge",
           "fieldType": "number",
           "description": "Percentage of winnings the house takes as profit (5 = 5%)."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2507,7 +2751,7 @@
       "category": "minigames",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: slotMachines",
-      "description": "Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
+      "description": "Updated to version latest. Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2573,6 +2817,12 @@
           "name": "houseEdge",
           "fieldType": "number",
           "description": "Percentage of winnings the house takes as profit (5 = 5%)."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2581,7 +2831,7 @@
       "category": "minigames",
       "date": "2025-08-06T21:22:19+02:00",
       "title": "New Module: triviaTime",
-      "description": "Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
+      "description": "Updated to version latest. Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
       "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
       "isNew": true,
       "details": [
@@ -2630,6 +2880,12 @@
           "name": "questions",
           "fieldType": "array",
           "description": "Key value pairs of questions and answers"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2638,7 +2894,7 @@
       "category": "minigames",
       "date": "2025-07-28T15:58:49+02:00",
       "title": "New Module: 7dtd_triviaTime",
-      "description": "Added 3 commands: `playerAnswer`, `triviaboard`, `triviareset`. Added 1 scheduled task: `TriviaTime`. New permissions: `TRIVIA_PARTICIPATE`, `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`, `rewardType`, `rewardAmount`, `rewardItems`, `questions`, `triviaStartSound`, `correctAnswerSound`, `wrongAnswerSound`.",
+      "description": "Updated to version latest. Added 3 commands: `playerAnswer`, `triviaboard`, `triviareset`. Added 1 scheduled task: `TriviaTime`. New permissions: `TRIVIA_PARTICIPATE`, `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`, `rewardType`, `rewardAmount`, `rewardItems`, `questions`, `triviaStartSound`, `correctAnswerSound`, `wrongAnswerSound`.",
       "commitHash": "c890006d787c4003b5b77e7ea860edcae544c59c",
       "isNew": true,
       "details": [
@@ -2754,6 +3010,12 @@
           "name": "wrongAnswerSound",
           "fieldType": "string",
           "description": "Sound to play to the player when they answer incorrectly (leave empty to disable)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     },
@@ -2762,7 +3024,7 @@
       "category": "administration",
       "date": "2025-07-09T16:43:45+02:00",
       "title": "New Module: serverModuleCloner",
-      "description": "Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
+      "description": "Updated to version latest. Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
       "commitHash": "8d2998177a5ddd51d001d16606652cc7be5aeb2b",
       "isNew": true,
       "details": [
@@ -2778,18 +3040,186 @@
           "name": "sourceServerId",
           "fieldType": "string",
           "description": "The ID of the server to copy modules from\n"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
         }
       ]
     }
   ],
   "byModule": {
+    "arenaModule": [
+      {
+        "moduleName": "arenaModule",
+        "category": "events",
+        "date": "2025-11-14T16:27:43+01:00",
+        "title": "Module Updated",
+        "description": "Updated to version 1.0.1.",
+        "commitHash": "3a1a388a1c24212bbcb0d2ef31313903ad36bfc5",
+        "isNew": false,
+        "details": [
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.1",
+            "previousVersion": "1.0.0"
+          }
+        ]
+      },
+      {
+        "moduleName": "arenaModule",
+        "category": "events",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: arenaModule",
+        "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "09 arena wait 125",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "10 arena wait 135",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "04 arena wait 15",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "06 arena wait 55",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "12 arena wait 195",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "03 arena wait 5",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "07 arena wait 85",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "11 arena wait 165",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "08 arena wait 95",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "02 arena wait 2",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "01 arena",
+            "description": "A huge arena battle for only the finest soldiers"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "05 arena wait 45",
+            "description": "No help text available"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerDied",
+            "eventType": "player-death"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "ARENA_PERMISSION",
+            "description": "Gives players access to the arena command"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "xlocation",
+            "fieldType": "string",
+            "description": "East West Location"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "ylocation",
+            "fieldType": "string",
+            "description": "Height teleport location. -1 for the highest block"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "zlocation",
+            "fieldType": "string",
+            "description": "Set North South location. South is negative"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemnumber",
+            "fieldType": "number",
+            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemlist",
+            "fieldType": "array",
+            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "fixedrewards",
+            "fieldType": "array",
+            "description": "All the items in this list will be given as a reward for completing the arena."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "BuffManager": [
       {
         "moduleName": "BuffManager",
         "category": "economy",
         "date": "2025-10-16T08:45:43+02:00",
         "title": "New Module: BuffManager",
-        "description": "Added 3 commands: `buffplayer`, `debuffplayer`, `getbuff`. Added 1 hook: `Auto-Apply Buff Packages` (player-connected). Added 1 scheduled task: `check Buff Packages`. New permission: `BUFF_ADMIN`. New configuration options: `buffPackages`, `maintenanceEnabled`, `maintenanceInterval`.",
+        "description": "Updated to version latest. Added 3 commands: `buffplayer`, `debuffplayer`, `getbuff`. Added 1 hook: `Auto-Apply Buff Packages` (player-connected). Added 1 scheduled task: `check Buff Packages`. New permission: `BUFF_ADMIN`. New configuration options: `buffPackages`, `maintenanceEnabled`, `maintenanceInterval`.",
         "commitHash": "04b689656755a6613de145c38ee76dd736bb5e1a",
         "isNew": true,
         "details": [
@@ -2849,6 +3279,12 @@
             "name": "maintenanceInterval",
             "fieldType": "string",
             "description": "Cron expression for maintenance frequency (default: every 15 minutes)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -2859,7 +3295,7 @@
         "category": "PvP",
         "date": "2025-08-12T21:17:12+02:00",
         "title": "New Module: killEarner",
-        "description": "Added 1 command: `killstats`. Added 1 hook: `PvP Kill Detector` (player-death). New configuration options: `killReward`, `enableKillerMessages`, `enableVictimMessages`, `usePublicMessages`, `killerMessages`, `victimMessages`.",
+        "description": "Updated to version 0.0.1. Added 1 command: `killstats`. Added 1 hook: `PvP Kill Detector` (player-death). New configuration options: `killReward`, `enableKillerMessages`, `enableVictimMessages`, `usePublicMessages`, `killerMessages`, `victimMessages`.",
         "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
         "isNew": true,
         "details": [
@@ -2916,6 +3352,12 @@
             "name": "victimMessages",
             "fieldType": "array",
             "description": "Random messages for victims"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.1",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -2926,7 +3368,7 @@
         "category": "community-management",
         "date": "2025-08-12T21:17:12+02:00",
         "title": "New Module: DiedTeleport",
-        "description": "Added 1 command: `died`. Added 1 hook: `Death Location Capture` (player-death). New permission: `DIED_TELEPORT_USE`. New configuration option: `deathLocationExpiration`.",
+        "description": "Updated to version latest. Added 1 command: `died`. Added 1 hook: `Death Location Capture` (player-death). New permission: `DIED_TELEPORT_USE`. New configuration option: `deathLocationExpiration`.",
         "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
         "isNew": true,
         "details": [
@@ -2954,6 +3396,61 @@
             "name": "deathLocationExpiration",
             "fieldType": "number",
             "description": "How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "DynamicServerMessages": [
+      {
+        "moduleName": "DynamicServerMessages",
+        "category": "community-management",
+        "date": "2025-08-12T21:17:12+02:00",
+        "title": "Module Updated",
+        "description": "Updated to version 0.0.1.",
+        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+        "isNew": false,
+        "details": [
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.1",
+            "previousVersion": "latest"
+          }
+        ]
+      },
+      {
+        "moduleName": "DynamicServerMessages",
+        "category": "community-management",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: DynamicServerMessages",
+        "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "ServerMessagesGenerator",
+            "schedule": "5 4 * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "cronjobs",
+            "fieldType": "array",
+            "description": "List of cronjobs and their schedules"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -2964,7 +3461,7 @@
         "category": "community-management",
         "date": "2025-08-12T21:17:12+02:00",
         "title": "New Module: dynamicCronjobs",
-        "description": "Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
+        "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
         "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
         "isNew": true,
         "details": [
@@ -2980,6 +3477,12 @@
             "name": "cronjobs",
             "fieldType": "array",
             "description": "List of cronjobs and their schedules"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -2990,7 +3493,7 @@
         "category": "community-management",
         "date": "2025-08-12T21:17:12+02:00",
         "title": "New Module: playerProgressionTracker",
-        "description": "Added 3 commands: `progression`, `claim`, `resetprogression`. Added 2 hooks: `Entity Kill XP` (entity-killed), `Player Connected Playtime` (player-connected). Added 1 scheduled task: `Active Player XP`. Added 3 functions: `grantRewards`, `calculateXPWithMultiplier`, `checkLevelUp`. New permissions: `XP_MULTIPLIER`, `PROGRESSION_ADMIN`. New configuration options: `levels`, `xpSettings`, `messages`.",
+        "description": "Updated to version 0.0.1. Added 3 commands: `progression`, `claim`, `resetprogression`. Added 2 hooks: `Entity Kill XP` (entity-killed), `Player Connected Playtime` (player-connected). Added 1 scheduled task: `Active Player XP`. Added 3 functions: `grantRewards`, `calculateXPWithMultiplier`, `checkLevelUp`. New permissions: `XP_MULTIPLIER`, `PROGRESSION_ADMIN`. New configuration options: `levels`, `xpSettings`, `messages`.",
         "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
         "isNew": true,
         "details": [
@@ -3077,6 +3580,12 @@
             "name": "messages",
             "fieldType": "object",
             "description": "Messages"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.1",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3087,7 +3596,7 @@
         "category": "minigames",
         "date": "2025-08-12T21:17:12+02:00",
         "title": "New Module: horseRacing",
-        "description": "Added 8 commands: `horseLeaderboard`, `horseStats`, `startrace`, `lastRace`, `horses`, `nextRace`, `horseBet`, `mybets`. Added 1 hook: `test` (log). Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `HORSE_RACING_BET`, `HORSE_RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `Horses`.",
+        "description": "Updated to version latest. Added 8 commands: `horseLeaderboard`, `horseStats`, `startrace`, `lastRace`, `horses`, `nextRace`, `horseBet`, `mybets`. Added 1 hook: `test` (log). Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `HORSE_RACING_BET`, `HORSE_RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `Horses`.",
         "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
         "isNew": true,
         "details": [
@@ -3194,6 +3703,12 @@
             "name": "Horses",
             "fieldType": "array",
             "description": "List of horses that can race. Format: HorseName; Odds (whole number) - one horse per line"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3204,7 +3719,7 @@
         "category": "administration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: CPMCommands",
-        "description": "Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
+        "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3285,6 +3800,12 @@
             "action": "added",
             "name": "VISIT_PERMISSION",
             "description": "Gives players permission to use the visit commmand"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3295,7 +3816,7 @@
         "category": "administration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "Updated 3 Commands",
-        "description": "Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`.",
+        "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": false,
         "details": [
@@ -3314,6 +3835,12 @@
             "type": "command",
             "action": "removed",
             "name": "setwaypointpublic"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "0.0.2"
           }
         ]
       }
@@ -3324,7 +3851,7 @@
         "category": "administration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: HordeNightWarnings",
-        "description": "Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`, `enableDebugMessages`.",
+        "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`, `enableDebugMessages`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3395,6 +3922,12 @@
             "name": "enableDebugMessages",
             "fieldType": "boolean",
             "description": "If enabled, the script will send debug messages to the specified debugChannel"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3405,7 +3938,7 @@
         "category": "administration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: RegionResetRandomiser",
-        "description": "Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
+        "description": "Updated to version latest. Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3455,6 +3988,12 @@
             "name": "sendDebugMessages",
             "fieldType": "boolean",
             "description": "If enabled, debug messages will be sent to the debugChannel.\n\nThe listening channel for keyphrase triggering is specified separately in the hook, below."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3465,7 +4004,7 @@
         "category": "administration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: droneTeleports",
-        "description": "Added 1 command: `helps`. Added 1 hook: `drone Teleport` (log).",
+        "description": "Updated to version latest. Added 1 command: `helps`. Added 1 hook: `drone Teleport` (log).",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3480,6 +4019,12 @@
             "action": "added",
             "name": "drone Teleport",
             "eventType": "log"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3490,7 +4035,7 @@
         "category": "administration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: serverWipe",
-        "description": "Added 2 commands: `wipecontinue`, `wipe`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
+        "description": "Updated to version latest. Added 2 commands: `wipecontinue`, `wipe`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3544,6 +4089,12 @@
             "name": "globalAnnouncement",
             "fieldType": "string",
             "description": "Message to broadcast to all players after the wipe"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3554,7 +4105,7 @@
         "category": "anti-cheat",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: AFKChecker",
-        "description": "Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
+        "description": "Updated to version 1.0.0. Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3611,6 +4162,12 @@
             "name": "globalAnnouncement",
             "fieldType": "boolean",
             "description": "Whether to announce AFK warnings and kicks to all players on the server"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3621,7 +4178,7 @@
         "category": "anti-cheat",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: ProfanityFilter",
-        "description": "Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
+        "description": "Updated to version latest. Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3706,6 +4263,12 @@
             "name": "swearJarAmount",
             "fieldType": "number",
             "description": "swearJarAmount"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3716,7 +4279,7 @@
         "category": "anti-cheat",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: VACChecker",
-        "description": "Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
+        "description": "Updated to version latest. Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3759,6 +4322,12 @@
             "name": "DaysThreshold",
             "fieldType": "string",
             "description": "Days Threshold"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3769,7 +4338,7 @@
         "category": "anti-cheat",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: linkBlocker",
-        "description": "Added 1 hook: `linkChecker` (chat-message). New permission: `link_blocker_immunity`. New configuration options: `blockUrls`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `noPunishmentMessage`.",
+        "description": "Updated to version latest. Added 1 hook: `linkChecker` (chat-message). New permission: `link_blocker_immunity`. New configuration options: `blockUrls`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `noPunishmentMessage`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3840,6 +4409,12 @@
             "name": "noPunishmentMessage",
             "fieldType": "string",
             "description": "No Punishment Message"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3850,7 +4425,7 @@
         "category": "community-management",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: Donator",
-        "description": "Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
+        "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3878,32 +4453,12 @@
             "name": "vipkit",
             "fieldType": "array",
             "description": "VIP Items"
-          }
-        ]
-      }
-    ],
-    "DynamicServerMessages": [
-      {
-        "moduleName": "DynamicServerMessages",
-        "category": "community-management",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: DynamicServerMessages",
-        "description": "Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "ServerMessagesGenerator",
-            "schedule": "5 4 * * *"
           },
           {
-            "type": "config",
-            "action": "added",
-            "name": "cronjobs",
-            "fieldType": "array",
-            "description": "List of cronjobs and their schedules"
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -3914,7 +4469,7 @@
         "category": "community-management",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: VotingSystem",
-        "description": "Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
+        "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -3993,6 +4548,12 @@
             "name": "fixedrewards",
             "fieldType": "array",
             "description": "All the items in this list will be given as a reward for the vote."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4003,7 +4564,7 @@
         "category": "community-management",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: Whitelisting",
-        "description": "Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
+        "description": "Updated to version 0.0.1. Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4025,6 +4586,12 @@
             "name": "kickMessage",
             "fieldType": "string",
             "description": "Message to display to players who are kicked for not having the required role."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.1",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4035,7 +4602,7 @@
         "category": "economy",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: GeneralstockMarket",
-        "description": "Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
+        "description": "Updated to version latest. Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4166,6 +4733,12 @@
             "name": "priceAlertThreshold",
             "fieldType": "number",
             "description": "Percentage change that triggers a market alert (10 = 10%)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4176,7 +4749,7 @@
         "category": "economy",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: PlaytimeReward",
-        "description": "Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
+        "description": "Updated to version latest. Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4238,6 +4811,12 @@
             "name": "rewardMessage",
             "fieldType": "string",
             "description": "Message with placeholders {minutes}, {currency}, {item}"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4248,7 +4827,7 @@
         "category": "economy",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: StockMarket",
-        "description": "Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
+        "description": "Updated to version latest. Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4386,6 +4965,12 @@
             "name": "marketNewsChannelId",
             "fieldType": "string",
             "description": "The ID of the Discord channel where market news messages should be posted. Leave empty to disable."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4396,7 +4981,7 @@
         "category": "economy",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: dailyRewardsItems",
-        "description": "Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
+        "description": "Updated to version 2.0.0. Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4496,6 +5081,12 @@
             "name": "maxItemChance",
             "fieldType": "number",
             "description": "Cap for total item chance after streak multiplier (1-100)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "2.0.0",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4506,7 +5097,7 @@
         "category": "events",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: BetterBloodMoons",
-        "description": "Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
+        "description": "Updated to version latest. Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4527,6 +5118,12 @@
             "action": "added",
             "name": "BETTER_BLOOD_MOONS",
             "description": "Blood Moons"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4537,7 +5134,7 @@
         "category": "events",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: Bosskills",
-        "description": "Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
+        "description": "Updated to version 1.0.0. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4560,6 +5157,12 @@
             "name": "announceDevourer",
             "fieldType": "string",
             "description": "Post in chat Boss Kill"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4570,7 +5173,7 @@
         "category": "events",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: Rampage",
-        "description": "Added 1 command: `rampage`. New permission: `RAMPAGE_PERMISSION`. New configuration options: `rLocationX`, `rLocationY`, `rLocationZ`, `spawnEntities`.",
+        "description": "Updated to version latest. Added 1 command: `rampage`. New permission: `RAMPAGE_PERMISSION`. New configuration options: `rLocationX`, `rLocationY`, `rLocationZ`, `spawnEntities`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4613,145 +5216,12 @@
             "name": "spawnEntities",
             "fieldType": "array",
             "description": "List of Bosses/zombies to spawn"
-          }
-        ]
-      }
-    ],
-    "arenaModule": [
-      {
-        "moduleName": "arenaModule",
-        "category": "events",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: arenaModule",
-        "description": "Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "09 arena wait 125",
-            "description": "No help text available"
           },
           {
-            "type": "command",
-            "action": "added",
-            "name": "10 arena wait 135",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "04 arena wait 15",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "06 arena wait 55",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "12 arena wait 195",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "03 arena wait 5",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "07 arena wait 85",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "11 arena wait 165",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "08 arena wait 95",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "02 arena wait 2",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "01 arena",
-            "description": "A huge arena battle for only the finest soldiers"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "05 arena wait 45",
-            "description": "No help text available"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "PlayerDied",
-            "eventType": "player-death"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "ARENA_PERMISSION",
-            "description": "Gives players access to the arena command"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "xlocation",
-            "fieldType": "string",
-            "description": "East West Location"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "ylocation",
-            "fieldType": "string",
-            "description": "Height teleport location. -1 for the highest block"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "zlocation",
-            "fieldType": "string",
-            "description": "Set North South location. South is negative"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemnumber",
-            "fieldType": "number",
-            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemlist",
-            "fieldType": "array",
-            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "fixedrewards",
-            "fieldType": "array",
-            "description": "All the items in this list will be given as a reward for completing the arena."
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4762,7 +5232,7 @@
         "category": "integration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: 7dtd_ChatBridge",
-        "description": "Added 6 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `resetRegions` (log), `serverStatusChange` (server-status-changed), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `includePartyChat`, `includeFriendsChat`, `filterCommands`, `commandPrefixes`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`, `showPlayerDetails`.",
+        "description": "Updated to version latest. Added 6 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `resetRegions` (log), `serverStatusChange` (server-status-changed), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `includePartyChat`, `includeFriendsChat`, `filterCommands`, `commandPrefixes`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`, `showPlayerDetails`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4882,6 +5352,12 @@
             "name": "showPlayerDetails",
             "fieldType": "boolean",
             "description": "Show Steam profile and Takaro profile links in join/leave notifications."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4892,7 +5368,7 @@
         "category": "integration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: Translator",
-        "description": "Added 6 commands: `setplayerlanguage`, `translate`, `toggletranslation`, `translateme`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `enabledByDefault`, `defaultLanguage`, `supportedLanguages`.",
+        "description": "Updated to version 1.0.0. Added 6 commands: `setplayerlanguage`, `translate`, `toggletranslation`, `translateme`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `enabledByDefault`, `defaultLanguage`, `supportedLanguages`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -4978,6 +5454,12 @@
             "name": "supportedLanguages",
             "fieldType": "array",
             "description": "List of supported language codes for translation"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -4988,7 +5470,7 @@
         "category": "integration",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: chatbridge",
-        "description": "Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
+        "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -5064,6 +5546,12 @@
             "name": "monitoringChannelId",
             "fieldType": "string",
             "description": "Discord channel ID for monitoring messages (only used if monitoring is enabled)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5074,7 +5562,7 @@
         "category": "minigames",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: 8ball",
-        "description": "Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
+        "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -5103,6 +5591,12 @@
             "name": "responses",
             "fieldType": "array",
             "description": "Here you can edit the responses of the 8ball command. \n"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5113,7 +5607,7 @@
         "category": "minigames",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: BlackJack",
-        "description": "Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
+        "description": "Updated to version 0.0.1. Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -5140,6 +5634,12 @@
             "action": "added",
             "name": "BJhit",
             "description": "No help text available"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.1",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5150,7 +5650,7 @@
         "category": "minigames",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: Hangman",
-        "description": "Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
+        "description": "Updated to version latest. Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -5275,6 +5775,12 @@
             "name": "hostingFee",
             "fieldType": "number",
             "description": "Cost to create and host a new Hangman game"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5285,7 +5791,7 @@
         "category": "minigames",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: Roulette",
-        "description": "Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
+        "description": "Updated to version latest. Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -5351,6 +5857,12 @@
             "name": "houseEdge",
             "fieldType": "number",
             "description": "Percentage of winnings the house takes as profit (5 = 5%)."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5361,7 +5873,7 @@
         "category": "minigames",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: slotMachines",
-        "description": "Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
+        "description": "Updated to version latest. Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -5427,6 +5939,12 @@
             "name": "houseEdge",
             "fieldType": "number",
             "description": "Percentage of winnings the house takes as profit (5 = 5%)."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5437,7 +5955,7 @@
         "category": "minigames",
         "date": "2025-08-06T21:22:19+02:00",
         "title": "New Module: triviaTime",
-        "description": "Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
+        "description": "Updated to version latest. Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
         "isNew": true,
         "details": [
@@ -5486,6 +6004,12 @@
             "name": "questions",
             "fieldType": "array",
             "description": "Key value pairs of questions and answers"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5496,7 +6020,7 @@
         "category": "minigames",
         "date": "2025-07-28T15:58:49+02:00",
         "title": "New Module: 7dtd_triviaTime",
-        "description": "Added 3 commands: `playerAnswer`, `triviaboard`, `triviareset`. Added 1 scheduled task: `TriviaTime`. New permissions: `TRIVIA_PARTICIPATE`, `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`, `rewardType`, `rewardAmount`, `rewardItems`, `questions`, `triviaStartSound`, `correctAnswerSound`, `wrongAnswerSound`.",
+        "description": "Updated to version latest. Added 3 commands: `playerAnswer`, `triviaboard`, `triviareset`. Added 1 scheduled task: `TriviaTime`. New permissions: `TRIVIA_PARTICIPATE`, `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`, `rewardType`, `rewardAmount`, `rewardItems`, `questions`, `triviaStartSound`, `correctAnswerSound`, `wrongAnswerSound`.",
         "commitHash": "c890006d787c4003b5b77e7ea860edcae544c59c",
         "isNew": true,
         "details": [
@@ -5612,6 +6136,12 @@
             "name": "wrongAnswerSound",
             "fieldType": "string",
             "description": "Sound to play to the player when they answer incorrectly (leave empty to disable)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
@@ -5622,7 +6152,7 @@
         "category": "administration",
         "date": "2025-07-09T16:43:45+02:00",
         "title": "New Module: serverModuleCloner",
-        "description": "Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
+        "description": "Updated to version latest. Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
         "commitHash": "8d2998177a5ddd51d001d16606652cc7be5aeb2b",
         "isNew": true,
         "details": [
@@ -5638,10 +6168,16 @@
             "name": "sourceServerId",
             "fieldType": "string",
             "description": "The ID of the server to copy modules from\n"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
           }
         ]
       }
     ]
   },
-  "generatedAt": "2025-11-14T13:28:59.550Z"
+  "generatedAt": "2025-11-14T15:47:12.626Z"
 }
