@@ -421,6 +421,64 @@ export function formatValidationError(
 }
 
 /**
+ * Changelog Types
+ */
+
+/**
+ * Individual changelog entry for a module change
+ */
+export interface ChangelogEntry {
+  /** Name of the module that changed */
+  moduleName: string;
+  /** Category of the module */
+  category: string;
+  /** ISO date string of when the change occurred */
+  date: string;
+  /** User-friendly title summarizing the change */
+  title: string;
+  /** Detailed description focusing on use cases and user impact */
+  description: string;
+  /** Git commit hash for reference */
+  commitHash: string;
+  /** Whether this is a new module or an update */
+  isNew: boolean;
+}
+
+/**
+ * Complete changelog data structure
+ */
+export interface Changelogs {
+  /** Global changelog showing all recent changes */
+  global: ChangelogEntry[];
+  /** Changelog entries organized by module name */
+  byModule: Record<string, ChangelogEntry[]>;
+  /** ISO timestamp of when the changelog was generated */
+  generatedAt?: string;
+}
+
+/**
+ * Zod schema for changelog entries
+ */
+export const ChangelogEntrySchema = z.object({
+  moduleName: z.string().min(1, 'Module name cannot be empty'),
+  category: z.string().min(1, 'Category cannot be empty'),
+  date: z.string().min(1, 'Date cannot be empty'),
+  title: z.string().min(1, 'Title cannot be empty'),
+  description: z.string().min(1, 'Description cannot be empty'),
+  commitHash: z.string().min(1, 'Commit hash cannot be empty'),
+  isNew: z.boolean(),
+});
+
+/**
+ * Zod schema for complete changelogs
+ */
+export const ChangelogsSchema = z.object({
+  global: z.array(ChangelogEntrySchema),
+  byModule: z.record(z.array(ChangelogEntrySchema)),
+  generatedAt: z.string().optional(),
+});
+
+/**
  * Takaro API Client Types
  */
 

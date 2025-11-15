@@ -1,13 +1,15 @@
 'use client';
 
-import { ModuleWithMeta } from '@/lib/types';
+import { ModuleWithMeta, Changelogs } from '@/lib/types';
 import { useCategoryFilter } from './CategoryFilterContext';
+import GlobalChangelog from './GlobalChangelog';
 
 export interface HomeContentProps {
   modules: ModuleWithMeta[];
+  changelogs: Changelogs | null;
 }
 
-export function HomeContent({ modules }: HomeContentProps) {
+export function HomeContent({ modules, changelogs }: HomeContentProps) {
   const { setCategoryFilter } = useCategoryFilter();
 
   const handleCategoryClick = (category: string) => {
@@ -40,6 +42,11 @@ export function HomeContent({ modules }: HomeContentProps) {
               </div>
             )}
           </div>
+
+          {/* Global Changelog Section - Prominently positioned at top */}
+          {changelogs && changelogs.global.length > 0 && (
+            <GlobalChangelog changes={changelogs.global} limit={10} />
+          )}
 
           {modules.length > 0 ? (
             <div className="space-y-8">

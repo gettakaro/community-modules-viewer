@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/fetch-builtin-modules.js",
+    "prebuild": "node scripts/fetch-builtin-modules.js && node scripts/generate-changelog.js && node scripts/populate-by-module.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -22,6 +22,7 @@
     "test:e2e:prod": "./scripts/test-e2e.sh",
     "test:e2e:dev": "playwright test --config=playwright.config.js",
     "fetch:modules": "node scripts/fetch-builtin-modules.js",
+    "generate:changelog": "node scripts/generate-changelog.js && node scripts/populate-by-module.js",
     "docker:up": "docker compose up",
     "docker:build": "docker compose build",
     "docker:down": "docker compose down",
