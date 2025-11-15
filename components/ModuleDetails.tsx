@@ -855,7 +855,14 @@ export function ModuleDetails({
  */
 interface SectionWrapperProps {
   title: string;
-  icon: 'cog' | 'terminal' | 'lightning' | 'clock' | 'shield' | 'code';
+  icon:
+    | 'cog'
+    | 'terminal'
+    | 'lightning'
+    | 'clock'
+    | 'shield'
+    | 'code'
+    | 'history';
   isCollapsed: boolean;
   onToggle: () => void;
   count: number;
@@ -917,6 +924,14 @@ function SectionWrapper({
         strokeLinejoin="round"
         strokeWidth={2}
         d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+      />
+    ),
+    history: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
       />
     ),
   };
