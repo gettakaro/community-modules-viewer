@@ -9,7 +9,7 @@ const rawData = JSON.parse(fs.readFileSync('data/changelog-raw.json', 'utf8'));
 const byModule = {};
 const global = [];
 
-rawData.changes.forEach(change => {
+rawData.changes.forEach((change) => {
   // ONLY include changes that have functional modifications
   // Skip formatting/non-functional commits
   if (!change.functionalAnalysis || !change.functionalAnalysis.hasChanges) {
@@ -26,7 +26,7 @@ rawData.changes.forEach(change => {
     description: analysis.description,
     commitHash: change.commitHash,
     isNew: !change.jsonBefore,
-    details: analysis.details || []
+    details: analysis.details || [],
   };
 
   // Add to global array
@@ -43,13 +43,13 @@ rawData.changes.forEach(change => {
 global.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 // Sort each module's changes by date (newest first) and deduplicate
-Object.keys(byModule).forEach(moduleName => {
+Object.keys(byModule).forEach((moduleName) => {
   // Sort by date
   byModule[moduleName].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   // Deduplicate by commit hash (keep first occurrence)
   const seen = new Set();
-  byModule[moduleName] = byModule[moduleName].filter(change => {
+  byModule[moduleName] = byModule[moduleName].filter((change) => {
     if (seen.has(change.commitHash)) {
       return false;
     }
@@ -62,20 +62,24 @@ Object.keys(byModule).forEach(moduleName => {
 const changelogs = {
   global,
   byModule,
-  generatedAt: new Date().toISOString()
+  generatedAt: new Date().toISOString(),
 };
 
 // Write to file
 fs.writeFileSync('data/changelogs.json', JSON.stringify(changelogs, null, 2));
 
-console.log(`✅ Populated byModule for ${Object.keys(byModule).length} modules`);
+console.log(
+  `✅ Populated byModule for ${Object.keys(byModule).length} modules`,
+);
 
 // Show stats
 const modulesWithMultiple = Object.entries(byModule)
   .filter(([name, changes]) => changes.length > 1)
   .sort((a, b) => b[1].length - a[1].length);
 
-console.log(`\n📊 Modules with multiple changelog entries: ${modulesWithMultiple.length}`);
+console.log(
+  `\n📊 Modules with multiple changelog entries: ${modulesWithMultiple.length}`,
+);
 modulesWithMultiple.slice(0, 5).forEach(([name, changes]) => {
   console.log(`   ${name}: ${changes.length} changes`);
 });

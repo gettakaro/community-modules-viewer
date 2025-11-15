@@ -21,10 +21,10 @@ function getModuleCommits() {
     // Get all commits that touched module JSON files
     const logOutput = execSync(
       `git log --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json`,
-      { encoding: 'utf-8' }
+      { encoding: 'utf-8' },
     );
 
-    const lines = logOutput.split('\n').filter(line => line.trim());
+    const lines = logOutput.split('\n').filter((line) => line.trim());
     const commits = [];
     let currentCommit = null;
 
@@ -37,7 +37,7 @@ function getModuleCommits() {
           date,
           author,
           message,
-          files: []
+          files: [],
         };
         commits.push(currentCommit);
       } else if (currentCommit && line.endsWith('.json')) {
@@ -67,10 +67,9 @@ function getJsonDiff(commitHash, filePath) {
 
     try {
       // Get content after commit (this commit)
-      afterContent = execSync(
-        `git show ${commitHash}:${filePath}`,
-        { encoding: 'utf-8' }
-      );
+      afterContent = execSync(`git show ${commitHash}:${filePath}`, {
+        encoding: 'utf-8',
+      });
     } catch (e) {
       // File might be new in this commit
       afterContent = '';
@@ -78,10 +77,9 @@ function getJsonDiff(commitHash, filePath) {
 
     try {
       // Get content before commit (parent commit)
-      beforeContent = execSync(
-        `git show ${commitHash}~1:${filePath}`,
-        { encoding: 'utf-8' }
-      );
+      beforeContent = execSync(`git show ${commitHash}~1:${filePath}`, {
+        encoding: 'utf-8',
+      });
     } catch (e) {
       // File might not exist in parent commit (new file)
       beforeContent = '';
@@ -94,7 +92,9 @@ function getJsonDiff(commitHash, filePath) {
       try {
         beforeJson = JSON.parse(beforeContent);
       } catch (e) {
-        console.warn(`Failed to parse JSON before commit ${commitHash} for ${filePath}`);
+        console.warn(
+          `Failed to parse JSON before commit ${commitHash} for ${filePath}`,
+        );
       }
     }
 
@@ -102,17 +102,22 @@ function getJsonDiff(commitHash, filePath) {
       try {
         afterJson = JSON.parse(afterContent);
       } catch (e) {
-        console.warn(`Failed to parse JSON after commit ${commitHash} for ${filePath}`);
+        console.warn(
+          `Failed to parse JSON after commit ${commitHash} for ${filePath}`,
+        );
       }
     }
 
     return {
       filePath,
       before: beforeJson,
-      after: afterJson
+      after: afterJson,
     };
   } catch (error) {
-    console.error(`Error getting diff for ${filePath} at ${commitHash}:`, error.message);
+    console.error(
+      `Error getting diff for ${filePath} at ${commitHash}:`,
+      error.message,
+    );
     return null;
   }
 }
@@ -153,7 +158,9 @@ function generateChangelogData() {
 
   for (const commit of commits) {
     for (const filePath of commit.files) {
-      console.log(`Processing ${filePath} from commit ${commit.hash.substring(0, 7)}...`);
+      console.log(
+        `Processing ${filePath} from commit ${commit.hash.substring(0, 7)}...`,
+      );
 
       const diff = getJsonDiff(commit.hash, filePath);
       if (!diff || !diff.after) {
@@ -165,8 +172,14 @@ function generateChangelogData() {
       const category = extractCategory(filePath);
 
       // Analyze functional changes
-      const { analyzeFunctionalChanges } = require('./analyze-functional-changes.js');
-      const analysis = analyzeFunctionalChanges(diff.before, diff.after, moduleName);
+      const {
+        analyzeFunctionalChanges,
+      } = require('./analyze-functional-changes.js');
+      const analysis = analyzeFunctionalChanges(
+        diff.before,
+        diff.after,
+        moduleName,
+      );
 
       changes.push({
         moduleName,
@@ -179,7 +192,7 @@ function generateChangelogData() {
         jsonBefore: diff.before,
         jsonAfter: diff.after,
         // Add functional analysis
-        functionalAnalysis: analysis
+        functionalAnalysis: analysis,
       });
     }
   }
@@ -187,9 +200,13 @@ function generateChangelogData() {
   console.log(`Extracted ${changes.length} module changes`);
 
   // Count changes with functional modifications
-  const withFunctionalChanges = changes.filter(c => c.functionalAnalysis.hasChanges).length;
+  const withFunctionalChanges = changes.filter(
+    (c) => c.functionalAnalysis.hasChanges,
+  ).length;
   console.log(`  - ${withFunctionalChanges} with functional changes`);
-  console.log(`  - ${changes.length - withFunctionalChanges} formatting/non-functional changes`);
+  console.log(
+    `  - ${changes.length - withFunctionalChanges} formatting/non-functional changes`,
+  );
 
   // Create data directory if it doesn't exist
   const dataDir = path.dirname(OUTPUT_FILE);
@@ -200,7 +217,7 @@ function generateChangelogData() {
   // Write raw changelog data
   fs.writeFileSync(
     OUTPUT_FILE,
-    JSON.stringify({ changes, generatedAt: new Date().toISOString() }, null, 2)
+    JSON.stringify({ changes, generatedAt: new Date().toISOString() }, null, 2),
   );
 
   console.log(`Raw changelog data written to ${OUTPUT_FILE}`);

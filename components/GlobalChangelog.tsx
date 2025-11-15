@@ -51,14 +51,18 @@ export default function GlobalChangelog({
           </svg>
         </div>
         <span className="text-sm text-base-content/70">
-          {recentChanges.length} recent {recentChanges.length === 1 ? 'change' : 'changes'}
+          {recentChanges.length} recent{' '}
+          {recentChanges.length === 1 ? 'change' : 'changes'}
         </span>
       </div>
 
       {!isCollapsed && (
         <div className="space-y-4">
           {recentChanges.map((change, index) => (
-            <ChangelogCard key={`${change.moduleName}-${change.commitHash}-${index}`} change={change} />
+            <ChangelogCard
+              key={`${change.moduleName}-${change.commitHash}-${index}`}
+              change={change}
+            />
           ))}
         </div>
       )}

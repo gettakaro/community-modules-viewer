@@ -674,21 +674,29 @@ export function ModuleDetails({
         >
           <div className="space-y-4">
             {moduleChanges.map((change, index) => {
-              const formattedDate = new Date(change.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              });
+              const formattedDate = new Date(change.date).toLocaleDateString(
+                'en-US',
+                {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                },
+              );
 
               return (
-                <div key={`${change.commitHash}-${index}`} className="card-takaro-hover p-4">
+                <div
+                  key={`${change.commitHash}-${index}`}
+                  className="card-takaro-hover p-4"
+                >
                   <div className="flex items-start justify-between gap-4 mb-2">
                     <div className="flex items-center gap-2">
                       <h4 className="font-semibold text-takaro-text-primary">
                         {change.title}
                       </h4>
                       {change.isNew && (
-                        <span className="badge badge-success badge-sm">NEW</span>
+                        <span className="badge badge-success badge-sm">
+                          NEW
+                        </span>
                       )}
                     </div>
                     <div className="text-sm text-takaro-text-muted whitespace-nowrap">
