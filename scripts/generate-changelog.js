@@ -14,15 +14,21 @@ const OUTPUT_FILE = 'data/changelog-raw.json';
 
 /**
  * Get all commits that modified module JSON files
+ * @param {string|null} sinceCommit - Optional commit hash to start from (exclusive)
  * @returns {Array} Array of commit objects with hash, date, author, message
  */
-function getModuleCommits() {
+function getModuleCommits(sinceCommit = null) {
   try {
+    // Build git log command
+    let gitCommand = `git log --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json`;
+
+    // If we have a sinceCommit, only get commits after it
+    if (sinceCommit) {
+      gitCommand = `git log ${sinceCommit}..HEAD --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json`;
+    }
+
     // Get all commits that touched module JSON files
-    const logOutput = execSync(
-      `git log --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json`,
-      { encoding: 'utf-8' },
-    );
+    const logOutput = execSync(gitCommand, { encoding: 'utf-8' });
 
     const lines = logOutput.split('\n').filter((line) => line.trim());
     const commits = [];
@@ -147,12 +153,39 @@ function extractCategory(filePath) {
 
 /**
  * Main function to generate changelog data
+ * @param {boolean} incremental - If true, only process new commits since last run
  */
-function generateChangelogData() {
+function generateChangelogData(incremental = true) {
   console.log('Analyzing git history for module changes...');
 
-  const commits = getModuleCommits();
-  console.log(`Found ${commits.length} commits affecting module files`);
+  // Check if we should do incremental update
+  let existingData = null;
+  let lastCommit = null;
+
+  if (incremental && fs.existsSync(OUTPUT_FILE)) {
+    try {
+      existingData = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf-8'));
+      if (existingData.changes && existingData.changes.length > 0) {
+        // Get the most recent commit from existing data
+        lastCommit = existingData.changes[0].commitHash;
+        console.log(
+          `Incremental mode: Processing commits after ${lastCommit.substring(0, 7)}`,
+        );
+      }
+    } catch (error) {
+      console.warn('Could not read existing changelog data, doing full scan');
+      existingData = null;
+    }
+  }
+
+  const commits = getModuleCommits(lastCommit);
+
+  if (commits.length === 0 && existingData) {
+    console.log('No new commits found');
+    return existingData.changes;
+  }
+
+  console.log(`Found ${commits.length} new commits affecting module files`);
 
   const changes = [];
 
@@ -197,15 +230,24 @@ function generateChangelogData() {
     }
   }
 
-  console.log(`Extracted ${changes.length} module changes`);
+  console.log(`Extracted ${changes.length} new module changes`);
+
+  // Merge with existing data if in incremental mode
+  let allChanges = changes;
+  if (existingData && existingData.changes) {
+    allChanges = [...changes, ...existingData.changes];
+    console.log(
+      `Merged with ${existingData.changes.length} existing changes (total: ${allChanges.length})`,
+    );
+  }
 
   // Count changes with functional modifications
-  const withFunctionalChanges = changes.filter(
+  const withFunctionalChanges = allChanges.filter(
     (c) => c.functionalAnalysis.hasChanges,
   ).length;
   console.log(`  - ${withFunctionalChanges} with functional changes`);
   console.log(
-    `  - ${changes.length - withFunctionalChanges} formatting/non-functional changes`,
+    `  - ${allChanges.length - withFunctionalChanges} formatting/non-functional changes`,
   );
 
   // Create data directory if it doesn't exist
@@ -217,18 +259,24 @@ function generateChangelogData() {
   // Write raw changelog data
   fs.writeFileSync(
     OUTPUT_FILE,
-    JSON.stringify({ changes, generatedAt: new Date().toISOString() }, null, 2),
+    JSON.stringify(
+      { changes: allChanges, generatedAt: new Date().toISOString() },
+      null,
+      2,
+    ),
   );
 
   console.log(`Raw changelog data written to ${OUTPUT_FILE}`);
   console.log(`Functional analysis complete!`);
 
-  return changes;
+  return allChanges;
 }
 
 // Run if called directly
 if (require.main === module) {
-  generateChangelogData();
+  // Check for --full flag to force full regeneration
+  const isFull = process.argv.includes('--full');
+  generateChangelogData(!isFull); // Pass true for incremental unless --full is specified
 }
 
 module.exports = { generateChangelogData, getModuleCommits, getJsonDiff };
