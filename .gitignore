@@ -51,3 +51,4 @@ node_modules/
 !/data/builtin-modules/README.md
 
 .claude
+public/version.json

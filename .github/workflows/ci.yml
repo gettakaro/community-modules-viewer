@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate version file
+        run: node scripts/generate-version.js
+
       - name: Run format check
         run: npm run format:check
 
