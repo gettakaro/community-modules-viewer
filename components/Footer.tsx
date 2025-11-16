@@ -1,3 +1,5 @@
+import version from '@/public/version.json';
+
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-takaro-border bg-takaro-background ml-80 md:ml-80 transition-all duration-300 max-md:ml-0">
@@ -80,7 +82,7 @@ export function Footer() {
           {/* Right section - Copyright */}
           <div className="text-center md:text-right">
             <p className="text-xs text-takaro-text-muted">
-              © {new Date().getFullYear()} Takaro Community
+              © {new Date().getFullYear()} Takaro Community • {version.commit}
             </p>
           </div>
         </div>

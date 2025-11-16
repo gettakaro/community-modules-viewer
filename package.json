@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/fetch-builtin-modules.js && node scripts/generate-changelog.js && node scripts/populate-by-module.js",
+    "prebuild": "node scripts/generate-version.js && node scripts/fetch-builtin-modules.js && node scripts/generate-changelog.js && node scripts/populate-by-module.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
