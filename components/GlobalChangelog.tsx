@@ -1,30 +1,43 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { ChangelogEntry } from '@/lib/types';
 
 interface GlobalChangelogProps {
-  /** Array of recent changelog entries to display */
+  /** Array of changelog entries to display */
   changes: ChangelogEntry[];
-  /** Maximum number of changes to show (default: 10) */
-  limit?: number;
 }
 
 /**
- * GlobalChangelog component displays recent module updates on the homepage
- * Shows user-friendly descriptions of what changed and why it matters
+ * GlobalChangelog component displays module updates on the homepage
+ * Shows user-friendly descriptions of what changed with filtering options
  */
-export default function GlobalChangelog({
-  changes,
-  limit = 10,
-}: GlobalChangelogProps) {
+export default function GlobalChangelog({ changes }: GlobalChangelogProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedStatus, setSelectedStatus] = useState<string>('all');
 
-  // Take only the most recent changes up to the limit
-  const recentChanges = changes.slice(0, limit);
+  // Get unique categories from changes
+  const categories = useMemo(() => {
+    const cats = new Set(changes.map((c) => c.category));
+    return ['all', ...Array.from(cats).sort()];
+  }, [changes]);
 
-  if (recentChanges.length === 0) {
+  // Filter changes based on selected filters
+  const filteredChanges = useMemo(() => {
+    return changes.filter((change) => {
+      const categoryMatch =
+        selectedCategory === 'all' || change.category === selectedCategory;
+      const statusMatch =
+        selectedStatus === 'all' ||
+        (selectedStatus === 'new' && change.isNew) ||
+        (selectedStatus === 'updated' && !change.isNew);
+      return categoryMatch && statusMatch;
+    });
+  }, [changes, selectedCategory, selectedStatus]);
+
+  if (changes.length === 0) {
     return null;
   }
 
@@ -35,7 +48,7 @@ export default function GlobalChangelog({
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         <div className="flex items-center gap-3">
-          <h2 className="text-2xl font-bold">Recent Updates</h2>
+          <h2 className="text-2xl font-bold">Module Changelog</h2>
           <svg
             className={`w-5 h-5 transition-transform ${isCollapsed ? '' : 'rotate-90'}`}
             fill="none"
@@ -51,19 +64,63 @@ export default function GlobalChangelog({
           </svg>
         </div>
         <span className="text-sm text-base-content/70">
-          {recentChanges.length} recent{' '}
-          {recentChanges.length === 1 ? 'change' : 'changes'}
+          {filteredChanges.length} of {changes.length}{' '}
+          {filteredChanges.length === 1 ? 'change' : 'changes'}
         </span>
       </div>
 
       {!isCollapsed && (
         <div className="space-y-4">
-          {recentChanges.map((change, index) => (
-            <ChangelogCard
-              key={`${change.moduleName}-${change.commitHash}-${index}`}
-              change={change}
-            />
-          ))}
+          {/* Filter Controls */}
+          <div className="flex flex-wrap gap-4 mb-4">
+            {/* Category Filter */}
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-base-content/80">
+                Category:
+              </label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="select select-bordered select-sm"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat === 'all' ? 'All Categories' : cat}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Status Filter */}
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-base-content/80">
+                Status:
+              </label>
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+                className="select select-bordered select-sm"
+              >
+                <option value="all">All</option>
+                <option value="new">New Modules</option>
+                <option value="updated">Updates</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Changelog Entries */}
+          {filteredChanges.length > 0 ? (
+            filteredChanges.map((change, index) => (
+              <ChangelogCard
+                key={`${change.moduleName}-${change.commitHash}-${index}`}
+                change={change}
+              />
+            ))
+          ) : (
+            <div className="text-center py-8 text-base-content/60">
+              No changes match the selected filters
+            </div>
+          )}
         </div>
       )}
     </section>

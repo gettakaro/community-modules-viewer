@@ -45,7 +45,7 @@ export function HomeContent({ modules, changelogs }: HomeContentProps) {
 
           {/* Global Changelog Section - Prominently positioned at top */}
           {changelogs && changelogs.global.length > 0 && (
-            <GlobalChangelog changes={changelogs.global} limit={10} />
+            <GlobalChangelog changes={changelogs.global} />
           )}
 
           {modules.length > 0 ? (
