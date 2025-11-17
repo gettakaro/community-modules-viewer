@@ -172,7 +172,11 @@ function extractCategory(filePath) {
 
   // Old flat structure: modules/[name].json
   // Try to find the module in current location to get its category
-  if (parts.length === 2 && parts[0] === 'modules' && parts[1].endsWith('.json')) {
+  if (
+    parts.length === 2 &&
+    parts[0] === 'modules' &&
+    parts[1].endsWith('.json')
+  ) {
     const moduleName = path.basename(filePath, '.json');
     const currentLocation = findCurrentModuleLocation(moduleName);
     if (currentLocation) {
@@ -198,25 +202,42 @@ function findCurrentModuleLocation(moduleName) {
   }
 
   // Read all category directories
-  const categories = fs.readdirSync(MODULES_DIR, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
+  const categories = fs
+    .readdirSync(MODULES_DIR, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
 
   // Try exact match first
   for (const category of categories) {
-    const moduleFilePath = path.join(MODULES_DIR, category, `${moduleName}.json`);
+    const moduleFilePath = path.join(
+      MODULES_DIR,
+      category,
+      `${moduleName}.json`,
+    );
     if (fs.existsSync(moduleFilePath)) {
       return moduleFilePath;
     }
   }
 
   // Try without common prefixes (Limon_, Mad_, Trevor_, MeeBob_, R20_, etc.)
-  const prefixes = ['Limon_', 'Mad_', 'Trevor_', 'MeeBob_', 'R20_', 'MAD_', 'hvb_'];
+  const prefixes = [
+    'Limon_',
+    'Mad_',
+    'Trevor_',
+    'MeeBob_',
+    'R20_',
+    'MAD_',
+    'hvb_',
+  ];
   for (const prefix of prefixes) {
     if (moduleName.startsWith(prefix)) {
       const nameWithoutPrefix = moduleName.substring(prefix.length);
       for (const category of categories) {
-        const moduleFilePath = path.join(MODULES_DIR, category, `${nameWithoutPrefix}.json`);
+        const moduleFilePath = path.join(
+          MODULES_DIR,
+          category,
+          `${nameWithoutPrefix}.json`,
+        );
         if (fs.existsSync(moduleFilePath)) {
           return moduleFilePath;
         }
@@ -240,7 +261,11 @@ function findCurrentModuleLocation(moduleName) {
   for (const variation of nameVariations) {
     if (variation !== moduleName) {
       for (const category of categories) {
-        const moduleFilePath = path.join(MODULES_DIR, category, `${variation}.json`);
+        const moduleFilePath = path.join(
+          MODULES_DIR,
+          category,
+          `${variation}.json`,
+        );
         if (fs.existsSync(moduleFilePath)) {
           return moduleFilePath;
         }
