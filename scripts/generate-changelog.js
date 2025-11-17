@@ -147,14 +147,107 @@ function extractModuleName(filePath) {
 
 /**
  * Extract category from file path
+ * Handles multiple historical file path patterns:
+ * 1. public/modules/[category]/[name].json (current, after July 2025)
+ * 2. modules/[category]/[name].json (old with category)
+ * 3. modules/[name].json (old flat structure)
  * @param {string} filePath - Path like "public/modules/economy/MyModule.json"
  * @returns {string|null} Category name or null
  */
 function extractCategory(filePath) {
   const parts = filePath.split('/');
+
+  // Current structure: public/modules/[category]/[name].json
   if (parts.length >= 3 && parts[0] === 'public' && parts[1] === 'modules') {
     return parts[2];
   }
+
+  // Old structure with category: modules/[category]/[name].json
+  if (parts.length >= 3 && parts[0] === 'modules' && parts[1] !== '') {
+    // Only consider it a category if it's not directly a .json file
+    if (!parts[1].endsWith('.json')) {
+      return parts[1];
+    }
+  }
+
+  // Old flat structure: modules/[name].json
+  // Try to find the module in current location to get its category
+  if (parts.length === 2 && parts[0] === 'modules' && parts[1].endsWith('.json')) {
+    const moduleName = path.basename(filePath, '.json');
+    const currentLocation = findCurrentModuleLocation(moduleName);
+    if (currentLocation) {
+      return extractCategory(currentLocation); // Recursive call with current path
+    }
+    // If module can't be found in current location, use 'unknown' category
+    // This handles historical modules that have been removed or renamed
+    return 'unknown';
+  }
+
+  return null;
+}
+
+/**
+ * Find the current location of a module by name
+ * Tries exact match first, then tries without common prefixes
+ * @param {string} moduleName - Name of the module
+ * @returns {string|null} Current file path or null if not found
+ */
+function findCurrentModuleLocation(moduleName) {
+  if (!fs.existsSync(MODULES_DIR)) {
+    return null;
+  }
+
+  // Read all category directories
+  const categories = fs.readdirSync(MODULES_DIR, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+
+  // Try exact match first
+  for (const category of categories) {
+    const moduleFilePath = path.join(MODULES_DIR, category, `${moduleName}.json`);
+    if (fs.existsSync(moduleFilePath)) {
+      return moduleFilePath;
+    }
+  }
+
+  // Try without common prefixes (Limon_, Mad_, Trevor_, MeeBob_, R20_, etc.)
+  const prefixes = ['Limon_', 'Mad_', 'Trevor_', 'MeeBob_', 'R20_', 'MAD_', 'hvb_'];
+  for (const prefix of prefixes) {
+    if (moduleName.startsWith(prefix)) {
+      const nameWithoutPrefix = moduleName.substring(prefix.length);
+      for (const category of categories) {
+        const moduleFilePath = path.join(MODULES_DIR, category, `${nameWithoutPrefix}.json`);
+        if (fs.existsSync(moduleFilePath)) {
+          return moduleFilePath;
+        }
+      }
+    }
+  }
+
+  // Try common name transformations
+  const nameVariations = [
+    moduleName.replace('7dtdStockMarket', 'StockMarket'),
+    moduleName.replace('Limon_7dtdStockMarket', 'StockMarket'),
+    moduleName.replace('7dtd_triviaTime', 'triviaTime'),
+    moduleName.replace('enhanced-chat-bridge', 'chatbridge'),
+    moduleName.replace('hvb_8ball_v2', '8ball'),
+    moduleName.replace('Horde Night Warnings', 'HordeNightWarnings'),
+    moduleName.replace('In Game Commands', 'CPMCommands'),
+    moduleName.replace('Trivia Time', 'triviaTime'),
+    moduleName.replace(' ', ''), // Remove spaces
+  ];
+
+  for (const variation of nameVariations) {
+    if (variation !== moduleName) {
+      for (const category of categories) {
+        const moduleFilePath = path.join(MODULES_DIR, category, `${variation}.json`);
+        if (fs.existsSync(moduleFilePath)) {
+          return moduleFilePath;
+        }
+      }
+    }
+  }
+
   return null;
 }
 

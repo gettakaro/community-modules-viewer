@@ -3228,7 +3228,7 @@
     },
     {
       "moduleName": "Multi_VIP_Packs",
-      "category": null,
+      "category": "community-management",
       "date": "2025-07-28T11:43:53+02:00",
       "title": "New Module: Multi_VIP_Packs",
       "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `welcomeHook` (log). New configuration options: `welcomeMessage`, `vipTiers`.",
@@ -3271,7 +3271,7 @@
     },
     {
       "moduleName": "7dtd_triviaTime",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-27T21:01:11+02:00",
       "title": "Command Update: playerAnswer",
       "description": "Updated 1 command implementation.",
@@ -3287,7 +3287,7 @@
     },
     {
       "moduleName": "CPMStaffCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-27T21:01:11+02:00",
       "title": "New Module: CPMStaffCommands",
       "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -3605,7 +3605,7 @@
     },
     {
       "moduleName": "Limon_triviaTime",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-27T21:01:11+02:00",
       "title": "Command Update: playerAnswer",
       "description": "Updated to version 0.0.4. Updated 1 command implementation.",
@@ -3627,7 +3627,7 @@
     },
     {
       "moduleName": "Mad_Rampage",
-      "category": null,
+      "category": "events",
       "date": "2025-07-27T21:01:11+02:00",
       "title": "New Module: Mad_Rampage",
       "description": "Updated to version latest. Added 1 command: `rampage`. New permission: `RAMPAGE_PERMISSION`. New configuration options: `rLocationX`, `rLocationY`, `rLocationZ`, `spawnEntities`.",
@@ -3684,7 +3684,7 @@
     },
     {
       "moduleName": "backTeleports",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-27T21:01:11+02:00",
       "title": "New Module: backTeleports",
       "description": "Updated to version 0.0.1. Added 1 command: `back`. Added 1 hook: `captureTeleportLocation` (chat-message). New permission: `BACK_TELEPORT_USE`.",
@@ -3719,7 +3719,7 @@
     },
     {
       "moduleName": "7dtd_triviaTime",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-21T09:17:32+02:00",
       "title": "New Module: 7dtd_triviaTime",
       "description": "Updated to version latest. Added 3 commands: `playerAnswer`, `triviaboard`, `triviareset`. Added 1 scheduled task: `TriviaTime`. New permissions: `TRIVIA_PARTICIPATE`, `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`, `rewardType`, `rewardAmount`, `rewardItems`, `questions`, `triviaStartSound`, `correctAnswerSound`, `wrongAnswerSound`.",
@@ -3849,7 +3849,7 @@
     },
     {
       "moduleName": "Limon_triviaTime",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-21T09:17:32+02:00",
       "title": "Updated 3 Commands",
       "description": "Added 2 commands: `triviaboard`, `triviareset`. New permission: `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`. Updated 1 command implementation.",
@@ -3911,7 +3911,7 @@
     },
     {
       "moduleName": "Link_Blocker",
-      "category": null,
+      "category": "unknown",
       "date": "2025-07-21T09:17:32+02:00",
       "title": "New Module: Link_Blocker",
       "description": "Updated to version latest. Added 1 hook: `linkChecker` (chat-message). New permission: `link_blocker_immunity`. New configuration options: `blockUrls`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `noPunishmentMessage`.",
@@ -3996,7 +3996,7 @@
     },
     {
       "moduleName": "Mad_Bosskills",
-      "category": null,
+      "category": "events",
       "date": "2025-07-21T09:17:32+02:00",
       "title": "Updated 11 Hooks",
       "description": "Updated to version latest. Added 10 hooks: `Shocker` (log), `Bear` (log), `Bull` (log), `Bitch` (log), `Veteran` (log), `Carrier` (log), `Gargul` (log), `Ostiarius` (log), `Cholera` (log), `BurningFlesh` (log). New configuration options: `coinAmountTinyBoss`, `coinAmountMiniBoss`, `coinAmountBoss`, `announceGargul`, `announceBear`, `announceBitch`, `announceBurningFlesh`, `announceCholera`, `announceBull`, `announceShocker`, `announceVeteran`, `announceCarrier`, `announceOstiarius`. Removed configuration option: `coinAmountDevourer`. Updated 1 hook implementation.",
@@ -4174,7 +4174,7 @@
     },
     {
       "moduleName": "Mad_droneTeleports",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-10T07:10:03+02:00",
       "title": "New Module: Mad_droneTeleports",
       "description": "Updated to version latest. Added 1 command: `helps`. Added 1 hook: `drone Teleport` (log).",
@@ -4233,7 +4233,7 @@
     },
     {
       "moduleName": "R20_VotingSystem",
-      "category": null,
+      "category": "community-management",
       "date": "2025-07-06T12:58:00+02:00",
       "title": "Command Update: vote",
       "description": "Updated 1 command implementation.",
@@ -4249,7 +4249,7 @@
     },
     {
       "moduleName": "Limon_dynamicCronjobs",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Limon_dynamicCronjobs",
       "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
@@ -4279,7 +4279,7 @@
     },
     {
       "moduleName": "Mad_CPMCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Mad_CPMCommands",
       "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -4374,7 +4374,7 @@
     },
     {
       "moduleName": "Mad_CPMStaffCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Mad_CPMStaffCommands",
       "description": "Updated to version latest. Added 31 commands: `azomb`, `kill`, `buff - 2`, `rdd`, `pr`, `release`, `pull`, `reset1`, `reset2`, `unmute`, `th - 2`, `ban`, `th - 3`, `rpd`, `avisit`, `visitmap`, `cm  & dm`, `rvr`, `setjail`, `killall`, `buff - 1`, `kickall`, `aaaaaaa`, `arrest`, `shutdownba`, `th - 1`, `kick`, `th - 4`, `ocn`, `mute`, `wi`. New permissions: `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `KILL_PLAYER`, `CM_DM`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -4686,7 +4686,7 @@
     },
     {
       "moduleName": "Mad_serverWipe",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Mad_serverWipe",
       "description": "Updated to version latest. Added 2 commands: `wipe`, `wipecontinue`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
@@ -4754,7 +4754,7 @@
     },
     {
       "moduleName": "Trevor_HordeNightWarnings",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Trevor_HordeNightWarnings",
       "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`, `enableDebugMessages`.",
@@ -4839,7 +4839,7 @@
     },
     {
       "moduleName": "Trevor_RegionResetRandomiser",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Trevor_RegionResetRandomiser",
       "description": "Updated to version latest. Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
@@ -4903,7 +4903,7 @@
     },
     {
       "moduleName": "serverModuleCloner",
-      "category": null,
+      "category": "administration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: serverModuleCloner",
       "description": "Updated to version latest. Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
@@ -4933,7 +4933,7 @@
     },
     {
       "moduleName": "7dtdStockMarket",
-      "category": null,
+      "category": "economy",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: 7dtdStockMarket",
       "description": "Updated to version latest. Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
@@ -5085,7 +5085,7 @@
     },
     {
       "moduleName": "Limon_General_stockMarket",
-      "category": null,
+      "category": "economy",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Limon_General_stockMarket",
       "description": "Updated to version latest. Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
@@ -5230,7 +5230,7 @@
     },
     {
       "moduleName": "Limon_PlaytimeReward",
-      "category": null,
+      "category": "economy",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Limon_PlaytimeReward",
       "description": "Updated to version latest. Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
@@ -5306,7 +5306,7 @@
     },
     {
       "moduleName": "Limon_dailyRewardsItems",
-      "category": null,
+      "category": "economy",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Limon_dailyRewardsItems",
       "description": "Updated to version 2.0.0. Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
@@ -5420,7 +5420,7 @@
     },
     {
       "moduleName": "Mad_BetterBloodMoons",
-      "category": null,
+      "category": "events",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Mad_BetterBloodMoons",
       "description": "Updated to version latest. Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
@@ -5455,7 +5455,7 @@
     },
     {
       "moduleName": "Mad_Bosskills",
-      "category": null,
+      "category": "events",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Mad_Bosskills",
       "description": "Updated to version 1.0.0. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
@@ -5492,7 +5492,7 @@
     },
     {
       "moduleName": "Mad_arenaModule",
-      "category": null,
+      "category": "events",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Mad_arenaModule",
       "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -5635,7 +5635,7 @@
     },
     {
       "moduleName": "Limon_7dtd_ChatBridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Limon_7dtd_ChatBridge",
       "description": "Updated to version latest. Added 6 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `resetRegions` (log), `serverStatusChange` (server-status-changed), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `includePartyChat`, `includeFriendsChat`, `filterCommands`, `commandPrefixes`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`, `showPlayerDetails`.",
@@ -5769,7 +5769,7 @@
     },
     {
       "moduleName": "Limon_Translator",
-      "category": null,
+      "category": "integration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Limon_Translator",
       "description": "Updated to version 1.0.0. Added 6 commands: `setplayerlanguage`, `translate`, `toggletranslation`, `translateme`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `enabledByDefault`, `defaultLanguage`, `supportedLanguages`.",
@@ -5869,7 +5869,7 @@
     },
     {
       "moduleName": "Limon_chatbridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-07-03T14:31:37+02:00",
       "title": "New Module: Limon_chatbridge",
       "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -5959,7 +5959,7 @@
     },
     {
       "moduleName": "Limon_AFKChecker",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_AFKChecker",
       "description": "Updated to version 1.0.0. Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -6030,7 +6030,7 @@
     },
     {
       "moduleName": "Limon_BannedItems",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_BannedItems",
       "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
@@ -6121,7 +6121,7 @@
     },
     {
       "moduleName": "Limon_ProfanityFilter",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_ProfanityFilter",
       "description": "Updated to version latest. Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
@@ -6220,7 +6220,7 @@
     },
     {
       "moduleName": "limon_VACChecker",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: limon_VACChecker",
       "description": "Updated to version latest. Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
@@ -6277,7 +6277,7 @@
     },
     {
       "moduleName": "Limon_DynamicServerMessages",
-      "category": null,
+      "category": "community-management",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_DynamicServerMessages",
       "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
@@ -6307,7 +6307,7 @@
     },
     {
       "moduleName": "Limon_Whitelisting",
-      "category": null,
+      "category": "community-management",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_Whitelisting",
       "description": "Updated to version 0.0.1. Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
@@ -6343,7 +6343,7 @@
     },
     {
       "moduleName": "MeeBob_Donator",
-      "category": null,
+      "category": "community-management",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: MeeBob_Donator",
       "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
@@ -6385,7 +6385,7 @@
     },
     {
       "moduleName": "R20_VotingSystem",
-      "category": null,
+      "category": "community-management",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: R20_VotingSystem",
       "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -6478,7 +6478,7 @@
     },
     {
       "moduleName": "Limon_8ball",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_8ball",
       "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -6521,7 +6521,7 @@
     },
     {
       "moduleName": "Limon_Hangman",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_Hangman",
       "description": "Updated to version latest. Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
@@ -6660,7 +6660,7 @@
     },
     {
       "moduleName": "Limon_Roulette",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_Roulette",
       "description": "Updated to version latest. Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
@@ -6740,7 +6740,7 @@
     },
     {
       "moduleName": "Limon_slotMachines",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_slotMachines",
       "description": "Updated to version latest. Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
@@ -6820,7 +6820,7 @@
     },
     {
       "moduleName": "Limon_triviaTime",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Limon_triviaTime",
       "description": "Updated to version latest. Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
@@ -6883,7 +6883,7 @@
     },
     {
       "moduleName": "Mad_BlackJack",
-      "category": null,
+      "category": "minigames",
       "date": "2025-07-03T12:40:47+02:00",
       "title": "New Module: Mad_BlackJack",
       "description": "Updated to version 0.0.1. Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
@@ -6924,7 +6924,7 @@
     },
     {
       "moduleName": "7dtdStockMarket",
-      "category": null,
+      "category": "economy",
       "date": "2025-06-09T14:44:14+02:00",
       "title": "New Module: 7dtdStockMarket",
       "description": "Updated to version latest. Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
@@ -7076,7 +7076,7 @@
     },
     {
       "moduleName": "Limon_Translator",
-      "category": null,
+      "category": "integration",
       "date": "2025-06-09T14:44:14+02:00",
       "title": "Updated 3 Commands",
       "description": "Updated to version 1.0.0. Added 1 command: `gettranslation`. New configuration option: `enabledByDefault`. Removed configuration option: `commandPrefixes`. Updated 2 command implementations. Updated 1 hook implementation.",
@@ -7136,7 +7136,7 @@
     },
     {
       "moduleName": "serverModuleCloner",
-      "category": null,
+      "category": "administration",
       "date": "2025-06-09T14:44:14+02:00",
       "title": "New Module: serverModuleCloner",
       "description": "Updated to version latest. Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
@@ -7166,7 +7166,7 @@
     },
     {
       "moduleName": "Limon_AFKChecker",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-05-13T07:21:42+02:00",
       "title": "Configuration Updated",
       "description": "New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -7219,7 +7219,7 @@
     },
     {
       "moduleName": "Limon_AFKChecker",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-05-12T21:17:47+02:00",
       "title": "Configuration Updated",
       "description": "Removed configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -7260,7 +7260,7 @@
     },
     {
       "moduleName": "Limon_7dtdStockMarket",
-      "category": null,
+      "category": "economy",
       "date": "2025-05-12T21:16:51+02:00",
       "title": "New Module: Limon_7dtdStockMarket",
       "description": "Updated to version latest. Added 6 commands: `buystock`, `stockportfolio`, `triggerevent`, `sellstock`, `markets`, `stockinfo`. Added 2 scheduled tasks: `marketnews`, `updatestockprices`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
@@ -7405,7 +7405,7 @@
     },
     {
       "moduleName": "Limon_General_stockMarket",
-      "category": null,
+      "category": "unknown",
       "date": "2025-05-12T20:33:57+02:00",
       "title": "New Module: Limon_General_stockMarket",
       "description": "Updated to version latest. Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
@@ -7550,7 +7550,7 @@
     },
     {
       "moduleName": "Mad_BlackJack",
-      "category": null,
+      "category": "minigames",
       "date": "2025-05-04T15:59:55+02:00",
       "title": "New Module: Mad_BlackJack",
       "description": "Updated to version 0.0.1. Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
@@ -7591,7 +7591,7 @@
     },
     {
       "moduleName": "Limon_7dtd_ChatBridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-05-03T15:50:09+02:00",
       "title": "Hook Update: GameToDiscord",
       "description": "Updated to version latest. New configuration option: `commandPrefixes`. Removed configuration option: `onlyGlobalChat`. Updated 1 hook implementation.",
@@ -7625,7 +7625,7 @@
     },
     {
       "moduleName": "Limon_BannedItems",
-      "category": null,
+      "category": "unknown",
       "date": "2025-05-03T15:50:09+02:00",
       "title": "Configuration Updated",
       "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
@@ -7726,7 +7726,7 @@
     },
     {
       "moduleName": "Limon_slotMachines",
-      "category": null,
+      "category": "minigames",
       "date": "2025-05-03T15:50:09+02:00",
       "title": "New Module: Limon_slotMachines",
       "description": "Updated to version latest. Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
@@ -7806,7 +7806,7 @@
     },
     {
       "moduleName": "Limon_7dtd_ChatBridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-05-01T21:09:15+02:00",
       "title": "Updated 6 Hooks",
       "description": "Updated to version 2.0.6. Added 2 hooks: `resetRegions` (log), `serverStatusChange` (server-status-changed). New configuration options: `showPlayerDetails`, `includePartyChat`, `includeFriendsChat`. Updated 4 hook implementations.",
@@ -7876,7 +7876,7 @@
     },
     {
       "moduleName": "Limon_Whitelisting",
-      "category": null,
+      "category": "community-management",
       "date": "2025-05-01T17:49:40+02:00",
       "title": "New Module: Limon_Whitelisting",
       "description": "Updated to version 0.0.1. Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
@@ -7912,7 +7912,7 @@
     },
     {
       "moduleName": "Limon_AFKChecker",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-05-01T14:50:14+02:00",
       "title": "New Module: Limon_AFKChecker",
       "description": "Updated to version 1.0.0. Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -7983,7 +7983,7 @@
     },
     {
       "moduleName": "Mad_serverWipe",
-      "category": null,
+      "category": "administration",
       "date": "2025-04-23T20:30:51+02:00",
       "title": "New Module: Mad_serverWipe",
       "description": "Updated to version latest. Added 2 commands: `wipe`, `wipecontinue`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
@@ -8051,7 +8051,7 @@
     },
     {
       "moduleName": "Trevor_HordeNightWarnings",
-      "category": null,
+      "category": "administration",
       "date": "2025-04-22T19:34:35+02:00",
       "title": "Configuration Updated",
       "description": "New configuration option: `enableDebugMessages`.",
@@ -8069,7 +8069,7 @@
     },
     {
       "moduleName": "Limon_7dtd_ChatBridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-04-20T21:59:37+02:00",
       "title": "Hook Update: DiscordToGame",
       "description": "Updated to version 2.0.0. Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. Updated 1 hook implementation.",
@@ -8102,7 +8102,7 @@
     },
     {
       "moduleName": "Limon_Roulette",
-      "category": null,
+      "category": "minigames",
       "date": "2025-04-14T08:58:45+02:00",
       "title": "New Module: Limon_Roulette",
       "description": "Updated to version latest. Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
@@ -8182,7 +8182,7 @@
     },
     {
       "moduleName": "Limon_Hangman",
-      "category": null,
+      "category": "minigames",
       "date": "2025-04-13T21:06:55+02:00",
       "title": "New Module: Limon_Hangman",
       "description": "Updated to version latest. Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
@@ -8321,7 +8321,7 @@
     },
     {
       "moduleName": "Limon_7dtd_ChatBridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-04-08T12:55:53+02:00",
       "title": "New Module: Limon_7dtd_ChatBridge",
       "description": "Updated to version latest. Added 4 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -8411,7 +8411,7 @@
     },
     {
       "moduleName": "Limon_BannedItems",
-      "category": null,
+      "category": "unknown",
       "date": "2025-04-08T12:55:53+02:00",
       "title": "Configuration Updated",
       "description": "Removed configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
@@ -8457,7 +8457,7 @@
     },
     {
       "moduleName": "Limon_dailyRewardsItems",
-      "category": null,
+      "category": "economy",
       "date": "2025-04-08T12:55:53+02:00",
       "title": "New Module: Limon_dailyRewardsItems",
       "description": "Updated to version 2.0.0. Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
@@ -8571,7 +8571,7 @@
     },
     {
       "moduleName": "Mad_Bosskills",
-      "category": null,
+      "category": "events",
       "date": "2025-04-06T21:16:04+02:00",
       "title": "Hook Update: Devourer",
       "description": "Updated to version 1.0.0. Updated 1 hook implementation.",
@@ -8593,7 +8593,7 @@
     },
     {
       "moduleName": "Mad_BetterBloodMoons",
-      "category": null,
+      "category": "events",
       "date": "2025-04-06T10:54:41+02:00",
       "title": "New Module: Mad_BetterBloodMoons",
       "description": "Updated to version latest. Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
@@ -8628,7 +8628,7 @@
     },
     {
       "moduleName": "Mad_Bosskills",
-      "category": null,
+      "category": "events",
       "date": "2025-04-06T10:54:41+02:00",
       "title": "New Module: Mad_Bosskills",
       "description": "Updated to version 2.0.1. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
@@ -8665,7 +8665,7 @@
     },
     {
       "moduleName": "Mad_CPMCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-04-06T10:54:41+02:00",
       "title": "New Module: Mad_CPMCommands",
       "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -8760,7 +8760,7 @@
     },
     {
       "moduleName": "Mad_CPMStaffCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-04-06T10:54:41+02:00",
       "title": "New Module: Mad_CPMStaffCommands",
       "description": "Updated to version latest. Added 31 commands: `azomb`, `kill`, `buff - 2`, `rdd`, `pr`, `release`, `pull`, `reset1`, `reset2`, `unmute`, `th - 2`, `ban`, `th - 3`, `rpd`, `avisit`, `visitmap`, `cm  & dm`, `rvr`, `setjail`, `killall`, `buff - 1`, `kickall`, `aaaaaaa`, `arrest`, `shutdownba`, `th - 1`, `kick`, `th - 4`, `ocn`, `mute`, `wi`. New permissions: `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `KILL_PLAYER`, `CM_DM`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -9072,7 +9072,7 @@
     },
     {
       "moduleName": "Mad_arenaModule",
-      "category": null,
+      "category": "events",
       "date": "2025-04-06T10:54:41+02:00",
       "title": "New Module: Mad_arenaModule",
       "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -9215,7 +9215,7 @@
     },
     {
       "moduleName": "Limon_DynamicServerMessages",
-      "category": null,
+      "category": "community-management",
       "date": "2025-03-24T21:25:59+01:00",
       "title": "New Module: Limon_DynamicServerMessages",
       "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
@@ -9245,7 +9245,7 @@
     },
     {
       "moduleName": "Limon_ServerWipe",
-      "category": null,
+      "category": "unknown",
       "date": "2025-03-24T21:25:59+01:00",
       "title": "New Module: Limon_ServerWipe",
       "description": "Updated to version 1.0.0. Added 1 command: `wipe`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
@@ -9302,7 +9302,7 @@
     },
     {
       "moduleName": "Limon_Translator",
-      "category": null,
+      "category": "integration",
       "date": "2025-03-24T21:25:59+01:00",
       "title": "New Module: Limon_Translator",
       "description": "Updated to version latest. Added 5 commands: `translateme`, `setplayerlanguage`, `translate`, `toggletranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permissions: `AUTO_TRANSLATE_PERMISSION`, `TRANSLATE_ADMIN`, `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `defaultLanguage`, `supportedLanguages`, `commandPrefixes`.",
@@ -9408,7 +9408,7 @@
     },
     {
       "moduleName": "Limon_dynamicCronjobs",
-      "category": null,
+      "category": "community-management",
       "date": "2025-03-24T21:25:59+01:00",
       "title": "New Module: Limon_dynamicCronjobs",
       "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
@@ -9438,7 +9438,7 @@
     },
     {
       "moduleName": "limon_VACChecker",
-      "category": null,
+      "category": "unknown",
       "date": "2025-03-24T21:25:59+01:00",
       "title": "New Module: limon_VACChecker",
       "description": "Updated to version latest. Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
@@ -9495,7 +9495,7 @@
     },
     {
       "moduleName": "MAD_CPMStaffCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-03-17T13:36:36+01:00",
       "title": "Updated 6 Commands",
       "description": "Added 4 commands: `unmute`, `kick`, `release`, `mute`. Updated 2 command implementations.",
@@ -9540,7 +9540,7 @@
     },
     {
       "moduleName": "Limon_PlaytimeReward",
-      "category": null,
+      "category": "economy",
       "date": "2025-03-15T21:42:19+01:00",
       "title": "New Module: Limon_PlaytimeReward",
       "description": "Updated to version latest. Added 1 command: `playtime`. Added 11 scheduled tasks: `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
@@ -9676,7 +9676,7 @@
     },
     {
       "moduleName": "Limon_RewardPlaytime",
-      "category": null,
+      "category": "unknown",
       "date": "2025-03-15T21:06:16+01:00",
       "title": "New Module: Limon_RewardPlaytime",
       "description": "Updated to version latest. Added 1 command: `playtime`. Added 11 scheduled tasks: `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`, `useStreakMultiplier`, `streakMultiplierValue`.",
@@ -9826,7 +9826,7 @@
     },
     {
       "moduleName": "limon_Translator",
-      "category": null,
+      "category": "unknown",
       "date": "2025-03-09T20:18:13+01:00",
       "title": "New Module: limon_Translator",
       "description": "Updated to version latest. Added 4 commands: `translate`, `toggletranslation`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `defaultLanguage`, `supportedLanguages`.",
@@ -9907,7 +9907,7 @@
     },
     {
       "moduleName": "MAD_CPMCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-03-06T21:12:31+01:00",
       "title": "Updated 3 Commands",
       "description": "Updated to version 1.0.0. Added 3 commands: `gfxoff`, `debuff`, `gfxon`.",
@@ -9942,7 +9942,7 @@
     },
     {
       "moduleName": "MAD_CPMStaffCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-03-06T21:12:31+01:00",
       "title": "New Module: MAD_CPMStaffCommands",
       "description": "Updated to version latest. Added 5 commands: `ban`, `kill`, `rdd`, `avisit`, `arrest`. New permission: `STAFF_COMMANDS`. New configuration option: `discordChannel`.",
@@ -10002,7 +10002,7 @@
     },
     {
       "moduleName": "Limon_BannedItems",
-      "category": null,
+      "category": "unknown",
       "date": "2025-03-01T18:32:14+01:00",
       "title": "New Module: Limon_BannedItems",
       "description": "Updated to version latest. Added 1 scheduled task: `CheckInventoryBanneditems`. New permission: `item_ban_immunity`. New configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
@@ -10080,7 +10080,7 @@
     },
     {
       "moduleName": "Limon_ProfanityFilter",
-      "category": null,
+      "category": "anti-cheat",
       "date": "2025-03-01T18:32:14+01:00",
       "title": "New Module: Limon_ProfanityFilter",
       "description": "Updated to version latest. Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
@@ -10179,7 +10179,7 @@
     },
     {
       "moduleName": "Limon_triviaTime",
-      "category": null,
+      "category": "minigames",
       "date": "2025-03-01T18:32:14+01:00",
       "title": "New Module: Limon_triviaTime",
       "description": "Updated to version latest. Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
@@ -10242,7 +10242,7 @@
     },
     {
       "moduleName": "MAD_CPMCommands",
-      "category": null,
+      "category": "administration",
       "date": "2025-03-01T18:32:14+01:00",
       "title": "New Module: MAD_CPMCommands",
       "description": "Updated to version latest. Added 7 commands: `minibike`, `visit`, `4x4`, `gyro`, `drone`, `bicycle`, `home`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -10319,7 +10319,7 @@
     },
     {
       "moduleName": "Limon_8ball",
-      "category": null,
+      "category": "minigames",
       "date": "2025-03-01T18:02:30+01:00",
       "title": "New Module: Limon_8ball",
       "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -10362,7 +10362,7 @@
     },
     {
       "moduleName": "MeeBob_Donator",
-      "category": null,
+      "category": "community-management",
       "date": "2025-03-01T18:02:30+01:00",
       "title": "New Module: MeeBob_Donator",
       "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
@@ -10404,7 +10404,7 @@
     },
     {
       "moduleName": "R20_VotingSystem",
-      "category": null,
+      "category": "community-management",
       "date": "2025-03-01T18:02:30+01:00",
       "title": "New Module: R20_VotingSystem",
       "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -10497,7 +10497,7 @@
     },
     {
       "moduleName": "Trevor_HordeNightWarnings",
-      "category": null,
+      "category": "administration",
       "date": "2025-03-01T18:02:30+01:00",
       "title": "New Module: Trevor_HordeNightWarnings",
       "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
@@ -10575,7 +10575,7 @@
     },
     {
       "moduleName": "Horde Night Warnings",
-      "category": null,
+      "category": "administration",
       "date": "2025-02-28T15:46:32+01:00",
       "title": "New Module: Horde Night Warnings",
       "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
@@ -10653,7 +10653,7 @@
     },
     {
       "moduleName": "Trevor_BloodMoon",
-      "category": null,
+      "category": "unknown",
       "date": "2025-02-27T09:27:54+01:00",
       "title": "New Module: Trevor_BloodMoon",
       "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
@@ -10731,7 +10731,7 @@
     },
     {
       "moduleName": "In Game Commands",
-      "category": null,
+      "category": "administration",
       "date": "2025-02-25T21:29:03+00:00",
       "title": "New Module: In Game Commands",
       "description": "Added In Game Commands to the repository",
@@ -10741,7 +10741,7 @@
     },
     {
       "moduleName": "Trivia Time",
-      "category": null,
+      "category": "minigames",
       "date": "2025-02-25T21:29:03+00:00",
       "title": "New Module: Trivia Time",
       "description": "Added Trivia Time to the repository",
@@ -10751,7 +10751,7 @@
     },
     {
       "moduleName": "Limon_chatbridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-02-25T21:27:40+00:00",
       "title": "New Module: Limon_chatbridge",
       "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -10841,7 +10841,7 @@
     },
     {
       "moduleName": "hvb_8ball_v2",
-      "category": null,
+      "category": "minigames",
       "date": "2025-02-25T21:27:40+00:00",
       "title": "New Module: hvb_8ball_v2",
       "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -10884,7 +10884,7 @@
     },
     {
       "moduleName": "MAD_CPM_COMMANDS",
-      "category": null,
+      "category": "unknown",
       "date": "2025-02-25T11:36:40+01:00",
       "title": "New Module: MAD_CPM_COMMANDS",
       "description": "Added MAD_CPM_COMMANDS to the repository",
@@ -10894,7 +10894,7 @@
     },
     {
       "moduleName": "Trevor_RegionResetRandomiser",
-      "category": null,
+      "category": "administration",
       "date": "2025-02-25T11:36:40+01:00",
       "title": "New Module: Trevor_RegionResetRandomiser",
       "description": "Updated to version latest. Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
@@ -10958,7 +10958,7 @@
     },
     {
       "moduleName": "8ball",
-      "category": null,
+      "category": "minigames",
       "date": "2025-02-24T09:46:51+01:00",
       "title": "New Module: 8ball",
       "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -11001,7 +11001,7 @@
     },
     {
       "moduleName": "enhanced-chat-bridge",
-      "category": null,
+      "category": "integration",
       "date": "2025-02-24T09:46:51+01:00",
       "title": "New Module: enhanced-chat-bridge",
       "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -11091,7 +11091,7 @@
     },
     {
       "moduleName": "trivia",
-      "category": null,
+      "category": "unknown",
       "date": "2025-02-24T09:46:51+01:00",
       "title": "New Module: trivia",
       "description": "Added trivia to the repository",
@@ -12175,7 +12175,7 @@
       },
       {
         "moduleName": "CPMStaffCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-27T21:01:11+02:00",
         "title": "New Module: CPMStaffCommands",
         "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -14179,7 +14179,7 @@
       },
       {
         "moduleName": "8ball",
-        "category": null,
+        "category": "minigames",
         "date": "2025-02-24T09:46:51+01:00",
         "title": "New Module: 8ball",
         "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -14767,7 +14767,7 @@
       },
       {
         "moduleName": "7dtd_triviaTime",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-27T21:01:11+02:00",
         "title": "Command Update: playerAnswer",
         "description": "Updated 1 command implementation.",
@@ -14783,7 +14783,7 @@
       },
       {
         "moduleName": "7dtd_triviaTime",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-21T09:17:32+02:00",
         "title": "New Module: 7dtd_triviaTime",
         "description": "Updated to version latest. Added 3 commands: `playerAnswer`, `triviaboard`, `triviareset`. Added 1 scheduled task: `TriviaTime`. New permissions: `TRIVIA_PARTICIPATE`, `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`, `rewardType`, `rewardAmount`, `rewardItems`, `questions`, `triviaStartSound`, `correctAnswerSound`, `wrongAnswerSound`.",
@@ -14915,7 +14915,7 @@
     "Multi_VIP_Packs": [
       {
         "moduleName": "Multi_VIP_Packs",
-        "category": null,
+        "category": "community-management",
         "date": "2025-07-28T11:43:53+02:00",
         "title": "New Module: Multi_VIP_Packs",
         "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `welcomeHook` (log). New configuration options: `welcomeMessage`, `vipTiers`.",
@@ -14960,7 +14960,7 @@
     "Limon_triviaTime": [
       {
         "moduleName": "Limon_triviaTime",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-27T21:01:11+02:00",
         "title": "Command Update: playerAnswer",
         "description": "Updated to version 0.0.4. Updated 1 command implementation.",
@@ -14982,7 +14982,7 @@
       },
       {
         "moduleName": "Limon_triviaTime",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-21T09:17:32+02:00",
         "title": "Updated 3 Commands",
         "description": "Added 2 commands: `triviaboard`, `triviareset`. New permission: `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`. Updated 1 command implementation.",
@@ -15044,7 +15044,7 @@
       },
       {
         "moduleName": "Limon_triviaTime",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_triviaTime",
         "description": "Updated to version latest. Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
@@ -15107,7 +15107,7 @@
       },
       {
         "moduleName": "Limon_triviaTime",
-        "category": null,
+        "category": "minigames",
         "date": "2025-03-01T18:32:14+01:00",
         "title": "New Module: Limon_triviaTime",
         "description": "Updated to version latest. Added 1 command: `playerAnswer`. Added 1 scheduled task: `TriviaTime`. New permission: `TRIVIA_PARTICIPATE`. New configuration options: `rewardItems`, `rewardType`, `rewardAmount`, `questions`.",
@@ -15172,7 +15172,7 @@
     "Mad_Rampage": [
       {
         "moduleName": "Mad_Rampage",
-        "category": null,
+        "category": "events",
         "date": "2025-07-27T21:01:11+02:00",
         "title": "New Module: Mad_Rampage",
         "description": "Updated to version latest. Added 1 command: `rampage`. New permission: `RAMPAGE_PERMISSION`. New configuration options: `rLocationX`, `rLocationY`, `rLocationZ`, `spawnEntities`.",
@@ -15231,7 +15231,7 @@
     "backTeleports": [
       {
         "moduleName": "backTeleports",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-27T21:01:11+02:00",
         "title": "New Module: backTeleports",
         "description": "Updated to version 0.0.1. Added 1 command: `back`. Added 1 hook: `captureTeleportLocation` (chat-message). New permission: `BACK_TELEPORT_USE`.",
@@ -15268,7 +15268,7 @@
     "Link_Blocker": [
       {
         "moduleName": "Link_Blocker",
-        "category": null,
+        "category": "unknown",
         "date": "2025-07-21T09:17:32+02:00",
         "title": "New Module: Link_Blocker",
         "description": "Updated to version latest. Added 1 hook: `linkChecker` (chat-message). New permission: `link_blocker_immunity`. New configuration options: `blockUrls`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `noPunishmentMessage`.",
@@ -15355,7 +15355,7 @@
     "Mad_Bosskills": [
       {
         "moduleName": "Mad_Bosskills",
-        "category": null,
+        "category": "events",
         "date": "2025-07-21T09:17:32+02:00",
         "title": "Updated 11 Hooks",
         "description": "Updated to version latest. Added 10 hooks: `Shocker` (log), `Bear` (log), `Bull` (log), `Bitch` (log), `Veteran` (log), `Carrier` (log), `Gargul` (log), `Ostiarius` (log), `Cholera` (log), `BurningFlesh` (log). New configuration options: `coinAmountTinyBoss`, `coinAmountMiniBoss`, `coinAmountBoss`, `announceGargul`, `announceBear`, `announceBitch`, `announceBurningFlesh`, `announceCholera`, `announceBull`, `announceShocker`, `announceVeteran`, `announceCarrier`, `announceOstiarius`. Removed configuration option: `coinAmountDevourer`. Updated 1 hook implementation.",
@@ -15533,7 +15533,7 @@
       },
       {
         "moduleName": "Mad_Bosskills",
-        "category": null,
+        "category": "events",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Mad_Bosskills",
         "description": "Updated to version 1.0.0. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
@@ -15570,7 +15570,7 @@
       },
       {
         "moduleName": "Mad_Bosskills",
-        "category": null,
+        "category": "events",
         "date": "2025-04-06T21:16:04+02:00",
         "title": "Hook Update: Devourer",
         "description": "Updated to version 1.0.0. Updated 1 hook implementation.",
@@ -15592,7 +15592,7 @@
       },
       {
         "moduleName": "Mad_Bosskills",
-        "category": null,
+        "category": "events",
         "date": "2025-04-06T10:54:41+02:00",
         "title": "New Module: Mad_Bosskills",
         "description": "Updated to version 2.0.1. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
@@ -15631,7 +15631,7 @@
     "Mad_droneTeleports": [
       {
         "moduleName": "Mad_droneTeleports",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-10T07:10:03+02:00",
         "title": "New Module: Mad_droneTeleports",
         "description": "Updated to version latest. Added 1 command: `helps`. Added 1 hook: `drone Teleport` (log).",
@@ -15692,7 +15692,7 @@
       },
       {
         "moduleName": "serverModuleCloner",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: serverModuleCloner",
         "description": "Updated to version latest. Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
@@ -15722,7 +15722,7 @@
       },
       {
         "moduleName": "serverModuleCloner",
-        "category": null,
+        "category": "administration",
         "date": "2025-06-09T14:44:14+02:00",
         "title": "New Module: serverModuleCloner",
         "description": "Updated to version latest. Added 1 scheduled task: `my-cronjob`. New configuration option: `sourceServerId`.",
@@ -15754,7 +15754,7 @@
     "R20_VotingSystem": [
       {
         "moduleName": "R20_VotingSystem",
-        "category": null,
+        "category": "community-management",
         "date": "2025-07-06T12:58:00+02:00",
         "title": "Command Update: vote",
         "description": "Updated 1 command implementation.",
@@ -15770,7 +15770,7 @@
       },
       {
         "moduleName": "R20_VotingSystem",
-        "category": null,
+        "category": "community-management",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: R20_VotingSystem",
         "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -15863,7 +15863,7 @@
       },
       {
         "moduleName": "R20_VotingSystem",
-        "category": null,
+        "category": "community-management",
         "date": "2025-03-01T18:02:30+01:00",
         "title": "New Module: R20_VotingSystem",
         "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -15958,7 +15958,7 @@
     "Limon_dynamicCronjobs": [
       {
         "moduleName": "Limon_dynamicCronjobs",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Limon_dynamicCronjobs",
         "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
@@ -15988,7 +15988,7 @@
       },
       {
         "moduleName": "Limon_dynamicCronjobs",
-        "category": null,
+        "category": "community-management",
         "date": "2025-03-24T21:25:59+01:00",
         "title": "New Module: Limon_dynamicCronjobs",
         "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
@@ -16020,7 +16020,7 @@
     "Mad_CPMCommands": [
       {
         "moduleName": "Mad_CPMCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Mad_CPMCommands",
         "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -16115,7 +16115,7 @@
       },
       {
         "moduleName": "Mad_CPMCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-04-06T10:54:41+02:00",
         "title": "New Module: Mad_CPMCommands",
         "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -16212,7 +16212,7 @@
     "Mad_CPMStaffCommands": [
       {
         "moduleName": "Mad_CPMStaffCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Mad_CPMStaffCommands",
         "description": "Updated to version latest. Added 31 commands: `azomb`, `kill`, `buff - 2`, `rdd`, `pr`, `release`, `pull`, `reset1`, `reset2`, `unmute`, `th - 2`, `ban`, `th - 3`, `rpd`, `avisit`, `visitmap`, `cm  & dm`, `rvr`, `setjail`, `killall`, `buff - 1`, `kickall`, `aaaaaaa`, `arrest`, `shutdownba`, `th - 1`, `kick`, `th - 4`, `ocn`, `mute`, `wi`. New permissions: `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `KILL_PLAYER`, `CM_DM`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -16524,7 +16524,7 @@
       },
       {
         "moduleName": "Mad_CPMStaffCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-04-06T10:54:41+02:00",
         "title": "New Module: Mad_CPMStaffCommands",
         "description": "Updated to version latest. Added 31 commands: `azomb`, `kill`, `buff - 2`, `rdd`, `pr`, `release`, `pull`, `reset1`, `reset2`, `unmute`, `th - 2`, `ban`, `th - 3`, `rpd`, `avisit`, `visitmap`, `cm  & dm`, `rvr`, `setjail`, `killall`, `buff - 1`, `kickall`, `aaaaaaa`, `arrest`, `shutdownba`, `th - 1`, `kick`, `th - 4`, `ocn`, `mute`, `wi`. New permissions: `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `KILL_PLAYER`, `CM_DM`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -16838,7 +16838,7 @@
     "Mad_serverWipe": [
       {
         "moduleName": "Mad_serverWipe",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Mad_serverWipe",
         "description": "Updated to version latest. Added 2 commands: `wipe`, `wipecontinue`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
@@ -16906,7 +16906,7 @@
       },
       {
         "moduleName": "Mad_serverWipe",
-        "category": null,
+        "category": "administration",
         "date": "2025-04-23T20:30:51+02:00",
         "title": "New Module: Mad_serverWipe",
         "description": "Updated to version latest. Added 2 commands: `wipe`, `wipecontinue`. Added 1 function: `wipeHelpers.js`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
@@ -16976,7 +16976,7 @@
     "Trevor_HordeNightWarnings": [
       {
         "moduleName": "Trevor_HordeNightWarnings",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Trevor_HordeNightWarnings",
         "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`, `enableDebugMessages`.",
@@ -17061,7 +17061,7 @@
       },
       {
         "moduleName": "Trevor_HordeNightWarnings",
-        "category": null,
+        "category": "administration",
         "date": "2025-04-22T19:34:35+02:00",
         "title": "Configuration Updated",
         "description": "New configuration option: `enableDebugMessages`.",
@@ -17079,7 +17079,7 @@
       },
       {
         "moduleName": "Trevor_HordeNightWarnings",
-        "category": null,
+        "category": "administration",
         "date": "2025-03-01T18:02:30+01:00",
         "title": "New Module: Trevor_HordeNightWarnings",
         "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
@@ -17159,7 +17159,7 @@
     "Trevor_RegionResetRandomiser": [
       {
         "moduleName": "Trevor_RegionResetRandomiser",
-        "category": null,
+        "category": "administration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Trevor_RegionResetRandomiser",
         "description": "Updated to version latest. Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
@@ -17223,7 +17223,7 @@
       },
       {
         "moduleName": "Trevor_RegionResetRandomiser",
-        "category": null,
+        "category": "administration",
         "date": "2025-02-25T11:36:40+01:00",
         "title": "New Module: Trevor_RegionResetRandomiser",
         "description": "Updated to version latest. Added 1 hook: `randomiseResetRegions` (discord-message). Added 1 scheduled task: `randomiseResetRegions`. New configuration options: `resetQuantity`, `debugChannel`, `authorisedPlayer`, `activationPhrase`, `sendDebugMessages`.",
@@ -17289,7 +17289,7 @@
     "7dtdStockMarket": [
       {
         "moduleName": "7dtdStockMarket",
-        "category": null,
+        "category": "economy",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: 7dtdStockMarket",
         "description": "Updated to version latest. Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
@@ -17441,7 +17441,7 @@
       },
       {
         "moduleName": "7dtdStockMarket",
-        "category": null,
+        "category": "economy",
         "date": "2025-06-09T14:44:14+02:00",
         "title": "New Module: 7dtdStockMarket",
         "description": "Updated to version latest. Added 6 commands: `buystock`, `triggerevent`, `sellstock`, `markets`, `stockinfo`, `stockportfolio`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`, `marketNewsChannelId`.",
@@ -17595,7 +17595,7 @@
     "Limon_General_stockMarket": [
       {
         "moduleName": "Limon_General_stockMarket",
-        "category": null,
+        "category": "economy",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Limon_General_stockMarket",
         "description": "Updated to version latest. Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
@@ -17740,7 +17740,7 @@
       },
       {
         "moduleName": "Limon_General_stockMarket",
-        "category": null,
+        "category": "unknown",
         "date": "2025-05-12T20:33:57+02:00",
         "title": "New Module: Limon_General_stockMarket",
         "description": "Updated to version latest. Added 6 commands: `buystock`, `sellstock`, `stockportfolio`, `markets`, `stockinfo`, `triggerevent`. Added 2 scheduled tasks: `updatestockprices`, `marketnews`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
@@ -17887,7 +17887,7 @@
     "Limon_PlaytimeReward": [
       {
         "moduleName": "Limon_PlaytimeReward",
-        "category": null,
+        "category": "economy",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Limon_PlaytimeReward",
         "description": "Updated to version latest. Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
@@ -17963,7 +17963,7 @@
       },
       {
         "moduleName": "Limon_PlaytimeReward",
-        "category": null,
+        "category": "economy",
         "date": "2025-03-15T21:42:19+01:00",
         "title": "New Module: Limon_PlaytimeReward",
         "description": "Updated to version latest. Added 1 command: `playtime`. Added 11 scheduled tasks: `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
@@ -18101,7 +18101,7 @@
     "Limon_dailyRewardsItems": [
       {
         "moduleName": "Limon_dailyRewardsItems",
-        "category": null,
+        "category": "economy",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Limon_dailyRewardsItems",
         "description": "Updated to version 2.0.0. Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
@@ -18215,7 +18215,7 @@
       },
       {
         "moduleName": "Limon_dailyRewardsItems",
-        "category": null,
+        "category": "economy",
         "date": "2025-04-08T12:55:53+02:00",
         "title": "New Module: Limon_dailyRewardsItems",
         "description": "Updated to version 2.0.0. Added 3 commands: `streak`, `daily`, `topstreak`. Added 1 hook: `dailyLoginCheck` (player-connected). Added 1 function: `utils`. New permissions: `DAILY_CLAIM`, `DAILY_REWARD_MULTIPLIER`. New configuration options: `baseReward`, `maxStreak`, `milestoneRewards`, `possibleItems`, `itemChance`, `useStreakMultiplier`, `streakMultiplierValue`, `maxItemChance`.",
@@ -18331,7 +18331,7 @@
     "Mad_BetterBloodMoons": [
       {
         "moduleName": "Mad_BetterBloodMoons",
-        "category": null,
+        "category": "events",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Mad_BetterBloodMoons",
         "description": "Updated to version latest. Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
@@ -18366,7 +18366,7 @@
       },
       {
         "moduleName": "Mad_BetterBloodMoons",
-        "category": null,
+        "category": "events",
         "date": "2025-04-06T10:54:41+02:00",
         "title": "New Module: Mad_BetterBloodMoons",
         "description": "Updated to version latest. Added 2 commands: `BBMoff`, `BBM`. New permission: `BETTER_BLOOD_MOONS`.",
@@ -18403,7 +18403,7 @@
     "Mad_arenaModule": [
       {
         "moduleName": "Mad_arenaModule",
-        "category": null,
+        "category": "events",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Mad_arenaModule",
         "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -18546,7 +18546,7 @@
       },
       {
         "moduleName": "Mad_arenaModule",
-        "category": null,
+        "category": "events",
         "date": "2025-04-06T10:54:41+02:00",
         "title": "New Module: Mad_arenaModule",
         "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
@@ -18691,7 +18691,7 @@
     "Limon_7dtd_ChatBridge": [
       {
         "moduleName": "Limon_7dtd_ChatBridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Limon_7dtd_ChatBridge",
         "description": "Updated to version latest. Added 6 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `resetRegions` (log), `serverStatusChange` (server-status-changed), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `includePartyChat`, `includeFriendsChat`, `filterCommands`, `commandPrefixes`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`, `showPlayerDetails`.",
@@ -18825,7 +18825,7 @@
       },
       {
         "moduleName": "Limon_7dtd_ChatBridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-05-03T15:50:09+02:00",
         "title": "Hook Update: GameToDiscord",
         "description": "Updated to version latest. New configuration option: `commandPrefixes`. Removed configuration option: `onlyGlobalChat`. Updated 1 hook implementation.",
@@ -18859,7 +18859,7 @@
       },
       {
         "moduleName": "Limon_7dtd_ChatBridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-05-01T21:09:15+02:00",
         "title": "Updated 6 Hooks",
         "description": "Updated to version 2.0.6. Added 2 hooks: `resetRegions` (log), `serverStatusChange` (server-status-changed). New configuration options: `showPlayerDetails`, `includePartyChat`, `includeFriendsChat`. Updated 4 hook implementations.",
@@ -18929,7 +18929,7 @@
       },
       {
         "moduleName": "Limon_7dtd_ChatBridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-04-20T21:59:37+02:00",
         "title": "Hook Update: DiscordToGame",
         "description": "Updated to version 2.0.0. Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. Updated 1 hook implementation.",
@@ -18962,7 +18962,7 @@
       },
       {
         "moduleName": "Limon_7dtd_ChatBridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-04-08T12:55:53+02:00",
         "title": "New Module: Limon_7dtd_ChatBridge",
         "description": "Updated to version latest. Added 4 hooks: `GameToDiscord` (chat-message), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -19054,7 +19054,7 @@
     "Limon_Translator": [
       {
         "moduleName": "Limon_Translator",
-        "category": null,
+        "category": "integration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Limon_Translator",
         "description": "Updated to version 1.0.0. Added 6 commands: `setplayerlanguage`, `translate`, `toggletranslation`, `translateme`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `enabledByDefault`, `defaultLanguage`, `supportedLanguages`.",
@@ -19154,7 +19154,7 @@
       },
       {
         "moduleName": "Limon_Translator",
-        "category": null,
+        "category": "integration",
         "date": "2025-06-09T14:44:14+02:00",
         "title": "Updated 3 Commands",
         "description": "Updated to version 1.0.0. Added 1 command: `gettranslation`. New configuration option: `enabledByDefault`. Removed configuration option: `commandPrefixes`. Updated 2 command implementations. Updated 1 hook implementation.",
@@ -19214,7 +19214,7 @@
       },
       {
         "moduleName": "Limon_Translator",
-        "category": null,
+        "category": "integration",
         "date": "2025-03-24T21:25:59+01:00",
         "title": "New Module: Limon_Translator",
         "description": "Updated to version latest. Added 5 commands: `translateme`, `setplayerlanguage`, `translate`, `toggletranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permissions: `AUTO_TRANSLATE_PERMISSION`, `TRANSLATE_ADMIN`, `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `defaultLanguage`, `supportedLanguages`, `commandPrefixes`.",
@@ -19322,7 +19322,7 @@
     "Limon_chatbridge": [
       {
         "moduleName": "Limon_chatbridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-07-03T14:31:37+02:00",
         "title": "New Module: Limon_chatbridge",
         "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -19412,7 +19412,7 @@
       },
       {
         "moduleName": "Limon_chatbridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-02-25T21:27:40+00:00",
         "title": "New Module: Limon_chatbridge",
         "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -19504,7 +19504,7 @@
     "Limon_AFKChecker": [
       {
         "moduleName": "Limon_AFKChecker",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_AFKChecker",
         "description": "Updated to version 1.0.0. Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -19575,7 +19575,7 @@
       },
       {
         "moduleName": "Limon_AFKChecker",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-05-13T07:21:42+02:00",
         "title": "Configuration Updated",
         "description": "New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -19628,7 +19628,7 @@
       },
       {
         "moduleName": "Limon_AFKChecker",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-05-12T21:17:47+02:00",
         "title": "Configuration Updated",
         "description": "Removed configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -19669,7 +19669,7 @@
       },
       {
         "moduleName": "Limon_AFKChecker",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-05-01T14:50:14+02:00",
         "title": "New Module: Limon_AFKChecker",
         "description": "Updated to version 1.0.0. Added 1 scheduled task: `afkChecker`. New permission: `AFK_IMMUNITY`. New configuration options: `minutesBeforeKick`, `maxAfkChecks`, `kickMessage`, `sendWarning`, `warningMessage`, `globalAnnouncement`.",
@@ -19742,7 +19742,7 @@
     "Limon_BannedItems": [
       {
         "moduleName": "Limon_BannedItems",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_BannedItems",
         "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
@@ -19833,7 +19833,7 @@
       },
       {
         "moduleName": "Limon_BannedItems",
-        "category": null,
+        "category": "unknown",
         "date": "2025-05-03T15:50:09+02:00",
         "title": "Configuration Updated",
         "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
@@ -19934,7 +19934,7 @@
       },
       {
         "moduleName": "Limon_BannedItems",
-        "category": null,
+        "category": "unknown",
         "date": "2025-04-08T12:55:53+02:00",
         "title": "Configuration Updated",
         "description": "Removed configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
@@ -19980,7 +19980,7 @@
       },
       {
         "moduleName": "Limon_BannedItems",
-        "category": null,
+        "category": "unknown",
         "date": "2025-03-01T18:32:14+01:00",
         "title": "New Module: Limon_BannedItems",
         "description": "Updated to version latest. Added 1 scheduled task: `CheckInventoryBanneditems`. New permission: `item_ban_immunity`. New configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
@@ -20060,7 +20060,7 @@
     "Limon_ProfanityFilter": [
       {
         "moduleName": "Limon_ProfanityFilter",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_ProfanityFilter",
         "description": "Updated to version latest. Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
@@ -20159,7 +20159,7 @@
       },
       {
         "moduleName": "Limon_ProfanityFilter",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-03-01T18:32:14+01:00",
         "title": "New Module: Limon_ProfanityFilter",
         "description": "Updated to version latest. Added 1 hook: `profanityChecker` (chat-message). New permission: `profanity_immunity`. New configuration options: `HVB_Profanity`, `noPunishmentMessage`, `punishmentType`, `banDuration`, `warningsBeforePunishment`, `warningResetTime`, `kickMessage`, `banMessage`, `enableSwearJar`, `swearJarAmount`.",
@@ -20260,7 +20260,7 @@
     "limon_VACChecker": [
       {
         "moduleName": "limon_VACChecker",
-        "category": null,
+        "category": "anti-cheat",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: limon_VACChecker",
         "description": "Updated to version latest. Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
@@ -20317,7 +20317,7 @@
       },
       {
         "moduleName": "limon_VACChecker",
-        "category": null,
+        "category": "unknown",
         "date": "2025-03-24T21:25:59+01:00",
         "title": "New Module: limon_VACChecker",
         "description": "Updated to version latest. Added 1 hook: `vac-checker` (player-connected). New permission: `VAC_BAN_IMMUNITY`. New configuration options: `PunishmentType`, `Ban Duration`, `PunishmentMessage`, `DaysThreshold`.",
@@ -20376,7 +20376,7 @@
     "Limon_DynamicServerMessages": [
       {
         "moduleName": "Limon_DynamicServerMessages",
-        "category": null,
+        "category": "community-management",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_DynamicServerMessages",
         "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
@@ -20406,7 +20406,7 @@
       },
       {
         "moduleName": "Limon_DynamicServerMessages",
-        "category": null,
+        "category": "community-management",
         "date": "2025-03-24T21:25:59+01:00",
         "title": "New Module: Limon_DynamicServerMessages",
         "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
@@ -20438,7 +20438,7 @@
     "Limon_Whitelisting": [
       {
         "moduleName": "Limon_Whitelisting",
-        "category": null,
+        "category": "community-management",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_Whitelisting",
         "description": "Updated to version 0.0.1. Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
@@ -20474,7 +20474,7 @@
       },
       {
         "moduleName": "Limon_Whitelisting",
-        "category": null,
+        "category": "community-management",
         "date": "2025-05-01T17:49:40+02:00",
         "title": "New Module: Limon_Whitelisting",
         "description": "Updated to version 0.0.1. Added 1 hook: `whitelisting` (player-connected). New permission: `WHITELIST_ACCESS`. New configuration option: `kickMessage`.",
@@ -20512,7 +20512,7 @@
     "MeeBob_Donator": [
       {
         "moduleName": "MeeBob_Donator",
-        "category": null,
+        "category": "community-management",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: MeeBob_Donator",
         "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
@@ -20554,7 +20554,7 @@
       },
       {
         "moduleName": "MeeBob_Donator",
-        "category": null,
+        "category": "community-management",
         "date": "2025-03-01T18:02:30+01:00",
         "title": "New Module: MeeBob_Donator",
         "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
@@ -20598,7 +20598,7 @@
     "Limon_8ball": [
       {
         "moduleName": "Limon_8ball",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_8ball",
         "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -20641,7 +20641,7 @@
       },
       {
         "moduleName": "Limon_8ball",
-        "category": null,
+        "category": "minigames",
         "date": "2025-03-01T18:02:30+01:00",
         "title": "New Module: Limon_8ball",
         "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -20686,7 +20686,7 @@
     "Limon_Hangman": [
       {
         "moduleName": "Limon_Hangman",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_Hangman",
         "description": "Updated to version latest. Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
@@ -20825,7 +20825,7 @@
       },
       {
         "moduleName": "Limon_Hangman",
-        "category": null,
+        "category": "minigames",
         "date": "2025-04-13T21:06:55+02:00",
         "title": "New Module: Limon_Hangman",
         "description": "Updated to version latest. Added 6 commands: `hangmanStart`, `hangmanJoin`, `hangmanGuess`, `hangmanStatus`, `hangmanReveal`, `hangmanCancel`. Added 1 function: `utils`. New permissions: `HANGMAN_HOST`, `HANGMAN_PLAY`, `HANGMAN_ADMIN`. New configuration options: `maxWrongGuesses`, `winReward`, `hostReward`, `gameTimeout`, `minWordLength`, `maxWordLength`, `entryFee`, `guessPrice`, `hostingFee`.",
@@ -20966,7 +20966,7 @@
     "Limon_Roulette": [
       {
         "moduleName": "Limon_Roulette",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_Roulette",
         "description": "Updated to version latest. Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
@@ -21046,7 +21046,7 @@
       },
       {
         "moduleName": "Limon_Roulette",
-        "category": null,
+        "category": "minigames",
         "date": "2025-04-14T08:58:45+02:00",
         "title": "New Module: Limon_Roulette",
         "description": "Updated to version latest. Added 4 commands: `roulettestats`, `roulettereset`, `rouletterules`, `roulette`. New permissions: `ROULETTE_PLAY`, `ROULETTE_HIGHER_LIMITS`, `ROULETTE_ADMIN`. New configuration options: `minimumBet`, `maximumBet`, `houseEdge`.",
@@ -21128,7 +21128,7 @@
     "Limon_slotMachines": [
       {
         "moduleName": "Limon_slotMachines",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Limon_slotMachines",
         "description": "Updated to version latest. Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
@@ -21208,7 +21208,7 @@
       },
       {
         "moduleName": "Limon_slotMachines",
-        "category": null,
+        "category": "minigames",
         "date": "2025-05-03T15:50:09+02:00",
         "title": "New Module: Limon_slotMachines",
         "description": "Updated to version latest. Added 4 commands: `slots`, `slotsstats`, `slotsreset`, `slotsrules`. New permissions: `SLOTS_PLAY`, `SLOTS_HIGHER_LIMITS`, `SLOTS_ADMIN`. New configuration options: `minimumBet `, `maximumBet`, `houseEdge`.",
@@ -21290,7 +21290,7 @@
     "Mad_BlackJack": [
       {
         "moduleName": "Mad_BlackJack",
-        "category": null,
+        "category": "minigames",
         "date": "2025-07-03T12:40:47+02:00",
         "title": "New Module: Mad_BlackJack",
         "description": "Updated to version 0.0.1. Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
@@ -21331,7 +21331,7 @@
       },
       {
         "moduleName": "Mad_BlackJack",
-        "category": null,
+        "category": "minigames",
         "date": "2025-05-04T15:59:55+02:00",
         "title": "New Module: Mad_BlackJack",
         "description": "Updated to version 0.0.1. Added 4 commands: `BJstatus`, `BJplay`, `BJstand`, `BJhit`.",
@@ -21374,7 +21374,7 @@
     "Limon_7dtdStockMarket": [
       {
         "moduleName": "Limon_7dtdStockMarket",
-        "category": null,
+        "category": "economy",
         "date": "2025-05-12T21:16:51+02:00",
         "title": "New Module: Limon_7dtdStockMarket",
         "description": "Updated to version latest. Added 6 commands: `buystock`, `stockportfolio`, `triggerevent`, `sellstock`, `markets`, `stockinfo`. Added 2 scheduled tasks: `marketnews`, `updatestockprices`. New permissions: `STOCK_MARKET_USE`, `STOCK_MARKET_TRADE`, `STOCK_MARKET_BROKER`, `STOCK_MARKET_TRIGGER_EVENT`. New configuration options: `sectors`, `stocks`, `marketEvents`, `eventFrequency`, `defaultEventDuration`, `transactionFee`, `vipDiscount`, `priceAlertThreshold`.",
@@ -21521,7 +21521,7 @@
     "Limon_ServerWipe": [
       {
         "moduleName": "Limon_ServerWipe",
-        "category": null,
+        "category": "unknown",
         "date": "2025-03-24T21:25:59+01:00",
         "title": "New Module: Limon_ServerWipe",
         "description": "Updated to version 1.0.0. Added 1 command: `wipe`. New permission: `SERVER_WIPE`. New configuration options: `wipeCurrency`, `wipeTeleports`, `wipeStarterKitClaims`, `globalAnnouncement`.",
@@ -21580,7 +21580,7 @@
     "MAD_CPMStaffCommands": [
       {
         "moduleName": "MAD_CPMStaffCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-03-17T13:36:36+01:00",
         "title": "Updated 6 Commands",
         "description": "Added 4 commands: `unmute`, `kick`, `release`, `mute`. Updated 2 command implementations.",
@@ -21625,7 +21625,7 @@
       },
       {
         "moduleName": "MAD_CPMStaffCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-03-06T21:12:31+01:00",
         "title": "New Module: MAD_CPMStaffCommands",
         "description": "Updated to version latest. Added 5 commands: `ban`, `kill`, `rdd`, `avisit`, `arrest`. New permission: `STAFF_COMMANDS`. New configuration option: `discordChannel`.",
@@ -21687,7 +21687,7 @@
     "Limon_RewardPlaytime": [
       {
         "moduleName": "Limon_RewardPlaytime",
-        "category": null,
+        "category": "unknown",
         "date": "2025-03-15T21:06:16+01:00",
         "title": "New Module: Limon_RewardPlaytime",
         "description": "Updated to version latest. Added 1 command: `playtime`. Added 11 scheduled tasks: `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`, `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`, `useStreakMultiplier`, `streakMultiplierValue`.",
@@ -21839,7 +21839,7 @@
     "limon_Translator": [
       {
         "moduleName": "limon_Translator",
-        "category": null,
+        "category": "unknown",
         "date": "2025-03-09T20:18:13+01:00",
         "title": "New Module: limon_Translator",
         "description": "Updated to version latest. Added 4 commands: `translate`, `toggletranslation`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `defaultLanguage`, `supportedLanguages`.",
@@ -21922,7 +21922,7 @@
     "MAD_CPMCommands": [
       {
         "moduleName": "MAD_CPMCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-03-06T21:12:31+01:00",
         "title": "Updated 3 Commands",
         "description": "Updated to version 1.0.0. Added 3 commands: `gfxoff`, `debuff`, `gfxon`.",
@@ -21957,7 +21957,7 @@
       },
       {
         "moduleName": "MAD_CPMCommands",
-        "category": null,
+        "category": "administration",
         "date": "2025-03-01T18:32:14+01:00",
         "title": "New Module: MAD_CPMCommands",
         "description": "Updated to version latest. Added 7 commands: `minibike`, `visit`, `4x4`, `gyro`, `drone`, `bicycle`, `home`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -22036,7 +22036,7 @@
     "Horde Night Warnings": [
       {
         "moduleName": "Horde Night Warnings",
-        "category": null,
+        "category": "administration",
         "date": "2025-02-28T15:46:32+01:00",
         "title": "New Module: Horde Night Warnings",
         "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
@@ -22116,7 +22116,7 @@
     "Trevor_BloodMoon": [
       {
         "moduleName": "Trevor_BloodMoon",
-        "category": null,
+        "category": "unknown",
         "date": "2025-02-27T09:27:54+01:00",
         "title": "New Module: Trevor_BloodMoon",
         "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
@@ -22196,7 +22196,7 @@
     "In Game Commands": [
       {
         "moduleName": "In Game Commands",
-        "category": null,
+        "category": "administration",
         "date": "2025-02-25T21:29:03+00:00",
         "title": "New Module: In Game Commands",
         "description": "Added In Game Commands to the repository",
@@ -22208,7 +22208,7 @@
     "Trivia Time": [
       {
         "moduleName": "Trivia Time",
-        "category": null,
+        "category": "minigames",
         "date": "2025-02-25T21:29:03+00:00",
         "title": "New Module: Trivia Time",
         "description": "Added Trivia Time to the repository",
@@ -22220,7 +22220,7 @@
     "hvb_8ball_v2": [
       {
         "moduleName": "hvb_8ball_v2",
-        "category": null,
+        "category": "minigames",
         "date": "2025-02-25T21:27:40+00:00",
         "title": "New Module: hvb_8ball_v2",
         "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
@@ -22265,7 +22265,7 @@
     "MAD_CPM_COMMANDS": [
       {
         "moduleName": "MAD_CPM_COMMANDS",
-        "category": null,
+        "category": "unknown",
         "date": "2025-02-25T11:36:40+01:00",
         "title": "New Module: MAD_CPM_COMMANDS",
         "description": "Added MAD_CPM_COMMANDS to the repository",
@@ -22277,7 +22277,7 @@
     "enhanced-chat-bridge": [
       {
         "moduleName": "enhanced-chat-bridge",
-        "category": null,
+        "category": "integration",
         "date": "2025-02-24T09:46:51+01:00",
         "title": "New Module: enhanced-chat-bridge",
         "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
@@ -22369,7 +22369,7 @@
     "trivia": [
       {
         "moduleName": "trivia",
-        "category": null,
+        "category": "unknown",
         "date": "2025-02-24T09:46:51+01:00",
         "title": "New Module: trivia",
         "description": "Added trivia to the repository",
@@ -22379,5 +22379,5 @@
       }
     ]
   },
-  "generatedAt": "2025-11-17T13:03:50.212Z"
+  "generatedAt": "2025-11-17T14:18:35.764Z"
 }
