@@ -137,6 +137,147 @@
       ]
     },
     {
+      "moduleName": "Banned Items",
+      "category": "anti-cheat",
+      "date": "2025-10-15T14:54:55+02:00",
+      "title": "New Module: Banned Items",
+      "description": "Updated to version latest. Added 1 scheduled task: `CheckBannedItems`. Added 1 function: `CheckBannedItems`. New permissions: `banned_items_immunity_admin`, `banned_items_immunity_vip`, `banned_items_immunity_moderator`, `banned_items_immunity_patreon`, `banned_items_immunity_donor`, `banned_items_immunity_trusted`. New configuration options: `bannedItems`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`, `arrestMessage`, `discordKickMessage`, `discordBanMessage`, `discordArrestMessage`, `discordWarningMessage`, `cheaterDetected`.",
+      "commitHash": "0b087f173c39c7bb8d522aca7dea2663d2db6e94",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "CheckBannedItems",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "CheckBannedItems"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_admin",
+          "description": "Grants immunity from banned items checks (Admin tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_vip",
+          "description": "Grants immunity from banned items checks (VIP tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_moderator",
+          "description": "Grants immunity from banned items checks (Moderator tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_patreon",
+          "description": "Grants immunity from banned items checks (Patreon tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_donor",
+          "description": "Grants immunity from banned items checks (Donor tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_trusted",
+          "description": "Grants immunity from banned items checks (Trusted tier)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bannedItems",
+          "fieldType": "array",
+          "description": "Select items that players should not have in their inventory and configure immunity permissions for each"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "banDuration",
+          "fieldType": "number",
+          "description": "How long to ban the player (only applies if punishment type is 'ban')"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "kickMessage",
+          "fieldType": "string",
+          "description": "Message shown when player is kicked. Use {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "banMessage",
+          "fieldType": "string",
+          "description": "Message shown when player is banned. Use {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "warningMessage",
+          "fieldType": "string",
+          "description": "Message shown for each warning. Use {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "arrestMessage",
+          "fieldType": "string",
+          "description": "Message shown when player is arrested. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordKickMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player is kicked. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordBanMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player is banned. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordArrestMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player is arrested. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordWarningMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player receives a warning. Use {pname} for player name, {item} for item name, {warnings} for warning count, {maxWarnings} for max warnings"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "cheaterDetected",
+          "fieldType": "string",
+          "description": "Discord channel ID to send alerts when punishments are applied"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "killEarner",
       "category": "PvP",
       "date": "2025-08-12T21:17:12+02:00",
@@ -2956,6 +3097,26 @@
       ]
     },
     {
+      "moduleName": "Multi_VIP_Packs",
+      "category": "community-management",
+      "date": "2025-07-28T20:32:23+02:00",
+      "title": "New Module: Multi_VIP_Packs",
+      "description": "Added Multi_VIP_Packs to the repository",
+      "commitHash": "7b6b0817e2d4327a8f81729e8d9ad6fcf58f5419",
+      "isNew": false,
+      "details": []
+    },
+    {
+      "moduleName": "backTeleports",
+      "category": "administration",
+      "date": "2025-07-28T20:32:23+02:00",
+      "title": "New Module: backTeleports",
+      "description": "Added backTeleports to the repository",
+      "commitHash": "7b6b0817e2d4327a8f81729e8d9ad6fcf58f5419",
+      "isNew": false,
+      "details": []
+    },
+    {
       "moduleName": "7dtd_triviaTime",
       "category": "minigames",
       "date": "2025-07-28T15:58:49+02:00",
@@ -3390,6 +3551,149 @@
             "name": "maintenanceInterval",
             "fieldType": "string",
             "description": "Cron expression for maintenance frequency (default: every 15 minutes)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Banned Items": [
+      {
+        "moduleName": "Banned Items",
+        "category": "anti-cheat",
+        "date": "2025-10-15T14:54:55+02:00",
+        "title": "New Module: Banned Items",
+        "description": "Updated to version latest. Added 1 scheduled task: `CheckBannedItems`. Added 1 function: `CheckBannedItems`. New permissions: `banned_items_immunity_admin`, `banned_items_immunity_vip`, `banned_items_immunity_moderator`, `banned_items_immunity_patreon`, `banned_items_immunity_donor`, `banned_items_immunity_trusted`. New configuration options: `bannedItems`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`, `arrestMessage`, `discordKickMessage`, `discordBanMessage`, `discordArrestMessage`, `discordWarningMessage`, `cheaterDetected`.",
+        "commitHash": "0b087f173c39c7bb8d522aca7dea2663d2db6e94",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "CheckBannedItems",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "CheckBannedItems"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_admin",
+            "description": "Grants immunity from banned items checks (Admin tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_vip",
+            "description": "Grants immunity from banned items checks (VIP tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_moderator",
+            "description": "Grants immunity from banned items checks (Moderator tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_patreon",
+            "description": "Grants immunity from banned items checks (Patreon tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_donor",
+            "description": "Grants immunity from banned items checks (Donor tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_trusted",
+            "description": "Grants immunity from banned items checks (Trusted tier)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bannedItems",
+            "fieldType": "array",
+            "description": "Select items that players should not have in their inventory and configure immunity permissions for each"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banDuration",
+            "fieldType": "number",
+            "description": "How long to ban the player (only applies if punishment type is 'ban')"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "kickMessage",
+            "fieldType": "string",
+            "description": "Message shown when player is kicked. Use {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banMessage",
+            "fieldType": "string",
+            "description": "Message shown when player is banned. Use {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "warningMessage",
+            "fieldType": "string",
+            "description": "Message shown for each warning. Use {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "arrestMessage",
+            "fieldType": "string",
+            "description": "Message shown when player is arrested. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordKickMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player is kicked. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordBanMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player is banned. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordArrestMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player is arrested. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordWarningMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player receives a warning. Use {pname} for player name, {item} for item name, {warnings} for warning count, {maxWarnings} for max warnings"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "cheaterDetected",
+            "fieldType": "string",
+            "description": "Discord channel ID to send alerts when punishments are applied"
           },
           {
             "type": "version",
@@ -6309,7 +6613,31 @@
           }
         ]
       }
+    ],
+    "Multi_VIP_Packs": [
+      {
+        "moduleName": "Multi_VIP_Packs",
+        "category": "community-management",
+        "date": "2025-07-28T20:32:23+02:00",
+        "title": "New Module: Multi_VIP_Packs",
+        "description": "Added Multi_VIP_Packs to the repository",
+        "commitHash": "7b6b0817e2d4327a8f81729e8d9ad6fcf58f5419",
+        "isNew": false,
+        "details": []
+      }
+    ],
+    "backTeleports": [
+      {
+        "moduleName": "backTeleports",
+        "category": "administration",
+        "date": "2025-07-28T20:32:23+02:00",
+        "title": "New Module: backTeleports",
+        "description": "Added backTeleports to the repository",
+        "commitHash": "7b6b0817e2d4327a8f81729e8d9ad6fcf58f5419",
+        "isNew": false,
+        "details": []
+      }
     ]
   },
-  "generatedAt": "2025-11-16T21:43:40.114Z"
+  "generatedAt": "2025-11-17T11:13:06.341Z"
 }

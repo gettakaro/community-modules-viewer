@@ -71,9 +71,12 @@ function getJsonDiff(commitHash, filePath) {
     let beforeContent = '';
     let afterContent = '';
 
+    // Properly quote file path for shell (escape single quotes)
+    const escapedPath = filePath.replace(/'/g, "'\\''");
+
     try {
       // Get content after commit (this commit)
-      afterContent = execSync(`git show ${commitHash}:${filePath}`, {
+      afterContent = execSync(`git show '${commitHash}':'${escapedPath}'`, {
         encoding: 'utf-8',
       });
     } catch (e) {
@@ -83,7 +86,7 @@ function getJsonDiff(commitHash, filePath) {
 
     try {
       // Get content before commit (parent commit)
-      beforeContent = execSync(`git show ${commitHash}~1:${filePath}`, {
+      beforeContent = execSync(`git show '${commitHash}~1':'${escapedPath}'`, {
         encoding: 'utf-8',
       });
     } catch (e) {
