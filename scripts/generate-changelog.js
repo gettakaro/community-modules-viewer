@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 const MODULES_DIR = 'public/modules';
+const OLD_MODULES_DIR = 'modules'; // Before July 2025, modules were stored here
 const OUTPUT_FILE = 'data/changelog-raw.json';
 
 /**
@@ -19,15 +20,18 @@ const OUTPUT_FILE = 'data/changelog-raw.json';
  */
 function getModuleCommits(sinceCommit = null) {
   try {
-    // Build git log command
-    let gitCommand = `git log --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json`;
+    // Build git log command to include all module locations:
+    // 1. public/modules/**/*.json (current, after July 2025)
+    // 2. modules/**/*.json (after categorization, before move to public)
+    // 3. modules/*.json (before categorization)
+    let gitCommand = `git log --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/*.json`;
 
     // If we have a sinceCommit, only get commits after it
     if (sinceCommit) {
-      gitCommand = `git log ${sinceCommit}..HEAD --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json`;
+      gitCommand = `git log ${sinceCommit}..HEAD --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/*.json`;
     }
 
-    // Get all commits that touched module JSON files
+    // Get all commits that touched module JSON files (all locations throughout history)
     const logOutput = execSync(gitCommand, { encoding: 'utf-8' });
 
     const lines = logOutput.split('\n').filter((line) => line.trim());
@@ -71,9 +75,12 @@ function getJsonDiff(commitHash, filePath) {
     let beforeContent = '';
     let afterContent = '';
 
+    // Properly quote file path for shell (escape single quotes)
+    const escapedPath = filePath.replace(/'/g, "'\\''");
+
     try {
       // Get content after commit (this commit)
-      afterContent = execSync(`git show ${commitHash}:${filePath}`, {
+      afterContent = execSync(`git show '${commitHash}':'${escapedPath}'`, {
         encoding: 'utf-8',
       });
     } catch (e) {
@@ -83,7 +90,7 @@ function getJsonDiff(commitHash, filePath) {
 
     try {
       // Get content before commit (parent commit)
-      beforeContent = execSync(`git show ${commitHash}~1:${filePath}`, {
+      beforeContent = execSync(`git show '${commitHash}~1':'${escapedPath}'`, {
         encoding: 'utf-8',
       });
     } catch (e) {

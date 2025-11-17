@@ -10,22 +10,27 @@ const byModule = {};
 const global = [];
 
 rawData.changes.forEach((change) => {
-  // ONLY include changes that have functional modifications
-  // Skip formatting/non-functional commits
-  if (!change.functionalAnalysis || !change.functionalAnalysis.hasChanges) {
+  // Include changes that have functional modifications OR are new modules
+  // Skip formatting/non-functional commits UNLESS it's a new module
+  const isNewModule = !change.jsonBefore;
+  const hasFunctionalChanges =
+    change.functionalAnalysis && change.functionalAnalysis.hasChanges;
+
+  if (!hasFunctionalChanges && !isNewModule) {
     return;
   }
 
-  const analysis = change.functionalAnalysis;
+  const analysis = change.functionalAnalysis || {};
 
   const entry = {
     moduleName: change.moduleName,
     category: change.category,
     date: change.commitDate,
-    title: analysis.title,
-    description: analysis.description,
+    title: analysis.title || `New Module: ${change.moduleName}`,
+    description:
+      analysis.description || `Added ${change.moduleName} to the repository`,
     commitHash: change.commitHash,
-    isNew: !change.jsonBefore,
+    isNew: isNewModule,
     details: analysis.details || [],
   };
 
@@ -40,6 +45,47 @@ rawData.changes.forEach((change) => {
 });
 
 // Sort global by date (newest first)
+global.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+// For modules with no changelog entries, add their earliest commit
+// (even if it has no functional changes) so every module has at least one entry
+const modulesInRaw = {};
+rawData.changes.forEach((change) => {
+  if (!modulesInRaw[change.moduleName]) {
+    modulesInRaw[change.moduleName] = [];
+  }
+  modulesInRaw[change.moduleName].push(change);
+});
+
+// Check for modules with no entries and add their earliest commit
+Object.keys(modulesInRaw).forEach((moduleName) => {
+  if (!byModule[moduleName] || byModule[moduleName].length === 0) {
+    // Sort by date to find earliest commit
+    const commits = modulesInRaw[moduleName].sort(
+      (a, b) => new Date(a.commitDate) - new Date(b.commitDate),
+    );
+    const earliestCommit = commits[0];
+
+    const analysis = earliestCommit.functionalAnalysis || {};
+    const entry = {
+      moduleName: earliestCommit.moduleName,
+      category: earliestCommit.category,
+      date: earliestCommit.commitDate,
+      title: analysis.title || `New Module: ${earliestCommit.moduleName}`,
+      description:
+        analysis.description ||
+        `Added ${earliestCommit.moduleName} to the repository`,
+      commitHash: earliestCommit.commitHash,
+      isNew: !earliestCommit.jsonBefore,
+      details: analysis.details || [],
+    };
+
+    byModule[moduleName] = [entry];
+    global.push(entry);
+  }
+});
+
+// Sort global by date (newest first) again after adding missing modules
 global.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 // Sort each module's changes by date (newest first) and deduplicate
@@ -74,7 +120,7 @@ console.log(
 
 // Show stats
 const modulesWithMultiple = Object.entries(byModule)
-  .filter(([name, changes]) => changes.length > 1)
+  .filter(([, changes]) => changes.length > 1)
   .sort((a, b) => b[1].length - a[1].length);
 
 console.log(
