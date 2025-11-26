@@ -1,6 +1,41 @@
 {
   "global": [
     {
+      "moduleName": "dynamicCronjobs",
+      "category": "community-management",
+      "date": "2025-11-26T12:40:22+01:00",
+      "title": "Module Updated",
+      "description": "Added 4 scheduled tasks: `cr-2a2b1d73-1-testservera1`, `cr-1a46b457-1-testserverb1`, `cr-1a46b457-2-testserverb2`, `cr-3251bb7f-1-mocktest2`.",
+      "commitHash": "5ee4e2282890d00712042ca12e8af83d8fd14031",
+      "isNew": false,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-2a2b1d73-1-testservera1",
+          "schedule": "5 4 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-1a46b457-1-testserverb1",
+          "schedule": "1 2 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-1a46b457-2-testserverb2",
+          "schedule": "2 2 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-3251bb7f-1-mocktest2",
+          "schedule": "1 * * * *"
+        }
+      ]
+    },
+    {
       "moduleName": "arenaModule",
       "category": "events",
       "date": "2025-11-14T16:27:43+01:00",
@@ -11101,6 +11136,73 @@
     }
   ],
   "byModule": {
+    "dynamicCronjobs": [
+      {
+        "moduleName": "dynamicCronjobs",
+        "category": "community-management",
+        "date": "2025-11-26T12:40:22+01:00",
+        "title": "Module Updated",
+        "description": "Added 4 scheduled tasks: `cr-2a2b1d73-1-testservera1`, `cr-1a46b457-1-testserverb1`, `cr-1a46b457-2-testserverb2`, `cr-3251bb7f-1-mocktest2`.",
+        "commitHash": "5ee4e2282890d00712042ca12e8af83d8fd14031",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-2a2b1d73-1-testservera1",
+            "schedule": "5 4 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-1a46b457-1-testserverb1",
+            "schedule": "1 2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-1a46b457-2-testserverb2",
+            "schedule": "2 2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-3251bb7f-1-mocktest2",
+            "schedule": "1 * * * *"
+          }
+        ]
+      },
+      {
+        "moduleName": "dynamicCronjobs",
+        "category": "community-management",
+        "date": "2025-08-12T21:17:12+02:00",
+        "title": "New Module: dynamicCronjobs",
+        "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
+        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cronJobGenerator",
+            "schedule": "*/15 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "cronjobs",
+            "fieldType": "array",
+            "description": "List of cronjobs and their schedules"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "arenaModule": [
       {
         "moduleName": "arenaModule",
@@ -11762,38 +11864,6 @@
             "action": "added",
             "name": "ServerMessagesGenerator",
             "schedule": "5 4 * * *"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "cronjobs",
-            "fieldType": "array",
-            "description": "List of cronjobs and their schedules"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "dynamicCronjobs": [
-      {
-        "moduleName": "dynamicCronjobs",
-        "category": "community-management",
-        "date": "2025-08-12T21:17:12+02:00",
-        "title": "New Module: dynamicCronjobs",
-        "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
-        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "cronJobGenerator",
-            "schedule": "*/15 * * * *"
           },
           {
             "type": "config",
@@ -22379,5 +22449,5 @@
       }
     ]
   },
-  "generatedAt": "2025-11-17T14:18:35.764Z"
+  "generatedAt": "2025-11-26T12:00:07.832Z"
 }
