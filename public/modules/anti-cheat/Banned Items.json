@@ -1,5 +1,5 @@
 {
-  "name": "BannedItems",
+  "name": "Banned Items",
   "author": "Mad",
   "supportedGames": ["all"],
   "versions": [
@@ -65,5 +65,5 @@
       ]
     }
   ],
-  "takaroVersion": "v0.4.3"
+  "takaroVersion": "v0.4.9"
 }

@@ -16,30 +16,6 @@
           "name": "cronJobGenerator",
           "description": "Check changes in the user config and adapts (optimized: runs every 15 minutes with smart change detection)",
           "temporalValue": "*/15 * * * *"
-        },
-        {
-          "function": "import { takaro, data } from '@takaro/helpers';\nasync function main() {\n  if (data.gameServerId !== '2a2b1d73-50ea-4f28-a2d4-3b02aef3041f') return;\n  await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n    command: `testservera1`,\n  });\n}\nawait main();",
-          "name": "cr-2a2b1d73-1-testservera1",
-          "description": null,
-          "temporalValue": "5 4 * * *"
-        },
-        {
-          "function": "import { takaro, data } from '@takaro/helpers';\nasync function main() {\n  if (data.gameServerId !== '1a46b457-84ae-434d-83fc-484a8c3c1743') return;\n  await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n    command: `testserverb1`,\n  });\n}\nawait main();",
-          "name": "cr-1a46b457-1-testserverb1",
-          "description": null,
-          "temporalValue": "1 2 * * *"
-        },
-        {
-          "function": "import { takaro, data } from '@takaro/helpers';\nasync function main() {\n  if (data.gameServerId !== '1a46b457-84ae-434d-83fc-484a8c3c1743') return;\n  await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n    command: `testserverb2`,\n  });\n}\nawait main();",
-          "name": "cr-1a46b457-2-testserverb2",
-          "description": null,
-          "temporalValue": "2 2 * * *"
-        },
-        {
-          "function": "import { takaro, data } from '@takaro/helpers';\nasync function main() {\n  if (data.gameServerId !== '3251bb7f-9290-4163-a4d1-43247e90faf6') return;\n  await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n    command: `status`,\n  });\n}\nawait main();",
-          "name": "cr-3251bb7f-1-mocktest2",
-          "description": null,
-          "temporalValue": "1 * * * *"
         }
       ],
       "functions": [],

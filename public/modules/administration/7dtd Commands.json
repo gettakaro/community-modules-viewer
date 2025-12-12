@@ -1,0 +1,458 @@
+{
+  "name": "7dtd Commands",
+  "author": "Mad",
+  "supportedGames": ["7 days to die"],
+  "versions": [
+    {
+      "tag": "1.0.0",
+      "description": "Provides a comprehensive collection of quality-of-life commands for 7 Days to Die servers utilizing CPM (CSMM Patrons Mod).\n\n  These commands enhance player convenience by simplifying common actions related to vehicles, teleportation, player status, and graphics settings.\n\n  ## Key Functionality\n\n  * **Vehicle Retrieval:**\n    * `/bike`: Teleports the player's min-bike to their location (if nearby).\n    * `/4x4`: Teleports the player's 4x4 to their location (if nearby).\n    * `/gyro`: Teleports the player's gyrocopter to their location (if nearby).\n    * `/motorcycle`: Teleports the player's motorcycle to their location (if nearby).\n    * `/bicycle`: Teleports the player's bicycle to their location (if nearby).\n    * `/drone`: Teleports the player's drone to their location (if nearby).\n\n  * **Teleportation:**\n    * `/home`: Teleports the player to their set home location (bedroll).\n    * `/visit <playerTarget>`: Allows a player to teleport to another player on the server, provided they are friends in-game and the target player is online.\n\n  * **Player Status:**\n    * `/debuff`: Removes common debuffs from the player (broken bones, sprains, etc.).\n\n  * **Graphics Settings:**\n    * `/gfxon`: Enables low graphics mode for improved performance.\n    * `/gfxoff`: Disables low graphics mode, restoring normal graphics.\n    * `/gfx`: Toggles gfx mode.\n\n  * **Account Linking**\n    * `/link` Shows the player how to link their account to the server.\n\n  ## How to Use\n\n  1.  **Installation:** Install the module on your Takaro instance.\n\n  2.  **CPM Requirement:** Ensure that the CSMM Patrons Mod (CPM) is installed and configured on your 7 Days to Die server. This module relies on CPM's functionality for vehicle retrieval.\n\n  3.  **Permissions:** Grant the appropriate permissions to the player groups or individuals who should have access to these commands:\n    * `inGameCommands`: General permission for most of the module's commands.\n    * `HOME_PERMISSION`: Permission to use the `/home` command.\n    * `VISIT_PERMISSION`: Permission to use the `/visit` command.\n\n  4.  **In-Game Usage:** Players can use the commands as described in the \"Key Functionality\" section.\n\n  ## Important Considerations\n\n  * **CPM Dependency:** This module is tightly integrated with CPM. It will not function correctly without CPM being present on the server.\n\n  * **Vehicle Proximity:** The vehicle retrieval commands (`/bike`, `/4x4`, `/gyro`, etc.) typically require the player to be within a certain proximity of their vehicle for the command to work. The exact range is defined by CPM.\n\n  * **Home Location:** The `/home` command requires players to have a valid bedroll set as their home location.\n\n  * **Friend System:** The `/visit` command relies on 7 Days to Die's in-game friend system. Players must be friends with the target player to teleport to them.\n\n  * **Graphics Settings:** The `/gfxon` and `/gfxoff` commands may not be effective in all game settings or configurations. Their functionality depends on how the game handles graphics settings.\n\n  * **Permission Management:** Use the provided permissions to control access to the module's commands.\n",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId, player } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbike ${player.name}`,\n    })).data.data.rawResult;\n    if (response.includes('MiniBike Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Mini Bike[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "minibike",
+          "trigger": "bike",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getdrone EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Drone Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Drone[-]. They take 10 min to load after a restart. You may need to retrace your steps to find it. Drone locations are saved 5 minutes apart.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "drone",
+          "trigger": "drone",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbicycle EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Bicycle Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Bicycle[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "bicycle",
+          "trigger": "bicycle",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc ${entityId} \"gfx pp enable 1\"`\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]Low GFX mode disabled.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        console.error(`Error executing GFX command: ${error.message}`);\n        await player.pm(`Failed to disable low GFX mode. Please try again or contact an admin.`);\n        throw error;\n    }\n}\n\nawait main();",
+          "name": "gfxoff",
+          "trigger": "gfxoff",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, player, gameServerId } = data;\n\n    // Get the current player's entity ID, handling Epic Online Services ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    // Define the debuffs to apply\n    const debuffs = [\n        'buffNearDeathTrauma',\n        'bufflegbroken',\n        'buffarmbroken',\n        'buffarmsprained',\n        'bufflegsprained'\n    ];\n\n    // Execute each debuff command separately\n    for (const debuff of debuffs) {\n        const command = `debuffplayer ${entityId} ${debuff}`;\n\n        try {\n            const result = await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n                command: command\n            });\n        } catch (error) {\n            console.error(`Error executing debuff command for ${debuff}:`, error);\n        }\n    }\n\n    // Notify the player\n    await data.player.pm(\"All debuffs have been applied to you\");\n}\n\nawait main();",
+          "name": "debuff",
+          "trigger": "debuff",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getjeep EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]4x4.[-] Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "4x4",
+          "trigger": "4x4",
+          "helpText": "Move your 4x4 to you if you're close enough to it.",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\r\nasync function main() {\r\n  const { player, gameServerId, pog } = data;\r\n  const playerTarget = data.arguments.playerTarget;\r\n  if (!checkPermission(pog, 'VISIT_PERMISSION')) {\r\n    throw new TakaroUserError('You do not have permission to use the visit commmand.');\r\n  }\r\n  const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\r\n    command: `mv \"${player.name}\" ${playerTarget} fo`,\r\n  })).data.data.rawResult;\r\n  if (response.includes('Targetplayer is offline')) {\r\n    throw new TakaroUserError(`[02FEDC]${playerTarget}[-] is not online`);\r\n  }\r\n  if (response.includes('no in-game friend')) {\r\n    throw new TakaroUserError(`Add [02FEDC]${playerTarget}[-] as a friend to visit them.`);\r\n  }\r\n};\r\nawait main()\r\n//# sourceMappingURL=visit.js.map",
+          "name": "visit",
+          "trigger": "visit",
+          "helpText": "No help text available",
+          "arguments": [
+            {
+              "name": "playerTarget",
+              "type": "string",
+              "defaultValue": "",
+              "helpText": "Person Teleporting to",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getgyrocopter EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Gyrocopter Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Gyrocopter[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "gyro",
+          "trigger": "gyro",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'HOME_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the home commmand.');\n    }\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `teleh EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('The player does not have a defined HOME bed')) {\n        throw new TakaroUserError(`You need to place a [FEF902]Bedroll[-] to teleport home.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "home",
+          "trigger": "home",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc ${entityId} \"gfx pp enable 0\"`\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]Low GFX mode activated.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        console.error(`Error executing GFX command: ${error.message}`);\n        await player.pm(`Failed to activate low GFX mode. Please try again or contact an admin.`);\n        throw error;\n    }\n}\n\nawait main();",
+          "name": "gfxon",
+          "trigger": "gfxon",
+          "helpText": "No help text available",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Commands in game",
+          "permission": "inGameCommands",
+          "friendlyName": "In Game Commands"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players access to the home command",
+          "permission": "HOME_PERMISSION",
+          "friendlyName": "Home command Permission"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players permission to use the visit commmand",
+          "permission": "VISIT_PERMISSION",
+          "friendlyName": "Visit Command Permission"
+        }
+      ]
+    },
+    {
+      "tag": "1.1.0",
+      "description": "Provides a comprehensive collection of quality-of-life commands for 7 Days to Die servers utilizing CPM (CSMM Patrons Mod).\n\n  These commands enhance player convenience by simplifying common actions related to vehicles, teleportation, player status, and graphics settings.\n\n  ## Key Functionality\n\n  * **Vehicle Retrieval:**\n    * `/bike`: Teleports the player's min-bike to their location (if nearby).\n    * `/4x4`: Teleports the player's 4x4 to their location (if nearby).\n    * `/gyro`: Teleports the player's gyrocopter to their location (if nearby).\n    * `/motorcycle`: Teleports the player's motorcycle to their location (if nearby).\n    * `/bicycle`: Teleports the player's bicycle to their location (if nearby).\n    * `/drone`: Teleports the player's drone to their location (if nearby).\n\n  * **Teleportation:**\n    * `/home`: Teleports the player to their set home location (bedroll).\n    * `/visit <playerTarget>`: Allows a player to teleport to another player on the server, provided they are friends in-game and the target player is online.\n\n  * **Player Status:**\n    * `/debuff`: Removes common debuffs from the player (broken bones, sprains, etc.).\n\n  * **Graphics Settings:**\n    * `/gfxon`: Enables low graphics mode for improved performance.\n    * `/gfxoff`: Disables low graphics mode, restoring normal graphics.\n    * `/gfx`: Toggles gfx mode.\n\n  * **Account Linking**\n    * `/link` Shows the player how to link their account to the server.\n\n  ## How to Use\n\n  1.  **Installation:** Install the module on your Takaro instance.\n\n  2.  **CPM Requirement:** Ensure that the CSMM Patrons Mod (CPM) is installed and configured on your 7 Days to Die server. This module relies on CPM's functionality for vehicle retrieval.\n\n  3.  **Permissions:** Grant the appropriate permissions to the player groups or individuals who should have access to these commands:\n    * `inGameCommands`: General permission for most of the module's commands.\n    * `HOME_PERMISSION`: Permission to use the `/home` command.\n    * `VISIT_PERMISSION`: Permission to use the `/visit` command.\n\n  4.  **In-Game Usage:** Players can use the commands as described in the \"Key Functionality\" section.\n\n  ## Important Considerations\n\n  * **CPM Dependency:** This module is tightly integrated with CPM. It will not function correctly without CPM being present on the server.\n\n  * **Vehicle Proximity:** The vehicle retrieval commands (`/bike`, `/4x4`, `/gyro`, etc.) typically require the player to be within a certain proximity of their vehicle for the command to work. The exact range is defined by CPM.\n\n  * **Home Location:** The `/home` command requires players to have a valid bedroll set as their home location.\n\n  * **Friend System:** The `/visit` command relies on 7 Days to Die's in-game friend system. Players must be friends with the target player to teleport to them.\n\n  * **Graphics Settings:** The `/gfxon` and `/gfxoff` commands may not be effective in all game settings or configurations. Their functionality depends on how the game handles graphics settings.\n\n  * **Permission Management:** Use the provided permissions to control access to the module's commands.\n",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc ${entityId} \"gfx pp enable 1\"`\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]Low GFX mode disabled.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        console.error(`Error executing GFX command: ${error.message}`);\n        await player.pm(`Failed to disable low GFX mode. Please try again or contact an admin.`);\n        throw error;\n    }\n}\n\nawait main();",
+          "name": "gfxoff",
+          "trigger": "gfxoff",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'HOME_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the home commmand.');\n    }\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `teleh EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('The player does not have a defined HOME bed')) {\n        throw new TakaroUserError(`You need to place a [FEF902]Bedroll[-] to teleport home.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "home",
+          "trigger": "home",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getgyrocopter EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Gyrocopter Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Gyrocopter[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "gyro",
+          "trigger": "gyro",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getjeep EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]4x4.[-] Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "4x4",
+          "trigger": "4x4",
+          "helpText": "Move your 4x4 to you if you're close enough to it.",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbicycle EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Bicycle Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Bicycle[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "bicycle",
+          "trigger": "bicycle",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\r\nasync function main() {\r\n  const { player, gameServerId, pog } = data;\r\n  const playerTarget = data.arguments.playerTarget;\r\n  if (!checkPermission(pog, 'VISIT_PERMISSION')) {\r\n    throw new TakaroUserError('You do not have permission to use the visit commmand.');\r\n  }\r\n  const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\r\n    command: `mv \"${player.name}\" ${playerTarget} fo`,\r\n  })).data.data.rawResult;\r\n  if (response.includes('Targetplayer is offline')) {\r\n    throw new TakaroUserError(`[02FEDC]${playerTarget}[-] is not online`);\r\n  }\r\n  if (response.includes('no in-game friend')) {\r\n    throw new TakaroUserError(`Add [02FEDC]${playerTarget}[-] as a friend to visit them.`);\r\n  }\r\n};\r\nawait main()\r\n//# sourceMappingURL=visit.js.map",
+          "name": "visit",
+          "trigger": "visit",
+          "helpText": "No help text available",
+          "arguments": [
+            {
+              "name": "playerTarget",
+              "type": "string",
+              "defaultValue": "",
+              "helpText": "Person Teleporting to",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getdrone EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Drone Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Drone[-]. They take 10 min to load after a restart. You may need to retrace your steps to find it. Drone locations are saved 5 minutes apart.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "drone",
+          "trigger": "drone",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, player, gameServerId } = data;\n\n    // Get the current player's entity ID, handling Epic Online Services ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    // Define the debuffs to apply\n    const debuffs = [\n        'buffNearDeathTrauma',\n        'bufflegbroken',\n        'buffarmbroken',\n        'buffarmsprained',\n        'bufflegsprained'\n    ];\n\n    // Execute each debuff command separately\n    for (const debuff of debuffs) {\n        const command = `debuffplayer ${entityId} ${debuff}`;\n\n        try {\n            const result = await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n                command: command\n            });\n        } catch (error) {\n            console.error(`Error executing debuff command for ${debuff}:`, error);\n        }\n    }\n\n    // Notify the player\n    await data.player.pm(\"All debuffs have been applied to you\");\n}\n\nawait main();",
+          "name": "debuff",
+          "trigger": "debuff",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc ${entityId} \"gfx pp enable 0\"`\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]Low GFX mode activated.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        console.error(`Error executing GFX command: ${error.message}`);\n        await player.pm(`Failed to activate low GFX mode. Please try again or contact an admin.`);\n        throw error;\n    }\n}\n\nawait main();",
+          "name": "gfxon",
+          "trigger": "gfxon",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId, player } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbike ${player.name}`,\n    })).data.data.rawResult;\n    if (response.includes('MiniBike Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Mini Bike[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "minibike",
+          "trigger": "bike",
+          "helpText": "No help text available",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Commands in game",
+          "permission": "inGameCommands",
+          "friendlyName": "In Game Commands"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players access to the home command",
+          "permission": "HOME_PERMISSION",
+          "friendlyName": "Home command Permission"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players permission to use the visit commmand",
+          "permission": "VISIT_PERMISSION",
+          "friendlyName": "Visit Command Permission"
+        }
+      ]
+    },
+    {
+      "tag": "latest",
+      "description": "Provides a comprehensive collection of quality-of-life commands for 7 Days to Die servers utilizing CPM (CSMM Patrons Mod).\n\n  These commands enhance player convenience by simplifying common actions related to vehicles, teleportation, player status, and graphics settings.\n\n  ## Key Functionality\n\n  * **Vehicle Retrieval:**\n    * `/bike`: Teleports the player's min-bike to their location (if nearby).\n    * `/4x4`: Teleports the player's 4x4 to their location (if nearby).\n    * `/gyro`: Teleports the player's gyrocopter to their location (if nearby).\n    * `/motorcycle`: Teleports the player's motorcycle to their location (if nearby).\n    * `/bicycle`: Teleports the player's bicycle to their location (if nearby).\n    * `/drone`: Teleports the player's drone to their location (if nearby).\n\n  * **Teleportation:**\n    * `/home`: Teleports the player to their set home location (bedroll).\n    * `/visit <playerTarget>`: Allows a player to teleport to another player on the server, provided they are friends in-game and the target player is online.\n\n  * **Player Status:**\n    * `/debuff`: Removes common debuffs from the player (broken bones, sprains, etc.).\n\n  * **Graphics Settings:**\n    * `/gfxon`: Enables low graphics mode for improved performance.\n    * `/gfxoff`: Disables low graphics mode, restoring normal graphics.\n    * `/gfx`: Toggles gfx mode.\n\n  * **Account Linking**\n    * `/link` Shows the player how to link their account to the server.\n\n  ## How to Use\n\n  1.  **Installation:** Install the module on your Takaro instance.\n\n  2.  **CPM Requirement:** Ensure that the CSMM Patrons Mod (CPM) is installed and configured on your 7 Days to Die server. This module relies on CPM's functionality for vehicle retrieval.\n\n  3.  **Permissions:** Grant the appropriate permissions to the player groups or individuals who should have access to these commands:\n    * `inGameCommands`: General permission for most of the module's commands.\n    * `HOME_PERMISSION`: Permission to use the `/home` command.\n    * `VISIT_PERMISSION`: Permission to use the `/visit` command.\n\n  4.  **In-Game Usage:** Players can use the commands as described in the \"Key Functionality\" section.\n\n  ## Important Considerations\n\n  * **CPM Dependency:** This module is tightly integrated with CPM. It will not function correctly without CPM being present on the server.\n\n  * **Vehicle Proximity:** The vehicle retrieval commands (`/bike`, `/4x4`, `/gyro`, etc.) typically require the player to be within a certain proximity of their vehicle for the command to work. The exact range is defined by CPM.\n\n  * **Home Location:** The `/home` command requires players to have a valid bedroll set as their home location.\n\n  * **Friend System:** The `/visit` command relies on 7 Days to Die's in-game friend system. Players must be friends with the target player to teleport to them.\n\n  * **Graphics Settings:** The `/gfxon` and `/gfxoff` commands may not be effective in all game settings or configurations. Their functionality depends on how the game handles graphics settings.\n\n  * **Permission Management:** Use the provided permissions to control access to the module's commands.\n",
+      "configSchema": "{\"$schema\": \"http://json-schema.org/draft-07/schema#\",\"type\": \"object\",\"additionalProperties\": false,\"properties\":{}}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getmotorcycle EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Motorcycle Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Motorcycle[-]. Move closer and try again.`);\n    }\n};\nawait main();",
+          "name": "motorcycle",
+          "trigger": "motorcycle",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { player } = data;\n    await player.pm(`[70FE02]Click ESC and click on the [CC6CE7]Takaro.io[-] icon, the purple leaf.[-]`);\n}\nawait main();",
+          "name": "link",
+          "trigger": "link",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc EOS_${pog.gameId} \"gfx pp enable 1\"`,\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]GFX[-][-] enabled.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        console.error(`Error executing GFX command: ${error.message}`);\n        await player.pm(`Failed to disable low GFX mode. Please try again or contact an admin.`);\n        throw error; // Re-throw the error to stop execution\n    }\n}\n\nawait main();",
+          "name": "gfxon",
+          "trigger": "gfxon",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    // const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc EOS_${pog.gameId} \"gfx pp enable 0\"`\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]GFX[-][-] disabled.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        await player.pm(`Failed to activate low GFX mode. Please try again or contact an admin.`);\n        throw error;\n    }\n}\n\nawait main();",
+          "name": "gfx",
+          "trigger": "gfx",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\r\nasync function main() {\r\n  const { player, gameServerId, pog } = data;\r\n  const playerTarget = data.arguments.playerTarget;\r\n  if (!checkPermission(pog, 'VISIT_PERMISSION')) {\r\n    throw new TakaroUserError('You do not have permission to use the visit commmand.');\r\n  }\r\n  const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\r\n    command: `mv \"${player.name}\" ${playerTarget} fo`,\r\n  })).data.data.rawResult;\r\n  if (response.includes('Targetplayer is offline')) {\r\n    throw new TakaroUserError(`[02FEDC]${playerTarget}[-] is not online`);\r\n  }\r\n  if (response.includes('no in-game friend')) {\r\n    throw new TakaroUserError(`Add [02FEDC]${playerTarget}[-] as a friend to visit them.`);\r\n  }\r\n};\r\nawait main()\r\n//# sourceMappingURL=visit.js.map",
+          "name": "visit",
+          "trigger": "visit",
+          "helpText": "No help text available",
+          "arguments": [
+            {
+              "name": "playerTarget",
+              "type": "string",
+              "defaultValue": "",
+              "helpText": "Person Teleporting to",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbicycle EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Bicycle Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Bicycle[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "bicycle",
+          "trigger": "bicycle",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, player, gameServerId } = data;\n\n    // Get the current player's entity ID, handling Epic Online Services ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    // Define the debuffs to apply\n    const debuffs = [\n        'buffNearDeathTrauma',\n        'bufflegbroken',\n        'buffarmbroken',\n        'buffarmsprained',\n        'bufflegsprained'\n    ];\n\n    // Execute each debuff command separately\n    for (const debuff of debuffs) {\n        const command = `debuffplayer EOS_${pog.gameId} ${debuff}`;\n\n        try {\n            const result = await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n                command: command\n            });\n        } catch (error) {\n            // Removed console.log here\n        }\n    }\n\n    // Notify the player\n    await data.player.pm(\"All debuffs have been removed for you\");\n}\n\nawait main();",
+          "name": "debuff",
+          "trigger": "debuff",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbike EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('MiniBike Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Mini Bike[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "minibike",
+          "trigger": "bike",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getdrone EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Drone Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Drone[-]. They take 10 min to load after a restart. You may need to retrace your steps to find it. Drone locations are saved 5 minutes apart.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "drone",
+          "trigger": "drone",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getgyrocopter EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Gyrocopter Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Gyrocopter[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "gyro",
+          "trigger": "gyro",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getjeep EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]4x4.[-] Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "4x4",
+          "trigger": "4x4",
+          "helpText": "Move your 4x4 to you if you're close enough to it.",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'HOME_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the home commmand.');\n    }\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `teleh EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('The player does not have a defined HOME bed')) {\n        throw new TakaroUserError(`You need to place a [FEF902]Bedroll[-] to teleport home.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "home",
+          "trigger": "home",
+          "helpText": "No help text available",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Commands in game",
+          "permission": "inGameCommands",
+          "friendlyName": "In Game Commands"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players access to the home command",
+          "permission": "HOME_PERMISSION",
+          "friendlyName": "Home command Permission"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players permission to use the visit commmand",
+          "permission": "VISIT_PERMISSION",
+          "friendlyName": "Visit Command Permission"
+        }
+      ]
+    },
+    {
+      "tag": "1.1.1",
+      "description": "Provides a comprehensive collection of quality-of-life commands for 7 Days to Die servers utilizing CPM (CSMM Patrons Mod).\n\n  These commands enhance player convenience by simplifying common actions related to vehicles, teleportation, player status, and graphics settings.\n\n  ## Key Functionality\n\n  * **Vehicle Retrieval:**\n    * `/bike`: Teleports the player's min-bike to their location (if nearby).\n    * `/4x4`: Teleports the player's 4x4 to their location (if nearby).\n    * `/gyro`: Teleports the player's gyrocopter to their location (if nearby).\n    * `/motorcycle`: Teleports the player's motorcycle to their location (if nearby).\n    * `/bicycle`: Teleports the player's bicycle to their location (if nearby).\n    * `/drone`: Teleports the player's drone to their location (if nearby).\n\n  * **Teleportation:**\n    * `/home`: Teleports the player to their set home location (bedroll).\n    * `/visit <playerTarget>`: Allows a player to teleport to another player on the server, provided they are friends in-game and the target player is online.\n\n  * **Player Status:**\n    * `/debuff`: Removes common debuffs from the player (broken bones, sprains, etc.).\n\n  * **Graphics Settings:**\n    * `/gfxon`: Enables low graphics mode for improved performance.\n    * `/gfxoff`: Disables low graphics mode, restoring normal graphics.\n    * `/gfx`: Toggles gfx mode.\n\n  * **Account Linking**\n    * `/link` Shows the player how to link their account to the server.\n\n  ## How to Use\n\n  1.  **Installation:** Install the module on your Takaro instance.\n\n  2.  **CPM Requirement:** Ensure that the CSMM Patrons Mod (CPM) is installed and configured on your 7 Days to Die server. This module relies on CPM's functionality for vehicle retrieval.\n\n  3.  **Permissions:** Grant the appropriate permissions to the player groups or individuals who should have access to these commands:\n    * `inGameCommands`: General permission for most of the module's commands.\n    * `HOME_PERMISSION`: Permission to use the `/home` command.\n    * `VISIT_PERMISSION`: Permission to use the `/visit` command.\n\n  4.  **In-Game Usage:** Players can use the commands as described in the \"Key Functionality\" section.\n\n  ## Important Considerations\n\n  * **CPM Dependency:** This module is tightly integrated with CPM. It will not function correctly without CPM being present on the server.\n\n  * **Vehicle Proximity:** The vehicle retrieval commands (`/bike`, `/4x4`, `/gyro`, etc.) typically require the player to be within a certain proximity of their vehicle for the command to work. The exact range is defined by CPM.\n\n  * **Home Location:** The `/home` command requires players to have a valid bedroll set as their home location.\n\n  * **Friend System:** The `/visit` command relies on 7 Days to Die's in-game friend system. Players must be friends with the target player to teleport to them.\n\n  * **Graphics Settings:** The `/gfxon` and `/gfxoff` commands may not be effective in all game settings or configurations. Their functionality depends on how the game handles graphics settings.\n\n  * **Permission Management:** Use the provided permissions to control access to the module's commands.\n",
+      "configSchema": "{\"$schema\": \"http://json-schema.org/draft-07/schema#\",\"type\": \"object\",\"additionalProperties\": false,\"properties\":{}}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getjeep EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]4x4.[-] Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "4x4",
+          "trigger": "4x4",
+          "helpText": "Move your 4x4 to you if you're close enough to it.",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    if (!checkPermission(pog, 'HOME_PERMISSION')) {\n        throw new TakaroUserError('You do not have permission to use the home commmand.');\n    }\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `teleh EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('The player does not have a defined HOME bed')) {\n        throw new TakaroUserError(`You need to place a [FEF902]Bedroll[-] to teleport home.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "home",
+          "trigger": "home",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc ${entityId} \"gfx pp enable 0\"`\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]Low GFX mode activated.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        await player.pm(`Failed to activate low GFX mode. Please try again or contact an admin.`);\n        throw error;\n    }\n}\n\nawait main();",
+          "name": "gfxon",
+          "trigger": "gfxon",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbicycle EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Bicycle Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Bicycle[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "bicycle",
+          "trigger": "bicycle",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\r\nasync function main() {\r\n  const { player, gameServerId, pog } = data;\r\n  const playerTarget = data.arguments.playerTarget;\r\n  if (!checkPermission(pog, 'VISIT_PERMISSION')) {\r\n    throw new TakaroUserError('You do not have permission to use the visit commmand.');\r\n  }\r\n  const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\r\n    command: `mv \"${player.name}\" ${playerTarget} fo`,\r\n  })).data.data.rawResult;\r\n  if (response.includes('Targetplayer is offline')) {\r\n    throw new TakaroUserError(`[02FEDC]${playerTarget}[-] is not online`);\r\n  }\r\n  if (response.includes('no in-game friend')) {\r\n    throw new TakaroUserError(`Add [02FEDC]${playerTarget}[-] as a friend to visit them.`);\r\n  }\r\n};\r\nawait main()\r\n//# sourceMappingURL=visit.js.map",
+          "name": "visit",
+          "trigger": "visit",
+          "helpText": "No help text available",
+          "arguments": [
+            {
+              "name": "playerTarget",
+              "type": "string",
+              "defaultValue": "",
+              "helpText": "Person Teleporting to",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, player, gameServerId } = data;\n\n    // Get the current player's entity ID, handling Epic Online Services ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    // Define the debuffs to apply\n    const debuffs = [\n        'buffNearDeathTrauma',\n        'bufflegbroken',\n        'buffarmbroken',\n        'buffarmsprained',\n        'bufflegsprained'\n    ];\n\n    // Execute each debuff command separately\n    for (const debuff of debuffs) {\n        const command = `debuffplayer ${entityId} ${debuff}`;\n\n        try {\n            const result = await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n                command: command\n            });\n        } catch (error) {\n            // Removed console.log here\n        }\n    }\n\n    // Notify the player\n    await data.player.pm(\"All debuffs have been removed for you\");\n}\n\nawait main();",
+          "name": "debuff",
+          "trigger": "debuff",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getdrone EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Drone Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Drone[-]. They take 10 min to load after a restart. You may need to retrace your steps to find it. Drone locations are saved 5 minutes apart.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "drone",
+          "trigger": "drone",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { pog } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getgyrocopter EOS_${pog.gameId}`,\n    })).data.data.rawResult;\n    if (response.includes('Gyrocopter Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Gyrocopter[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "gyro",
+          "trigger": "gyro",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId, player } = data;\n    const response = (await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: `cpm-getbike ${player.name}`,\n    })).data.data.rawResult;\n    if (response.includes('MiniBike Could not be found')) {\n        throw new TakaroUserError(`You're not close enough to your [FEF902]Mini Bike[-]. Move closer and try again.`);\n    }\n};\nawait main();\n//# sourceMappingURL=visit.js.map",
+          "name": "minibike",
+          "trigger": "bike",
+          "helpText": "No help text available",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, gameServerId, pog } = data;\n\n    // For 7D2D, we need to use the epicOnlineServicesId as the entity ID\n    const entityId = player.epicOnlineServicesId || pog.gameId;\n\n    try {\n        // Execute the command with proper spacing and the correct ID\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `eoc ${entityId} \"gfx pp enable 1\"`,\n        });\n\n        // Send confirmation to the player\n        await player.pm(`[02FEDC]Low GFX mode disabled.`);\n    } catch (error) {\n        // Only log if there's an actual error\n        console.error(`Error executing GFX command: ${error.message}`);\n        await player.pm(`Failed to disable low GFX mode. Please try again or contact an admin.`);\n        throw error; // Re-throw the error to stop execution\n    }\n}\n\nawait main();",
+          "name": "gfxoff",
+          "trigger": "gfxoff",
+          "helpText": "No help text available",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Commands in game",
+          "permission": "inGameCommands",
+          "friendlyName": "In Game Commands"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players access to the home command",
+          "permission": "HOME_PERMISSION",
+          "friendlyName": "Home command Permission"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Gives players permission to use the visit commmand",
+          "permission": "VISIT_PERMISSION",
+          "friendlyName": "Visit Command Permission"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "main"
+}

@@ -1,6 +1,945 @@
 {
   "global": [
     {
+      "moduleName": "PvP Air Drops",
+      "category": "PvP",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: PvP Air Drops",
+      "description": "Updated to version 2.1.3. Added 1 hook: `PvP Air Drop` (log). New configuration options: `pvpMessage`, `pvpRange`, `enterPvPMessage`, `exitPvPMessage`, `deleteCronjob`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "PvP Air Drop",
+          "eventType": "log"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pvpMessage",
+          "fieldType": "string",
+          "description": "Message to the server about airdrops being PvP. Use {x} and {z} to announce the location of the air drop."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pvpRange",
+          "fieldType": "number",
+          "description": "The range of PvP area. The Area will be double this number."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "enterPvPMessage",
+          "fieldType": "string",
+          "description": "Entering the PvP area message"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "exitPvPMessage",
+          "fieldType": "string",
+          "description": "Exiting the PvP area Message"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "deleteCronjob",
+          "fieldType": "number",
+          "description": "Set the minutes you want the PvP area to be live"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "2.1.3",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "7dtd Commands",
+      "category": "administration",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: 7dtd Commands",
+      "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minibike",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "drone",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "bicycle",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "gfxoff",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "debuff",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "4x4",
+          "description": "Move your 4x4 to you if you're close enough to it."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "visit",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "gyro",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "home",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "gfxon",
+          "description": "No help text available"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "inGameCommands",
+          "description": "Commands in game"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "HOME_PERMISSION",
+          "description": "Gives players access to the home command"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "VISIT_PERMISSION",
+          "description": "Gives players permission to use the visit commmand"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Discord Links",
+      "category": "administration",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: Discord Links",
+      "description": "Updated to version latest. Added 1 scheduled task: `Daily Link Update`. Added 1 function: `postDailyLinks`. New configuration options: `discordChannelId`, `messageColor`, `decorativeHeader`, `links`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Daily Link Update",
+          "schedule": "0 12 * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "postDailyLinks"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where links will be posted"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "messageColor",
+          "fieldType": "number",
+          "description": "Decimal color code for the embed (0-16777215)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "decorativeHeader",
+          "fieldType": "string",
+          "description": "Optional decorative text at the top of the message"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "links",
+          "fieldType": "array",
+          "description": "List of links to display"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Staff Commands",
+      "category": "administration",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: Staff Commands",
+      "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "mute",
+          "description": "[02FEDMute (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "zomb",
+          "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "buff - 1",
+          "description": "[02FEDC]buff (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 3",
+          "description": "Targeted Horde round 3"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 1",
+          "description": "[02FEDC]Send a horde in 4 intervals in 30 seconds at a player. Type /th (name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "kickall",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "avisit",
+          "description": "[02FEDC]avisit (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 4",
+          "description": "[02FEDC]Fourth round of Targeted Horde[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "killall",
+          "description": "[02FEDC]Kill all of the Zeds on the server.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "pr",
+          "description": "[02FEDC]Reset the POI you are standing in[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "visitmap",
+          "description": "[02FEDC]Open the map for Takaro and CPM.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "setwaypointpublic",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "aaaaaaa",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "rpd",
+          "description": "[02FEDC]rpd (player name) Resets a player's data. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "ban",
+          "description": "[02FEDC]ban (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "rvr",
+          "description": "[02FEDC]rvr (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "arrest",
+          "description": "[02FEDC]arrest (player name) (reason for arrest)[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "ocn",
+          "description": "[02FEDC] Change a player's name in chat. Type /ocn (Name) (New Name). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "setjail",
+          "description": "[02FEDC]Set an 11x11 area to put hail birds in.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "rdd",
+          "description": "[02FEDC]rdd (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "buff - 2",
+          "description": "Ends players buff"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "pull",
+          "description": "[02FEDC]pull (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "reset1",
+          "description": "[02FEDC]First position to reset a chunk. Use /reset2 in the opposite corner to reset the desired area.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "release",
+          "description": "[02FEDC]Release (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "reset2",
+          "description": "[02FEDC]Last position to reset a chunk.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "kick",
+          "description": "[02FEDC]kick (player name) (reason in quotes). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 2",
+          "description": "[02FEDC]Second round of a targeted horde[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "unmute",
+          "description": "[02FEDC]unmute (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "shutdownba",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "cm  & dm",
+          "description": "[02FEDC]Creative mode and debug menu. Reserved for admins[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "wi",
+          "description": "Wipe a player's belt, bag, equipment, all"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "kill",
+          "description": "[02FEDC]kill (players name) You must run the command a second time to confirm the kill. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "KILL_PLAYER",
+          "description": "Kill a player"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "CM_DM",
+          "description": "Creative mode and debug menu"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "MUTE",
+          "description": "Mute unruly players in game"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "ZOMB_FREE_SELF",
+          "description": "Zombie free command for admins to run the command for their personal house"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "LIST_LANDCLAIMS",
+          "description": "Lists land claims near by"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "REMOVE_LANDCLAIMS",
+          "description": "remove nearby land claims"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RESET_PLAYER",
+          "description": "Resets a player's corrupted data"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RDD",
+          "description": "Resets player drone data to place a new one"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "UNMUTE",
+          "description": "Unmute a player"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "VISIT_MAP",
+          "description": "Visit the map to unlock for Takaro and CPM"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RELEASE",
+          "description": "Release a player from jail"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "SET_JAIL",
+          "description": "Set the location of your jail "
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "BUFF",
+          "description": "Buff another player"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RESET_CHUNKS",
+          "description": "Reset Chunks Permission"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "WIPE_INVENTORY",
+          "description": "Wipe Inventory"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "STAFF_COMMANDS",
+          "description": "Commands for staff to use without using Currency"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RESET_PREFAB",
+          "description": "Reset prefab permission"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "userDiscordChannel",
+          "fieldType": "string",
+          "description": "Sends to discord"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.2",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "User to Player Role Sync",
+      "category": "administration",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: User to Player Role Sync",
+      "description": "Updated to version latest. Added 2 hooks: `onRoleRemoved` (role-removed), `onRoleAssigned` (role-assigned). Added 1 function: `syncUserRoleToPlayer`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "onRoleRemoved",
+          "eventType": "role-removed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "onRoleAssigned",
+          "eventType": "role-assigned"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "syncUserRoleToPlayer"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "highPingKickerOptimized",
+      "category": "administration",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: highPingKickerOptimized",
+      "description": "Updated to version latest. Added 1 scheduled task: `Ping check`. New configuration options: `pingThreshold`, `warningsBeforeKick`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Ping check",
+          "schedule": "*/3 * * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pingThreshold",
+          "fieldType": "number",
+          "description": "A ping value that is deemed too high and prompts a warning."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "warningsBeforeKick",
+          "fieldType": "number",
+          "description": "Number of warnings before a player is kicked."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Inactive Player Cleanup",
+      "category": "community-management",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: Inactive Player Cleanup",
+      "description": "Updated to version latest. Added 2 scheduled tasks: `Monthly Inactive Player Cleanup`, `Cleanup Watchdog`. Added 1 function: `watchdog`. New configuration options: `discordChannelId`, `inactivityDays`, `batchSize`, `enabled`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Monthly Inactive Player Cleanup",
+          "schedule": "0 0 1 * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Cleanup Watchdog",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "watchdog"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where cleanup logs will be sent"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "inactivityDays",
+          "fieldType": "number",
+          "description": "Number of days of inactivity before a player is considered for deletion"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "batchSize",
+          "fieldType": "number",
+          "description": "Number of players to process per cronjob execution"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "enabled",
+          "fieldType": "boolean",
+          "description": "Master switch to enable/disable the cleanup process"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "VotingSystem",
+      "category": "community-management",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "Command Update: vote",
+      "description": "Updated 1 command implementation.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": false,
+      "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "vote"
+        }
+      ]
+    },
+    {
+      "moduleName": "dynamicCommands",
+      "category": "community-management",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "New Module: dynamicCommands",
+      "description": "Updated to version latest. Added 1 scheduled task: `commandGenerator`. New configuration options: `validateOnlinePlayers`, `commands`.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "commandGenerator",
+          "schedule": "*/15 * * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "validateOnlinePlayers",
+          "fieldType": "boolean",
+          "description": "Global setting: When enabled, validates player-type arguments against online players before executing. Can be overridden per-command."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commands",
+          "fieldType": "array",
+          "description": "List of commands to create dynamically"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Bosskills",
+      "category": "events",
+      "date": "2025-12-12T17:40:04+01:00",
+      "title": "Updated 11 Hooks",
+      "description": "Updated to version 0.1.0. Added 10 hooks: `Shocker` (log), `Bull` (log), `Veteran` (log), `BurningFlesh` (log), `Bitch` (log), `Carrier` (log), `Bear` (log), `Cholera` (log), `Ostiarius` (log), `Gargul` (log). New configuration options: `coinAmountTinyBoss`, `coinAmountMiniBoss`, `coinAmountBoss`, `announceGargul`, `announceBear`, `announceBitch`, `announceBurningFlesh`, `announceCholera`, `announceBull`, `announceShocker`, `announceVeteran`, `announceCarrier`, `announceOstiarius`. Removed configuration option: `coinAmountDevourer`. Updated 1 hook implementation.",
+      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+      "isNew": false,
+      "details": [
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Shocker",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Bull",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Veteran",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "BurningFlesh",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Bitch",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Carrier",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Bear",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Cholera",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Ostiarius",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Gargul",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "updated",
+          "name": "Devourer"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "coinAmountTinyBoss",
+          "fieldType": "number",
+          "description": "Amount of Coin to award for a tinyboss"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "coinAmountMiniBoss",
+          "fieldType": "number",
+          "description": "Amount of Coin to award for a miniboss"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "coinAmountBoss",
+          "fieldType": "number",
+          "description": "Amount of Coin to award for a Boss"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceGargul",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceBear",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceBitch",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceBurningFlesh",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceCholera",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceBull",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceShocker",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceVeteran",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceCarrier",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceOstiarius",
+          "fieldType": "string",
+          "description": "Use {pname} for player name and {amount} for currency"
+        },
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "coinAmountDevourer"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.1.0",
+          "previousVersion": "1.0.0"
+        }
+      ]
+    },
+    {
+      "moduleName": "DynamicServerMessages",
+      "category": "community-management",
+      "date": "2025-11-26T15:01:22+01:00",
+      "title": "Module Updated",
+      "description": "Updated to version latest.",
+      "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
+      "isNew": false,
+      "details": [
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "0.0.1"
+        }
+      ]
+    },
+    {
+      "moduleName": "dynamicCronjobs",
+      "category": "community-management",
+      "date": "2025-11-26T15:01:22+01:00",
+      "title": "Module Updated",
+      "description": "Module updated with improvements and fixes.",
+      "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
+      "isNew": false,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "removed",
+          "name": "cr-2a2b1d73-1-testservera1"
+        },
+        {
+          "type": "cronjob",
+          "action": "removed",
+          "name": "cr-1a46b457-1-testserverb1"
+        },
+        {
+          "type": "cronjob",
+          "action": "removed",
+          "name": "cr-1a46b457-2-testserverb2"
+        },
+        {
+          "type": "cronjob",
+          "action": "removed",
+          "name": "cr-3251bb7f-1-mocktest2"
+        }
+      ]
+    },
+    {
       "moduleName": "dynamicCronjobs",
       "category": "community-management",
       "date": "2025-11-26T12:40:22+01:00",
@@ -11136,7 +12075,1145 @@
     }
   ],
   "byModule": {
+    "PvP Air Drops": [
+      {
+        "moduleName": "PvP Air Drops",
+        "category": "PvP",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: PvP Air Drops",
+        "description": "Updated to version 2.1.3. Added 1 hook: `PvP Air Drop` (log). New configuration options: `pvpMessage`, `pvpRange`, `enterPvPMessage`, `exitPvPMessage`, `deleteCronjob`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PvP Air Drop",
+            "eventType": "log"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pvpMessage",
+            "fieldType": "string",
+            "description": "Message to the server about airdrops being PvP. Use {x} and {z} to announce the location of the air drop."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pvpRange",
+            "fieldType": "number",
+            "description": "The range of PvP area. The Area will be double this number."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "enterPvPMessage",
+            "fieldType": "string",
+            "description": "Entering the PvP area message"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "exitPvPMessage",
+            "fieldType": "string",
+            "description": "Exiting the PvP area Message"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "deleteCronjob",
+            "fieldType": "number",
+            "description": "Set the minutes you want the PvP area to be live"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "2.1.3",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "7dtd Commands": [
+      {
+        "moduleName": "7dtd Commands",
+        "category": "administration",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: 7dtd Commands",
+        "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minibike",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "drone",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "bicycle",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "gfxoff",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "debuff",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "4x4",
+            "description": "Move your 4x4 to you if you're close enough to it."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "visit",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "gyro",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "home",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "gfxon",
+            "description": "No help text available"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "inGameCommands",
+            "description": "Commands in game"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "HOME_PERMISSION",
+            "description": "Gives players access to the home command"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VISIT_PERMISSION",
+            "description": "Gives players permission to use the visit commmand"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Discord Links": [
+      {
+        "moduleName": "Discord Links",
+        "category": "administration",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: Discord Links",
+        "description": "Updated to version latest. Added 1 scheduled task: `Daily Link Update`. Added 1 function: `postDailyLinks`. New configuration options: `discordChannelId`, `messageColor`, `decorativeHeader`, `links`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Daily Link Update",
+            "schedule": "0 12 * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "postDailyLinks"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where links will be posted"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "messageColor",
+            "fieldType": "number",
+            "description": "Decimal color code for the embed (0-16777215)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "decorativeHeader",
+            "fieldType": "string",
+            "description": "Optional decorative text at the top of the message"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "links",
+            "fieldType": "array",
+            "description": "List of links to display"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Staff Commands": [
+      {
+        "moduleName": "Staff Commands",
+        "category": "administration",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: Staff Commands",
+        "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "mute",
+            "description": "[02FEDMute (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "zomb",
+            "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "buff - 1",
+            "description": "[02FEDC]buff (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 3",
+            "description": "Targeted Horde round 3"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 1",
+            "description": "[02FEDC]Send a horde in 4 intervals in 30 seconds at a player. Type /th (name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kickall",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "avisit",
+            "description": "[02FEDC]avisit (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 4",
+            "description": "[02FEDC]Fourth round of Targeted Horde[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "killall",
+            "description": "[02FEDC]Kill all of the Zeds on the server.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pr",
+            "description": "[02FEDC]Reset the POI you are standing in[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "visitmap",
+            "description": "[02FEDC]Open the map for Takaro and CPM.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setwaypointpublic",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "aaaaaaa",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rpd",
+            "description": "[02FEDC]rpd (player name) Resets a player's data. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "ban",
+            "description": "[02FEDC]ban (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rvr",
+            "description": "[02FEDC]rvr (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "arrest",
+            "description": "[02FEDC]arrest (player name) (reason for arrest)[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "ocn",
+            "description": "[02FEDC] Change a player's name in chat. Type /ocn (Name) (New Name). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setjail",
+            "description": "[02FEDC]Set an 11x11 area to put hail birds in.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rdd",
+            "description": "[02FEDC]rdd (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "buff - 2",
+            "description": "Ends players buff"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pull",
+            "description": "[02FEDC]pull (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reset1",
+            "description": "[02FEDC]First position to reset a chunk. Use /reset2 in the opposite corner to reset the desired area.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "release",
+            "description": "[02FEDC]Release (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reset2",
+            "description": "[02FEDC]Last position to reset a chunk.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kick",
+            "description": "[02FEDC]kick (player name) (reason in quotes). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 2",
+            "description": "[02FEDC]Second round of a targeted horde[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "unmute",
+            "description": "[02FEDC]unmute (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "shutdownba",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "cm  & dm",
+            "description": "[02FEDC]Creative mode and debug menu. Reserved for admins[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "wi",
+            "description": "Wipe a player's belt, bag, equipment, all"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kill",
+            "description": "[02FEDC]kill (players name) You must run the command a second time to confirm the kill. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "KILL_PLAYER",
+            "description": "Kill a player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "CM_DM",
+            "description": "Creative mode and debug menu"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "MUTE",
+            "description": "Mute unruly players in game"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "ZOMB_FREE_SELF",
+            "description": "Zombie free command for admins to run the command for their personal house"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "LIST_LANDCLAIMS",
+            "description": "Lists land claims near by"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REMOVE_LANDCLAIMS",
+            "description": "remove nearby land claims"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_PLAYER",
+            "description": "Resets a player's corrupted data"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RDD",
+            "description": "Resets player drone data to place a new one"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "UNMUTE",
+            "description": "Unmute a player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VISIT_MAP",
+            "description": "Visit the map to unlock for Takaro and CPM"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RELEASE",
+            "description": "Release a player from jail"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "SET_JAIL",
+            "description": "Set the location of your jail "
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "BUFF",
+            "description": "Buff another player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_CHUNKS",
+            "description": "Reset Chunks Permission"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "WIPE_INVENTORY",
+            "description": "Wipe Inventory"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "STAFF_COMMANDS",
+            "description": "Commands for staff to use without using Currency"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_PREFAB",
+            "description": "Reset prefab permission"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "userDiscordChannel",
+            "fieldType": "string",
+            "description": "Sends to discord"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.2",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "User to Player Role Sync": [
+      {
+        "moduleName": "User to Player Role Sync",
+        "category": "administration",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: User to Player Role Sync",
+        "description": "Updated to version latest. Added 2 hooks: `onRoleRemoved` (role-removed), `onRoleAssigned` (role-assigned). Added 1 function: `syncUserRoleToPlayer`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "onRoleRemoved",
+            "eventType": "role-removed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "onRoleAssigned",
+            "eventType": "role-assigned"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "syncUserRoleToPlayer"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "highPingKickerOptimized": [
+      {
+        "moduleName": "highPingKickerOptimized",
+        "category": "administration",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: highPingKickerOptimized",
+        "description": "Updated to version latest. Added 1 scheduled task: `Ping check`. New configuration options: `pingThreshold`, `warningsBeforeKick`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Ping check",
+            "schedule": "*/3 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pingThreshold",
+            "fieldType": "number",
+            "description": "A ping value that is deemed too high and prompts a warning."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "warningsBeforeKick",
+            "fieldType": "number",
+            "description": "Number of warnings before a player is kicked."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Inactive Player Cleanup": [
+      {
+        "moduleName": "Inactive Player Cleanup",
+        "category": "community-management",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: Inactive Player Cleanup",
+        "description": "Updated to version latest. Added 2 scheduled tasks: `Monthly Inactive Player Cleanup`, `Cleanup Watchdog`. Added 1 function: `watchdog`. New configuration options: `discordChannelId`, `inactivityDays`, `batchSize`, `enabled`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Monthly Inactive Player Cleanup",
+            "schedule": "0 0 1 * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Cleanup Watchdog",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "watchdog"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where cleanup logs will be sent"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "inactivityDays",
+            "fieldType": "number",
+            "description": "Number of days of inactivity before a player is considered for deletion"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "batchSize",
+            "fieldType": "number",
+            "description": "Number of players to process per cronjob execution"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "enabled",
+            "fieldType": "boolean",
+            "description": "Master switch to enable/disable the cleanup process"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "VotingSystem": [
+      {
+        "moduleName": "VotingSystem",
+        "category": "community-management",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "Command Update: vote",
+        "description": "Updated 1 command implementation.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": false,
+        "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "vote"
+          }
+        ]
+      },
+      {
+        "moduleName": "VotingSystem",
+        "category": "community-management",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: VotingSystem",
+        "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "vote",
+            "description": "Claim rewards for voting for the server"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "votingsite",
+            "fieldType": "string",
+            "description": "Site where players vote. Example: \nhttps://7daystodie-servers.com for 7 Days to Die;\nhttps://rust-servers.net for RUST\n\n"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "votekey",
+            "fieldType": "string",
+            "description": "Vote key provided by the voting site"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "novote",
+            "fieldType": "string",
+            "description": "Message to send to the player when voting site reports no vote was cast. "
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "alreadyclaimed",
+            "fieldType": "string",
+            "description": "Message to send to the player when the voting site reports the vote reward was already claimed."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "privatemessage",
+            "fieldType": "string",
+            "description": "Optional message to send to the player when the voting site reports a vote with no reward claimed yet. \nExample: Thanks for voting.\nLeave it blank if you want nothing to be sent instead."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "publicmessage",
+            "fieldType": "string",
+            "description": "Optional message to broadcast to all players online when vote is successful. Use {name} in the message to refer to the player name.\nExample: [00FF00]{name}[-] voted at 7daystodie-servers.com and was rewarded Takaro Coins!\nLeave it blank if you want nothing to be sent instead.\n"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "currency",
+            "fieldType": "number",
+            "description": "How much currency to add to the player in Takaro, if any.\nMake sure to enable economy for this server."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemnumber",
+            "fieldType": "number",
+            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemlist",
+            "fieldType": "array",
+            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "fixedrewards",
+            "fieldType": "array",
+            "description": "All the items in this list will be given as a reward for the vote."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "dynamicCommands": [
+      {
+        "moduleName": "dynamicCommands",
+        "category": "community-management",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "New Module: dynamicCommands",
+        "description": "Updated to version latest. Added 1 scheduled task: `commandGenerator`. New configuration options: `validateOnlinePlayers`, `commands`.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "commandGenerator",
+            "schedule": "*/15 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "validateOnlinePlayers",
+            "fieldType": "boolean",
+            "description": "Global setting: When enabled, validates player-type arguments against online players before executing. Can be overridden per-command."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commands",
+            "fieldType": "array",
+            "description": "List of commands to create dynamically"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Bosskills": [
+      {
+        "moduleName": "Bosskills",
+        "category": "events",
+        "date": "2025-12-12T17:40:04+01:00",
+        "title": "Updated 11 Hooks",
+        "description": "Updated to version 0.1.0. Added 10 hooks: `Shocker` (log), `Bull` (log), `Veteran` (log), `BurningFlesh` (log), `Bitch` (log), `Carrier` (log), `Bear` (log), `Cholera` (log), `Ostiarius` (log), `Gargul` (log). New configuration options: `coinAmountTinyBoss`, `coinAmountMiniBoss`, `coinAmountBoss`, `announceGargul`, `announceBear`, `announceBitch`, `announceBurningFlesh`, `announceCholera`, `announceBull`, `announceShocker`, `announceVeteran`, `announceCarrier`, `announceOstiarius`. Removed configuration option: `coinAmountDevourer`. Updated 1 hook implementation.",
+        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
+        "isNew": false,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Shocker",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Bull",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Veteran",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "BurningFlesh",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Bitch",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Carrier",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Bear",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Cholera",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Ostiarius",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Gargul",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "updated",
+            "name": "Devourer"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "coinAmountTinyBoss",
+            "fieldType": "number",
+            "description": "Amount of Coin to award for a tinyboss"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "coinAmountMiniBoss",
+            "fieldType": "number",
+            "description": "Amount of Coin to award for a miniboss"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "coinAmountBoss",
+            "fieldType": "number",
+            "description": "Amount of Coin to award for a Boss"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceGargul",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceBear",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceBitch",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceBurningFlesh",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceCholera",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceBull",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceShocker",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceVeteran",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceCarrier",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceOstiarius",
+            "fieldType": "string",
+            "description": "Use {pname} for player name and {amount} for currency"
+          },
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "coinAmountDevourer"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.1.0",
+            "previousVersion": "1.0.0"
+          }
+        ]
+      },
+      {
+        "moduleName": "Bosskills",
+        "category": "events",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: Bosskills",
+        "description": "Updated to version 1.0.0. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Devourer",
+            "eventType": "log"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "coinAmountDevourer",
+            "fieldType": "number",
+            "description": "Amoint of Coin to award"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceDevourer",
+            "fieldType": "string",
+            "description": "Post in chat Boss Kill"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "DynamicServerMessages": [
+      {
+        "moduleName": "DynamicServerMessages",
+        "category": "community-management",
+        "date": "2025-11-26T15:01:22+01:00",
+        "title": "Module Updated",
+        "description": "Updated to version latest.",
+        "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
+        "isNew": false,
+        "details": [
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "0.0.1"
+          }
+        ]
+      },
+      {
+        "moduleName": "DynamicServerMessages",
+        "category": "community-management",
+        "date": "2025-08-12T21:17:12+02:00",
+        "title": "Module Updated",
+        "description": "Updated to version 0.0.1.",
+        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+        "isNew": false,
+        "details": [
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.1",
+            "previousVersion": "latest"
+          }
+        ]
+      },
+      {
+        "moduleName": "DynamicServerMessages",
+        "category": "community-management",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: DynamicServerMessages",
+        "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "ServerMessagesGenerator",
+            "schedule": "5 4 * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "cronjobs",
+            "fieldType": "array",
+            "description": "List of cronjobs and their schedules"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "dynamicCronjobs": [
+      {
+        "moduleName": "dynamicCronjobs",
+        "category": "community-management",
+        "date": "2025-11-26T15:01:22+01:00",
+        "title": "Module Updated",
+        "description": "Module updated with improvements and fixes.",
+        "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-2a2b1d73-1-testservera1"
+          },
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-1a46b457-1-testserverb1"
+          },
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-1a46b457-2-testserverb2"
+          },
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-3251bb7f-1-mocktest2"
+          }
+        ]
+      },
       {
         "moduleName": "dynamicCronjobs",
         "category": "community-management",
@@ -11822,55 +13899,6 @@
             "name": "deathLocationExpiration",
             "fieldType": "number",
             "description": "How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "DynamicServerMessages": [
-      {
-        "moduleName": "DynamicServerMessages",
-        "category": "community-management",
-        "date": "2025-08-12T21:17:12+02:00",
-        "title": "Module Updated",
-        "description": "Updated to version 0.0.1.",
-        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
-        "isNew": false,
-        "details": [
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "0.0.1",
-            "previousVersion": "latest"
-          }
-        ]
-      },
-      {
-        "moduleName": "DynamicServerMessages",
-        "category": "community-management",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: DynamicServerMessages",
-        "description": "Updated to version latest. Added 1 scheduled task: `ServerMessagesGenerator`. New configuration option: `cronjobs`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "ServerMessagesGenerator",
-            "schedule": "5 4 * * *"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "cronjobs",
-            "fieldType": "array",
-            "description": "List of cronjobs and their schedules"
           },
           {
             "type": "version",
@@ -13110,101 +15138,6 @@
         ]
       }
     ],
-    "VotingSystem": [
-      {
-        "moduleName": "VotingSystem",
-        "category": "community-management",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: VotingSystem",
-        "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "vote",
-            "description": "Claim rewards for voting for the server"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "votingsite",
-            "fieldType": "string",
-            "description": "Site where players vote. Example: \nhttps://7daystodie-servers.com for 7 Days to Die;\nhttps://rust-servers.net for RUST\n\n"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "votekey",
-            "fieldType": "string",
-            "description": "Vote key provided by the voting site"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "novote",
-            "fieldType": "string",
-            "description": "Message to send to the player when voting site reports no vote was cast. "
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "alreadyclaimed",
-            "fieldType": "string",
-            "description": "Message to send to the player when the voting site reports the vote reward was already claimed."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "privatemessage",
-            "fieldType": "string",
-            "description": "Optional message to send to the player when the voting site reports a vote with no reward claimed yet. \nExample: Thanks for voting.\nLeave it blank if you want nothing to be sent instead."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "publicmessage",
-            "fieldType": "string",
-            "description": "Optional message to broadcast to all players online when vote is successful. Use {name} in the message to refer to the player name.\nExample: [00FF00]{name}[-] voted at 7daystodie-servers.com and was rewarded Takaro Coins!\nLeave it blank if you want nothing to be sent instead.\n"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "currency",
-            "fieldType": "number",
-            "description": "How much currency to add to the player in Takaro, if any.\nMake sure to enable economy for this server."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemnumber",
-            "fieldType": "number",
-            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemlist",
-            "fieldType": "array",
-            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "fixedrewards",
-            "fieldType": "array",
-            "description": "All the items in this list will be given as a reward for the vote."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
     "Whitelisting": [
       {
         "moduleName": "Whitelisting",
@@ -13770,45 +15703,6 @@
             "type": "version",
             "action": "updated",
             "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "Bosskills": [
-      {
-        "moduleName": "Bosskills",
-        "category": "events",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: Bosskills",
-        "description": "Updated to version 1.0.0. Added 1 hook: `Devourer` (log). New configuration options: `coinAmountDevourer`, `announceDevourer`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "Devourer",
-            "eventType": "log"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "coinAmountDevourer",
-            "fieldType": "number",
-            "description": "Amoint of Coin to award"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "announceDevourer",
-            "fieldType": "string",
-            "description": "Post in chat Boss Kill"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "1.0.0",
             "previousVersion": "initial"
           }
         ]
@@ -22449,5 +24343,5 @@
       }
     ]
   },
-  "generatedAt": "2025-11-26T12:00:07.832Z"
+  "generatedAt": "2025-12-12T17:07:46.392Z"
 }
