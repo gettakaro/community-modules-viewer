@@ -30,5 +30,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
     moduleData.versions[0];
 
   // Redirect to the specific version page (use encoded name for URL)
-  redirect(`/module/${encodeURIComponent(decodedName)}/${encodeURIComponent(latestVersion.tag)}`);
+  redirect(
+    `/module/${encodeURIComponent(decodedName)}/${encodeURIComponent(latestVersion.tag)}`,
+  );
 }
