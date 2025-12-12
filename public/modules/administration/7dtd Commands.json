@@ -1,7 +1,7 @@
 {
-  "name": "CPMCommands",
+  "name": "7dtd Commands",
   "author": "Mad",
-  "supportedGames": ["all"],
+  "supportedGames": ["7 days to die"],
   "versions": [
     {
       "tag": "1.0.0",

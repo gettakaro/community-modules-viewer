@@ -1,0 +1,30 @@
+{
+    "name": "highPingKickerOptimized",
+    "author": "Mad",
+    "supportedGames": [
+        "7 days to die",
+        "rust",
+        "minecraft"
+    ],
+    "versions": [
+        {
+            "tag": "latest",
+            "description": "Optimized version: Automatically kick players with high ping, with warnings and configurable thresholds. Uses efficient queries with time filtering to check only current ping data.",
+            "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"pingThreshold\":{\"title\":\"pingThreshold\",\"description\":\"A ping value that is deemed too high and prompts a warning.\",\"default\":200,\"type\":\"number\"},\"warningsBeforeKick\":{\"title\":\"warningsBeforeKick\",\"description\":\"Number of warnings before a player is kicked.\",\"default\":3,\"type\":\"number\"}}}",
+            "uiSchema": "{}",
+            "commands": [],
+            "hooks": [],
+            "cronJobs": [
+                {
+                    "function": "import { takaro, data } from '@takaro/helpers';\n\nconst VARIABLE_KEY = 'highPingKicker:warnings';\n\nasync function main() {\n    const startTime = Date.now();\n    \n    // Calculate timestamp for 3 minutes ago (matching cronjob interval)\n    const threeMinutesAgo = new Date(Date.now() - 3 * 60 * 1000).toISOString();\n    \n    // Get only online players with recent activity - NO extend to avoid loading role/permission bloat\n    const onlinePlayersRes = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n        filters: {\n            gameServerId: [data.gameServerId],\n            online: [true]\n        },\n        greaterThan: {\n            lastSeen: threeMinutesAgo\n        }\n    });\n    \n    const onlinePlayers = onlinePlayersRes.data.data;\n    console.log(`Found ${onlinePlayers.length} online players to check`);\n    \n    await Promise.all(onlinePlayers.map(async (playerOnServer) => {\n        // Check if ping exceeds threshold\n        if (playerOnServer.ping > data.module.userConfig.pingThreshold) {\n            \n            // Check current warning count\n            const currentWarningsRes = await takaro.variable.variableControllerSearch({\n                filters: {\n                    playerId: [playerOnServer.playerId],\n                    key: [VARIABLE_KEY],\n                    gameServerId: [data.gameServerId]\n                },\n            });\n            \n            const currentWarningsRecords = currentWarningsRes.data.data;\n            let currentWarnings = 1;\n            \n            if (!currentWarningsRecords.length) {\n                await takaro.variable.variableControllerCreate({\n                    playerId: playerOnServer.playerId,\n                    gameServerId: data.gameServerId,\n                    key: VARIABLE_KEY,\n                    value: '1',\n                });\n            } else {\n                currentWarnings = parseInt(currentWarningsRecords[0].value, 10) + 1;\n                await takaro.variable.variableControllerUpdate(currentWarningsRecords[0].id, {\n                    value: currentWarnings.toString(),\n                });\n            }\n            \n            // Check if player should be kicked\n            if (currentWarnings >= data.module.userConfig.warningsBeforeKick) {\n                await takaro.gameserver.gameServerControllerKickPlayer(\n                    data.gameServerId, \n                    playerOnServer.playerId, \n                    {\n                        reason: `Your ping (${playerOnServer.ping}) is too high, please try again later.`,\n                    }\n                );\n                \n                // Delete the warning record after kicking\n                if (currentWarningsRecords.length > 0) {\n                    await takaro.variable.variableControllerDelete(currentWarningsRecords[0].id);\n                }\n            } else {\n                // Send warning message\n                await takaro.gameserver.gameServerControllerSendMessage(data.gameServerId, {\n                    message: `Your ping (${playerOnServer.ping}) is too high. Warning ${currentWarnings}/${data.module.userConfig.warningsBeforeKick}`,\n                    opts: {\n                        recipient: {\n                            gameId: playerOnServer.gameId,\n                        },\n                    },\n                });\n            }\n        }\n    }));\n    \n    const executionTime = Date.now() - startTime;\n    console.log(`Execution completed in ${executionTime}ms`);\n}\n\nawait main();",
+                    "name": "Ping check",
+                    "description": "Checks online players every 3 minutes for high ping",
+                    "temporalValue": "*/3 * * * *"
+                }
+            ],
+            "functions": [],
+            "permissions": []
+        }
+    ],
+    "takaroVersion": "v0.4.9"
+}

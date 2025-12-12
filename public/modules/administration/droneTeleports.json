@@ -1,7 +1,7 @@
 {
   "name": "droneTeleports",
   "author": "Mad",
-  "supportedGames": ["all"],
+  "supportedGames": ["7 days to die"],
   "versions": [
     {
       "tag": "latest",

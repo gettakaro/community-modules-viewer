@@ -1,7 +1,9 @@
 {
-  "name": "BannedItems",
+  "name": "Banned Items",
   "author": "Mad",
-  "supportedGames": ["all"],
+  "supportedGames": [
+    "all"
+  ],
   "versions": [
     {
       "tag": "latest",
@@ -65,5 +67,5 @@
       ]
     }
   ],
-  "takaroVersion": "v0.4.3"
+  "takaroVersion": "v0.4.9"
 }
