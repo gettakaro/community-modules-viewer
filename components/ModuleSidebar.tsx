@@ -314,8 +314,8 @@ export function ModuleSidebar({
   }, [modules, filteredModules]);
 
   const handleModuleClick = (module: ModuleWithMeta) => {
-    // Navigate to the module page
-    router.push(`/module/${module.name}`);
+    // Navigate to the module page (encode name for URL compatibility)
+    router.push(`/module/${encodeURIComponent(module.name)}`);
     // Close mobile sidebar after navigation
     if (isMobile) {
       setIsMobileOpen(false);

@@ -36,14 +36,20 @@ async function loadChangelogs(): Promise<Changelogs | null> {
 
 export async function generateStaticParams() {
   const paths = await getAllModuleVersionPaths();
-  return paths;
+  // URL-encode names and versions with special characters for static export compatibility
+  return paths.map((p) => ({
+    name: encodeURIComponent(p.name),
+    version: encodeURIComponent(p.version),
+  }));
 }
 
 export async function generateMetadata({ params }: ModuleVersionPageProps) {
   const { name, version } = await params;
+  const decodedName = decodeURIComponent(name);
+  const decodedVersion = decodeURIComponent(version);
   return {
-    title: `${name} v${version} - Community Modules Viewer`,
-    description: `View details for ${name} module version ${version}`,
+    title: `${decodedName} v${decodedVersion} - Community Modules Viewer`,
+    description: `View details for ${decodedName} module version ${decodedVersion}`,
   };
 }
 
@@ -51,13 +57,17 @@ export default async function ModuleVersionPage({
   params,
 }: ModuleVersionPageProps) {
   const { name, version } = await params;
-  const moduleData = await getModuleByName(name);
+  const decodedName = decodeURIComponent(name);
+  const decodedVersion = decodeURIComponent(version);
+  const moduleData = await getModuleByName(decodedName);
 
   if (!moduleData) {
     notFound();
   }
 
-  const moduleVersion = moduleData.versions.find((v) => v.tag === version);
+  const moduleVersion = moduleData.versions.find(
+    (v) => v.tag === decodedVersion,
+  );
 
   if (!moduleVersion) {
     notFound();
@@ -65,13 +75,13 @@ export default async function ModuleVersionPage({
 
   // Load changelogs and get changes for this specific module
   const changelogs = await loadChangelogs();
-  const moduleChanges = changelogs?.byModule[name] || [];
+  const moduleChanges = changelogs?.byModule[decodedName] || [];
 
   return (
     <div className="container mx-auto p-6 max-w-6xl">
       <ModuleDetails
         module={moduleData}
-        selectedVersion={version}
+        selectedVersion={decodedVersion}
         moduleChanges={moduleChanges}
       />
     </div>
