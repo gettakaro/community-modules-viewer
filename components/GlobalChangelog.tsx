@@ -144,7 +144,7 @@ function ChangelogCard({ change }: { change: ChangelogEntry }) {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Link
-                href={`/module/${change.moduleName}/latest`}
+                href={`/module/${encodeURIComponent(change.moduleName)}/latest`}
                 className="font-semibold text-lg hover:text-primary transition-colors"
               >
                 {change.moduleName}

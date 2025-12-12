@@ -9,14 +9,16 @@ interface ModulePageProps {
 
 export async function generateStaticParams() {
   const moduleNames = await getAllModuleNames();
+  // URL-encode names with special characters for static export compatibility
   return moduleNames.map((name) => ({
-    name,
+    name: encodeURIComponent(name),
   }));
 }
 
 export default async function ModulePage({ params }: ModulePageProps) {
   const { name } = await params;
-  const moduleData = await getModuleByName(name);
+  const decodedName = decodeURIComponent(name);
+  const moduleData = await getModuleByName(decodedName);
 
   if (!moduleData || moduleData.versions.length === 0) {
     redirect('/');
@@ -27,6 +29,6 @@ export default async function ModulePage({ params }: ModulePageProps) {
     moduleData.versions.find((v) => v.tag === 'latest') ||
     moduleData.versions[0];
 
-  // Redirect to the specific version page
-  redirect(`/module/${name}/${latestVersion.tag}`);
+  // Redirect to the specific version page (use encoded name for URL)
+  redirect(`/module/${encodeURIComponent(decodedName)}/${encodeURIComponent(latestVersion.tag)}`);
 }
