@@ -1,9 +1,7 @@
 {
   "name": "VotingSystem",
   "author": "Mad x R20",
-  "supportedGames": [
-    "all"
-  ],
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",

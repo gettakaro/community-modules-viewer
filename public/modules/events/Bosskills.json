@@ -1,9 +1,7 @@
 {
   "name": "Bosskills",
   "author": "Mad",
-  "supportedGames": [
-    "all"
-  ],
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "0.1.0",

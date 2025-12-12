@@ -1,9 +1,7 @@
 {
   "name": "Banned Items",
   "author": "Mad",
-  "supportedGames": [
-    "all"
-  ],
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",

@@ -1,9 +1,7 @@
 {
   "name": "Staff Commands",
   "author": "Mad",
-  "supportedGames": [
-    "7 days to die"
-  ],
+  "supportedGames": ["7 days to die"],
   "versions": [
     {
       "tag": "0.0.2",
