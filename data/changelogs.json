@@ -1,6 +1,396 @@
 {
   "global": [
     {
+      "moduleName": "PvPAirDrops",
+      "category": "PvP",
+      "date": "2025-12-15T12:20:06+01:00",
+      "title": "New Module: PvPAirDrops",
+      "description": "Updated to version 2.1.3. Added 1 hook: `PvP Air Drop` (log). New configuration options: `pvpMessage`, `pvpRange`, `enterPvPMessage`, `exitPvPMessage`, `deleteCronjob`.",
+      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+      "isNew": true,
+      "details": [
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "PvP Air Drop",
+          "eventType": "log"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pvpMessage",
+          "fieldType": "string",
+          "description": "Message to the server about airdrops being PvP. Use {x} and {z} to announce the location of the air drop."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pvpRange",
+          "fieldType": "number",
+          "description": "The range of PvP area. The Area will be double this number."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "enterPvPMessage",
+          "fieldType": "string",
+          "description": "Entering the PvP area message"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "exitPvPMessage",
+          "fieldType": "string",
+          "description": "Exiting the PvP area Message"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "deleteCronjob",
+          "fieldType": "number",
+          "description": "Set the minutes you want the PvP area to be live"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "2.1.3",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "7dtdCommands",
+      "category": "administration",
+      "date": "2025-12-15T12:20:06+01:00",
+      "title": "New Module: 7dtdCommands",
+      "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
+      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minibike",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "drone",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "bicycle",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "gfxoff",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "debuff",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "4x4",
+          "description": "Move your 4x4 to you if you're close enough to it."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "visit",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "gyro",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "home",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "gfxon",
+          "description": "No help text available"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "inGameCommands",
+          "description": "Commands in game"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "HOME_PERMISSION",
+          "description": "Gives players access to the home command"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "VISIT_PERMISSION",
+          "description": "Gives players permission to use the visit commmand"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "UsertoPlayerRoleSync",
+      "category": "administration",
+      "date": "2025-12-15T12:20:06+01:00",
+      "title": "New Module: UsertoPlayerRoleSync",
+      "description": "Updated to version latest. Added 2 hooks: `onRoleRemoved` (role-removed), `onRoleAssigned` (role-assigned). Added 1 function: `syncUserRoleToPlayer`.",
+      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+      "isNew": true,
+      "details": [
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "onRoleRemoved",
+          "eventType": "role-removed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "onRoleAssigned",
+          "eventType": "role-assigned"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "syncUserRoleToPlayer"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "BannedItems",
+      "category": "anti-cheat",
+      "date": "2025-12-15T12:20:06+01:00",
+      "title": "New Module: BannedItems",
+      "description": "Updated to version latest. Added 1 scheduled task: `CheckBannedItems`. Added 1 function: `CheckBannedItems`. New permissions: `banned_items_immunity_admin`, `banned_items_immunity_vip`, `banned_items_immunity_moderator`, `banned_items_immunity_patreon`, `banned_items_immunity_donor`, `banned_items_immunity_trusted`. New configuration options: `bannedItems`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`, `arrestMessage`, `discordKickMessage`, `discordBanMessage`, `discordArrestMessage`, `discordWarningMessage`, `cheaterDetected`.",
+      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "CheckBannedItems",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "CheckBannedItems"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_admin",
+          "description": "Grants immunity from banned items checks (Admin tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_vip",
+          "description": "Grants immunity from banned items checks (VIP tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_moderator",
+          "description": "Grants immunity from banned items checks (Moderator tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_patreon",
+          "description": "Grants immunity from banned items checks (Patreon tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_donor",
+          "description": "Grants immunity from banned items checks (Donor tier)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "banned_items_immunity_trusted",
+          "description": "Grants immunity from banned items checks (Trusted tier)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bannedItems",
+          "fieldType": "array",
+          "description": "Select items that players should not have in their inventory and configure immunity permissions for each"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "banDuration",
+          "fieldType": "number",
+          "description": "How long to ban the player (only applies if punishment type is 'ban')"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "kickMessage",
+          "fieldType": "string",
+          "description": "Message shown when player is kicked. Use {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "banMessage",
+          "fieldType": "string",
+          "description": "Message shown when player is banned. Use {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "warningMessage",
+          "fieldType": "string",
+          "description": "Message shown for each warning. Use {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "arrestMessage",
+          "fieldType": "string",
+          "description": "Message shown when player is arrested. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordKickMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player is kicked. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordBanMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player is banned. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordArrestMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player is arrested. Use {pname} for player name, {item} for item name"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordWarningMessage",
+          "fieldType": "string",
+          "description": "Message sent to Discord when player receives a warning. Use {pname} for player name, {item} for item name, {warnings} for warning count, {maxWarnings} for max warnings"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "cheaterDetected",
+          "fieldType": "string",
+          "description": "Discord channel ID to send alerts when punishments are applied"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "InactivePlayerCleanup",
+      "category": "community-management",
+      "date": "2025-12-15T12:20:06+01:00",
+      "title": "New Module: InactivePlayerCleanup",
+      "description": "Updated to version latest. Added 2 scheduled tasks: `Monthly Inactive Player Cleanup`, `Cleanup Watchdog`. Added 1 function: `watchdog`. New configuration options: `discordChannelId`, `inactivityDays`, `batchSize`, `enabled`.",
+      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Monthly Inactive Player Cleanup",
+          "schedule": "0 0 1 * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Cleanup Watchdog",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "watchdog"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where cleanup logs will be sent"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "inactivityDays",
+          "fieldType": "number",
+          "description": "Number of days of inactivity before a player is considered for deletion"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "batchSize",
+          "fieldType": "number",
+          "description": "Number of players to process per cronjob execution"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "enabled",
+          "fieldType": "boolean",
+          "description": "Master switch to enable/disable the cleanup process"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "WipePlayerCharacter",
       "category": "administration",
       "date": "2025-12-12T21:48:26+01:00",
@@ -12104,6 +12494,406 @@
     }
   ],
   "byModule": {
+    "PvPAirDrops": [
+      {
+        "moduleName": "PvPAirDrops",
+        "category": "PvP",
+        "date": "2025-12-15T12:20:06+01:00",
+        "title": "New Module: PvPAirDrops",
+        "description": "Updated to version 2.1.3. Added 1 hook: `PvP Air Drop` (log). New configuration options: `pvpMessage`, `pvpRange`, `enterPvPMessage`, `exitPvPMessage`, `deleteCronjob`.",
+        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PvP Air Drop",
+            "eventType": "log"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pvpMessage",
+            "fieldType": "string",
+            "description": "Message to the server about airdrops being PvP. Use {x} and {z} to announce the location of the air drop."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pvpRange",
+            "fieldType": "number",
+            "description": "The range of PvP area. The Area will be double this number."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "enterPvPMessage",
+            "fieldType": "string",
+            "description": "Entering the PvP area message"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "exitPvPMessage",
+            "fieldType": "string",
+            "description": "Exiting the PvP area Message"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "deleteCronjob",
+            "fieldType": "number",
+            "description": "Set the minutes you want the PvP area to be live"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "2.1.3",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "7dtdCommands": [
+      {
+        "moduleName": "7dtdCommands",
+        "category": "administration",
+        "date": "2025-12-15T12:20:06+01:00",
+        "title": "New Module: 7dtdCommands",
+        "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
+        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minibike",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "drone",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "bicycle",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "gfxoff",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "debuff",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "4x4",
+            "description": "Move your 4x4 to you if you're close enough to it."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "visit",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "gyro",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "home",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "gfxon",
+            "description": "No help text available"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "inGameCommands",
+            "description": "Commands in game"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "HOME_PERMISSION",
+            "description": "Gives players access to the home command"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VISIT_PERMISSION",
+            "description": "Gives players permission to use the visit commmand"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "UsertoPlayerRoleSync": [
+      {
+        "moduleName": "UsertoPlayerRoleSync",
+        "category": "administration",
+        "date": "2025-12-15T12:20:06+01:00",
+        "title": "New Module: UsertoPlayerRoleSync",
+        "description": "Updated to version latest. Added 2 hooks: `onRoleRemoved` (role-removed), `onRoleAssigned` (role-assigned). Added 1 function: `syncUserRoleToPlayer`.",
+        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "onRoleRemoved",
+            "eventType": "role-removed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "onRoleAssigned",
+            "eventType": "role-assigned"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "syncUserRoleToPlayer"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "BannedItems": [
+      {
+        "moduleName": "BannedItems",
+        "category": "anti-cheat",
+        "date": "2025-12-15T12:20:06+01:00",
+        "title": "New Module: BannedItems",
+        "description": "Updated to version latest. Added 1 scheduled task: `CheckBannedItems`. Added 1 function: `CheckBannedItems`. New permissions: `banned_items_immunity_admin`, `banned_items_immunity_vip`, `banned_items_immunity_moderator`, `banned_items_immunity_patreon`, `banned_items_immunity_donor`, `banned_items_immunity_trusted`. New configuration options: `bannedItems`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`, `arrestMessage`, `discordKickMessage`, `discordBanMessage`, `discordArrestMessage`, `discordWarningMessage`, `cheaterDetected`.",
+        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "CheckBannedItems",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "CheckBannedItems"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_admin",
+            "description": "Grants immunity from banned items checks (Admin tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_vip",
+            "description": "Grants immunity from banned items checks (VIP tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_moderator",
+            "description": "Grants immunity from banned items checks (Moderator tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_patreon",
+            "description": "Grants immunity from banned items checks (Patreon tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_donor",
+            "description": "Grants immunity from banned items checks (Donor tier)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "banned_items_immunity_trusted",
+            "description": "Grants immunity from banned items checks (Trusted tier)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bannedItems",
+            "fieldType": "array",
+            "description": "Select items that players should not have in their inventory and configure immunity permissions for each"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banDuration",
+            "fieldType": "number",
+            "description": "How long to ban the player (only applies if punishment type is 'ban')"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "kickMessage",
+            "fieldType": "string",
+            "description": "Message shown when player is kicked. Use {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banMessage",
+            "fieldType": "string",
+            "description": "Message shown when player is banned. Use {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "warningMessage",
+            "fieldType": "string",
+            "description": "Message shown for each warning. Use {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "arrestMessage",
+            "fieldType": "string",
+            "description": "Message shown when player is arrested. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordKickMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player is kicked. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordBanMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player is banned. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordArrestMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player is arrested. Use {pname} for player name, {item} for item name"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordWarningMessage",
+            "fieldType": "string",
+            "description": "Message sent to Discord when player receives a warning. Use {pname} for player name, {item} for item name, {warnings} for warning count, {maxWarnings} for max warnings"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "cheaterDetected",
+            "fieldType": "string",
+            "description": "Discord channel ID to send alerts when punishments are applied"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "InactivePlayerCleanup": [
+      {
+        "moduleName": "InactivePlayerCleanup",
+        "category": "community-management",
+        "date": "2025-12-15T12:20:06+01:00",
+        "title": "New Module: InactivePlayerCleanup",
+        "description": "Updated to version latest. Added 2 scheduled tasks: `Monthly Inactive Player Cleanup`, `Cleanup Watchdog`. Added 1 function: `watchdog`. New configuration options: `discordChannelId`, `inactivityDays`, `batchSize`, `enabled`.",
+        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Monthly Inactive Player Cleanup",
+            "schedule": "0 0 1 * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Cleanup Watchdog",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "watchdog"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where cleanup logs will be sent"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "inactivityDays",
+            "fieldType": "number",
+            "description": "Number of days of inactivity before a player is considered for deletion"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "batchSize",
+            "fieldType": "number",
+            "description": "Number of players to process per cronjob execution"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "enabled",
+            "fieldType": "boolean",
+            "description": "Master switch to enable/disable the cleanup process"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "WipePlayerCharacter": [
       {
         "moduleName": "WipePlayerCharacter",
@@ -24403,5 +25193,5 @@
       }
     ]
   },
-  "generatedAt": "2025-12-15T11:09:40.118Z"
+  "generatedAt": "2025-12-15T11:46:38.215Z"
 }
