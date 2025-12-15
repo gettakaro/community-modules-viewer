@@ -1,6 +1,35 @@
 {
   "global": [
     {
+      "moduleName": "WipePlayerCharacter",
+      "category": "administration",
+      "date": "2025-12-12T21:48:26+01:00",
+      "title": "New Module: WipePlayerCharacter",
+      "description": "Updated to version 1.0.0. Added 2 commands: `reallywipeme`, `wipeme`.",
+      "commitHash": "887a322d76ca83e5fe6a9447cfb93263fc76f2ff",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "reallywipeme",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "wipeme",
+          "description": "No help text available"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.0",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "PvP Air Drops",
       "category": "PvP",
       "date": "2025-12-12T17:40:04+01:00",
@@ -12075,6 +12104,37 @@
     }
   ],
   "byModule": {
+    "WipePlayerCharacter": [
+      {
+        "moduleName": "WipePlayerCharacter",
+        "category": "administration",
+        "date": "2025-12-12T21:48:26+01:00",
+        "title": "New Module: WipePlayerCharacter",
+        "description": "Updated to version 1.0.0. Added 2 commands: `reallywipeme`, `wipeme`.",
+        "commitHash": "887a322d76ca83e5fe6a9447cfb93263fc76f2ff",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reallywipeme",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "wipeme",
+            "description": "No help text available"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "PvP Air Drops": [
       {
         "moduleName": "PvP Air Drops",
@@ -24343,5 +24403,5 @@
       }
     ]
   },
-  "generatedAt": "2025-12-12T17:25:22.815Z"
+  "generatedAt": "2025-12-15T11:09:40.118Z"
 }
