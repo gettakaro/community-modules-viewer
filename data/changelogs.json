@@ -1,6 +1,50 @@
 {
   "global": [
     {
+      "moduleName": "Multi_VIP_Packs",
+      "category": "community-management",
+      "date": "2025-12-21T08:37:17+01:00",
+      "title": "Command Update: vipkit",
+      "description": "New permission: `VIP_ACCESS`. Updated 1 command implementation.",
+      "commitHash": "2e1214f153f5bc1ef7fbb31f6d8f869c0c35b84a",
+      "isNew": false,
+      "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "vipkit"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "VIP_ACCESS",
+          "description": "Grants VIP access. The count value determines the VIP tier level (1=Bronze, 2=Silver, 3=Gold, etc.)"
+        }
+      ]
+    },
+    {
+      "moduleName": "Multi_VIP_Packs",
+      "category": "community-management",
+      "date": "2025-12-21T08:37:17+01:00",
+      "title": "Command Update: vipkit",
+      "description": "New permission: `VIP_ACCESS`. Updated 1 command implementation.",
+      "commitHash": "1c5aa758b4ffae88daa84de5b96452ad40fc3077",
+      "isNew": false,
+      "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "vipkit"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "VIP_ACCESS",
+          "description": "Grants VIP access. The count value determines the VIP tier level (1=Bronze, 2=Silver, 3=Gold, etc.)"
+        }
+      ]
+    },
+    {
       "moduleName": "PvPAirDrops",
       "category": "PvP",
       "date": "2025-12-15T12:20:06+01:00",
@@ -12494,6 +12538,95 @@
     }
   ],
   "byModule": {
+    "Multi_VIP_Packs": [
+      {
+        "moduleName": "Multi_VIP_Packs",
+        "category": "community-management",
+        "date": "2025-12-21T08:37:17+01:00",
+        "title": "Command Update: vipkit",
+        "description": "New permission: `VIP_ACCESS`. Updated 1 command implementation.",
+        "commitHash": "2e1214f153f5bc1ef7fbb31f6d8f869c0c35b84a",
+        "isNew": false,
+        "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "vipkit"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VIP_ACCESS",
+            "description": "Grants VIP access. The count value determines the VIP tier level (1=Bronze, 2=Silver, 3=Gold, etc.)"
+          }
+        ]
+      },
+      {
+        "moduleName": "Multi_VIP_Packs",
+        "category": "community-management",
+        "date": "2025-12-21T08:37:17+01:00",
+        "title": "Command Update: vipkit",
+        "description": "New permission: `VIP_ACCESS`. Updated 1 command implementation.",
+        "commitHash": "1c5aa758b4ffae88daa84de5b96452ad40fc3077",
+        "isNew": false,
+        "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "vipkit"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VIP_ACCESS",
+            "description": "Grants VIP access. The count value determines the VIP tier level (1=Bronze, 2=Silver, 3=Gold, etc.)"
+          }
+        ]
+      },
+      {
+        "moduleName": "Multi_VIP_Packs",
+        "category": "community-management",
+        "date": "2025-07-28T11:43:53+02:00",
+        "title": "New Module: Multi_VIP_Packs",
+        "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `welcomeHook` (log). New configuration options: `welcomeMessage`, `vipTiers`.",
+        "commitHash": "7c96159978edb496c14744b6b9b54f186c286193",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "vipkit",
+            "description": "Claim your VIP kit items based on your tier"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "welcomeHook",
+            "eventType": "log"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "welcomeMessage",
+            "fieldType": "string",
+            "description": "Message sent when VIP players connect (use {player} for player name, {tier} for VIP tier name)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "vipTiers",
+            "fieldType": "array",
+            "description": "Configure VIP tiers by tier level (must match permission count values)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "PvPAirDrops": [
       {
         "moduleName": "PvPAirDrops",
@@ -17706,51 +17839,6 @@
             "name": "wrongAnswerSound",
             "fieldType": "string",
             "description": "Sound to play to the player when they answer incorrectly (leave empty to disable)"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "Multi_VIP_Packs": [
-      {
-        "moduleName": "Multi_VIP_Packs",
-        "category": "community-management",
-        "date": "2025-07-28T11:43:53+02:00",
-        "title": "New Module: Multi_VIP_Packs",
-        "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `welcomeHook` (log). New configuration options: `welcomeMessage`, `vipTiers`.",
-        "commitHash": "7c96159978edb496c14744b6b9b54f186c286193",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "vipkit",
-            "description": "Claim your VIP kit items based on your tier"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "welcomeHook",
-            "eventType": "log"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "welcomeMessage",
-            "fieldType": "string",
-            "description": "Message sent when VIP players connect (use {player} for player name, {tier} for VIP tier name)"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "vipTiers",
-            "fieldType": "array",
-            "description": "Configure VIP tiers by tier level (must match permission count values)"
           },
           {
             "type": "version",
@@ -25183,5 +25271,5 @@
       }
     ]
   },
-  "generatedAt": "2025-12-19T19:00:53.569Z"
+  "generatedAt": "2025-12-21T07:39:25.763Z"
 }
