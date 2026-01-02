@@ -136,11 +136,19 @@ function getJsonDiff(commitHash, filePath) {
 }
 
 /**
- * Extract module name from file path
+ * Extract module name from file path or JSON content
+ * Prefers the `name` property from JSON content if available (handles
+ * cases where filename differs from actual module name)
  * @param {string} filePath - Path like "public/modules/economy/MyModule.json"
+ * @param {Object|null} jsonContent - Parsed JSON content (optional)
  * @returns {string} Module name
  */
-function extractModuleName(filePath) {
+function extractModuleName(filePath, jsonContent = null) {
+  // Prefer the name property from JSON if available
+  if (jsonContent && jsonContent.name) {
+    return jsonContent.name;
+  }
+  // Fallback to filename
   const fileName = path.basename(filePath, '.json');
   return fileName;
 }
@@ -326,7 +334,7 @@ function generateChangelogData(incremental = true) {
         continue;
       }
 
-      const moduleName = extractModuleName(filePath);
+      const moduleName = extractModuleName(filePath, diff.after || diff.before);
       const category = extractCategory(filePath);
 
       // Analyze functional changes
