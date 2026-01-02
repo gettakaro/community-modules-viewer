@@ -80,6 +80,10 @@ export function ModuleDetails({
     changelog: false,
   });
 
+  // Changelog truncation
+  const [showAllChanges, setShowAllChanges] = useState(false);
+  const CHANGELOG_VISIBLE_COUNT = 10;
+
   const toggleSection = (sectionName: string) => {
     setCollapsedSections((prev) => ({
       ...prev,
@@ -673,7 +677,10 @@ export function ModuleDetails({
           count={moduleChanges.length}
         >
           <div className="space-y-4">
-            {moduleChanges.map((change, index) => {
+            {(showAllChanges
+              ? moduleChanges
+              : moduleChanges.slice(0, CHANGELOG_VISIBLE_COUNT)
+            ).map((change, index) => {
               const formattedDate = new Date(change.date).toLocaleDateString(
                 'en-US',
                 {
@@ -703,12 +710,26 @@ export function ModuleDetails({
                       {formattedDate}
                     </div>
                   </div>
-                  <p className="text-sm text-takaro-text-secondary">
-                    {change.description}
-                  </p>
+                  <div className="text-sm text-takaro-text-secondary">
+                    <MarkdownRenderer content={change.description} />
+                  </div>
                 </div>
               );
             })}
+
+            {/* Show more/less button */}
+            {moduleChanges.length > CHANGELOG_VISIBLE_COUNT && (
+              <div className="text-center pt-2">
+                <button
+                  onClick={() => setShowAllChanges(!showAllChanges)}
+                  className="btn btn-ghost btn-sm text-primary hover:text-primary-focus"
+                >
+                  {showAllChanges
+                    ? 'Show less'
+                    : `Show all ${moduleChanges.length} changes`}
+                </button>
+              </div>
+            )}
           </div>
         </SectionWrapper>
       )}

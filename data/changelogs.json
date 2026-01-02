@@ -1,6 +1,16 @@
 {
   "global": [
     {
+      "moduleName": "7dtdCommands",
+      "category": "administration",
+      "date": "2025-12-15T13:00:48+01:00",
+      "title": "New Module: 7dtdCommands",
+      "description": "Added 7dtdCommands to the repository",
+      "commitHash": "9320e17a09e725b312b717edee4a86071b71ef15",
+      "isNew": false,
+      "details": []
+    },
+    {
       "moduleName": "PvPAirDrops",
       "category": "PvP",
       "date": "2025-12-15T12:20:06+01:00",
@@ -59,10 +69,10 @@
       ]
     },
     {
-      "moduleName": "7dtdCommands",
+      "moduleName": "7dtd Commands",
       "category": "administration",
       "date": "2025-12-15T12:20:06+01:00",
-      "title": "New Module: 7dtdCommands",
+      "title": "New Module: 7dtd Commands",
       "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
       "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
       "isNew": true,
@@ -391,6 +401,26 @@
       ]
     },
     {
+      "moduleName": "DiscordLinks",
+      "category": "administration",
+      "date": "2025-12-15T12:20:06+01:00",
+      "title": "New Module: DiscordLinks",
+      "description": "Added DiscordLinks to the repository",
+      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+      "isNew": false,
+      "details": []
+    },
+    {
+      "moduleName": "StaffCommands",
+      "category": "administration",
+      "date": "2025-12-15T12:20:06+01:00",
+      "title": "New Module: StaffCommands",
+      "description": "Added StaffCommands to the repository",
+      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+      "isNew": false,
+      "details": []
+    },
+    {
       "moduleName": "WipePlayerCharacter",
       "category": "administration",
       "date": "2025-12-12T21:48:26+01:00",
@@ -410,159 +440,6 @@
           "action": "added",
           "name": "wipeme",
           "description": "No help text available"
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "1.0.0",
-          "previousVersion": "initial"
-        }
-      ]
-    },
-    {
-      "moduleName": "PvP Air Drops",
-      "category": "PvP",
-      "date": "2025-12-12T17:40:04+01:00",
-      "title": "New Module: PvP Air Drops",
-      "description": "Updated to version 2.1.3. Added 1 hook: `PvP Air Drop` (log). New configuration options: `pvpMessage`, `pvpRange`, `enterPvPMessage`, `exitPvPMessage`, `deleteCronjob`.",
-      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-      "isNew": true,
-      "details": [
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "PvP Air Drop",
-          "eventType": "log"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "pvpMessage",
-          "fieldType": "string",
-          "description": "Message to the server about airdrops being PvP. Use {x} and {z} to announce the location of the air drop."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "pvpRange",
-          "fieldType": "number",
-          "description": "The range of PvP area. The Area will be double this number."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "enterPvPMessage",
-          "fieldType": "string",
-          "description": "Entering the PvP area message"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "exitPvPMessage",
-          "fieldType": "string",
-          "description": "Exiting the PvP area Message"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "deleteCronjob",
-          "fieldType": "number",
-          "description": "Set the minutes you want the PvP area to be live"
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "2.1.3",
-          "previousVersion": "initial"
-        }
-      ]
-    },
-    {
-      "moduleName": "7dtd Commands",
-      "category": "administration",
-      "date": "2025-12-12T17:40:04+01:00",
-      "title": "New Module: 7dtd Commands",
-      "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
-      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-      "isNew": true,
-      "details": [
-        {
-          "type": "command",
-          "action": "added",
-          "name": "minibike",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "drone",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "bicycle",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "gfxoff",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "debuff",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "4x4",
-          "description": "Move your 4x4 to you if you're close enough to it."
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "visit",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "gyro",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "home",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "gfxon",
-          "description": "No help text available"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "inGameCommands",
-          "description": "Commands in game"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "HOME_PERMISSION",
-          "description": "Gives players access to the home command"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "VISIT_PERMISSION",
-          "description": "Gives players permission to use the visit commmand"
         },
         {
           "type": "version",
@@ -947,40 +824,6 @@
       ]
     },
     {
-      "moduleName": "User to Player Role Sync",
-      "category": "administration",
-      "date": "2025-12-12T17:40:04+01:00",
-      "title": "New Module: User to Player Role Sync",
-      "description": "Updated to version latest. Added 2 hooks: `onRoleRemoved` (role-removed), `onRoleAssigned` (role-assigned). Added 1 function: `syncUserRoleToPlayer`.",
-      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-      "isNew": true,
-      "details": [
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "onRoleRemoved",
-          "eventType": "role-removed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "onRoleAssigned",
-          "eventType": "role-assigned"
-        },
-        {
-          "type": "function",
-          "action": "added",
-          "name": "syncUserRoleToPlayer"
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "latest",
-          "previousVersion": "initial"
-        }
-      ]
-    },
-    {
       "moduleName": "highPingKickerOptimized",
       "category": "administration",
       "date": "2025-12-12T17:40:04+01:00",
@@ -1008,68 +851,6 @@
           "name": "warningsBeforeKick",
           "fieldType": "number",
           "description": "Number of warnings before a player is kicked."
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "latest",
-          "previousVersion": "initial"
-        }
-      ]
-    },
-    {
-      "moduleName": "Inactive Player Cleanup",
-      "category": "community-management",
-      "date": "2025-12-12T17:40:04+01:00",
-      "title": "New Module: Inactive Player Cleanup",
-      "description": "Updated to version latest. Added 2 scheduled tasks: `Monthly Inactive Player Cleanup`, `Cleanup Watchdog`. Added 1 function: `watchdog`. New configuration options: `discordChannelId`, `inactivityDays`, `batchSize`, `enabled`.",
-      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-      "isNew": true,
-      "details": [
-        {
-          "type": "cronjob",
-          "action": "added",
-          "name": "Monthly Inactive Player Cleanup",
-          "schedule": "0 0 1 * *"
-        },
-        {
-          "type": "cronjob",
-          "action": "added",
-          "name": "Cleanup Watchdog",
-          "schedule": "*/5 * * * *"
-        },
-        {
-          "type": "function",
-          "action": "added",
-          "name": "watchdog"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "discordChannelId",
-          "fieldType": "string",
-          "description": "The Discord channel ID where cleanup logs will be sent"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "inactivityDays",
-          "fieldType": "number",
-          "description": "Number of days of inactivity before a player is considered for deletion"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "batchSize",
-          "fieldType": "number",
-          "description": "Number of players to process per cronjob execution"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "enabled",
-          "fieldType": "boolean",
-          "description": "Master switch to enable/disable the cleanup process"
         },
         {
           "type": "version",
@@ -1328,7 +1109,7 @@
       ]
     },
     {
-      "moduleName": "dynamicCronjobs",
+      "moduleName": "DynamicCronjobs",
       "category": "community-management",
       "date": "2025-11-26T15:01:22+01:00",
       "title": "Module Updated",
@@ -1359,7 +1140,7 @@
       ]
     },
     {
-      "moduleName": "dynamicCronjobs",
+      "moduleName": "DynamicCronjobs",
       "category": "community-management",
       "date": "2025-11-26T12:40:22+01:00",
       "title": "Module Updated",
@@ -1394,7 +1175,7 @@
       ]
     },
     {
-      "moduleName": "arenaModule",
+      "moduleName": "Arena Module",
       "category": "events",
       "date": "2025-11-14T16:27:43+01:00",
       "title": "Updated 9 Commands",
@@ -1520,147 +1301,6 @@
           "name": "maintenanceInterval",
           "fieldType": "string",
           "description": "Cron expression for maintenance frequency (default: every 15 minutes)"
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "latest",
-          "previousVersion": "initial"
-        }
-      ]
-    },
-    {
-      "moduleName": "Banned Items",
-      "category": "anti-cheat",
-      "date": "2025-10-15T14:54:55+02:00",
-      "title": "New Module: Banned Items",
-      "description": "Updated to version latest. Added 1 scheduled task: `CheckBannedItems`. Added 1 function: `CheckBannedItems`. New permissions: `banned_items_immunity_admin`, `banned_items_immunity_vip`, `banned_items_immunity_moderator`, `banned_items_immunity_patreon`, `banned_items_immunity_donor`, `banned_items_immunity_trusted`. New configuration options: `bannedItems`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`, `arrestMessage`, `discordKickMessage`, `discordBanMessage`, `discordArrestMessage`, `discordWarningMessage`, `cheaterDetected`.",
-      "commitHash": "0b087f173c39c7bb8d522aca7dea2663d2db6e94",
-      "isNew": true,
-      "details": [
-        {
-          "type": "cronjob",
-          "action": "added",
-          "name": "CheckBannedItems",
-          "schedule": "*/5 * * * *"
-        },
-        {
-          "type": "function",
-          "action": "added",
-          "name": "CheckBannedItems"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "banned_items_immunity_admin",
-          "description": "Grants immunity from banned items checks (Admin tier)"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "banned_items_immunity_vip",
-          "description": "Grants immunity from banned items checks (VIP tier)"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "banned_items_immunity_moderator",
-          "description": "Grants immunity from banned items checks (Moderator tier)"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "banned_items_immunity_patreon",
-          "description": "Grants immunity from banned items checks (Patreon tier)"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "banned_items_immunity_donor",
-          "description": "Grants immunity from banned items checks (Donor tier)"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "banned_items_immunity_trusted",
-          "description": "Grants immunity from banned items checks (Trusted tier)"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "bannedItems",
-          "fieldType": "array",
-          "description": "Select items that players should not have in their inventory and configure immunity permissions for each"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "banDuration",
-          "fieldType": "number",
-          "description": "How long to ban the player (only applies if punishment type is 'ban')"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "kickMessage",
-          "fieldType": "string",
-          "description": "Message shown when player is kicked. Use {item} for item name"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "banMessage",
-          "fieldType": "string",
-          "description": "Message shown when player is banned. Use {item} for item name"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "warningMessage",
-          "fieldType": "string",
-          "description": "Message shown for each warning. Use {item} for item name"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "arrestMessage",
-          "fieldType": "string",
-          "description": "Message shown when player is arrested. Use {pname} for player name, {item} for item name"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "discordKickMessage",
-          "fieldType": "string",
-          "description": "Message sent to Discord when player is kicked. Use {pname} for player name, {item} for item name"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "discordBanMessage",
-          "fieldType": "string",
-          "description": "Message sent to Discord when player is banned. Use {pname} for player name, {item} for item name"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "discordArrestMessage",
-          "fieldType": "string",
-          "description": "Message sent to Discord when player is arrested. Use {pname} for player name, {item} for item name"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "discordWarningMessage",
-          "fieldType": "string",
-          "description": "Message sent to Discord when player receives a warning. Use {pname} for player name, {item} for item name, {warnings} for warning count, {maxWarnings} for max warnings"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "cheaterDetected",
-          "fieldType": "string",
-          "description": "Discord channel ID to send alerts when punishments are applied"
         },
         {
           "type": "version",
@@ -1817,10 +1457,10 @@
       ]
     },
     {
-      "moduleName": "dynamicCronjobs",
+      "moduleName": "dynamiccronjobs",
       "category": "community-management",
       "date": "2025-08-12T21:17:12+02:00",
-      "title": "New Module: dynamicCronjobs",
+      "title": "New Module: dynamiccronjobs",
       "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
       "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
       "isNew": true,
@@ -2069,139 +1709,6 @@
       ]
     },
     {
-      "moduleName": "CPMCommands",
-      "category": "administration",
-      "date": "2025-08-06T21:22:19+02:00",
-      "title": "New Module: CPMCommands",
-      "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
-      "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-      "isNew": true,
-      "details": [
-        {
-          "type": "command",
-          "action": "added",
-          "name": "minibike",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "drone",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "bicycle",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "gfxoff",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "debuff",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "4x4",
-          "description": "Move your 4x4 to you if you're close enough to it."
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "visit",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "gyro",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "home",
-          "description": "No help text available"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "gfxon",
-          "description": "No help text available"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "inGameCommands",
-          "description": "Commands in game"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "HOME_PERMISSION",
-          "description": "Gives players access to the home command"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "VISIT_PERMISSION",
-          "description": "Gives players permission to use the visit commmand"
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "1.0.0",
-          "previousVersion": "initial"
-        }
-      ]
-    },
-    {
-      "moduleName": "CPMStaffCommands",
-      "category": "administration",
-      "date": "2025-08-06T21:22:19+02:00",
-      "title": "Updated 4 Commands",
-      "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`. Updated 1 command implementation.",
-      "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-      "isNew": false,
-      "details": [
-        {
-          "type": "command",
-          "action": "added",
-          "name": "azomb",
-          "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
-        },
-        {
-          "type": "command",
-          "action": "removed",
-          "name": "zomb"
-        },
-        {
-          "type": "command",
-          "action": "removed",
-          "name": "setwaypointpublic"
-        },
-        {
-          "type": "command",
-          "action": "updated",
-          "name": "avisit"
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "latest",
-          "previousVersion": "0.0.2"
-        }
-      ]
-    },
-    {
       "moduleName": "HordeNightWarnings",
       "category": "administration",
       "date": "2025-08-06T21:22:19+02:00",
@@ -2326,7 +1833,7 @@
           "action": "added",
           "name": "authorisedPlayer",
           "fieldType": "string",
-          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
+          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
         },
         {
           "type": "config",
@@ -2473,14 +1980,14 @@
           "action": "added",
           "name": "minutesBeforeKick",
           "fieldType": "number",
-          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
         },
         {
           "type": "config",
           "action": "added",
           "name": "maxAfkChecks",
           "fieldType": "number",
-          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
         },
         {
           "type": "config",
@@ -2514,6 +2021,97 @@
           "type": "version",
           "action": "updated",
           "name": "1.0.0",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "BannedItems",
+      "category": "anti-cheat",
+      "date": "2025-08-06T21:22:19+02:00",
+      "title": "New Module: BannedItems",
+      "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
+      "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "bannedItems",
+          "schedule": "*/2 * * * *"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "BANNED_ITEMS_IMMUNITY",
+          "description": "Players with this permission are immune to all item bans regardless of item permissions"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "ALLOW_ITEMS_TIER",
+          "description": "Allow player to possess tier items. the count connected to the item will allow it for that role"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bannedItemsWithPermissions",
+          "fieldType": "array",
+          "description": "List of items that require a specific tier permission to possess. Players need ALLOW_ITEMS_TIER permission with a count equal to or greater than the required tier to possess these items. Players with BANNED_ITEMS_IMMUNITY can possess any items regardless of tier."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "warningsBeforePunishment",
+          "fieldType": "number",
+          "description": "Number of warnings a player receives before punishment is applied"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "punishmentType",
+          "fieldType": "string",
+          "description": "What happens when a player has unauthorized items too many times"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "banDuration",
+          "fieldType": "number",
+          "description": "How long a player is banned for (if ban is selected)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "kickMessage",
+          "fieldType": "string",
+          "description": "Message to display when a player is kicked (use {items} to list all unauthorized items)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "Discord channel ID where notifications about players with banned items will be sent. Leave empty to disable Discord notifications."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "banMessage",
+          "fieldType": "string",
+          "description": "Message to display when a player is banned (use {items} to list all unauthorized items)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "warningMessage",
+          "fieldType": "string",
+          "description": "Message to display when warning a player (use {items} to list all unauthorized items)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.9",
           "previousVersion": "initial"
         }
       ]
@@ -4680,7 +4278,7 @@
     },
     {
       "moduleName": "CPMStaffCommands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-07-27T21:01:11+02:00",
       "title": "New Module: CPMStaffCommands",
       "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -6270,7 +5868,7 @@
           "action": "added",
           "name": "authorisedPlayer",
           "fieldType": "string",
-          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
+          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
         },
         {
           "type": "config",
@@ -7376,14 +6974,14 @@
           "action": "added",
           "name": "minutesBeforeKick",
           "fieldType": "number",
-          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
         },
         {
           "type": "config",
           "action": "added",
           "name": "maxAfkChecks",
           "fieldType": "number",
-          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
         },
         {
           "type": "config",
@@ -8571,14 +8169,14 @@
           "action": "added",
           "name": "minutesBeforeKick",
           "fieldType": "number",
-          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
         },
         {
           "type": "config",
           "action": "added",
           "name": "maxAfkChecks",
           "fieldType": "number",
-          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
+          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
         },
         {
           "type": "config",
@@ -9018,7 +8616,7 @@
     },
     {
       "moduleName": "Limon_BannedItems",
-      "category": "unknown",
+      "category": "anti-cheat",
       "date": "2025-05-03T15:50:09+02:00",
       "title": "Configuration Updated",
       "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
@@ -9329,14 +8927,14 @@
           "action": "added",
           "name": "minutesBeforeKick",
           "fieldType": "number",
-          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
         },
         {
           "type": "config",
           "action": "added",
           "name": "maxAfkChecks",
           "fieldType": "number",
-          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
+          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
         },
         {
           "type": "config",
@@ -9804,7 +9402,7 @@
     },
     {
       "moduleName": "Limon_BannedItems",
-      "category": "unknown",
+      "category": "anti-cheat",
       "date": "2025-04-08T12:55:53+02:00",
       "title": "Configuration Updated",
       "description": "Removed configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
@@ -10058,7 +9656,7 @@
     },
     {
       "moduleName": "Mad_CPMCommands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-04-06T10:54:41+02:00",
       "title": "New Module: Mad_CPMCommands",
       "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -10153,7 +9751,7 @@
     },
     {
       "moduleName": "Mad_CPMStaffCommands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-04-06T10:54:41+02:00",
       "title": "New Module: Mad_CPMStaffCommands",
       "description": "Updated to version latest. Added 31 commands: `azomb`, `kill`, `buff - 2`, `rdd`, `pr`, `release`, `pull`, `reset1`, `reset2`, `unmute`, `th - 2`, `ban`, `th - 3`, `rpd`, `avisit`, `visitmap`, `cm  & dm`, `rvr`, `setjail`, `killall`, `buff - 1`, `kickall`, `aaaaaaa`, `arrest`, `shutdownba`, `th - 1`, `kick`, `th - 4`, `ocn`, `mute`, `wi`. New permissions: `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `KILL_PLAYER`, `CM_DM`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -10888,7 +10486,7 @@
     },
     {
       "moduleName": "MAD_CPMStaffCommands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-03-17T13:36:36+01:00",
       "title": "Updated 6 Commands",
       "description": "Added 4 commands: `unmute`, `kick`, `release`, `mute`. Updated 2 command implementations.",
@@ -10905,7 +10503,7 @@
           "type": "command",
           "action": "added",
           "name": "kick",
-          "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Lin\u00f3n\" \"Too cool\""
+          "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Linón\" \"Too cool\""
         },
         {
           "type": "command",
@@ -11220,8 +10818,18 @@
     {
       "moduleName": "limon_Translator",
       "category": "unknown",
-      "date": "2025-03-09T20:18:13+01:00",
+      "date": "2025-03-09T20:26:24+01:00",
       "title": "New Module: limon_Translator",
+      "description": "Added limon_Translator to the repository",
+      "commitHash": "09ad0d73152cd9bbf213c34b2789962a4eb3209c",
+      "isNew": false,
+      "details": []
+    },
+    {
+      "moduleName": "limon_translator",
+      "category": "unknown",
+      "date": "2025-03-09T20:18:13+01:00",
+      "title": "New Module: limon_translator",
       "description": "Updated to version latest. Added 4 commands: `translate`, `toggletranslation`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `defaultLanguage`, `supportedLanguages`.",
       "commitHash": "52e966c9c49628f1bfaaf04213e07c2a0a3d8c89",
       "isNew": true,
@@ -11300,7 +10908,7 @@
     },
     {
       "moduleName": "MAD_CPMCommands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-03-06T21:12:31+01:00",
       "title": "Updated 3 Commands",
       "description": "Updated to version 1.0.0. Added 3 commands: `gfxoff`, `debuff`, `gfxon`.",
@@ -11335,7 +10943,7 @@
     },
     {
       "moduleName": "MAD_CPMStaffCommands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-03-06T21:12:31+01:00",
       "title": "New Module: MAD_CPMStaffCommands",
       "description": "Updated to version latest. Added 5 commands: `ban`, `kill`, `rdd`, `avisit`, `arrest`. New permission: `STAFF_COMMANDS`. New configuration option: `discordChannel`.",
@@ -11394,10 +11002,10 @@
       ]
     },
     {
-      "moduleName": "Limon_BannedItems",
-      "category": "unknown",
+      "moduleName": "limon_BannedItems",
+      "category": "anti-cheat",
       "date": "2025-03-01T18:32:14+01:00",
-      "title": "New Module: Limon_BannedItems",
+      "title": "New Module: limon_BannedItems",
       "description": "Updated to version latest. Added 1 scheduled task: `CheckInventoryBanneditems`. New permission: `item_ban_immunity`. New configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
       "commitHash": "5bd0695dbf5ac1008dd0999adcdcf25c83f90569",
       "isNew": true,
@@ -11635,7 +11243,7 @@
     },
     {
       "moduleName": "MAD_CPMCommands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-03-01T18:32:14+01:00",
       "title": "New Module: MAD_CPMCommands",
       "description": "Updated to version latest. Added 7 commands: `minibike`, `visit`, `4x4`, `gyro`, `drone`, `bicycle`, `home`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -11711,10 +11319,10 @@
       ]
     },
     {
-      "moduleName": "Limon_8ball",
+      "moduleName": "hvb_8ball_v2",
       "category": "minigames",
       "date": "2025-03-01T18:02:30+01:00",
-      "title": "New Module: Limon_8ball",
+      "title": "New Module: hvb_8ball_v2",
       "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
       "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
       "isNew": true,
@@ -11754,10 +11362,10 @@
       ]
     },
     {
-      "moduleName": "MeeBob_Donator",
+      "moduleName": "VIP/Donator",
       "category": "community-management",
       "date": "2025-03-01T18:02:30+01:00",
-      "title": "New Module: MeeBob_Donator",
+      "title": "New Module: VIP/Donator",
       "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
       "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
       "isNew": true,
@@ -11889,10 +11497,10 @@
       ]
     },
     {
-      "moduleName": "Trevor_HordeNightWarnings",
+      "moduleName": "Horde Night Warnings",
       "category": "administration",
       "date": "2025-03-01T18:02:30+01:00",
-      "title": "New Module: Trevor_HordeNightWarnings",
+      "title": "New Module: Horde Night Warnings",
       "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
       "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
       "isNew": true,
@@ -12045,10 +11653,10 @@
       ]
     },
     {
-      "moduleName": "Trevor_BloodMoon",
+      "moduleName": "Horde Night Warnings",
       "category": "unknown",
       "date": "2025-02-27T09:27:54+01:00",
-      "title": "New Module: Trevor_BloodMoon",
+      "title": "New Module: Horde Night Warnings",
       "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
       "commitHash": "69c65f860e6ecfffd27c21240089ba8044754587",
       "isNew": true,
@@ -12124,7 +11732,7 @@
     },
     {
       "moduleName": "In Game Commands",
-      "category": "administration",
+      "category": "unknown",
       "date": "2025-02-25T21:29:03+00:00",
       "title": "New Module: In Game Commands",
       "description": "Added In Game Commands to the repository",
@@ -12276,11 +11884,11 @@
       ]
     },
     {
-      "moduleName": "MAD_CPM_COMMANDS",
+      "moduleName": "In Game Commands",
       "category": "unknown",
       "date": "2025-02-25T11:36:40+01:00",
-      "title": "New Module: MAD_CPM_COMMANDS",
-      "description": "Added MAD_CPM_COMMANDS to the repository",
+      "title": "New Module: In Game Commands",
+      "description": "Added In Game Commands to the repository",
       "commitHash": "25b88dd95dfdd01ade811989d13ecf1514cb7aa1",
       "isNew": true,
       "details": []
@@ -12325,7 +11933,7 @@
           "action": "added",
           "name": "authorisedPlayer",
           "fieldType": "string",
-          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
+          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
         },
         {
           "type": "config",
@@ -12350,10 +11958,10 @@
       ]
     },
     {
-      "moduleName": "8ball",
+      "moduleName": "hvb_8ball_v2",
       "category": "minigames",
       "date": "2025-02-24T09:46:51+01:00",
-      "title": "New Module: 8ball",
+      "title": "New Module: hvb_8ball_v2",
       "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
       "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
       "isNew": true,
@@ -12393,10 +12001,10 @@
       ]
     },
     {
-      "moduleName": "enhanced-chat-bridge",
+      "moduleName": "Limon_chatbridge",
       "category": "integration",
       "date": "2025-02-24T09:46:51+01:00",
-      "title": "New Module: enhanced-chat-bridge",
+      "title": "New Module: Limon_chatbridge",
       "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
       "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
       "isNew": true,
@@ -12483,11 +12091,11 @@
       ]
     },
     {
-      "moduleName": "trivia",
+      "moduleName": "Trivia Time",
       "category": "unknown",
       "date": "2025-02-24T09:46:51+01:00",
-      "title": "New Module: trivia",
-      "description": "Added trivia to the repository",
+      "title": "New Module: Trivia Time",
+      "description": "Added Trivia Time to the repository",
       "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
       "isNew": true,
       "details": []
@@ -12554,12 +12162,12 @@
         ]
       }
     ],
-    "7dtdCommands": [
+    "7dtd Commands": [
       {
-        "moduleName": "7dtdCommands",
+        "moduleName": "7dtd Commands",
         "category": "administration",
         "date": "2025-12-15T12:20:06+01:00",
-        "title": "New Module: 7dtdCommands",
+        "title": "New Module: 7dtd Commands",
         "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
         "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
         "isNew": true,
@@ -12828,6 +12436,97 @@
             "previousVersion": "initial"
           }
         ]
+      },
+      {
+        "moduleName": "BannedItems",
+        "category": "anti-cheat",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: BannedItems",
+        "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "bannedItems",
+            "schedule": "*/2 * * * *"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "BANNED_ITEMS_IMMUNITY",
+            "description": "Players with this permission are immune to all item bans regardless of item permissions"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "ALLOW_ITEMS_TIER",
+            "description": "Allow player to possess tier items. the count connected to the item will allow it for that role"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bannedItemsWithPermissions",
+            "fieldType": "array",
+            "description": "List of items that require a specific tier permission to possess. Players need ALLOW_ITEMS_TIER permission with a count equal to or greater than the required tier to possess these items. Players with BANNED_ITEMS_IMMUNITY can possess any items regardless of tier."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "warningsBeforePunishment",
+            "fieldType": "number",
+            "description": "Number of warnings a player receives before punishment is applied"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "punishmentType",
+            "fieldType": "string",
+            "description": "What happens when a player has unauthorized items too many times"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banDuration",
+            "fieldType": "number",
+            "description": "How long a player is banned for (if ban is selected)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "kickMessage",
+            "fieldType": "string",
+            "description": "Message to display when a player is kicked (use {items} to list all unauthorized items)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "Discord channel ID where notifications about players with banned items will be sent. Leave empty to disable Discord notifications."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banMessage",
+            "fieldType": "string",
+            "description": "Message to display when a player is banned (use {items} to list all unauthorized items)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "warningMessage",
+            "fieldType": "string",
+            "description": "Message to display when warning a player (use {items} to list all unauthorized items)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.9",
+            "previousVersion": "initial"
+          }
+        ]
       }
     ],
     "InactivePlayerCleanup": [
@@ -12915,163 +12614,6 @@
             "action": "added",
             "name": "wipeme",
             "description": "No help text available"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "1.0.0",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "PvPAirDrops": [
-      {
-        "moduleName": "PvPAirDrops",
-        "category": "PvP",
-        "date": "2025-12-12T17:40:04+01:00",
-        "title": "New Module: PvPAirDrops",
-        "description": "Updated to version 2.1.3. Added 1 hook: `PvP Air Drop` (log). New configuration options: `pvpMessage`, `pvpRange`, `enterPvPMessage`, `exitPvPMessage`, `deleteCronjob`.",
-        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-        "isNew": true,
-        "details": [
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "PvP Air Drop",
-            "eventType": "log"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "pvpMessage",
-            "fieldType": "string",
-            "description": "Message to the server about airdrops being PvP. Use {x} and {z} to announce the location of the air drop."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "pvpRange",
-            "fieldType": "number",
-            "description": "The range of PvP area. The Area will be double this number."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "enterPvPMessage",
-            "fieldType": "string",
-            "description": "Entering the PvP area message"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "exitPvPMessage",
-            "fieldType": "string",
-            "description": "Exiting the PvP area Message"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "deleteCronjob",
-            "fieldType": "number",
-            "description": "Set the minutes you want the PvP area to be live"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "2.1.3",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "7dtdCommands": [
-      {
-        "moduleName": "7dtdCommands",
-        "category": "administration",
-        "date": "2025-12-12T17:40:04+01:00",
-        "title": "New Module: 7dtdCommands",
-        "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
-        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "minibike",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "drone",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "bicycle",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "gfxoff",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "debuff",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "4x4",
-            "description": "Move your 4x4 to you if you're close enough to it."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "visit",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "gyro",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "home",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "gfxon",
-            "description": "No help text available"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "inGameCommands",
-            "description": "Commands in game"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "HOME_PERMISSION",
-            "description": "Gives players access to the home command"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "VISIT_PERMISSION",
-            "description": "Gives players permission to use the visit commmand"
           },
           {
             "type": "version",
@@ -13460,42 +13002,6 @@
         ]
       }
     ],
-    "UsertoPlayerRoleSync": [
-      {
-        "moduleName": "UsertoPlayerRoleSync",
-        "category": "administration",
-        "date": "2025-12-12T17:40:04+01:00",
-        "title": "New Module: UsertoPlayerRoleSync",
-        "description": "Updated to version latest. Added 2 hooks: `onRoleRemoved` (role-removed), `onRoleAssigned` (role-assigned). Added 1 function: `syncUserRoleToPlayer`.",
-        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-        "isNew": true,
-        "details": [
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "onRoleRemoved",
-            "eventType": "role-removed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "onRoleAssigned",
-            "eventType": "role-assigned"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "syncUserRoleToPlayer"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
     "highPingKickerOptimized": [
       {
         "moduleName": "highPingKickerOptimized",
@@ -13525,70 +13031,6 @@
             "name": "warningsBeforeKick",
             "fieldType": "number",
             "description": "Number of warnings before a player is kicked."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "InactivePlayerCleanup": [
-      {
-        "moduleName": "InactivePlayerCleanup",
-        "category": "community-management",
-        "date": "2025-12-12T17:40:04+01:00",
-        "title": "New Module: InactivePlayerCleanup",
-        "description": "Updated to version latest. Added 2 scheduled tasks: `Monthly Inactive Player Cleanup`, `Cleanup Watchdog`. Added 1 function: `watchdog`. New configuration options: `discordChannelId`, `inactivityDays`, `batchSize`, `enabled`.",
-        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "Monthly Inactive Player Cleanup",
-            "schedule": "0 0 1 * *"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "Cleanup Watchdog",
-            "schedule": "*/5 * * * *"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "watchdog"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "discordChannelId",
-            "fieldType": "string",
-            "description": "The Discord channel ID where cleanup logs will be sent"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "inactivityDays",
-            "fieldType": "number",
-            "description": "Number of days of inactivity before a player is considered for deletion"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "batchSize",
-            "fieldType": "number",
-            "description": "Number of players to process per cronjob execution"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "enabled",
-            "fieldType": "boolean",
-            "description": "Master switch to enable/disable the cleanup process"
           },
           {
             "type": "version",
@@ -14032,9 +13474,9 @@
         ]
       }
     ],
-    "dynamicCronjobs": [
+    "DynamicCronjobs": [
       {
-        "moduleName": "dynamicCronjobs",
+        "moduleName": "DynamicCronjobs",
         "category": "community-management",
         "date": "2025-11-26T15:01:22+01:00",
         "title": "Module Updated",
@@ -14065,7 +13507,7 @@
         ]
       },
       {
-        "moduleName": "dynamicCronjobs",
+        "moduleName": "DynamicCronjobs",
         "category": "community-management",
         "date": "2025-11-26T12:40:22+01:00",
         "title": "Module Updated",
@@ -14098,41 +13540,11 @@
             "schedule": "1 * * * *"
           }
         ]
-      },
-      {
-        "moduleName": "dynamicCronjobs",
-        "category": "community-management",
-        "date": "2025-08-12T21:17:12+02:00",
-        "title": "New Module: dynamicCronjobs",
-        "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
-        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "cronJobGenerator",
-            "schedule": "*/15 * * * *"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "cronjobs",
-            "fieldType": "array",
-            "description": "List of cronjobs and their schedules"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
       }
     ],
-    "arenaModule": [
+    "Arena Module": [
       {
-        "moduleName": "arenaModule",
+        "moduleName": "Arena Module",
         "category": "events",
         "date": "2025-11-14T16:27:43+01:00",
         "title": "Updated 9 Commands",
@@ -14190,149 +13602,6 @@
             "action": "updated",
             "name": "1.0.1",
             "previousVersion": "1.0.0"
-          }
-        ]
-      },
-      {
-        "moduleName": "arenaModule",
-        "category": "events",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: arenaModule",
-        "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "09 arena wait 125",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "10 arena wait 135",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "04 arena wait 15",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "06 arena wait 55",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "12 arena wait 195",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "03 arena wait 5",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "07 arena wait 85",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "11 arena wait 165",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "08 arena wait 95",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "02 arena wait 2",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "01 arena",
-            "description": "A huge arena battle for only the finest soldiers"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "05 arena wait 45",
-            "description": "No help text available"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "PlayerDied",
-            "eventType": "player-death"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "ARENA_PERMISSION",
-            "description": "Gives players access to the arena command"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "xlocation",
-            "fieldType": "string",
-            "description": "East West Location"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "ylocation",
-            "fieldType": "string",
-            "description": "Height teleport location. -1 for the highest block"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "zlocation",
-            "fieldType": "string",
-            "description": "Set North South location. South is negative"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemnumber",
-            "fieldType": "number",
-            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemlist",
-            "fieldType": "array",
-            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "fixedrewards",
-            "fieldType": "array",
-            "description": "All the items in this list will be given as a reward for completing the arena."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "1.0.0",
-            "previousVersion": "initial"
           }
         ]
       }
@@ -14403,149 +13672,6 @@
             "name": "maintenanceInterval",
             "fieldType": "string",
             "description": "Cron expression for maintenance frequency (default: every 15 minutes)"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "BannedItems": [
-      {
-        "moduleName": "BannedItems",
-        "category": "anti-cheat",
-        "date": "2025-10-15T14:54:55+02:00",
-        "title": "New Module: BannedItems",
-        "description": "Updated to version latest. Added 1 scheduled task: `CheckBannedItems`. Added 1 function: `CheckBannedItems`. New permissions: `banned_items_immunity_admin`, `banned_items_immunity_vip`, `banned_items_immunity_moderator`, `banned_items_immunity_patreon`, `banned_items_immunity_donor`, `banned_items_immunity_trusted`. New configuration options: `bannedItems`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`, `arrestMessage`, `discordKickMessage`, `discordBanMessage`, `discordArrestMessage`, `discordWarningMessage`, `cheaterDetected`.",
-        "commitHash": "0b087f173c39c7bb8d522aca7dea2663d2db6e94",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "CheckBannedItems",
-            "schedule": "*/5 * * * *"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "CheckBannedItems"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "banned_items_immunity_admin",
-            "description": "Grants immunity from banned items checks (Admin tier)"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "banned_items_immunity_vip",
-            "description": "Grants immunity from banned items checks (VIP tier)"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "banned_items_immunity_moderator",
-            "description": "Grants immunity from banned items checks (Moderator tier)"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "banned_items_immunity_patreon",
-            "description": "Grants immunity from banned items checks (Patreon tier)"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "banned_items_immunity_donor",
-            "description": "Grants immunity from banned items checks (Donor tier)"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "banned_items_immunity_trusted",
-            "description": "Grants immunity from banned items checks (Trusted tier)"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "bannedItems",
-            "fieldType": "array",
-            "description": "Select items that players should not have in their inventory and configure immunity permissions for each"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "banDuration",
-            "fieldType": "number",
-            "description": "How long to ban the player (only applies if punishment type is 'ban')"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "kickMessage",
-            "fieldType": "string",
-            "description": "Message shown when player is kicked. Use {item} for item name"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "banMessage",
-            "fieldType": "string",
-            "description": "Message shown when player is banned. Use {item} for item name"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "warningMessage",
-            "fieldType": "string",
-            "description": "Message shown for each warning. Use {item} for item name"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "arrestMessage",
-            "fieldType": "string",
-            "description": "Message shown when player is arrested. Use {pname} for player name, {item} for item name"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "discordKickMessage",
-            "fieldType": "string",
-            "description": "Message sent to Discord when player is kicked. Use {pname} for player name, {item} for item name"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "discordBanMessage",
-            "fieldType": "string",
-            "description": "Message sent to Discord when player is banned. Use {pname} for player name, {item} for item name"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "discordArrestMessage",
-            "fieldType": "string",
-            "description": "Message sent to Discord when player is arrested. Use {pname} for player name, {item} for item name"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "discordWarningMessage",
-            "fieldType": "string",
-            "description": "Message sent to Discord when player receives a warning. Use {pname} for player name, {item} for item name, {warnings} for warning count, {maxWarnings} for max warnings"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "cheaterDetected",
-            "fieldType": "string",
-            "description": "Discord channel ID to send alerts when punishments are applied"
           },
           {
             "type": "version",
@@ -14749,6 +13875,38 @@
             "name": "deathLocationExpiration",
             "fieldType": "number",
             "description": "How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "dynamiccronjobs": [
+      {
+        "moduleName": "dynamiccronjobs",
+        "category": "community-management",
+        "date": "2025-08-12T21:17:12+02:00",
+        "title": "New Module: dynamiccronjobs",
+        "description": "Updated to version latest. Added 1 scheduled task: `cronJobGenerator`. New configuration option: `cronjobs`.",
+        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cronJobGenerator",
+            "schedule": "*/15 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "cronjobs",
+            "fieldType": "array",
+            "description": "List of cronjobs and their schedules"
           },
           {
             "type": "version",
@@ -14985,461 +14143,6 @@
         ]
       }
     ],
-    "CPMCommands": [
-      {
-        "moduleName": "CPMCommands",
-        "category": "administration",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: CPMCommands",
-        "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "minibike",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "drone",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "bicycle",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "gfxoff",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "debuff",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "4x4",
-            "description": "Move your 4x4 to you if you're close enough to it."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "visit",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "gyro",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "home",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "gfxon",
-            "description": "No help text available"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "inGameCommands",
-            "description": "Commands in game"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "HOME_PERMISSION",
-            "description": "Gives players access to the home command"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "VISIT_PERMISSION",
-            "description": "Gives players permission to use the visit commmand"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "1.0.0",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "CPMStaffCommands": [
-      {
-        "moduleName": "CPMStaffCommands",
-        "category": "administration",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "Updated 4 Commands",
-        "description": "Updated to version latest. Added 1 command: `azomb`. Removed 2 commands: `zomb`, `setwaypointpublic`. Updated 1 command implementation.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": false,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "azomb",
-            "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
-          },
-          {
-            "type": "command",
-            "action": "removed",
-            "name": "zomb"
-          },
-          {
-            "type": "command",
-            "action": "removed",
-            "name": "setwaypointpublic"
-          },
-          {
-            "type": "command",
-            "action": "updated",
-            "name": "avisit"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "0.0.2"
-          }
-        ]
-      },
-      {
-        "moduleName": "CPMStaffCommands",
-        "category": "administration",
-        "date": "2025-07-27T21:01:11+02:00",
-        "title": "New Module: CPMStaffCommands",
-        "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
-        "commitHash": "e237c8c3499aeaa63f86d40b756d3e6ee85f0702",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "mute",
-            "description": "[02FEDMute (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "zomb",
-            "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "buff - 1",
-            "description": "[02FEDC]buff (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "th - 3",
-            "description": "Targeted Horde round 3"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "th - 1",
-            "description": "[02FEDC]Send a horde in 4 intervals in 30 seconds at a player. Type /th (name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "kickall",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "avisit",
-            "description": "[02FEDC]avisit (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "th - 4",
-            "description": "[02FEDC]Fourth round of Targeted Horde[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "killall",
-            "description": "[02FEDC]Kill all of the Zeds on the server.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "pr",
-            "description": "[02FEDC]Reset the POI you are standing in[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "visitmap",
-            "description": "[02FEDC]Open the map for Takaro and CPM.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "setwaypointpublic",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "aaaaaaa",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "rpd",
-            "description": "[02FEDC]rpd (player name) Resets a player's data. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "ban",
-            "description": "[02FEDC]ban (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "rvr",
-            "description": "[02FEDC]rvr (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "arrest",
-            "description": "[02FEDC]arrest (player name) (reason for arrest)[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "ocn",
-            "description": "[02FEDC] Change a player's name in chat. Type /ocn (Name) (New Name). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "setjail",
-            "description": "[02FEDC]Set an 11x11 area to put hail birds in.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "rdd",
-            "description": "[02FEDC]rdd (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "buff - 2",
-            "description": "Ends players buff"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "pull",
-            "description": "[02FEDC]pull (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "reset1",
-            "description": "[02FEDC]First position to reset a chunk. Use /reset2 in the opposite corner to reset the desired area.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "release",
-            "description": "[02FEDC]Release (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "reset2",
-            "description": "[02FEDC]Last position to reset a chunk.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "kick",
-            "description": "[02FEDC]kick (player name) (reason in quotes). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "th - 2",
-            "description": "[02FEDC]Second round of a targeted horde[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "unmute",
-            "description": "[02FEDC]unmute (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "shutdownba",
-            "description": "No help text available"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "cm  & dm",
-            "description": "[02FEDC]Creative mode and debug menu. Reserved for admins[-]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "wi",
-            "description": "Wipe a player's belt, bag, equipment, all"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "kill",
-            "description": "[02FEDC]kill (players name) You must run the command a second time to confirm the kill. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "KILL_PLAYER",
-            "description": "Kill a player"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "CM_DM",
-            "description": "Creative mode and debug menu"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "MUTE",
-            "description": "Mute unruly players in game"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "ZOMB_FREE_SELF",
-            "description": "Zombie free command for admins to run the command for their personal house"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "LIST_LANDCLAIMS",
-            "description": "Lists land claims near by"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "REMOVE_LANDCLAIMS",
-            "description": "remove nearby land claims"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "RESET_PLAYER",
-            "description": "Resets a player's corrupted data"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "RDD",
-            "description": "Resets player drone data to place a new one"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "UNMUTE",
-            "description": "Unmute a player"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "VISIT_MAP",
-            "description": "Visit the map to unlock for Takaro and CPM"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "RELEASE",
-            "description": "Release a player from jail"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "SET_JAIL",
-            "description": "Set the location of your jail "
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "BUFF",
-            "description": "Buff another player"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "RESET_CHUNKS",
-            "description": "Reset Chunks Permission"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "WIPE_INVENTORY",
-            "description": "Wipe Inventory"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "STAFF_COMMANDS",
-            "description": "Commands for staff to use without using Currency"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "RESET_PREFAB",
-            "description": "Reset prefab permission"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "userDiscordChannel",
-            "fieldType": "string",
-            "description": "Sends to discord"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "0.0.2",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
     "HordeNightWarnings": [
       {
         "moduleName": "HordeNightWarnings",
@@ -15568,7 +14271,7 @@
             "action": "added",
             "name": "authorisedPlayer",
             "fieldType": "string",
-            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
+            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
           },
           {
             "type": "config",
@@ -15651,14 +14354,14 @@
             "action": "added",
             "name": "minutesBeforeKick",
             "fieldType": "number",
-            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
           },
           {
             "type": "config",
             "action": "added",
             "name": "maxAfkChecks",
             "fieldType": "number",
-            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
           },
           {
             "type": "config",
@@ -16617,6 +15320,151 @@
         ]
       }
     ],
+    "arenaModule": [
+      {
+        "moduleName": "arenaModule",
+        "category": "events",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: arenaModule",
+        "description": "Updated to version 1.0.0. Added 12 commands: `09 arena wait 125`, `10 arena wait 135`, `04 arena wait 15`, `06 arena wait 55`, `12 arena wait 195`, `03 arena wait 5`, `07 arena wait 85`, `11 arena wait 165`, `08 arena wait 95`, `02 arena wait 2`, `01 arena`, `05 arena wait 45`. Added 1 hook: `PlayerDied` (player-death). New permission: `ARENA_PERMISSION`. New configuration options: `xlocation`, `ylocation`, `zlocation`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "09 arena wait 125",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "10 arena wait 135",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "04 arena wait 15",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "06 arena wait 55",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "12 arena wait 195",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "03 arena wait 5",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "07 arena wait 85",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "11 arena wait 165",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "08 arena wait 95",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "02 arena wait 2",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "01 arena",
+            "description": "A huge arena battle for only the finest soldiers"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "05 arena wait 45",
+            "description": "No help text available"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerDied",
+            "eventType": "player-death"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "ARENA_PERMISSION",
+            "description": "Gives players access to the arena command"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "xlocation",
+            "fieldType": "string",
+            "description": "East West Location"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "ylocation",
+            "fieldType": "string",
+            "description": "Height teleport location. -1 for the highest block"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "zlocation",
+            "fieldType": "string",
+            "description": "Set North South location. South is negative"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemnumber",
+            "fieldType": "number",
+            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemlist",
+            "fieldType": "array",
+            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "fixedrewards",
+            "fieldType": "array",
+            "description": "All the items in this list will be given as a reward for completing the arena."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.0",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "7dtd_ChatBridge": [
       {
         "moduleName": "7dtd_ChatBridge",
@@ -16955,49 +15803,6 @@
         "title": "New Module: 8ball",
         "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
         "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "my-command",
-            "description": "No help text available"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "MAGIC_8BALL_USE",
-            "description": "This permissions allows your players to use the Magic 8Ball"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "sendMessage",
-            "fieldType": "string",
-            "description": "Decide on sending it to the server globally or to the individual player"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "responses",
-            "fieldType": "array",
-            "description": "Here you can edit the responses of the 8ball command. \n"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      },
-      {
-        "moduleName": "8ball",
-        "category": "minigames",
-        "date": "2025-02-24T09:46:51+01:00",
-        "title": "New Module: 8ball",
-        "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
-        "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
         "isNew": true,
         "details": [
           {
@@ -17766,6 +16571,326 @@
             "type": "version",
             "action": "updated",
             "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "CPMStaffCommands": [
+      {
+        "moduleName": "CPMStaffCommands",
+        "category": "unknown",
+        "date": "2025-07-27T21:01:11+02:00",
+        "title": "New Module: CPMStaffCommands",
+        "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
+        "commitHash": "e237c8c3499aeaa63f86d40b756d3e6ee85f0702",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "mute",
+            "description": "[02FEDMute (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "zomb",
+            "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "buff - 1",
+            "description": "[02FEDC]buff (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 3",
+            "description": "Targeted Horde round 3"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 1",
+            "description": "[02FEDC]Send a horde in 4 intervals in 30 seconds at a player. Type /th (name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kickall",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "avisit",
+            "description": "[02FEDC]avisit (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 4",
+            "description": "[02FEDC]Fourth round of Targeted Horde[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "killall",
+            "description": "[02FEDC]Kill all of the Zeds on the server.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pr",
+            "description": "[02FEDC]Reset the POI you are standing in[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "visitmap",
+            "description": "[02FEDC]Open the map for Takaro and CPM.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setwaypointpublic",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "aaaaaaa",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rpd",
+            "description": "[02FEDC]rpd (player name) Resets a player's data. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "ban",
+            "description": "[02FEDC]ban (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rvr",
+            "description": "[02FEDC]rvr (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "arrest",
+            "description": "[02FEDC]arrest (player name) (reason for arrest)[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "ocn",
+            "description": "[02FEDC] Change a player's name in chat. Type /ocn (Name) (New Name). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setjail",
+            "description": "[02FEDC]Set an 11x11 area to put hail birds in.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rdd",
+            "description": "[02FEDC]rdd (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "buff - 2",
+            "description": "Ends players buff"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pull",
+            "description": "[02FEDC]pull (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reset1",
+            "description": "[02FEDC]First position to reset a chunk. Use /reset2 in the opposite corner to reset the desired area.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "release",
+            "description": "[02FEDC]Release (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reset2",
+            "description": "[02FEDC]Last position to reset a chunk.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kick",
+            "description": "[02FEDC]kick (player name) (reason in quotes). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 2",
+            "description": "[02FEDC]Second round of a targeted horde[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "unmute",
+            "description": "[02FEDC]unmute (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "shutdownba",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "cm  & dm",
+            "description": "[02FEDC]Creative mode and debug menu. Reserved for admins[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "wi",
+            "description": "Wipe a player's belt, bag, equipment, all"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kill",
+            "description": "[02FEDC]kill (players name) You must run the command a second time to confirm the kill. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "KILL_PLAYER",
+            "description": "Kill a player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "CM_DM",
+            "description": "Creative mode and debug menu"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "MUTE",
+            "description": "Mute unruly players in game"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "ZOMB_FREE_SELF",
+            "description": "Zombie free command for admins to run the command for their personal house"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "LIST_LANDCLAIMS",
+            "description": "Lists land claims near by"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REMOVE_LANDCLAIMS",
+            "description": "remove nearby land claims"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_PLAYER",
+            "description": "Resets a player's corrupted data"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RDD",
+            "description": "Resets player drone data to place a new one"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "UNMUTE",
+            "description": "Unmute a player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VISIT_MAP",
+            "description": "Visit the map to unlock for Takaro and CPM"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RELEASE",
+            "description": "Release a player from jail"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "SET_JAIL",
+            "description": "Set the location of your jail "
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "BUFF",
+            "description": "Buff another player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_CHUNKS",
+            "description": "Reset Chunks Permission"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "WIPE_INVENTORY",
+            "description": "Wipe Inventory"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "STAFF_COMMANDS",
+            "description": "Commands for staff to use without using Currency"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_PREFAB",
+            "description": "Reset prefab permission"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "userDiscordChannel",
+            "fieldType": "string",
+            "description": "Sends to discord"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.2",
             "previousVersion": "initial"
           }
         ]
@@ -18929,7 +18054,7 @@
       },
       {
         "moduleName": "Mad_CPMCommands",
-        "category": "administration",
+        "category": "unknown",
         "date": "2025-04-06T10:54:41+02:00",
         "title": "New Module: Mad_CPMCommands",
         "description": "Updated to version 1.0.0. Added 10 commands: `minibike`, `drone`, `bicycle`, `gfxoff`, `debuff`, `4x4`, `visit`, `gyro`, `home`, `gfxon`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -19338,7 +18463,7 @@
       },
       {
         "moduleName": "Mad_CPMStaffCommands",
-        "category": "administration",
+        "category": "unknown",
         "date": "2025-04-06T10:54:41+02:00",
         "title": "New Module: Mad_CPMStaffCommands",
         "description": "Updated to version latest. Added 31 commands: `azomb`, `kill`, `buff - 2`, `rdd`, `pr`, `release`, `pull`, `reset1`, `reset2`, `unmute`, `th - 2`, `ban`, `th - 3`, `rpd`, `avisit`, `visitmap`, `cm  & dm`, `rvr`, `setjail`, `killall`, `buff - 1`, `kickall`, `aaaaaaa`, `arrest`, `shutdownba`, `th - 1`, `kick`, `th - 4`, `ocn`, `mute`, `wi`. New permissions: `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `KILL_PLAYER`, `CM_DM`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
@@ -19890,84 +19015,6 @@
             "description": "If enabled, the script will send debug messages to the specified debugChannel"
           }
         ]
-      },
-      {
-        "moduleName": "Trevor_HordeNightWarnings",
-        "category": "administration",
-        "date": "2025-03-01T18:02:30+01:00",
-        "title": "New Module: Trevor_HordeNightWarnings",
-        "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
-        "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
-        "isNew": true,
-        "details": [
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "BM_is_over",
-            "eventType": "log"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "horde_night_warning",
-            "schedule": "*/10 * * * *"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "StartTime1",
-            "fieldType": "number",
-            "description": "In-game time that 'soft' warnings should begin.  Hour only.  e.g. 9 or 15\nDefault: 0 - Will play all day leading up to blood moon"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "StartTime2",
-            "fieldType": "number",
-            "description": "In-game time that 'serious' warnings should begin.  Hour only.  e.g. 9 or 15\nDefault: 17 - Will broadcast from 5pm in-game.  If everyone logs out by 5pm, BM fighters will have 5 in-game hours to do last minute prep."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "SoftWarningText",
-            "fieldType": "string",
-            "description": "Text for 'soft' warning message.  e.g. \"Blood moon tonight.  Please log out before 17:00 if you're not going to fight the horde.\""
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "SeriousWarningText",
-            "fieldType": "string",
-            "description": "Text for 'serious' warning message.  e.g. \"[FF1111]Blood moon soon![-]  Log out NOW if you're not going to fight the horde.\""
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "discordChannel",
-            "fieldType": "string",
-            "description": "Specify the target discord Channel ID for alerts"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "debugChannel",
-            "fieldType": "string",
-            "description": "Specify the target discord Channel ID for debug messages"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "bloodMoonOverText",
-            "fieldType": "string",
-            "description": "Text to display when bloodmoon ends."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
       }
     ],
     "Trevor_RegionResetRandomiser": [
@@ -20011,7 +19058,7 @@
             "action": "added",
             "name": "authorisedPlayer",
             "fieldType": "string",
-            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
+            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
           },
           {
             "type": "config",
@@ -20075,7 +19122,7 @@
             "action": "added",
             "name": "authorisedPlayer",
             "fieldType": "string",
-            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
+            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
           },
           {
             "type": "config",
@@ -22313,6 +21360,96 @@
             "previousVersion": "initial"
           }
         ]
+      },
+      {
+        "moduleName": "Limon_chatbridge",
+        "category": "integration",
+        "date": "2025-02-24T09:46:51+01:00",
+        "title": "New Module: Limon_chatbridge",
+        "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
+        "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerDisconnected",
+            "eventType": "player-disconnected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerConnected",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "DiscordToGame",
+            "eventType": "discord-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "GameToDiscord",
+            "eventType": "chat-message"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "sendPlayerConnected",
+            "fieldType": "boolean",
+            "description": "Send a message when a player connects."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "sendPlayerDisconnected",
+            "fieldType": "boolean",
+            "description": "Send a message when a player disconnects."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "onlyGlobalChat",
+            "fieldType": "boolean",
+            "description": "Only relay messages from global chat (no team chat or private messages)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "filterCommands",
+            "fieldType": "boolean",
+            "description": "Don't relay command messages (/command) to Discord"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "filterSystemMessages",
+            "fieldType": "boolean",
+            "description": "Don't relay system messages to Discord"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "useMonitoring",
+            "fieldType": "boolean",
+            "description": "Send commands and system messages to a separate monitoring channel"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitoringChannelId",
+            "fieldType": "string",
+            "description": "Discord channel ID for monitoring messages (only used if monitoring is enabled)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
       }
     ],
     "Limon_AFKChecker": [
@@ -22342,14 +21479,14 @@
             "action": "added",
             "name": "minutesBeforeKick",
             "fieldType": "number",
-            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
           },
           {
             "type": "config",
             "action": "added",
             "name": "maxAfkChecks",
             "fieldType": "number",
-            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
           },
           {
             "type": "config",
@@ -22401,14 +21538,14 @@
             "action": "added",
             "name": "minutesBeforeKick",
             "fieldType": "number",
-            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
           },
           {
             "type": "config",
             "action": "added",
             "name": "maxAfkChecks",
             "fieldType": "number",
-            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
+            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
           },
           {
             "type": "config",
@@ -22507,14 +21644,14 @@
             "action": "added",
             "name": "minutesBeforeKick",
             "fieldType": "number",
-            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
+            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
           },
           {
             "type": "config",
             "action": "added",
             "name": "maxAfkChecks",
             "fieldType": "number",
-            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
+            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
           },
           {
             "type": "config",
@@ -22647,7 +21784,7 @@
       },
       {
         "moduleName": "Limon_BannedItems",
-        "category": "unknown",
+        "category": "anti-cheat",
         "date": "2025-05-03T15:50:09+02:00",
         "title": "Configuration Updated",
         "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
@@ -22748,7 +21885,7 @@
       },
       {
         "moduleName": "Limon_BannedItems",
-        "category": "unknown",
+        "category": "anti-cheat",
         "date": "2025-04-08T12:55:53+02:00",
         "title": "Configuration Updated",
         "description": "Removed configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
@@ -22789,84 +21926,6 @@
             "type": "config",
             "action": "removed",
             "name": "warningMessage"
-          }
-        ]
-      },
-      {
-        "moduleName": "Limon_BannedItems",
-        "category": "unknown",
-        "date": "2025-03-01T18:32:14+01:00",
-        "title": "New Module: Limon_BannedItems",
-        "description": "Updated to version latest. Added 1 scheduled task: `CheckInventoryBanneditems`. New permission: `item_ban_immunity`. New configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
-        "commitHash": "5bd0695dbf5ac1008dd0999adcdcf25c83f90569",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "CheckInventoryBanneditems",
-            "schedule": "* * * * *"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "item_ban_immunity",
-            "description": "Immunity in terms of items you can have in your inventory"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "bannedItems ",
-            "fieldType": "array",
-            "description": "Select the items they should not have in their inventory"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "warningsBeforePunishment",
-            "fieldType": "number",
-            "description": "warningsBeforePunishment"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "punishmentType",
-            "fieldType": "string",
-            "description": "this is to decide what to do  kick ban"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "banDuration",
-            "fieldType": "number",
-            "description": "If you choose ban, you can decide how long"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "kickMessage",
-            "fieldType": "string",
-            "description": "kickMessage"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "banMessage",
-            "fieldType": "string",
-            "description": "banMessage"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "warningMessage",
-            "fieldType": "string",
-            "description": "warningMessage"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
           }
         ]
       }
@@ -23365,48 +22424,6 @@
             "previousVersion": "initial"
           }
         ]
-      },
-      {
-        "moduleName": "MeeBob_Donator",
-        "category": "community-management",
-        "date": "2025-03-01T18:02:30+01:00",
-        "title": "New Module: MeeBob_Donator",
-        "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
-        "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "vipkit",
-            "description": "VIP Items"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "PlayerConnected",
-            "eventType": "player-connected"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "VIP_KIT_PERMISSION",
-            "description": "Vip Items"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "vipkit",
-            "fieldType": "array",
-            "description": "VIP Items"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
       }
     ],
     "Limon_8ball": [
@@ -23417,49 +22434,6 @@
         "title": "New Module: Limon_8ball",
         "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
         "commitHash": "bb8a1e59e37f0e63e31d289a5016aefe0576c5b5",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "my-command",
-            "description": "No help text available"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "MAGIC_8BALL_USE",
-            "description": "This permissions allows your players to use the Magic 8Ball"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "sendMessage",
-            "fieldType": "string",
-            "description": "Decide on sending it to the server globally or to the individual player"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "responses",
-            "fieldType": "array",
-            "description": "Here you can edit the responses of the 8ball command. \n"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      },
-      {
-        "moduleName": "Limon_8ball",
-        "category": "minigames",
-        "date": "2025-03-01T18:02:30+01:00",
-        "title": "New Module: Limon_8ball",
-        "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
-        "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
         "isNew": true,
         "details": [
           {
@@ -24394,7 +23368,7 @@
     "MAD_CPMStaffCommands": [
       {
         "moduleName": "MAD_CPMStaffCommands",
-        "category": "administration",
+        "category": "unknown",
         "date": "2025-03-17T13:36:36+01:00",
         "title": "Updated 6 Commands",
         "description": "Added 4 commands: `unmute`, `kick`, `release`, `mute`. Updated 2 command implementations.",
@@ -24411,7 +23385,7 @@
             "type": "command",
             "action": "added",
             "name": "kick",
-            "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Lin\u00f3n\" \"Too cool\""
+            "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Linón\" \"Too cool\""
           },
           {
             "type": "command",
@@ -24439,7 +23413,7 @@
       },
       {
         "moduleName": "MAD_CPMStaffCommands",
-        "category": "administration",
+        "category": "unknown",
         "date": "2025-03-06T21:12:31+01:00",
         "title": "New Module: MAD_CPMStaffCommands",
         "description": "Updated to version latest. Added 5 commands: `ban`, `kill`, `rdd`, `avisit`, `arrest`. New permission: `STAFF_COMMANDS`. New configuration option: `discordChannel`.",
@@ -24650,12 +23624,12 @@
         ]
       }
     ],
-    "limon_Translator": [
+    "limon_translator": [
       {
-        "moduleName": "limon_Translator",
+        "moduleName": "limon_translator",
         "category": "unknown",
         "date": "2025-03-09T20:18:13+01:00",
-        "title": "New Module: limon_Translator",
+        "title": "New Module: limon_translator",
         "description": "Updated to version latest. Added 4 commands: `translate`, `toggletranslation`, `gettranslation`, `setlanguage`. Added 1 hook: `auto-translate` (chat-message). New permission: `TRANSLATE_PERMISSION`. New configuration options: `googleApiKey`, `maxMessageLength`, `defaultLanguage`, `supportedLanguages`.",
         "commitHash": "52e966c9c49628f1bfaaf04213e07c2a0a3d8c89",
         "isNew": true,
@@ -24736,7 +23710,7 @@
     "MAD_CPMCommands": [
       {
         "moduleName": "MAD_CPMCommands",
-        "category": "administration",
+        "category": "unknown",
         "date": "2025-03-06T21:12:31+01:00",
         "title": "Updated 3 Commands",
         "description": "Updated to version 1.0.0. Added 3 commands: `gfxoff`, `debuff`, `gfxon`.",
@@ -24771,7 +23745,7 @@
       },
       {
         "moduleName": "MAD_CPMCommands",
-        "category": "administration",
+        "category": "unknown",
         "date": "2025-03-01T18:32:14+01:00",
         "title": "New Module: MAD_CPMCommands",
         "description": "Updated to version latest. Added 7 commands: `minibike`, `visit`, `4x4`, `gyro`, `drone`, `bicycle`, `home`. New permissions: `inGameCommands`, `HOME_PERMISSION`, `VISIT_PERMISSION`.",
@@ -24847,7 +23821,340 @@
         ]
       }
     ],
+    "limon_BannedItems": [
+      {
+        "moduleName": "limon_BannedItems",
+        "category": "anti-cheat",
+        "date": "2025-03-01T18:32:14+01:00",
+        "title": "New Module: limon_BannedItems",
+        "description": "Updated to version latest. Added 1 scheduled task: `CheckInventoryBanneditems`. New permission: `item_ban_immunity`. New configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
+        "commitHash": "5bd0695dbf5ac1008dd0999adcdcf25c83f90569",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "CheckInventoryBanneditems",
+            "schedule": "* * * * *"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "item_ban_immunity",
+            "description": "Immunity in terms of items you can have in your inventory"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bannedItems ",
+            "fieldType": "array",
+            "description": "Select the items they should not have in their inventory"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "warningsBeforePunishment",
+            "fieldType": "number",
+            "description": "warningsBeforePunishment"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "punishmentType",
+            "fieldType": "string",
+            "description": "this is to decide what to do  kick ban"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banDuration",
+            "fieldType": "number",
+            "description": "If you choose ban, you can decide how long"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "kickMessage",
+            "fieldType": "string",
+            "description": "kickMessage"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "banMessage",
+            "fieldType": "string",
+            "description": "banMessage"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "warningMessage",
+            "fieldType": "string",
+            "description": "warningMessage"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "hvb_8ball_v2": [
+      {
+        "moduleName": "hvb_8ball_v2",
+        "category": "minigames",
+        "date": "2025-03-01T18:02:30+01:00",
+        "title": "New Module: hvb_8ball_v2",
+        "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
+        "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "my-command",
+            "description": "No help text available"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "MAGIC_8BALL_USE",
+            "description": "This permissions allows your players to use the Magic 8Ball"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "sendMessage",
+            "fieldType": "string",
+            "description": "Decide on sending it to the server globally or to the individual player"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "responses",
+            "fieldType": "array",
+            "description": "Here you can edit the responses of the 8ball command. \n"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      },
+      {
+        "moduleName": "hvb_8ball_v2",
+        "category": "minigames",
+        "date": "2025-02-25T21:27:40+00:00",
+        "title": "New Module: hvb_8ball_v2",
+        "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
+        "commitHash": "b0cbb0ce5c49f3ab4fc6af37423965fdce255059",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "my-command",
+            "description": "No help text available"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "MAGIC_8BALL_USE",
+            "description": "This permissions allows your players to use the Magic 8Ball"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "sendMessage",
+            "fieldType": "string",
+            "description": "Decide on sending it to the server globally or to the individual player"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "responses",
+            "fieldType": "array",
+            "description": "Here you can edit the responses of the 8ball command. \n"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      },
+      {
+        "moduleName": "hvb_8ball_v2",
+        "category": "minigames",
+        "date": "2025-02-24T09:46:51+01:00",
+        "title": "New Module: hvb_8ball_v2",
+        "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
+        "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "my-command",
+            "description": "No help text available"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "MAGIC_8BALL_USE",
+            "description": "This permissions allows your players to use the Magic 8Ball"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "sendMessage",
+            "fieldType": "string",
+            "description": "Decide on sending it to the server globally or to the individual player"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "responses",
+            "fieldType": "array",
+            "description": "Here you can edit the responses of the 8ball command. \n"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "VIP/Donator": [
+      {
+        "moduleName": "VIP/Donator",
+        "category": "community-management",
+        "date": "2025-03-01T18:02:30+01:00",
+        "title": "New Module: VIP/Donator",
+        "description": "Updated to version latest. Added 1 command: `vipkit`. Added 1 hook: `PlayerConnected` (player-connected). New permission: `VIP_KIT_PERMISSION`. New configuration option: `vipkit`.",
+        "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "vipkit",
+            "description": "VIP Items"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerConnected",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VIP_KIT_PERMISSION",
+            "description": "Vip Items"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "vipkit",
+            "fieldType": "array",
+            "description": "VIP Items"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "Horde Night Warnings": [
+      {
+        "moduleName": "Horde Night Warnings",
+        "category": "administration",
+        "date": "2025-03-01T18:02:30+01:00",
+        "title": "New Module: Horde Night Warnings",
+        "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
+        "commitHash": "c13b8edf521dd7ec74118add490c5c62490f89a8",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "BM_is_over",
+            "eventType": "log"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "horde_night_warning",
+            "schedule": "*/10 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "StartTime1",
+            "fieldType": "number",
+            "description": "In-game time that 'soft' warnings should begin.  Hour only.  e.g. 9 or 15\nDefault: 0 - Will play all day leading up to blood moon"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "StartTime2",
+            "fieldType": "number",
+            "description": "In-game time that 'serious' warnings should begin.  Hour only.  e.g. 9 or 15\nDefault: 17 - Will broadcast from 5pm in-game.  If everyone logs out by 5pm, BM fighters will have 5 in-game hours to do last minute prep."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "SoftWarningText",
+            "fieldType": "string",
+            "description": "Text for 'soft' warning message.  e.g. \"Blood moon tonight.  Please log out before 17:00 if you're not going to fight the horde.\""
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "SeriousWarningText",
+            "fieldType": "string",
+            "description": "Text for 'serious' warning message.  e.g. \"[FF1111]Blood moon soon![-]  Log out NOW if you're not going to fight the horde.\""
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannel",
+            "fieldType": "string",
+            "description": "Specify the target discord Channel ID for alerts"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "debugChannel",
+            "fieldType": "string",
+            "description": "Specify the target discord Channel ID for debug messages"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonOverText",
+            "fieldType": "string",
+            "description": "Text to display when bloodmoon ends."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      },
       {
         "moduleName": "Horde Night Warnings",
         "category": "administration",
@@ -24925,14 +24232,12 @@
             "previousVersion": "initial"
           }
         ]
-      }
-    ],
-    "Trevor_BloodMoon": [
+      },
       {
-        "moduleName": "Trevor_BloodMoon",
+        "moduleName": "Horde Night Warnings",
         "category": "unknown",
         "date": "2025-02-27T09:27:54+01:00",
-        "title": "New Module: Trevor_BloodMoon",
+        "title": "New Module: Horde Night Warnings",
         "description": "Updated to version latest. Added 1 hook: `BM_is_over` (log). Added 1 scheduled task: `horde_night_warning`. New configuration options: `StartTime1`, `StartTime2`, `SoftWarningText`, `SeriousWarningText`, `discordChannel`, `debugChannel`, `bloodMoonOverText`.",
         "commitHash": "69c65f860e6ecfffd27c21240089ba8044754587",
         "isNew": true,
@@ -25010,11 +24315,21 @@
     "In Game Commands": [
       {
         "moduleName": "In Game Commands",
-        "category": "administration",
+        "category": "unknown",
         "date": "2025-02-25T21:29:03+00:00",
         "title": "New Module: In Game Commands",
         "description": "Added In Game Commands to the repository",
         "commitHash": "d5abb4c647a45251298ccdd44976db3eb9b4a2c7",
+        "isNew": true,
+        "details": []
+      },
+      {
+        "moduleName": "In Game Commands",
+        "category": "unknown",
+        "date": "2025-02-25T11:36:40+01:00",
+        "title": "New Module: In Game Commands",
+        "description": "Added In Game Commands to the repository",
+        "commitHash": "25b88dd95dfdd01ade811989d13ecf1514cb7aa1",
         "isNew": true,
         "details": []
       }
@@ -25029,169 +24344,66 @@
         "commitHash": "d5abb4c647a45251298ccdd44976db3eb9b4a2c7",
         "isNew": true,
         "details": []
-      }
-    ],
-    "hvb_8ball_v2": [
+      },
       {
-        "moduleName": "hvb_8ball_v2",
-        "category": "minigames",
-        "date": "2025-02-25T21:27:40+00:00",
-        "title": "New Module: hvb_8ball_v2",
-        "description": "Updated to version latest. Added 1 command: `my-command`. New permission: `MAGIC_8BALL_USE`. New configuration options: `sendMessage`, `responses`.",
-        "commitHash": "b0cbb0ce5c49f3ab4fc6af37423965fdce255059",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "my-command",
-            "description": "No help text available"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "MAGIC_8BALL_USE",
-            "description": "This permissions allows your players to use the Magic 8Ball"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "sendMessage",
-            "fieldType": "string",
-            "description": "Decide on sending it to the server globally or to the individual player"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "responses",
-            "fieldType": "array",
-            "description": "Here you can edit the responses of the 8ball command. \n"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "MAD_CPM_COMMANDS": [
-      {
-        "moduleName": "MAD_CPM_COMMANDS",
+        "moduleName": "Trivia Time",
         "category": "unknown",
-        "date": "2025-02-25T11:36:40+01:00",
-        "title": "New Module: MAD_CPM_COMMANDS",
-        "description": "Added MAD_CPM_COMMANDS to the repository",
-        "commitHash": "25b88dd95dfdd01ade811989d13ecf1514cb7aa1",
+        "date": "2025-02-24T09:46:51+01:00",
+        "title": "New Module: Trivia Time",
+        "description": "Added Trivia Time to the repository",
+        "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
         "isNew": true,
         "details": []
       }
     ],
-    "enhanced-chat-bridge": [
+    "7dtdCommands": [
       {
-        "moduleName": "enhanced-chat-bridge",
-        "category": "integration",
-        "date": "2025-02-24T09:46:51+01:00",
-        "title": "New Module: enhanced-chat-bridge",
-        "description": "Updated to version latest. Added 4 hooks: `PlayerDisconnected` (player-disconnected), `PlayerConnected` (player-connected), `DiscordToGame` (discord-message), `GameToDiscord` (chat-message). New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `filterCommands`, `filterSystemMessages`, `useMonitoring`, `monitoringChannelId`.",
-        "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
-        "isNew": true,
-        "details": [
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "PlayerDisconnected",
-            "eventType": "player-disconnected"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "PlayerConnected",
-            "eventType": "player-connected"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "DiscordToGame",
-            "eventType": "discord-message"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "GameToDiscord",
-            "eventType": "chat-message"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "sendPlayerConnected",
-            "fieldType": "boolean",
-            "description": "Send a message when a player connects."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "sendPlayerDisconnected",
-            "fieldType": "boolean",
-            "description": "Send a message when a player disconnects."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "onlyGlobalChat",
-            "fieldType": "boolean",
-            "description": "Only relay messages from global chat (no team chat or private messages)"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "filterCommands",
-            "fieldType": "boolean",
-            "description": "Don't relay command messages (/command) to Discord"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "filterSystemMessages",
-            "fieldType": "boolean",
-            "description": "Don't relay system messages to Discord"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "useMonitoring",
-            "fieldType": "boolean",
-            "description": "Send commands and system messages to a separate monitoring channel"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "monitoringChannelId",
-            "fieldType": "string",
-            "description": "Discord channel ID for monitoring messages (only used if monitoring is enabled)"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
+        "moduleName": "7dtdCommands",
+        "category": "administration",
+        "date": "2025-12-15T13:00:48+01:00",
+        "title": "New Module: 7dtdCommands",
+        "description": "Added 7dtdCommands to the repository",
+        "commitHash": "9320e17a09e725b312b717edee4a86071b71ef15",
+        "isNew": false,
+        "details": []
       }
     ],
-    "trivia": [
+    "DiscordLinks": [
       {
-        "moduleName": "trivia",
+        "moduleName": "DiscordLinks",
+        "category": "administration",
+        "date": "2025-12-15T12:20:06+01:00",
+        "title": "New Module: DiscordLinks",
+        "description": "Added DiscordLinks to the repository",
+        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+        "isNew": false,
+        "details": []
+      }
+    ],
+    "StaffCommands": [
+      {
+        "moduleName": "StaffCommands",
+        "category": "administration",
+        "date": "2025-12-15T12:20:06+01:00",
+        "title": "New Module: StaffCommands",
+        "description": "Added StaffCommands to the repository",
+        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
+        "isNew": false,
+        "details": []
+      }
+    ],
+    "limon_Translator": [
+      {
+        "moduleName": "limon_Translator",
         "category": "unknown",
-        "date": "2025-02-24T09:46:51+01:00",
-        "title": "New Module: trivia",
-        "description": "Added trivia to the repository",
-        "commitHash": "e6cb551703433348bdc168fd67ade1a4f345efc6",
-        "isNew": true,
+        "date": "2025-03-09T20:26:24+01:00",
+        "title": "New Module: limon_Translator",
+        "description": "Added limon_Translator to the repository",
+        "commitHash": "09ad0d73152cd9bbf213c34b2789962a4eb3209c",
+        "isNew": false,
         "details": []
       }
     ]
   },
-  "generatedAt": "2025-12-15T11:46:38.215Z"
+  "generatedAt": "2026-01-02T16:47:13.484Z"
 }
