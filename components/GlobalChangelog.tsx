@@ -3,6 +3,9 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { ChangelogEntry } from '@/lib/types';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer';
+
+const DEFAULT_VISIBLE_COUNT = 10;
 
 interface GlobalChangelogProps {
   /** Array of changelog entries to display */
@@ -17,6 +20,7 @@ export default function GlobalChangelog({ changes }: GlobalChangelogProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [showAll, setShowAll] = useState(false);
 
   // Get unique categories from changes
   const categories = useMemo(() => {
@@ -36,6 +40,16 @@ export default function GlobalChangelog({ changes }: GlobalChangelogProps) {
       return categoryMatch && statusMatch;
     });
   }, [changes, selectedCategory, selectedStatus]);
+
+  // Limit displayed entries based on showAll state
+  const visibleChanges = useMemo(() => {
+    if (showAll) {
+      return filteredChanges;
+    }
+    return filteredChanges.slice(0, DEFAULT_VISIBLE_COUNT);
+  }, [filteredChanges, showAll]);
+
+  const hasMoreEntries = filteredChanges.length > DEFAULT_VISIBLE_COUNT;
 
   if (changes.length === 0) {
     return null;
@@ -109,8 +123,8 @@ export default function GlobalChangelog({ changes }: GlobalChangelogProps) {
           </div>
 
           {/* Changelog Entries */}
-          {filteredChanges.length > 0 ? (
-            filteredChanges.map((change, index) => (
+          {visibleChanges.length > 0 ? (
+            visibleChanges.map((change, index) => (
               <ChangelogCard
                 key={`${change.moduleName}-${change.commitHash}-${index}`}
                 change={change}
@@ -119,6 +133,20 @@ export default function GlobalChangelog({ changes }: GlobalChangelogProps) {
           ) : (
             <div className="text-center py-8 text-base-content/60">
               No changes match the selected filters
+            </div>
+          )}
+
+          {/* Show more/less button */}
+          {hasMoreEntries && (
+            <div className="text-center pt-2">
+              <button
+                onClick={() => setShowAll(!showAll)}
+                className="btn btn-ghost btn-sm text-primary hover:text-primary-focus"
+              >
+                {showAll
+                  ? 'Show less'
+                  : `Show all ${filteredChanges.length} changes`}
+              </button>
             </div>
           )}
         </div>
@@ -158,7 +186,9 @@ function ChangelogCard({ change }: { change: ChangelogEntry }) {
             </div>
 
             <h3 className="font-medium mb-2">{change.title}</h3>
-            <p className="text-sm text-base-content/80">{change.description}</p>
+            <div className="text-sm text-base-content/80">
+              <MarkdownRenderer content={change.description} />
+            </div>
           </div>
 
           <div className="text-sm text-base-content/60 whitespace-nowrap">
