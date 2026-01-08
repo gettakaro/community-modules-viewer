@@ -1,0 +1,54 @@
+{
+  "name": "Theft Investigation",
+  "author": "AI Assistant",
+  "supportedGames": [
+    "7d2d",
+    "rust",
+    "sevendaystodie"
+  ],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Investigates item theft by correlating player location and inventory data to identify suspects and track where stolen items were taken.",
+      "configSchema": "{}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { arguments: args, gameServerId, module } = data;\n    const itemName = args.itemName;\n    const hoursAgo = args.hoursBack || 2;\n\n    // Calculate time range: 1 hour before and 1 hour after the specified time\n    // Example: hoursAgo=6 means check from 7 hours ago to 5 hours ago\n    const now = new Date();\n    const startDate = new Date(now.getTime() - ((hoursAgo + 1) * 60 * 60 * 1000));\n    const endDate = new Date(now.getTime() - ((hoursAgo - 1) * 60 * 60 * 1000));\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `🔍 Investigating \"${itemName}\" thefts from ${hoursAgo + 1} to ${hoursAgo - 1} hours ago...`\n    });\n\n    // Find the item by name\n    const itemSearch = await takaro.item.itemControllerSearch({\n        filters: { gameserverId: [gameServerId] },\n        search: { name: [itemName] }\n    });\n\n    if (!itemSearch.data.data || itemSearch.data.data.length === 0) {\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: `Item \"${itemName}\" not found on this server.`\n        });\n        return;\n    }\n\n    const item = itemSearch.data.data[0];\n\n    // Get all death events in the time range\n    const deathEvents = await takaro.event.eventControllerSearch({\n        filters: {\n            gameserverId: [gameServerId],\n            eventName: ['player-death']\n        },\n        greaterThan: { createdAt: startDate.toISOString() },\n        lessThan: { createdAt: endDate.toISOString() },\n        sortBy: 'createdAt',\n        sortDirection: 'desc',\n        limit: 100\n    });\n\n    if (!deathEvents.data.data || deathEvents.data.data.length === 0) {\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: `No deaths found from ${hoursAgo + 1} to ${hoursAgo - 1} hours ago.`\n        });\n        return;\n    }\n\n    let theftFound = false;\n\n    // Check each death event\n    for (const deathEvent of deathEvents.data.data) {\n        const victimId = deathEvent.playerId;\n        const deathTime = new Date(deathEvent.createdAt);\n\n        // Get victim's name\n        const victimInfo = await takaro.player.playerControllerGetOne(victimId);\n        const victimName = victimInfo.data.data.name;\n\n        // Check victim's inventory 1 minute before death for the item\n        const victimBeforeDeath = new Date(deathTime.getTime() - 60000);\n        const victimInventoryBefore = await takaro.tracking.trackingControllerGetPlayerInventoryHistory({\n            playerId: victimId,\n            startDate: victimBeforeDeath.toISOString(),\n            endDate: deathTime.toISOString()\n        });\n\n        // Check if victim had the item\n        let victimHadItem = false;\n        let victimItemQuantity = 0;\n\n        for (const record of victimInventoryBefore.data.data) {\n            if (record.itemId === item.id) {\n                victimHadItem = true;\n                victimItemQuantity = Math.max(victimItemQuantity, record.quantity);\n            }\n        }\n\n        if (!victimHadItem) {\n            continue; // Victim didn't have the item, skip this death\n        }\n\n        // Get all players who had the item shortly after this death (within 2 minutes)\n        const afterDeathStart = deathTime;\n        const afterDeathEnd = new Date(deathTime.getTime() + 120000); // 2 minutes after\n\n        const playersWithItem = await takaro.tracking.trackingControllerGetPlayersByItem({\n            itemId: item.id,\n            startDate: afterDeathStart.toISOString(),\n            endDate: afterDeathEnd.toISOString()\n        });\n\n        // Deduplicate suspects by playerId\n        const uniqueSuspectIds = [...new Set(playersWithItem.data.data.map(p => p.playerId))];\n\n        // Check each unique suspect\n        for (const suspectId of uniqueSuspectIds) {\n            if (suspectId === victimId) {\n                continue; // Skip the victim themselves\n            }\n\n            // Get suspect's inventory BEFORE the death\n            const suspectInventoryBefore = await takaro.tracking.trackingControllerGetPlayerInventoryHistory({\n                playerId: suspectId,\n                startDate: victimBeforeDeath.toISOString(),\n                endDate: deathTime.toISOString()\n            });\n\n            // Count how many items suspect had before death\n            let suspectQuantityBefore = 0;\n            for (const record of suspectInventoryBefore.data.data) {\n                if (record.itemId === item.id) {\n                    suspectQuantityBefore = Math.max(suspectQuantityBefore, record.quantity);\n                }\n            }\n\n            // Get suspect's inventory AFTER the death\n            const suspectInventoryAfter = await takaro.tracking.trackingControllerGetPlayerInventoryHistory({\n                playerId: suspectId,\n                startDate: afterDeathStart.toISOString(),\n                endDate: afterDeathEnd.toISOString()\n            });\n\n            // Count how many items suspect had after death\n            let suspectQuantityAfter = 0;\n            let firstSeenAfter = null;\n            for (const record of suspectInventoryAfter.data.data) {\n                if (record.itemId === item.id) {\n                    if (!firstSeenAfter || new Date(record.createdAt) < new Date(firstSeenAfter)) {\n                        firstSeenAfter = record.createdAt;\n                    }\n                    suspectQuantityAfter = Math.max(suspectQuantityAfter, record.quantity);\n                }\n            }\n\n            // If suspect gained items after the death\n            const itemsGained = suspectQuantityAfter - suspectQuantityBefore;\n            if (itemsGained > 0 && firstSeenAfter) {\n                const suspectInfo = await takaro.player.playerControllerGetOne(suspectId);\n                const suspectName = suspectInfo.data.data.name;\n\n                const timeDiff = Math.round((new Date(firstSeenAfter) - deathTime) / 1000);\n\n                await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n                    message: `🚨 THEFT DETECTED! ${suspectName} took ${itemsGained}x ${itemName} from ${victimName}'s death bag (${timeDiff}s after death at ${deathTime.toLocaleTimeString()})`\n                });\n\n                theftFound = true;\n            }\n        }\n    }\n\n    if (!theftFound) {\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: `No thefts of \"${itemName}\" detected from ${hoursAgo + 1} to ${hoursAgo - 1} hours ago.`\n        });\n    }\n}\n\nawait main();",
+          "name": "whostole",
+          "description": null,
+          "trigger": "whostole",
+          "helpText": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)",
+          "arguments": [
+            {
+              "name": "itemName",
+              "type": "string",
+              "defaultValue": null,
+              "helpText": "Name of the stolen item",
+              "position": 0
+            },
+            {
+              "name": "hoursBack",
+              "type": "number",
+              "defaultValue": "2",
+              "helpText": "How long ago to check (e.g., 6 = check 7-5 hours ago)",
+              "position": 1
+            }
+          ]
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Allows using the /whostole command to investigate item theft",
+          "permission": "THEFT_INVESTIGATE",
+          "friendlyName": "Investigate Theft"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.4.10"
+}
