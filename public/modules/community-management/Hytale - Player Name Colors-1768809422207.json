@@ -19,7 +19,6 @@
             {
               "name": "color",
               "type": "string",
-              "defaultValue": null,
               "helpText": "Color name (gold, red, blue) or hex code (ff0000)",
               "position": 0
             }

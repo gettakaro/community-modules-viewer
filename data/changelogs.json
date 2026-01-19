@@ -1,6 +1,300 @@
 {
   "global": [
     {
+      "moduleName": "Hytale - Home",
+      "category": "community-management",
+      "date": "2026-01-19T02:34:19-06:00",
+      "title": "New Module: Hytale - Home",
+      "description": "Updated to version latest. Added 1 command: `home`.",
+      "commitHash": "e90178aaa4af721a459c733f21b14affef8d6137",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "home",
+          "description": "No help text available"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Generic Game - Restarts",
+      "category": "administration",
+      "date": "2026-01-19T02:25:01-06:00",
+      "title": "New Module: Generic Game - Restarts",
+      "description": "Updated to version latest. Added 4 scheduled tasks: `10 minute`, `5 minute`, `Restart`, `1 minute`. New configuration options: `userDiscordChannel`, `shutdownCommand`, `saveCommand`, `supportsInGameMessages`, `message10Minute`, `message5Minute`, `message1Minute`, `messageRestart`.",
+      "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "10 minute",
+          "schedule": "* */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "5 minute",
+          "schedule": "05 */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Restart",
+          "schedule": "10 */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "1 minute",
+          "schedule": "09 */3 * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "userDiscordChannel",
+          "fieldType": "string",
+          "description": "Discord Channel"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "shutdownCommand",
+          "fieldType": "string",
+          "description": "Command that shuts down your server"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "saveCommand",
+          "fieldType": "string",
+          "description": "save command - if supported"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "supportsInGameMessages",
+          "fieldType": "boolean",
+          "description": "Enable in-game messages for restart warnings"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message10Minute",
+          "fieldType": "string",
+          "description": "In-game message for 10 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message5Minute",
+          "fieldType": "string",
+          "description": "In-game message for 5 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message1Minute",
+          "fieldType": "string",
+          "description": "In-game message for 1 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "messageRestart",
+          "fieldType": "string",
+          "description": "In-game message when restart is initiated"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Hytale - Player Name Colors",
+      "category": "community-management",
+      "date": "2026-01-19T02:25:01-06:00",
+      "title": "New Module: Hytale - Player Name Colors",
+      "description": "Updated to version latest. Added 1 command: `Set Name Color`. Added 2 hooks: `Load Player Name Color` (player-connected), `Connected Color` (player-connected). New permission: `COLOR`.",
+      "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "Set Name Color",
+          "description": "Set your chat name color. Use a color name (gold, red, blue, green, purple, orange, white, cyan, magenta, yellow, pink, lime, aqua, gray) or a hex code (e.g., ff0000)"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Load Player Name Color",
+          "eventType": "player-connected"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Connected Color",
+          "eventType": "player-connected"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "COLOR",
+          "description": "Allows player to set the color of their name"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Hytale - Visit Players",
+      "category": "community-management",
+      "date": "2026-01-19T02:25:01-06:00",
+      "title": "New Module: Hytale - Visit Players",
+      "description": "Updated to version latest. Added 4 commands: `visit`, `granted`, `revoke`, `visitlist`. New permissions: `TELEPORTS_USE`, `TELEPORTS_TPHERE`. New configuration option: `timeout`.",
+      "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "visit",
+          "description": "Request to visit another player or teleport to them if permission is granted."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "granted",
+          "description": "Grant permission for another player to visit you."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "revoke",
+          "description": "Revoke another player's permission to visit you."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "visitlist",
+          "description": "List all pending visit requests and granted visit permissions."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "TELEPORTS_USE",
+          "description": "Allows the player to use the teleports module."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "TELEPORTS_TPHERE",
+          "description": "Allows the player to teleport other players to their location."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "timeout",
+          "fieldType": "number",
+          "description": "The time one has to wait before teleporting again (in milliseconds)."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Hytale - Playtime Earner",
+      "category": "economy",
+      "date": "2026-01-19T02:25:01-06:00",
+      "title": "New Module: Hytale - Playtime Earner",
+      "description": "Updated to version latest. Added 1 scheduled task: `rewardOnlinePlaytime`. New permission: `PLAYTIME_CURRENCY_OVERRIDE`. New configuration options: `currencyReward`, `rewardMessage`.",
+      "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "rewardOnlinePlaytime",
+          "schedule": "*/10 * * * *"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "PLAYTIME_CURRENCY_OVERRIDE",
+          "description": "Override the base currency reward for playtime. Count value determines the reward amount."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "currencyReward",
+          "fieldType": "number",
+          "description": "Currency given each time the cronjob runs"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "rewardMessage",
+          "fieldType": "string",
+          "description": "Message broadcast for each player. Use {name}, {currency}, and {role} placeholders."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Leaderboards",
+      "category": "events",
+      "date": "2026-01-19T02:25:01-06:00",
+      "title": "New Module: Leaderboards",
+      "description": "Updated to version latest. Added 1 scheduled task: `Update Leaderboards`. New configuration option: `discordChannelId`.",
+      "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Update Leaderboards",
+          "schedule": "55 * * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "Multi_VIP_Packs",
       "category": "community-management",
       "date": "2025-12-21T08:37:17+01:00",
@@ -12124,6 +12418,312 @@
     }
   ],
   "byModule": {
+    "Hytale - Home": [
+      {
+        "moduleName": "Hytale - Home",
+        "category": "community-management",
+        "date": "2026-01-19T02:34:19-06:00",
+        "title": "New Module: Hytale - Home",
+        "description": "Updated to version latest. Added 1 command: `home`.",
+        "commitHash": "e90178aaa4af721a459c733f21b14affef8d6137",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "home",
+            "description": "No help text available"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Generic Game - Restarts": [
+      {
+        "moduleName": "Generic Game - Restarts",
+        "category": "administration",
+        "date": "2026-01-19T02:25:01-06:00",
+        "title": "New Module: Generic Game - Restarts",
+        "description": "Updated to version latest. Added 4 scheduled tasks: `10 minute`, `5 minute`, `Restart`, `1 minute`. New configuration options: `userDiscordChannel`, `shutdownCommand`, `saveCommand`, `supportsInGameMessages`, `message10Minute`, `message5Minute`, `message1Minute`, `messageRestart`.",
+        "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "10 minute",
+            "schedule": "* */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "5 minute",
+            "schedule": "05 */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Restart",
+            "schedule": "10 */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "1 minute",
+            "schedule": "09 */3 * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "userDiscordChannel",
+            "fieldType": "string",
+            "description": "Discord Channel"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "shutdownCommand",
+            "fieldType": "string",
+            "description": "Command that shuts down your server"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "saveCommand",
+            "fieldType": "string",
+            "description": "save command - if supported"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "supportsInGameMessages",
+            "fieldType": "boolean",
+            "description": "Enable in-game messages for restart warnings"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message10Minute",
+            "fieldType": "string",
+            "description": "In-game message for 10 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message5Minute",
+            "fieldType": "string",
+            "description": "In-game message for 5 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message1Minute",
+            "fieldType": "string",
+            "description": "In-game message for 1 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "messageRestart",
+            "fieldType": "string",
+            "description": "In-game message when restart is initiated"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Hytale - Player Name Colors": [
+      {
+        "moduleName": "Hytale - Player Name Colors",
+        "category": "community-management",
+        "date": "2026-01-19T02:25:01-06:00",
+        "title": "New Module: Hytale - Player Name Colors",
+        "description": "Updated to version latest. Added 1 command: `Set Name Color`. Added 2 hooks: `Load Player Name Color` (player-connected), `Connected Color` (player-connected). New permission: `COLOR`.",
+        "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "Set Name Color",
+            "description": "Set your chat name color. Use a color name (gold, red, blue, green, purple, orange, white, cyan, magenta, yellow, pink, lime, aqua, gray) or a hex code (e.g., ff0000)"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Load Player Name Color",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Connected Color",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "COLOR",
+            "description": "Allows player to set the color of their name"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Hytale - Visit Players": [
+      {
+        "moduleName": "Hytale - Visit Players",
+        "category": "community-management",
+        "date": "2026-01-19T02:25:01-06:00",
+        "title": "New Module: Hytale - Visit Players",
+        "description": "Updated to version latest. Added 4 commands: `visit`, `granted`, `revoke`, `visitlist`. New permissions: `TELEPORTS_USE`, `TELEPORTS_TPHERE`. New configuration option: `timeout`.",
+        "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "visit",
+            "description": "Request to visit another player or teleport to them if permission is granted."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "granted",
+            "description": "Grant permission for another player to visit you."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "revoke",
+            "description": "Revoke another player's permission to visit you."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "visitlist",
+            "description": "List all pending visit requests and granted visit permissions."
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "TELEPORTS_USE",
+            "description": "Allows the player to use the teleports module."
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "TELEPORTS_TPHERE",
+            "description": "Allows the player to teleport other players to their location."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "timeout",
+            "fieldType": "number",
+            "description": "The time one has to wait before teleporting again (in milliseconds)."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Hytale - Playtime Earner": [
+      {
+        "moduleName": "Hytale - Playtime Earner",
+        "category": "economy",
+        "date": "2026-01-19T02:25:01-06:00",
+        "title": "New Module: Hytale - Playtime Earner",
+        "description": "Updated to version latest. Added 1 scheduled task: `rewardOnlinePlaytime`. New permission: `PLAYTIME_CURRENCY_OVERRIDE`. New configuration options: `currencyReward`, `rewardMessage`.",
+        "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "rewardOnlinePlaytime",
+            "schedule": "*/10 * * * *"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "PLAYTIME_CURRENCY_OVERRIDE",
+            "description": "Override the base currency reward for playtime. Count value determines the reward amount."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "currencyReward",
+            "fieldType": "number",
+            "description": "Currency given each time the cronjob runs"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "rewardMessage",
+            "fieldType": "string",
+            "description": "Message broadcast for each player. Use {name}, {currency}, and {role} placeholders."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Leaderboards": [
+      {
+        "moduleName": "Leaderboards",
+        "category": "events",
+        "date": "2026-01-19T02:25:01-06:00",
+        "title": "New Module: Leaderboards",
+        "description": "Updated to version latest. Added 1 scheduled task: `Update Leaderboards`. New configuration option: `discordChannelId`.",
+        "commitHash": "c84779b1ae6eda06dffb10e7bc7442e3e88e5172",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Update Leaderboards",
+            "schedule": "55 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "Multi_VIP_Packs": [
       {
         "moduleName": "Multi_VIP_Packs",
@@ -24449,5 +25049,5 @@
       }
     ]
   },
-  "generatedAt": "2026-01-02T16:54:36.953Z"
+  "generatedAt": "2026-01-19T09:07:26.051Z"
 }

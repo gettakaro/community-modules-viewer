@@ -19,7 +19,6 @@
             {
               "name": "playerName",
               "type": "string",
-              "defaultValue": null,
               "helpText": "The name of the player you want to visit.",
               "position": 0
             }
@@ -35,7 +34,6 @@
             {
               "name": "playerName",
               "type": "string",
-              "defaultValue": null,
               "helpText": "The name of the player to grant visit permission to.",
               "position": 0
             }
@@ -51,7 +49,6 @@
             {
               "name": "playerName",
               "type": "string",
-              "defaultValue": null,
               "helpText": "The name of the player to revoke visit permission from.",
               "position": 0
             }
