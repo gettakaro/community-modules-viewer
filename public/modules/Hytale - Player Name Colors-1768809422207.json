@@ -1,0 +1,58 @@
+{
+  "name": "Hytale - Player Name Colors",
+  "author": "Unknown",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Allows players to customize their chat name colors using the /color command. Colors persist across sessions and are automatically applied when players connect.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n  const color = data.arguments.color;\n\n  // Validate color\n  const validColors = ['gold', 'red', 'blue', 'green', 'purple', 'orange', 'white', 'cyan', 'magenta', 'yellow', 'pink', 'lime',\n    'aqua', 'gray'];\n  const isHex = /^[0-9a-fA-F]{6}$/.test(color);\n\n  if (!validColors.includes(color) && !isHex) {\n    await takaro.gameserver.gameServerControllerSendMessage(data.gameServerId, {\n      message: `Invalid color! Use: gold, red, blue, green, purple, orange, white, cyan, magenta, yellow, pink, lime, aqua, gray,\n  or a hex code like ff0000`\n    });\n    return;\n  }\n\n  // Store as variable\n  const existingVar = await takaro.variable.variableControllerSearch({\n    filters: {\n      key: ['nameColor'],\n      gameServerId: [data.gameServerId],\n      playerId: [data.player.id],\n      moduleId: [data.module.moduleId]\n    }\n  });\n\n  if (existingVar.data.data.length > 0) {\n    await takaro.variable.variableControllerUpdate(existingVar.data.data[0].id, {\n      value: color\n    });\n  } else {\n    await takaro.variable.variableControllerCreate({\n      key: 'nameColor',\n      value: color,\n      gameServerId: data.gameServerId,\n      playerId: data.player.id,\n      moduleId: data.module.moduleId\n    });\n  }\n\n  // Execute console command to update mod's cache\n  await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n    command: `setcolor ${data.player.name} ${color}`\n  });\n\n  await takaro.gameserver.gameServerControllerSendMessage(data.gameServerId, {\n    message: `${data.player.name}'s chat name color set to: ${color}`\n  });\n}\n\nawait main();",
+          "name": "Set Name Color",
+          "description": "use !color gold, red, blue, green, purple, orange, white, cyan, magenta, yellow, pink, lime, aqua, gray,\n  or a hex code like ff0000",
+          "trigger": "color",
+          "helpText": "Set your chat name color. Use a color name (gold, red, blue, green, purple, orange, white, cyan, magenta, yellow, pink, lime, aqua, gray) or a hex code (e.g., ff0000)",
+          "arguments": [
+            {
+              "name": "color",
+              "type": "string",
+              "defaultValue": null,
+              "helpText": "Color name (gold, red, blue) or hex code (ff0000)",
+              "position": 0
+            }
+          ]
+        }
+      ],
+      "hooks": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n  // Look up stored color\n  const variableResult = await takaro.variable.variableControllerSearch({\n    filters: {\n      key: ['nameColor'],\n      gameServerId: [data.gameServerId],\n      playerId: [data.player.id],\n      moduleId: [data.module.moduleId]\n    }\n  });\n\n  if (variableResult.data.data.length > 0) {\n    const color = variableResult.data.data[0].value;\n\n    // Send action to game mod\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n      command: `takaroAction setPlayerNameColor ${JSON.stringify({ uuid: data.player.gameId, color: color })}`\n    });\n  }\n}\n\nawait main();",
+          "name": "Load Player Name Color",
+          "description": "Loads and applies the player's saved name color when they connect to the server",
+          "eventType": "player-connected",
+          "regex": ".*"
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    // Look up their stored color\n    const variableResult = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['nameColor'],\n            gameServerId: [data.gameServerId],\n            playerId: [data.player.id],\n            moduleId: [data.module.moduleId]\n        }\n    });\n\n    if (variableResult.data.data.length > 0) {\n        const color = variableResult.data.data[0].value;\n\n        // Send to mod to cache it\n        await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n            command: `setcolor ${data.player.name} ${color}`\n        });\n\n        console.log(`Loaded name color for ${data.player.name}: ${color}`);\n    }\n}\n\nawait main();",
+          "name": "Connected Color",
+          "description": "as;odlgikfj",
+          "eventType": "player-connected",
+          "regex": ""
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Allows player to set the color of their name",
+          "permission": "COLOR",
+          "friendlyName": "Color"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.4.10"
+}

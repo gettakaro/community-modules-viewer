@@ -1,9 +1,7 @@
 {
   "name": "Leaderboards",
   "author": "Unknown",
-  "supportedGames": [
-    "all"
-  ],
+  "supportedGames": ["all"],
   "versions": [
     {
       "tag": "latest",
