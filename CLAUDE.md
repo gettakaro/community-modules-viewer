@@ -1,3 +1,9 @@
+## Module Naming Conventions
+
+- Module files and titles must NEVER contain spaces or special characters
+- Use hyphens or camelCase for multi-word names (e.g., `my-module` or `myModule`)
+- This applies to both the filename and the `name` field in module JSON files
+
 ## Development Guidelines
 
 - NEVER run the app on the host directly. Always use the docker compose environment to start/stop/run the app
