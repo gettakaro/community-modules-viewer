@@ -1,7 +1,7 @@
 {
-  "name": "Hytale - Player Name Colors",
-  "author": "Unknown",
-  "supportedGames": ["all"],
+  "name": "HytalePlayerNameColors",
+  "author": "Mad",
+  "supportedGames": ["hytale"],
   "versions": [
     {
       "tag": "latest",
