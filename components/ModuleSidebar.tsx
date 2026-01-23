@@ -10,6 +10,7 @@ import {
   getUniqueAuthors,
   getUniqueSupportedGames,
   formatAuthorName,
+  moduleSupportsAllGames,
 } from '@/utils/moduleUtils';
 
 export interface ModuleSidebarProps {
@@ -212,6 +213,8 @@ export function ModuleSidebar({
     // Filter by supported game
     if (gameFilter !== 'all') {
       filtered = filtered.filter((module) => {
+        // Universal modules (supportedGames: ["all"]) match any game filter
+        if (moduleSupportsAllGames(module)) return true;
         const game = getModuleSupportedGame(module);
         return game === gameFilter;
       });
@@ -624,9 +627,11 @@ export function ModuleSidebar({
                     All
                   </button>
                   {stats.games.map((game) => {
-                    const count = modules.filter(
-                      (m) => getModuleSupportedGame(m) === game,
-                    ).length;
+                    const count = modules.filter((m) => {
+                      // Include universal modules in all game counts
+                      if (moduleSupportsAllGames(m)) return true;
+                      return getModuleSupportedGame(m) === game;
+                    }).length;
                     return (
                       <button
                         key={game}
