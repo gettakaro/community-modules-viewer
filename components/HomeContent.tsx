@@ -43,11 +43,6 @@ export function HomeContent({ modules, changelogs }: HomeContentProps) {
             )}
           </div>
 
-          {/* Global Changelog Section - Prominently positioned at top */}
-          {changelogs && changelogs.global.length > 0 && (
-            <GlobalChangelog changes={changelogs.global} />
-          )}
-
           {modules.length > 0 ? (
             <div className="space-y-8">
               {/* Categories Overview */}
@@ -248,6 +243,11 @@ export function HomeContent({ modules, changelogs }: HomeContentProps) {
                 There are no modules available to display.
               </p>
             </div>
+          )}
+
+          {/* Global Changelog Section */}
+          {changelogs && changelogs.global.length > 0 && (
+            <GlobalChangelog changes={changelogs.global} />
           )}
         </div>
       </main>
