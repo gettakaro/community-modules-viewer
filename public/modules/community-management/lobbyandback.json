@@ -1,0 +1,49 @@
+{
+  "name": "lobbyandback",
+  "author": "Unknown",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Adds /back (single-use: deletes saved location after teleport) and /lobby (teleport to fixed 0,40,0). /lobby saves your previous position so /back works once.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"additionalProperties\":false,\"properties\":{}}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "// commands/lobby.js\nimport { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n  const { pog, gameServerId, module: mod } = data;\n\n  if (!checkPermission(pog, 'LOBBY_TELEPORT_USE')) {\n    throw new TakaroUserError('You do not have permission to use lobby teleport.');\n  }\n\n  // Fixed coordinates (no config/userconfig)\n  const X = -1058, Y = 38, Z = 308;\n\n  // Save current spot for /back (single-use)\n  const previousLocation = { x: pog.positionX, y: pog.positionY, z: pog.positionZ, timestamp: new Date().toISOString() };\n  const existing = await takaro.variable.variableControllerSearch({\n    filters: { key: ['back_location'], gameServerId: [gameServerId], playerId: [pog.playerId], moduleId: [mod.moduleId] },\n  });\n  if (existing.data.data.length) {\n    await takaro.variable.variableControllerUpdate(existing.data.data[0].id, { value: JSON.stringify(previousLocation) });\n  } else {\n    await takaro.variable.variableControllerCreate({\n      key: 'back_location',\n      value: JSON.stringify(previousLocation),\n      gameServerId,\n      moduleId: mod.moduleId,\n      playerId: pog.playerId,\n    });\n  }\n\n  // Teleport to fixed lobby coords\n  await takaro.gameserver.gameServerControllerTeleportPlayer(gameServerId, pog.playerId, { x: X, y: Y, z: Z });\n  await data.player.pm(`Teleported to the lobby (X: ${X}, Y: ${Y}, Z: ${Z}). Use /back to return once.`);\n}\n\nawait main();",
+          "name": "lobby",
+          "description": "Teleport to the fixed lobby coordinates (0,40,0) and save your current spot for a single-use /back.",
+          "trigger": "lobby",
+          "helpText": "Teleports you to (0,40,0) and saves your current spot for a single-use /back.",
+          "arguments": []
+        },
+        {
+          "function": "// commands/back.js\nimport { takaro, data, checkPermission, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n  const { pog, gameServerId, module: mod } = data;\n\n  if (!checkPermission(pog, 'BACK_TELEPORT_USE')) {\n    throw new TakaroUserError('You do not have permission to use back teleport.');\n  }\n\n  // Find saved back location\n  const search = await takaro.variable.variableControllerSearch({\n    filters: { key: ['back_location'], gameServerId: [gameServerId], playerId: [pog.playerId], moduleId: [mod.moduleId] },\n  });\n\n  if (search.data.data.length === 0) {\n    throw new TakaroUserError('No previous location found. Use /lobby first or another command that saves one.');\n  }\n\n  const v = search.data.data[0];\n  let backLocation;\n  try {\n    backLocation = JSON.parse(v.value);\n  } catch (_) {\n    throw new TakaroUserError('Saved back location is unreadable. Try saving again (e.g., use /lobby).');\n  }\n\n  // Teleport back\n  await takaro.gameserver.gameServerControllerTeleportPlayer(gameServerId, pog.playerId, {\n    x: backLocation.x, y: backLocation.y, z: backLocation.z,\n  });\n\n  // SINGLE-USE: delete the saved location after successful teleport\n  await takaro.variable.variableControllerDelete(v.id);\n\n  await data.player.pm('Teleported back to your previous location! (Single-use: location cleared.)');\n}\n\nawait main();",
+          "name": "back",
+          "description": "Teleport back to your previously saved location (single-use).",
+          "trigger": "back",
+          "helpText": "Teleports you back once to your last saved spot. After use, the saved spot is deleted.",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "BACK_TELEPORT_USE",
+          "permission": "BACK_TELEPORT_USE",
+          "friendlyName": "BACK_TELEPORT_USE"
+        },
+        {
+          "canHaveCount": false,
+          "description": "LOBBY_TELEPORT_USE",
+          "permission": "LOBBY_TELEPORT_USE",
+          "friendlyName": "LOBBY_TELEPORT_USE"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.4.10"
+}
