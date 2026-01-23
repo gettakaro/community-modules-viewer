@@ -1,0 +1,33 @@
+{
+  "name": "Hytale - Playtime Earner",
+  "author": "Unknown",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Rewards players with currency for being online.\n\n## How it Works\n\n* A cronjob runs periodically (default: every 10 minutes)\n* All online players receive currency silently each time it runs\n* Simple and straightforward\n\n## Configuration\n\n* `currencyReward`: Amount of currency given each time the cronjob runs (default: 10)\n\n## System Config\n\n* Cronjob frequency: Configure how often the cronjob runs (default: */10 * * * * = every 10 minutes)\n\n## Permissions\n\n* `PLAYTIME_CURRENCY_OVERRIDE`: Override currency amount for specific players/roles (uses count value)\n\n## Example\n\n* Cronjob runs every 10 minutes\n* currencyReward = 17\n* Result: Players get 17 currency every 10 minutes = 102 currency per hour",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"currencyReward\":{\"title\":\"Currency Reward\",\"description\":\"Currency given each time the cronjob runs\",\"default\":10,\"type\":\"number\"},\"rewardMessage\":{\"title\":\"Reward Message\",\"description\":\"Message broadcast for each player. Use {name}, {currency}, and {role} placeholders.\",\"default\":\"{name} received {currency} for being online!\",\"type\":\"string\"}}}",
+      "uiSchema": "{}",
+      "commands": [],
+      "hooks": [],
+      "cronJobs": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, module: { userConfig } } = data;\n    const { currencyReward, rewardMessage } = userConfig;\n\n    const [{ data: { data: roles } }, { data: { data: players, meta } }, currencyNameSetting] = await Promise.all([\n        takaro.role.roleControllerSearch({ extend: ['permissions'] }),\n        takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n            filters: { gameServerId: [gameServerId], online: [true] },\n            extend: rewardMessage ? ['player'] : []\n        }),\n        rewardMessage ? takaro.settings.settingsControllerGetOne('currencyName', gameServerId) : null\n    ]);\n\n    if (!meta.total) return;\n\n    const PERM = 'PLAYTIME_CURRENCY_OVERRIDE';\n    const roleAmounts = {};\n    const roleNames = {};\n    let maxReward = currencyReward;\n    \n    for (const { id, name, permissions } of roles) {\n        if (permissions?.length) {\n            for (const p of permissions) {\n                if (p.permission?.permission === PERM && p.count > 0) {\n                    roleAmounts[id] = p.count;\n                    roleNames[id] = name;\n                    if (p.count > maxReward) maxReward = p.count;\n                    break;\n                }\n            }\n        }\n    }\n\n    const currencyName = currencyNameSetting?.data?.data?.value || \"coins\";\n    const rolePrefix = \"having role \";\n\n    await Promise.all(players.map(async (pog) => {\n        let reward = currencyReward;\n        let roleName = \"being online\";\n        \n        const playerRoles = pog.roles;\n        if (playerRoles?.length) {\n            for (let i = 0, len = playerRoles.length; i < len; i++) {\n                const roleId = playerRoles[i].roleId;\n                const amount = roleAmounts[roleId];\n                if (amount > reward) {\n                    reward = amount;\n                    roleName = rolePrefix + roleNames[roleId];\n                    if (reward === maxReward) break;\n                }\n            }\n        }\n\n        if (reward <= 0) return;\n\n        if (rewardMessage) {\n            await Promise.all([\n                takaro.playerOnGameserver.playerOnGameServerControllerAddCurrency(gameServerId, pog.playerId, { currency: reward }),\n                takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n                    message: rewardMessage\n                        .replace('{name}', pog.player?.name || 'Player')\n                        .replace('{currency}', `${reward} ${currencyName}`)\n                        .replace('{role}', roleName)\n                })\n            ]);\n        } else {\n            await takaro.playerOnGameserver.playerOnGameServerControllerAddCurrency(gameServerId, pog.playerId, { currency: reward });\n        }\n    }));\n}\n\nawait main();",
+          "name": "rewardOnlinePlaytime",
+          "description": "Rewards online players with currency based on playtime",
+          "temporalValue": "*/10 * * * *"
+        }
+      ],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": true,
+          "description": "Override the base currency reward for playtime. Count value determines the reward amount.",
+          "permission": "PLAYTIME_CURRENCY_OVERRIDE",
+          "friendlyName": "Playtime Currency Override"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.4.10"
+}
