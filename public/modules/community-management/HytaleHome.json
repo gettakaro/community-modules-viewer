@@ -1,7 +1,7 @@
 {
-  "name": "Hytale - Home",
-  "author": "Unknown",
-  "supportedGames": ["all"],
+  "name": "HytaleHome",
+  "author": "Mad",
+  "supportedGames": ["hytale"],
   "versions": [
     {
       "tag": "latest",
