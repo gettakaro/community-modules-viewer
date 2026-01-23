@@ -1,6 +1,47 @@
 {
   "global": [
     {
+      "moduleName": "lobbyandback",
+      "category": "community-management",
+      "date": "2026-01-23T09:37:26+01:00",
+      "title": "New Module: lobbyandback",
+      "description": "Updated to version latest. Added 2 commands: `lobby`, `back`. New permissions: `BACK_TELEPORT_USE`, `LOBBY_TELEPORT_USE`.",
+      "commitHash": "b27b88a16be9b7332947c59906b255322b968849",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "lobby",
+          "description": "Teleports you to (0,40,0) and saves your current spot for a single-use /back."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "back",
+          "description": "Teleports you back once to your last saved spot. After use, the saved spot is deleted."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "BACK_TELEPORT_USE",
+          "description": "BACK_TELEPORT_USE"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "LOBBY_TELEPORT_USE",
+          "description": "LOBBY_TELEPORT_USE"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "Multi_VIP_Packs",
       "category": "community-management",
       "date": "2025-12-21T08:37:17+01:00",
@@ -12124,6 +12165,49 @@
     }
   ],
   "byModule": {
+    "lobbyandback": [
+      {
+        "moduleName": "lobbyandback",
+        "category": "community-management",
+        "date": "2026-01-23T09:37:26+01:00",
+        "title": "New Module: lobbyandback",
+        "description": "Updated to version latest. Added 2 commands: `lobby`, `back`. New permissions: `BACK_TELEPORT_USE`, `LOBBY_TELEPORT_USE`.",
+        "commitHash": "b27b88a16be9b7332947c59906b255322b968849",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "lobby",
+            "description": "Teleports you to (0,40,0) and saves your current spot for a single-use /back."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "back",
+            "description": "Teleports you back once to your last saved spot. After use, the saved spot is deleted."
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "BACK_TELEPORT_USE",
+            "description": "BACK_TELEPORT_USE"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "LOBBY_TELEPORT_USE",
+            "description": "LOBBY_TELEPORT_USE"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "Multi_VIP_Packs": [
       {
         "moduleName": "Multi_VIP_Packs",
@@ -24449,5 +24533,5 @@
       }
     ]
   },
-  "generatedAt": "2026-01-02T16:54:36.953Z"
+  "generatedAt": "2026-01-23T09:01:04.322Z"
 }
