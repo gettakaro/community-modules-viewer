@@ -13,6 +13,7 @@ const GAME_NAME_MAP: Record<string, string> = {
   hytale: 'Hytale',
   rust: 'Rust',
   minecraft: 'Minecraft',
+  other: 'All',
 };
 
 /**
