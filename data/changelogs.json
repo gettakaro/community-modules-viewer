@@ -118,7 +118,8 @@
           "name": "latest",
           "previousVersion": "initial"
         }
-      ]
+      ],
+      "author": "Mad"
     },
     {
       "moduleName": "Hytale - Player Name Colors",
@@ -159,7 +160,8 @@
           "name": "latest",
           "previousVersion": "initial"
         }
-      ]
+      ],
+      "author": "Mad"
     },
     {
       "moduleName": "Hytale - Visit Players",
@@ -219,7 +221,8 @@
           "name": "latest",
           "previousVersion": "initial"
         }
-      ]
+      ],
+      "author": "Mad"
     },
     {
       "moduleName": "Hytale - Playtime Earner",
@@ -262,7 +265,8 @@
           "name": "latest",
           "previousVersion": "initial"
         }
-      ]
+      ],
+      "author": "Mad"
     },
     {
       "moduleName": "Leaderboards",
