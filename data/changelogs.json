@@ -1,6 +1,76 @@
 {
   "global": [
     {
+      "moduleName": "Theft Investigation",
+      "category": "administration",
+      "date": "2026-01-23T09:59:52+01:00",
+      "title": "New Module: Theft Investigation",
+      "description": "Updated to version latest. Added 1 command: `whostole`. New permission: `THEFT_INVESTIGATE`.",
+      "commitHash": "41fb3c9cb8f58ee52874c6e49652313c09849758",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "whostole",
+          "description": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "THEFT_INVESTIGATE",
+          "description": "Allows using the /whostole command to investigate item theft"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "lobbyandback",
+      "category": "community-management",
+      "date": "2026-01-23T09:37:26+01:00",
+      "title": "New Module: lobbyandback",
+      "description": "Updated to version latest. Added 2 commands: `lobby`, `back`. New permissions: `BACK_TELEPORT_USE`, `LOBBY_TELEPORT_USE`.",
+      "commitHash": "b27b88a16be9b7332947c59906b255322b968849",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "lobby",
+          "description": "Teleports you to (0,40,0) and saves your current spot for a single-use /back."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "back",
+          "description": "Teleports you back once to your last saved spot. After use, the saved spot is deleted."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "BACK_TELEPORT_USE",
+          "description": "BACK_TELEPORT_USE"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "LOBBY_TELEPORT_USE",
+          "description": "LOBBY_TELEPORT_USE"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "lobbyandback",
       "category": "community-management",
       "date": "2026-01-23T09:37:26+01:00",
@@ -12198,6 +12268,37 @@
             "action": "added",
             "name": "LOBBY_TELEPORT_USE",
             "description": "LOBBY_TELEPORT_USE"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Theft Investigation": [
+      {
+        "moduleName": "Theft Investigation",
+        "category": "administration",
+        "date": "2026-01-23T09:59:52+01:00",
+        "title": "New Module: Theft Investigation",
+        "description": "Updated to version latest. Added 1 command: `whostole`. New permission: `THEFT_INVESTIGATE`.",
+        "commitHash": "41fb3c9cb8f58ee52874c6e49652313c09849758",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "whostole",
+            "description": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "THEFT_INVESTIGATE",
+            "description": "Allows using the /whostole command to investigate item theft"
           },
           {
             "type": "version",
@@ -24533,5 +24634,5 @@
       }
     ]
   },
-  "generatedAt": "2026-01-23T09:01:04.322Z"
+  "generatedAt": "2026-01-23T10:28:54.143Z"
 }
