@@ -6,9 +6,13 @@ import { ModuleWithMeta } from '@/lib/types';
  */
 const GAME_NAME_MAP: Record<string, string> = {
   '7dtd': '7 Days to Die',
+  '7d2d': '7 Days to Die',
   '7 days to die': '7 Days to Die',
   '7days': '7 Days to Die',
+  sevendaystodie: '7 Days to Die',
   hytale: 'Hytale',
+  rust: 'Rust',
+  minecraft: 'Minecraft',
 };
 
 /**

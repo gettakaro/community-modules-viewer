@@ -1,7 +1,7 @@
 {
   "name": "dynamicCommands",
   "author": "Limon",
-  "supportedGames": ["7dtd"],
+  "supportedGames": ["7 Days to Die"],
   "versions": [
     {
       "tag": "latest",
