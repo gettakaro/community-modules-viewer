@@ -90,23 +90,44 @@ global.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 // Sort each module's changes by date (newest first) and deduplicate
 Object.keys(byModule).forEach((moduleName) => {
-  // Sort by date
+  // Sort by date (newest first)
   byModule[moduleName].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   // Deduplicate by commit hash (keep first occurrence)
-  const seen = new Set();
+  const seenCommits = new Set();
   byModule[moduleName] = byModule[moduleName].filter((change) => {
-    if (seen.has(change.commitHash)) {
+    if (seenCommits.has(change.commitHash)) {
       return false;
     }
-    seen.add(change.commitHash);
+    seenCommits.add(change.commitHash);
+    return true;
+  });
+
+  // Also deduplicate by title (keep most recent, which is first after sorting)
+  const seenTitles = new Set();
+  byModule[moduleName] = byModule[moduleName].filter((change) => {
+    if (seenTitles.has(change.title)) {
+      return false;
+    }
+    seenTitles.add(change.title);
     return true;
   });
 });
 
+// Deduplicate global array by (moduleName + title) - keep most recent
+const seenGlobal = new Set();
+const deduplicatedGlobal = global.filter((change) => {
+  const key = `${change.moduleName}|${change.title}`;
+  if (seenGlobal.has(key)) {
+    return false;
+  }
+  seenGlobal.add(key);
+  return true;
+});
+
 // Create the changelogs object
 const changelogs = {
-  global,
+  global: deduplicatedGlobal,
   byModule,
   generatedAt: new Date().toISOString(),
 };
