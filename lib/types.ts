@@ -17,8 +17,10 @@ export interface Module {
   takaroVersion: string;
   /** Module author (optional) */
   author?: string;
-  /** Supported games (optional) */
+  /** Supported game (legacy, optional) */
   supportgame?: string;
+  /** Supported games array (optional) */
+  supportedGames?: string[];
 }
 
 /**
@@ -296,6 +298,7 @@ export const ModuleSchema = z.object({
   takaroVersion: z.string().min(1, 'Takaro version cannot be empty'),
   author: z.string().optional(),
   supportgame: z.string().optional(),
+  supportedGames: z.array(z.string()).optional(),
 });
 
 /**
