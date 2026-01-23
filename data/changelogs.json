@@ -1,6 +1,516 @@
 {
   "global": [
     {
+      "moduleName": "DiscordLinks",
+      "category": "administration",
+      "date": "2026-01-23T22:40:02+01:00",
+      "title": "New Module: DiscordLinks",
+      "description": "Updated to version latest. Added 1 scheduled task: `Daily Link Update`. Added 1 function: `postDailyLinks`. New configuration options: `discordChannelId`, `messageColor`, `decorativeHeader`, `links`.",
+      "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Daily Link Update",
+          "schedule": "0 12 * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "postDailyLinks"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where links will be posted"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "messageColor",
+          "fieldType": "number",
+          "description": "Decimal color code for the embed (0-16777215)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "decorativeHeader",
+          "fieldType": "string",
+          "description": "Optional decorative text at the top of the message"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "links",
+          "fieldType": "array",
+          "description": "List of links to display"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "GenericGameRestarts",
+      "category": "administration",
+      "date": "2026-01-23T22:40:02+01:00",
+      "title": "New Module: GenericGameRestarts",
+      "description": "Updated to version latest. Added 4 scheduled tasks: `10 minute`, `5 minute`, `Restart`, `1 minute`. New configuration options: `userDiscordChannel`, `shutdownCommand`, `saveCommand`, `supportsInGameMessages`, `message10Minute`, `message5Minute`, `message1Minute`, `messageRestart`.",
+      "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "10 minute",
+          "schedule": "* */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "5 minute",
+          "schedule": "05 */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Restart",
+          "schedule": "10 */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "1 minute",
+          "schedule": "09 */3 * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "userDiscordChannel",
+          "fieldType": "string",
+          "description": "Discord Channel"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "shutdownCommand",
+          "fieldType": "string",
+          "description": "Command that shuts down your server"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "saveCommand",
+          "fieldType": "string",
+          "description": "save command - if supported"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "supportsInGameMessages",
+          "fieldType": "boolean",
+          "description": "Enable in-game messages for restart warnings"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message10Minute",
+          "fieldType": "string",
+          "description": "In-game message for 10 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message5Minute",
+          "fieldType": "string",
+          "description": "In-game message for 5 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message1Minute",
+          "fieldType": "string",
+          "description": "In-game message for 1 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "messageRestart",
+          "fieldType": "string",
+          "description": "In-game message when restart is initiated"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "StaffCommands",
+      "category": "administration",
+      "date": "2026-01-23T22:40:02+01:00",
+      "title": "New Module: StaffCommands",
+      "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
+      "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "mute",
+          "description": "[02FEDMute (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "zomb",
+          "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "buff - 1",
+          "description": "[02FEDC]buff (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 3",
+          "description": "Targeted Horde round 3"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 1",
+          "description": "[02FEDC]Send a horde in 4 intervals in 30 seconds at a player. Type /th (name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "kickall",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "avisit",
+          "description": "[02FEDC]avisit (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 4",
+          "description": "[02FEDC]Fourth round of Targeted Horde[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "killall",
+          "description": "[02FEDC]Kill all of the Zeds on the server.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "pr",
+          "description": "[02FEDC]Reset the POI you are standing in[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "visitmap",
+          "description": "[02FEDC]Open the map for Takaro and CPM.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "setwaypointpublic",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "aaaaaaa",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "rpd",
+          "description": "[02FEDC]rpd (player name) Resets a player's data. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "ban",
+          "description": "[02FEDC]ban (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "rvr",
+          "description": "[02FEDC]rvr (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "arrest",
+          "description": "[02FEDC]arrest (player name) (reason for arrest)[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "ocn",
+          "description": "[02FEDC] Change a player's name in chat. Type /ocn (Name) (New Name). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "setjail",
+          "description": "[02FEDC]Set an 11x11 area to put hail birds in.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "rdd",
+          "description": "[02FEDC]rdd (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "buff - 2",
+          "description": "Ends players buff"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "pull",
+          "description": "[02FEDC]pull (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "reset1",
+          "description": "[02FEDC]First position to reset a chunk. Use /reset2 in the opposite corner to reset the desired area.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "release",
+          "description": "[02FEDC]Release (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "reset2",
+          "description": "[02FEDC]Last position to reset a chunk.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "kick",
+          "description": "[02FEDC]kick (player name) (reason in quotes). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "th - 2",
+          "description": "[02FEDC]Second round of a targeted horde[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "unmute",
+          "description": "[02FEDC]unmute (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "shutdownba",
+          "description": "No help text available"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "cm  & dm",
+          "description": "[02FEDC]Creative mode and debug menu. Reserved for admins[-]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "wi",
+          "description": "Wipe a player's belt, bag, equipment, all"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "kill",
+          "description": "[02FEDC]kill (players name) You must run the command a second time to confirm the kill. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "KILL_PLAYER",
+          "description": "Kill a player"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "CM_DM",
+          "description": "Creative mode and debug menu"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "MUTE",
+          "description": "Mute unruly players in game"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "ZOMB_FREE_SELF",
+          "description": "Zombie free command for admins to run the command for their personal house"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "LIST_LANDCLAIMS",
+          "description": "Lists land claims near by"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "REMOVE_LANDCLAIMS",
+          "description": "remove nearby land claims"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RESET_PLAYER",
+          "description": "Resets a player's corrupted data"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RDD",
+          "description": "Resets player drone data to place a new one"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "UNMUTE",
+          "description": "Unmute a player"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "VISIT_MAP",
+          "description": "Visit the map to unlock for Takaro and CPM"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RELEASE",
+          "description": "Release a player from jail"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "SET_JAIL",
+          "description": "Set the location of your jail "
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "BUFF",
+          "description": "Buff another player"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RESET_CHUNKS",
+          "description": "Reset Chunks Permission"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "WIPE_INVENTORY",
+          "description": "Wipe Inventory"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "STAFF_COMMANDS",
+          "description": "Commands for staff to use without using Currency"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RESET_PREFAB",
+          "description": "Reset prefab permission"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "userDiscordChannel",
+          "fieldType": "string",
+          "description": "Sends to discord"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.2",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "TheftInvestigation",
+      "category": "administration",
+      "date": "2026-01-23T22:40:02+01:00",
+      "title": "New Module: TheftInvestigation",
+      "description": "Updated to version latest. Added 1 command: `whostole`. New permission: `THEFT_INVESTIGATE`.",
+      "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "whostole",
+          "description": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "THEFT_INVESTIGATE",
+          "description": "Allows using the /whostole command to investigate item theft"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "PvPBet",
+      "category": "pvp-bet.json",
+      "date": "2026-01-23T22:40:02+01:00",
+      "title": "New Module: PvPBet",
+      "description": "Added PvPBet to the repository",
+      "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+      "isNew": false,
+      "details": []
+    },
+    {
       "moduleName": "HytaleHome",
       "category": "community-management",
       "date": "2026-01-23T19:27:41+01:00",
@@ -860,26 +1370,6 @@
           "previousVersion": "initial"
         }
       ]
-    },
-    {
-      "moduleName": "DiscordLinks",
-      "category": "administration",
-      "date": "2025-12-15T12:20:06+01:00",
-      "title": "New Module: DiscordLinks",
-      "description": "Added DiscordLinks to the repository",
-      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
-      "isNew": false,
-      "details": []
-    },
-    {
-      "moduleName": "StaffCommands",
-      "category": "administration",
-      "date": "2025-12-15T12:20:06+01:00",
-      "title": "New Module: StaffCommands",
-      "description": "Added StaffCommands to the repository",
-      "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
-      "isNew": false,
-      "details": []
     },
     {
       "moduleName": "WipePlayerCharacter",
@@ -9385,6 +9875,514 @@
     }
   ],
   "byModule": {
+    "DiscordLinks": [
+      {
+        "moduleName": "DiscordLinks",
+        "category": "administration",
+        "date": "2026-01-23T22:40:02+01:00",
+        "title": "New Module: DiscordLinks",
+        "description": "Updated to version latest. Added 1 scheduled task: `Daily Link Update`. Added 1 function: `postDailyLinks`. New configuration options: `discordChannelId`, `messageColor`, `decorativeHeader`, `links`.",
+        "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Daily Link Update",
+            "schedule": "0 12 * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "postDailyLinks"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where links will be posted"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "messageColor",
+            "fieldType": "number",
+            "description": "Decimal color code for the embed (0-16777215)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "decorativeHeader",
+            "fieldType": "string",
+            "description": "Optional decorative text at the top of the message"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "links",
+            "fieldType": "array",
+            "description": "List of links to display"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "GenericGameRestarts": [
+      {
+        "moduleName": "GenericGameRestarts",
+        "category": "administration",
+        "date": "2026-01-23T22:40:02+01:00",
+        "title": "New Module: GenericGameRestarts",
+        "description": "Updated to version latest. Added 4 scheduled tasks: `10 minute`, `5 minute`, `Restart`, `1 minute`. New configuration options: `userDiscordChannel`, `shutdownCommand`, `saveCommand`, `supportsInGameMessages`, `message10Minute`, `message5Minute`, `message1Minute`, `messageRestart`.",
+        "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "10 minute",
+            "schedule": "* */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "5 minute",
+            "schedule": "05 */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Restart",
+            "schedule": "10 */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "1 minute",
+            "schedule": "09 */3 * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "userDiscordChannel",
+            "fieldType": "string",
+            "description": "Discord Channel"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "shutdownCommand",
+            "fieldType": "string",
+            "description": "Command that shuts down your server"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "saveCommand",
+            "fieldType": "string",
+            "description": "save command - if supported"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "supportsInGameMessages",
+            "fieldType": "boolean",
+            "description": "Enable in-game messages for restart warnings"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message10Minute",
+            "fieldType": "string",
+            "description": "In-game message for 10 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message5Minute",
+            "fieldType": "string",
+            "description": "In-game message for 5 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message1Minute",
+            "fieldType": "string",
+            "description": "In-game message for 1 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "messageRestart",
+            "fieldType": "string",
+            "description": "In-game message when restart is initiated"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "StaffCommands": [
+      {
+        "moduleName": "StaffCommands",
+        "category": "administration",
+        "date": "2026-01-23T22:40:02+01:00",
+        "title": "New Module: StaffCommands",
+        "description": "Updated to version 0.0.2. Added 32 commands: `mute`, `zomb`, `buff - 1`, `th - 3`, `th - 1`, `kickall`, `avisit`, `th - 4`, `killall`, `pr`, `visitmap`, `setwaypointpublic`, `aaaaaaa`, `rpd`, `ban`, `rvr`, `arrest`, `ocn`, `setjail`, `rdd`, `buff - 2`, `pull`, `reset1`, `release`, `reset2`, `kick`, `th - 2`, `unmute`, `shutdownba`, `cm  & dm`, `wi`, `kill`. New permissions: `KILL_PLAYER`, `CM_DM`, `MUTE`, `ZOMB_FREE_SELF`, `LIST_LANDCLAIMS`, `REMOVE_LANDCLAIMS`, `RESET_PLAYER`, `RDD`, `UNMUTE`, `VISIT_MAP`, `RELEASE`, `SET_JAIL`, `BUFF`, `RESET_CHUNKS`, `WIPE_INVENTORY`, `STAFF_COMMANDS`, `RESET_PREFAB`. New configuration option: `userDiscordChannel`.",
+        "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "mute",
+            "description": "[02FEDMute (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "zomb",
+            "description": "[02FEDC]Stand directly above your land claim when you run this command!!!!!![-] "
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "buff - 1",
+            "description": "[02FEDC]buff (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 3",
+            "description": "Targeted Horde round 3"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 1",
+            "description": "[02FEDC]Send a horde in 4 intervals in 30 seconds at a player. Type /th (name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kickall",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "avisit",
+            "description": "[02FEDC]avisit (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 4",
+            "description": "[02FEDC]Fourth round of Targeted Horde[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "killall",
+            "description": "[02FEDC]Kill all of the Zeds on the server.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pr",
+            "description": "[02FEDC]Reset the POI you are standing in[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "visitmap",
+            "description": "[02FEDC]Open the map for Takaro and CPM.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setwaypointpublic",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "aaaaaaa",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rpd",
+            "description": "[02FEDC]rpd (player name) Resets a player's data. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "ban",
+            "description": "[02FEDC]ban (player name) (reason in quotes) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rvr",
+            "description": "[02FEDC]rvr (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "arrest",
+            "description": "[02FEDC]arrest (player name) (reason for arrest)[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "ocn",
+            "description": "[02FEDC] Change a player's name in chat. Type /ocn (Name) (New Name). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name. [-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setjail",
+            "description": "[02FEDC]Set an 11x11 area to put hail birds in.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "rdd",
+            "description": "[02FEDC]rdd (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "buff - 2",
+            "description": "Ends players buff"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pull",
+            "description": "[02FEDC]pull (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reset1",
+            "description": "[02FEDC]First position to reset a chunk. Use /reset2 in the opposite corner to reset the desired area.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "release",
+            "description": "[02FEDC]Release (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reset2",
+            "description": "[02FEDC]Last position to reset a chunk.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kick",
+            "description": "[02FEDC]kick (player name) (reason in quotes). Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "th - 2",
+            "description": "[02FEDC]Second round of a targeted horde[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "unmute",
+            "description": "[02FEDC]unmute (player name) Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "shutdownba",
+            "description": "No help text available"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "cm  & dm",
+            "description": "[02FEDC]Creative mode and debug menu. Reserved for admins[-]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "wi",
+            "description": "Wipe a player's belt, bag, equipment, all"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "kill",
+            "description": "[02FEDC]kill (players name) You must run the command a second time to confirm the kill. Use quotes for players with spaces in their name. Copy their name from Discord if you cannot type their name.[-]"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "KILL_PLAYER",
+            "description": "Kill a player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "CM_DM",
+            "description": "Creative mode and debug menu"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "MUTE",
+            "description": "Mute unruly players in game"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "ZOMB_FREE_SELF",
+            "description": "Zombie free command for admins to run the command for their personal house"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "LIST_LANDCLAIMS",
+            "description": "Lists land claims near by"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REMOVE_LANDCLAIMS",
+            "description": "remove nearby land claims"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_PLAYER",
+            "description": "Resets a player's corrupted data"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RDD",
+            "description": "Resets player drone data to place a new one"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "UNMUTE",
+            "description": "Unmute a player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "VISIT_MAP",
+            "description": "Visit the map to unlock for Takaro and CPM"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RELEASE",
+            "description": "Release a player from jail"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "SET_JAIL",
+            "description": "Set the location of your jail "
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "BUFF",
+            "description": "Buff another player"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_CHUNKS",
+            "description": "Reset Chunks Permission"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "WIPE_INVENTORY",
+            "description": "Wipe Inventory"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "STAFF_COMMANDS",
+            "description": "Commands for staff to use without using Currency"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RESET_PREFAB",
+            "description": "Reset prefab permission"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "userDiscordChannel",
+            "fieldType": "string",
+            "description": "Sends to discord"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.2",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "TheftInvestigation": [
+      {
+        "moduleName": "TheftInvestigation",
+        "category": "administration",
+        "date": "2026-01-23T22:40:02+01:00",
+        "title": "New Module: TheftInvestigation",
+        "description": "Updated to version latest. Added 1 command: `whostole`. New permission: `THEFT_INVESTIGATE`.",
+        "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "whostole",
+            "description": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "THEFT_INVESTIGATE",
+            "description": "Allows using the /whostole command to investigate item theft"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "HytaleHome": [
       {
         "moduleName": "HytaleHome",
@@ -18940,6 +19938,18 @@
         "details": []
       }
     ],
+    "PvPBet": [
+      {
+        "moduleName": "PvPBet",
+        "category": "pvp-bet.json",
+        "date": "2026-01-23T22:40:02+01:00",
+        "title": "New Module: PvPBet",
+        "description": "Added PvPBet to the repository",
+        "commitHash": "ef3f76c33da1eac0593add3322b9579fd7ddaf40",
+        "isNew": false,
+        "details": []
+      }
+    ],
     "7dtdCommands": [
       {
         "moduleName": "7dtdCommands",
@@ -18948,30 +19958,6 @@
         "title": "New Module: 7dtdCommands",
         "description": "Added 7dtdCommands to the repository",
         "commitHash": "9320e17a09e725b312b717edee4a86071b71ef15",
-        "isNew": false,
-        "details": []
-      }
-    ],
-    "DiscordLinks": [
-      {
-        "moduleName": "DiscordLinks",
-        "category": "administration",
-        "date": "2025-12-15T12:20:06+01:00",
-        "title": "New Module: DiscordLinks",
-        "description": "Added DiscordLinks to the repository",
-        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
-        "isNew": false,
-        "details": []
-      }
-    ],
-    "StaffCommands": [
-      {
-        "moduleName": "StaffCommands",
-        "category": "administration",
-        "date": "2025-12-15T12:20:06+01:00",
-        "title": "New Module: StaffCommands",
-        "description": "Added StaffCommands to the repository",
-        "commitHash": "2d33d0c32dc2825e08252cea3b7a29e2009f6c07",
         "isNew": false,
         "details": []
       }
@@ -18989,5 +19975,5 @@
       }
     ]
   },
-  "generatedAt": "2026-01-23T21:12:33.215Z"
+  "generatedAt": "2026-01-23T21:59:46.001Z"
 }
