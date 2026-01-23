@@ -1,9 +1,7 @@
 {
   "name": "PvP Bet",
   "author": "Mad",
-  "supportedGames": [
-    "7 days to die"
-  ],
+  "supportedGames": ["7 days to die"],
   "versions": [
     {
       "tag": "latest",
