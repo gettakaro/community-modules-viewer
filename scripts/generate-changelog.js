@@ -21,14 +21,15 @@ const OUTPUT_FILE = 'data/changelog-raw.json';
 function getModuleCommits(sinceCommit = null) {
   try {
     // Build git log command to include all module locations:
-    // 1. public/modules/**/*.json (current, after July 2025)
-    // 2. modules/**/*.json (after categorization, before move to public)
-    // 3. modules/*.json (before categorization)
-    let gitCommand = `git log --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/*.json`;
+    // 1. public/modules/**/*.json (current, after July 2025, in category subfolders)
+    // 2. public/modules/*.json (current, root-level modules)
+    // 3. modules/**/*.json (after categorization, before move to public)
+    // 4. modules/*.json (before categorization)
+    let gitCommand = `git log --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json ${MODULES_DIR}/*.json ${OLD_MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/*.json`;
 
     // If we have a sinceCommit, only get commits after it
     if (sinceCommit) {
-      gitCommand = `git log ${sinceCommit}..HEAD --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/*.json`;
+      gitCommand = `git log ${sinceCommit}..HEAD --pretty=format:"%H|%aI|%an|%s" --name-only -- ${MODULES_DIR}/**/*.json ${MODULES_DIR}/*.json ${OLD_MODULES_DIR}/**/*.json ${OLD_MODULES_DIR}/*.json`;
     }
 
     // Get all commits that touched module JSON files (all locations throughout history)

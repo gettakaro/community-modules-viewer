@@ -647,6 +647,151 @@
       ]
     },
     {
+      "moduleName": "Theft Investigation",
+      "category": "administration",
+      "date": "2026-01-23T09:59:52+01:00",
+      "title": "New Module: Theft Investigation",
+      "description": "Updated to version latest. Added 1 command: `whostole`. New permission: `THEFT_INVESTIGATE`.",
+      "commitHash": "41fb3c9cb8f58ee52874c6e49652313c09849758",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "whostole",
+          "description": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "THEFT_INVESTIGATE",
+          "description": "Allows using the /whostole command to investigate item theft"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "PvP Bet",
+      "category": "pvp-bet.json",
+      "date": "2026-01-23T09:45:23+01:00",
+      "title": "New Module: PvP Bet",
+      "description": "Updated to version latest. Added 2 commands: `pvpbet`, `pvpaccept`. Added 1 hook: `PvP Bet Kill Tracker` (log). Added 1 scheduled task: `PvP Bet Announcement & Leaderboard`. New permission: `PVP_BET_USE`. New configuration options: `minimumBetAmount`, `xLocation`, `zLocation`, `discordChannelId`.",
+      "commitHash": "5028f6772c3238a6396bf1ac204d5e4b8f90c63c",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "pvpbet",
+          "description": "Challenge another player to a PvP battle with a currency bet. Usage: /pvpbet [amount]"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "pvpaccept",
+          "description": "Accept an active PvP bet challenge"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "PvP Bet Kill Tracker",
+          "eventType": "log"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "PvP Bet Announcement & Leaderboard",
+          "schedule": "22 */2 * * *"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "PVP_BET_USE",
+          "description": "Allows players to create and accept PvP bets"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "minimumBetAmount",
+          "fieldType": "number",
+          "description": "Minimum currency amount required to create a PvP bet"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "xLocation",
+          "fieldType": "number",
+          "description": "X coordinate for PvP arena center"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "zLocation",
+          "fieldType": "number",
+          "description": "Z coordinate for PvP arena center"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "Discord channel ID for posting leaderboard (optional)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "lobbyandback",
+      "category": "community-management",
+      "date": "2026-01-23T09:37:26+01:00",
+      "title": "New Module: lobbyandback",
+      "description": "Updated to version latest. Added 2 commands: `lobby`, `back`. New permissions: `BACK_TELEPORT_USE`, `LOBBY_TELEPORT_USE`.",
+      "commitHash": "b27b88a16be9b7332947c59906b255322b968849",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "lobby",
+          "description": "Teleports you to (0,40,0) and saves your current spot for a single-use /back."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "back",
+          "description": "Teleports you back once to your last saved spot. After use, the saved spot is deleted."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "BACK_TELEPORT_USE",
+          "description": "BACK_TELEPORT_USE"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "LOBBY_TELEPORT_USE",
+          "description": "LOBBY_TELEPORT_USE"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "lobbyandback",
       "category": "community-management",
       "date": "2026-01-23T09:37:26+01:00",
@@ -12934,6 +13079,157 @@
     }
   ],
   "byModule": {
+    "Theft Investigation": [
+      {
+        "moduleName": "Theft Investigation",
+        "category": "administration",
+        "date": "2026-01-23T09:59:52+01:00",
+        "title": "New Module: Theft Investigation",
+        "description": "Updated to version latest. Added 1 command: `whostole`. New permission: `THEFT_INVESTIGATE`.",
+        "commitHash": "41fb3c9cb8f58ee52874c6e49652313c09849758",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "whostole",
+            "description": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "THEFT_INVESTIGATE",
+            "description": "Allows using the /whostole command to investigate item theft"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "PvP Bet": [
+      {
+        "moduleName": "PvP Bet",
+        "category": "pvp-bet.json",
+        "date": "2026-01-23T09:45:23+01:00",
+        "title": "New Module: PvP Bet",
+        "description": "Updated to version latest. Added 2 commands: `pvpbet`, `pvpaccept`. Added 1 hook: `PvP Bet Kill Tracker` (log). Added 1 scheduled task: `PvP Bet Announcement & Leaderboard`. New permission: `PVP_BET_USE`. New configuration options: `minimumBetAmount`, `xLocation`, `zLocation`, `discordChannelId`.",
+        "commitHash": "5028f6772c3238a6396bf1ac204d5e4b8f90c63c",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pvpbet",
+            "description": "Challenge another player to a PvP battle with a currency bet. Usage: /pvpbet [amount]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "pvpaccept",
+            "description": "Accept an active PvP bet challenge"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PvP Bet Kill Tracker",
+            "eventType": "log"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "PvP Bet Announcement & Leaderboard",
+            "schedule": "22 */2 * * *"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "PVP_BET_USE",
+            "description": "Allows players to create and accept PvP bets"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "minimumBetAmount",
+            "fieldType": "number",
+            "description": "Minimum currency amount required to create a PvP bet"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "xLocation",
+            "fieldType": "number",
+            "description": "X coordinate for PvP arena center"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "zLocation",
+            "fieldType": "number",
+            "description": "Z coordinate for PvP arena center"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "Discord channel ID for posting leaderboard (optional)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "lobbyandback": [
+      {
+        "moduleName": "lobbyandback",
+        "category": "community-management",
+        "date": "2026-01-23T09:37:26+01:00",
+        "title": "New Module: lobbyandback",
+        "description": "Updated to version latest. Added 2 commands: `lobby`, `back`. New permissions: `BACK_TELEPORT_USE`, `LOBBY_TELEPORT_USE`.",
+        "commitHash": "b27b88a16be9b7332947c59906b255322b968849",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "lobby",
+            "description": "Teleports you to (0,40,0) and saves your current spot for a single-use /back."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "back",
+            "description": "Teleports you back once to your last saved spot. After use, the saved spot is deleted."
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "BACK_TELEPORT_USE",
+            "description": "BACK_TELEPORT_USE"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "LOBBY_TELEPORT_USE",
+            "description": "LOBBY_TELEPORT_USE"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "Generic Game - Restarts": [
       {
         "moduleName": "Generic Game - Restarts",
@@ -13230,80 +13526,6 @@
             "name": "discordChannelId",
             "fieldType": "string",
             "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "lobbyandback": [
-      {
-        "moduleName": "lobbyandback",
-        "category": "community-management",
-        "date": "2026-01-23T09:37:26+01:00",
-        "title": "New Module: lobbyandback",
-        "description": "Updated to version latest. Added 2 commands: `lobby`, `back`. New permissions: `BACK_TELEPORT_USE`, `LOBBY_TELEPORT_USE`.",
-        "commitHash": "b27b88a16be9b7332947c59906b255322b968849",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "lobby",
-            "description": "Teleports you to (0,40,0) and saves your current spot for a single-use /back."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "back",
-            "description": "Teleports you back once to your last saved spot. After use, the saved spot is deleted."
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "BACK_TELEPORT_USE",
-            "description": "BACK_TELEPORT_USE"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "LOBBY_TELEPORT_USE",
-            "description": "LOBBY_TELEPORT_USE"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "Theft Investigation": [
-      {
-        "moduleName": "Theft Investigation",
-        "category": "administration",
-        "date": "2026-01-23T09:59:52+01:00",
-        "title": "New Module: Theft Investigation",
-        "description": "Updated to version latest. Added 1 command: `whostole`. New permission: `THEFT_INVESTIGATE`.",
-        "commitHash": "41fb3c9cb8f58ee52874c6e49652313c09849758",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "whostole",
-            "description": "Investigate who stole items from death bags. Usage: /whostole <itemName> <hoursAgo> (e.g., 6 checks 7-5 hours ago)"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "THEFT_INVESTIGATE",
-            "description": "Allows using the /whostole command to investigate item theft"
           },
           {
             "type": "version",
@@ -25639,5 +25861,5 @@
       }
     ]
   },
-  "generatedAt": "2026-01-23T10:56:14.642Z"
+  "generatedAt": "2026-01-23T12:17:33.641Z"
 }
