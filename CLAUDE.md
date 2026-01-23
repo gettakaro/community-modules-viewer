@@ -2,6 +2,11 @@
 
 - NEVER run the app on the host directly. Always use the docker compose environment to start/stop/run the app
 
+## Pre-commit Checks
+
+- Always run `npm run format:check` before pushing to ensure code formatting is correct
+- If formatting issues are found, run `npm run format` to auto-fix them
+
 ## Testing
 
 ### E2E Tests
