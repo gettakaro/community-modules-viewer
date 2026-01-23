@@ -38,6 +38,9 @@ jobs:
       - name: Generate changelogs
         run: npm run generate:changelog
 
+      - name: Format generated files
+        run: npx prettier --write data/changelog-raw.json data/changelogs.json
+
       - name: Check if last commit was by CI bot
         id: check_last_commit
         run: |
