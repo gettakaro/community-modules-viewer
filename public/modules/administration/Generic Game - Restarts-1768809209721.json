@@ -1,0 +1,44 @@
+{
+  "name": "Generic Game - Restarts",
+  "author": "Mad",
+  "supportedGames": ["other"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Restart any server that supports running a shutdown command",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[\"userDiscordChannel\"],\"additionalProperties\":false,\"properties\":{\"userDiscordChannel\":{\"title\":\"userDiscordChannel\",\"description\":\"Discord Channel\",\"type\":\"string\"},\"shutdownCommand\":{\"title\":\"shutdownCommand\",\"description\":\"Command that shuts down your server\",\"type\":\"string\"},\"saveCommand\":{\"title\":\"saveCommand\",\"description\":\"save command - if supported\",\"type\":\"string\"},\"supportsInGameMessages\":{\"title\":\"supportsInGameMessages\",\"description\":\"Enable in-game messages for restart warnings\",\"type\":\"boolean\",\"default\":false},\"message10Minute\":{\"title\":\"message10Minute\",\"description\":\"In-game message for 10 minute warning\",\"type\":\"string\",\"default\":\"Server will restart in 10 minutes.\"},\"message5Minute\":{\"title\":\"message5Minute\",\"description\":\"In-game message for 5 minute warning\",\"type\":\"string\",\"default\":\"Server will restart in 5 minutes.\"},\"message1Minute\":{\"title\":\"message1Minute\",\"description\":\"In-game message for 1 minute warning\",\"type\":\"string\",\"default\":\"Server will restart in 1 minute. Saving now...\"},\"messageRestart\":{\"title\":\"messageRestart\",\"description\":\"In-game message when restart is initiated\",\"type\":\"string\",\"default\":\"Server restart initiated!\"}}}",
+      "uiSchema": "{}",
+      "commands": [],
+      "hooks": [],
+      "cronJobs": [
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId } = data;\n\n    // Get server name\n    const gameServer = await takaro.gameserver.gameServerControllerGetOne(gameServerId);\n    const serverName = gameServer.data.data.name;\n\n    // Discord Channel Configuration\n    const userDiscord = data.module.userConfig.userDiscordChannel;\n    const supportsInGameMessages = data.module.userConfig.supportsInGameMessages;\n    const inGameMessage = data.module.userConfig.message10Minute;\n\n    // Send it to Discord\n    await takaro.discord.discordControllerSendMessage(userDiscord, {\n        message: `**${serverName}** will restart in **10 minutes**.`,\n    });\n\n    // Send in-game message if enabled\n    if (supportsInGameMessages) {\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: inGameMessage,\n        });\n    }\n\n}\nawait main();",
+          "name": "10 minute",
+          "description": "Restart aevery 3 hours",
+          "temporalValue": "* */3 * * *"
+        },
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId } = data;\n\n    // Get server name\n    const gameServer = await takaro.gameserver.gameServerControllerGetOne(gameServerId);\n    const serverName = gameServer.data.data.name;\n\n    // Discord Channel Configuration\n    const userDiscord = data.module.userConfig.userDiscordChannel;\n    const supportsInGameMessages = data.module.userConfig.supportsInGameMessages;\n    const inGameMessage = data.module.userConfig.message5Minute;\n\n    // Send it to Discord\n    await takaro.discord.discordControllerSendMessage(userDiscord, {\n        message: `**${serverName}** will restart in **5 minutes**.`,\n    });\n\n    // Send in-game message if enabled\n    if (supportsInGameMessages) {\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: inGameMessage,\n        });\n    }\n\n}\nawait main();",
+          "name": "5 minute",
+          "description": "Restart aevery 3 hours",
+          "temporalValue": "05 */3 * * *"
+        },
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId } = data;\n\n    // Get server name\n    const gameServer = await takaro.gameserver.gameServerControllerGetOne(gameServerId);\n    const serverName = gameServer.data.data.name;\n\n    // Discord Channel Configuration\n    const userDiscord = data.module.userConfig.userDiscordChannel;\n    const shutdown = data.module.userConfig.shutdownCommand;\n    const supportsInGameMessages = data.module.userConfig.supportsInGameMessages;\n    const inGameMessage = data.module.userConfig.messageRestart;\n\n    // Send Discord\n    await takaro.discord.discordControllerSendMessage(userDiscord, {\n        message: `**${serverName}** restart initiated!`,\n    });\n\n    // Send in-game message if enabled\n    if (supportsInGameMessages) {\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: inGameMessage,\n        });\n    }\n\n    // Execute shutdown command if provided\n    if (shutdown) {\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `${shutdown}`,\n        });\n    }\n}\nawait main();",
+          "name": "Restart",
+          "description": "Restart aevery 3 hours",
+          "temporalValue": "10 */3 * * *"
+        },
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId } = data;\n\n    // Get server name\n    const gameServer = await takaro.gameserver.gameServerControllerGetOne(gameServerId);\n    const serverName = gameServer.data.data.name;\n\n    // Discord Channel Configuration\n    const userDiscord = data.module.userConfig.userDiscordChannel;\n    const save = data.module.userConfig.saveCommand;\n    const supportsInGameMessages = data.module.userConfig.supportsInGameMessages;\n    const inGameMessage = data.module.userConfig.message1Minute;\n\n    // Send it to Discord\n    await takaro.discord.discordControllerSendMessage(userDiscord, {\n        message: `**${serverName}** will restart in **1 minute**.`,\n    });\n\n    // Send in-game message if enabled\n    if (supportsInGameMessages) {\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: inGameMessage,\n        });\n    }\n\n    // Execute save command if provided\n    if (save) {\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `${save}`,\n        });\n    }\n\n}\nawait main();",
+          "name": "1 minute",
+          "description": "Restart aevery 3 hours ",
+          "temporalValue": "09 */3 * * *"
+        }
+      ],
+      "functions": [],
+      "permissions": []
+    }
+  ],
+  "takaroVersion": "v0.4.10"
+}

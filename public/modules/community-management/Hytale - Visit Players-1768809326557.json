@@ -1,0 +1,86 @@
+{
+  "name": "Hytale - Visit Players",
+  "author": "Custom",
+  "supportedGames": ["hytale"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "A player visit permission system for Hytale allowing players to request permission to visit others and manage visit permissions.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"timeout\":{\"title\":\"Timeout\",\"description\":\"The time one has to wait before teleporting again (in milliseconds).\",\"type\":\"number\",\"minimum\":0,\"default\":0}},\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, gameServerId, arguments: args, module: mod, player } = data;\n\n    // Get all players on this gameserver with player data extended\n    const allPlayersOnServerRes = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n        filters: {\n            gameServerId: [gameServerId],\n        },\n        extend: ['player'],\n    });\n    \n    // Filter by name\n    const matchingPlayers = allPlayersOnServerRes.data.data.filter(p => \n        p.player.name.toLowerCase() === args.playerName.toLowerCase()\n    );\n    \n    if (matchingPlayers.length === 0) {\n        throw new TakaroUserError(`Player ${args.playerName} not found on this server.`);\n    }\n    \n    if (matchingPlayers.length > 1) {\n        throw new TakaroUserError(`Multiple players found with name \"${args.playerName}\" on this server. Contact an admin.`);\n    }\n    \n    const targetPlayer = matchingPlayers[0].player;\n    const targetPog = matchingPlayers[0];\n\n    // Can't visit yourself\n    if (targetPlayer.id === pog.playerId) {\n        throw new TakaroUserError('You cannot visit yourself.');\n    }\n\n    // Check if the target player is online\n    if (!targetPog.online) {\n        throw new TakaroUserError(`Player ${targetPlayer.name} is not online on this server.`);\n    }\n\n    // Check if visit permission already exists\n    const visitPermissionRes = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: [`visit_${pog.playerId}_to_${targetPlayer.id}`],\n            gameServerId: [gameServerId],\n            moduleId: [mod.moduleId],\n        },\n    });\n\n    if (visitPermissionRes.data.data.length > 0) {\n        const permission = JSON.parse(visitPermissionRes.data.data[0].value);\n\n        if (permission.granted) {\n            // Permission is granted, teleport using console command\n            await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n                command: `teleportPlayerToPlayer ${player.name} ${targetPlayer.name}`\n            });\n            \n            await data.player.pm(`Teleported to ${targetPlayer.name}.`);\n            return;\n        } else {\n            // Request is still pending\n            throw new TakaroUserError(`Your visit request to ${targetPlayer.name} is still pending. Wait for them to grant permission.`);\n        }\n    }\n\n    // Create a new visit request\n    await takaro.variable.variableControllerCreate({\n        key: `visit_${pog.playerId}_to_${targetPlayer.id}`,\n        value: JSON.stringify({\n            requesterName: player.name,\n            requesterId: pog.playerId,\n            targetName: targetPlayer.name,\n            targetId: targetPlayer.id,\n            granted: false,\n            requestedAt: new Date().toISOString(),\n        }),\n        gameServerId,\n        moduleId: mod.moduleId,\n    });\n\n    await data.player.pm(`Visit request sent to ${targetPlayer.name}. They need to use !granted ${player.name} to approve.`);\n\n    // Notify the target player\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `[green]${player.name}[-] has requested to visit you. Use [blue]!granted ${player.name}[-] to approve or [yellow]!revoke ${player.name}[-] to deny.`\n    });\n}\n\nawait main();",
+          "name": "visit",
+          "description": null,
+          "trigger": "visit",
+          "helpText": "Request to visit another player or teleport to them if permission is granted.",
+          "arguments": [
+            {
+              "name": "playerName",
+              "type": "string",
+              "helpText": "The name of the player you want to visit.",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, gameServerId, arguments: args, module: mod } = data;\n    \n    // Get all players on this gameserver with player data extended\n    const allPlayersOnServerRes = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n        filters: {\n            gameServerId: [gameServerId],\n        },\n        extend: ['player'],\n    });\n    \n    // Filter by name\n    const matchingPlayers = allPlayersOnServerRes.data.data.filter(pog => \n        pog.player.name.toLowerCase() === args.playerName.toLowerCase()\n    );\n    \n    if (matchingPlayers.length === 0) {\n        throw new TakaroUserError(`Player ${args.playerName} not found on this server.`);\n    }\n    \n    if (matchingPlayers.length > 1) {\n        throw new TakaroUserError(`Multiple players found with name \"${args.playerName}\" on this server. Contact an admin.`);\n    }\n    \n    const requesterPlayer = matchingPlayers[0].player;\n    \n    // Find the visit request\n    const visitRequestRes = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: [`visit_${requesterPlayer.id}_to_${pog.playerId}`],\n            gameServerId: [gameServerId],\n            moduleId: [mod.moduleId],\n        },\n    });\n    \n    if (visitRequestRes.data.data.length === 0) {\n        throw new TakaroUserError(`No visit request found from ${requesterPlayer.name}.`);\n    }\n    \n    const requestVariable = visitRequestRes.data.data[0];\n    const request = JSON.parse(requestVariable.value);\n    \n    // Check if already granted\n    if (request.granted) {\n        throw new TakaroUserError(`${requesterPlayer.name} already has permission to visit you.`);\n    }\n    \n    // Update the request to granted\n    request.granted = true;\n    request.grantedAt = new Date().toISOString();\n    \n    await takaro.variable.variableControllerUpdate(requestVariable.id, {\n        value: JSON.stringify(request),\n    });\n    \n    await data.player.pm(`You have granted ${requesterPlayer.name} permission to visit you. They can now use !visit ${data.player.name} anytime.`);\n    \n    // Notify the requester if they're online\n    const requesterPogRes = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n        filters: {\n            playerId: [requesterPlayer.id],\n            gameServerId: [gameServerId],\n            online: [true],\n        },\n    });\n    \n    if (requesterPogRes.data.data.length > 0) {\n        const requesterPog = requesterPogRes.data.data[0];\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: `${data.player.name} has granted you permission to visit them! Use !visit ${data.player.name} to teleport.`,\n            opts: {\n                recipient: {\n                    gameId: requesterPog.gameId,\n                },\n            },\n        });\n    }\n}\n\nawait main();",
+          "name": "granted",
+          "description": null,
+          "trigger": "granted",
+          "helpText": "Grant permission for another player to visit you.",
+          "arguments": [
+            {
+              "name": "playerName",
+              "type": "string",
+              "helpText": "The name of the player to grant visit permission to.",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, gameServerId, arguments: args, module: mod } = data;\n    \n    // Get all players on this gameserver with player data extended\n    const allPlayersOnServerRes = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n        filters: {\n            gameServerId: [gameServerId],\n        },\n        extend: ['player'],\n    });\n    \n    // Filter by name\n    const matchingPlayers = allPlayersOnServerRes.data.data.filter(pog => \n        pog.player.name.toLowerCase() === args.playerName.toLowerCase()\n    );\n    \n    if (matchingPlayers.length === 0) {\n        throw new TakaroUserError(`Player ${args.playerName} not found on this server.`);\n    }\n    \n    if (matchingPlayers.length > 1) {\n        throw new TakaroUserError(`Multiple players found with name \"${args.playerName}\" on this server. Contact an admin.`);\n    }\n    \n    const revokePlayer = matchingPlayers[0].player;\n    \n    // Find the visit permission\n    const visitPermissionRes = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: [`visit_${revokePlayer.id}_to_${pog.playerId}`],\n            gameServerId: [gameServerId],\n            moduleId: [mod.moduleId],\n        },\n    });\n    \n    if (visitPermissionRes.data.data.length === 0) {\n        throw new TakaroUserError(`${revokePlayer.name} has no visit request or permission to visit you.`);\n    }\n    \n    // Delete the visit permission\n    await takaro.variable.variableControllerDelete(visitPermissionRes.data.data[0].id);\n    \n    await data.player.pm(`You have revoked ${revokePlayer.name}'s permission to visit you.`);\n    \n    // Notify the revoked player if they're online\n    const revokedPogRes = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n        filters: {\n            playerId: [revokePlayer.id],\n            gameServerId: [gameServerId],\n            online: [true],\n        },\n    });\n    \n    if (revokedPogRes.data.data.length > 0) {\n        const revokedPog = revokedPogRes.data.data[0];\n        await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n            message: `${data.player.name} has revoked your permission to visit them.`,\n            opts: {\n                recipient: {\n                    gameId: revokedPog.gameId,\n                },\n            },\n        });\n    }\n}\n\nawait main();",
+          "name": "revoke",
+          "description": null,
+          "trigger": "revoke",
+          "helpText": "Revoke another player's permission to visit you.",
+          "arguments": [
+            {
+              "name": "playerName",
+              "type": "string",
+              "helpText": "The name of the player to revoke visit permission from.",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, gameServerId, module: mod } = data;\n    \n    // Get all visit requests where this player is the target (incoming requests)\n    const incomingRequestsRes = await takaro.variable.variableControllerSearch({\n        search: {\n            key: [`visit_`],\n        },\n        filters: {\n            gameServerId: [gameServerId],\n            moduleId: [mod.moduleId],\n        },\n    });\n    \n    // Filter for requests to this player\n    const incomingRequests = incomingRequestsRes.data.data\n        .map(v => ({ variable: v, data: JSON.parse(v.value) }))\n        .filter(item => item.data.targetId === pog.playerId);\n    \n    const pendingIncoming = incomingRequests.filter(item => !item.data.granted);\n    const grantedIncoming = incomingRequests.filter(item => item.data.granted);\n    \n    // Get all visit permissions where this player is the requester (outgoing requests)\n    const outgoingRequestsRes = await takaro.variable.variableControllerSearch({\n        search: {\n            key: [`visit_${pog.playerId}_to_`],\n        },\n        filters: {\n            gameServerId: [gameServerId],\n            moduleId: [mod.moduleId],\n        },\n    });\n    \n    const outgoingRequests = outgoingRequestsRes.data.data\n        .map(v => ({ variable: v, data: JSON.parse(v.value) }));\n    \n    const pendingOutgoing = outgoingRequests.filter(item => !item.data.granted);\n    const grantedOutgoing = outgoingRequests.filter(item => item.data.granted);\n    \n    // Build the message\n    let message = '=== Visit Permissions ===\\n';\n    \n    if (pendingIncoming.length > 0) {\n        message += '\\nPending requests to visit you:\\n';\n        for (const item of pendingIncoming) {\n            message += `  - ${item.data.requesterName} (use !granted ${item.data.requesterName})\\n`;\n        }\n    }\n    \n    if (grantedIncoming.length > 0) {\n        message += '\\nPlayers who can visit you:\\n';\n        for (const item of grantedIncoming) {\n            message += `  - ${item.data.requesterName} (use !revoke ${item.data.requesterName} to remove)\\n`;\n        }\n    }\n    \n    if (pendingOutgoing.length > 0) {\n        message += '\\nYour pending visit requests:\\n';\n        for (const item of pendingOutgoing) {\n            message += `  - ${item.data.targetName} (waiting for approval)\\n`;\n        }\n    }\n    \n    if (grantedOutgoing.length > 0) {\n        message += '\\nPlayers you can visit:\\n';\n        for (const item of grantedOutgoing) {\n            message += `  - ${item.data.targetName} (use !visit ${item.data.targetName})\\n`;\n        }\n    }\n    \n    if (pendingIncoming.length === 0 && grantedIncoming.length === 0 && \n        pendingOutgoing.length === 0 && grantedOutgoing.length === 0) {\n        message += '\\nNo visit requests or permissions found.';\n    }\n    \n    await data.player.pm(message);\n}\n\nawait main();",
+          "name": "visitlist",
+          "description": null,
+          "trigger": "visitlist",
+          "helpText": "List all pending visit requests and granted visit permissions.",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": true,
+          "description": "Allows the player to use the teleports module.",
+          "permission": "TELEPORTS_USE",
+          "friendlyName": "Use Teleports"
+        },
+        {
+          "canHaveCount": false,
+          "description": "Allows the player to teleport other players to their location.",
+          "permission": "TELEPORTS_TPHERE",
+          "friendlyName": "Teleport Players"
+        }
+      ]
+    }
+  ],
+  "takaroVersion": "v0.4.10"
+}
