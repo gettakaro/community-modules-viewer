@@ -146,8 +146,9 @@ function getJsonDiff(commitHash, filePath) {
  */
 function extractModuleName(filePath, jsonContent = null) {
   // Prefer the name property from JSON if available
+  // Strip whitespace to normalize historical names that contained spaces
   if (jsonContent && jsonContent.name) {
-    return jsonContent.name;
+    return jsonContent.name.replace(/\s+/g, '');
   }
   // Fallback to filename
   const fileName = path.basename(filePath, '.json');
