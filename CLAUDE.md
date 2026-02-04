@@ -1,8 +1,9 @@
-## Module Naming Conventions
+## Module Naming Conventions (CRITICAL)
 
-- Module files and titles must NEVER contain spaces or special characters
+- Module files and titles must NEVER contain spaces or special characters — spaces in names cause bugs in changelog grouping and module lookups
 - Use hyphens or camelCase for multi-word names (e.g., `my-module` or `myModule`)
 - This applies to both the filename and the `name` field in module JSON files
+- The changelog generation pipeline (`scripts/generate-changelog.js`) normalizes names by stripping spaces, but the source JSON files must always be correct
 
 ## Development Guidelines
 
