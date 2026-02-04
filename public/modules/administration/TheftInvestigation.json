@@ -19,7 +19,7 @@
             {
               "name": "itemName",
               "type": "string",
-              "defaultValue": null,
+
               "helpText": "Name of the stolen item",
               "position": 0
             },
