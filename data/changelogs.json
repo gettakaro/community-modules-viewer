@@ -1,6 +1,82 @@
 {
   "global": [
     {
+      "moduleName": "PlaytimeEarnerAdvanced",
+      "category": "economy",
+      "date": "2026-03-03T09:14:01+01:00",
+      "title": "New Module: PlaytimeEarnerAdvanced",
+      "description": "Updated to version 2.0.0. Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
+      "commitHash": "8d6cdc48310eb9f2d39a238e907f644d3079daea",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "playtime",
+          "description": "Check your playtime statistics"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "rewardOnlinePlaytime",
+          "schedule": "0 0 * * *"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "PLAYTIME_REWARD_OVERRIDE",
+          "description": "Override the base currency reward for playtime. Count value determines the reward amount."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "PLAYTIME_ITEM_CHANCE_OVERRIDE",
+          "description": "Override the chance to receive an item. Count value is the percentage (0-100)."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "rewardInterval",
+          "fieldType": "number",
+          "description": "Give rewards every X minutes of playtime"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "baseReward",
+          "fieldType": "number",
+          "description": "Currency given per reward"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "possibleItems",
+          "fieldType": "array",
+          "description": "Items that can be randomly awarded"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "itemChance",
+          "fieldType": "string",
+          "description": "Chance to receive an item (1-100)\n"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "rewardMessage",
+          "fieldType": "string",
+          "description": "Message with placeholders {minutes}, {currency}, {item}"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "2.0.0",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "DiscordLinks",
       "category": "administration",
       "date": "2026-01-23T22:40:02+01:00",
@@ -9277,6 +9353,84 @@
     }
   ],
   "byModule": {
+    "PlaytimeEarnerAdvanced": [
+      {
+        "moduleName": "PlaytimeEarnerAdvanced",
+        "category": "economy",
+        "date": "2026-03-03T09:14:01+01:00",
+        "title": "New Module: PlaytimeEarnerAdvanced",
+        "description": "Updated to version 2.0.0. Added 1 command: `playtime`. Added 1 scheduled task: `rewardOnlinePlaytime`. New permissions: `PLAYTIME_REWARD_OVERRIDE`, `PLAYTIME_ITEM_CHANCE_OVERRIDE`. New configuration options: `rewardInterval`, `baseReward`, `possibleItems`, `itemChance`, `rewardMessage`.",
+        "commitHash": "8d6cdc48310eb9f2d39a238e907f644d3079daea",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "playtime",
+            "description": "Check your playtime statistics"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "rewardOnlinePlaytime",
+            "schedule": "0 0 * * *"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "PLAYTIME_REWARD_OVERRIDE",
+            "description": "Override the base currency reward for playtime. Count value determines the reward amount."
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "PLAYTIME_ITEM_CHANCE_OVERRIDE",
+            "description": "Override the chance to receive an item. Count value is the percentage (0-100)."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "rewardInterval",
+            "fieldType": "number",
+            "description": "Give rewards every X minutes of playtime"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "baseReward",
+            "fieldType": "number",
+            "description": "Currency given per reward"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "possibleItems",
+            "fieldType": "array",
+            "description": "Items that can be randomly awarded"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "itemChance",
+            "fieldType": "string",
+            "description": "Chance to receive an item (1-100)\n"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "rewardMessage",
+            "fieldType": "string",
+            "description": "Message with placeholders {minutes}, {currency}, {item}"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "2.0.0",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "DiscordLinks": [
       {
         "moduleName": "DiscordLinks",
@@ -18765,5 +18919,5 @@
       }
     ]
   },
-  "generatedAt": "2026-02-04T13:41:58.577Z"
+  "generatedAt": "2026-03-03T08:36:25.831Z"
 }

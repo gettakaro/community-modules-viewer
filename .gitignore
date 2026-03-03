@@ -46,9 +46,8 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 
-# Built-in modules (fetched at build time)
-/data/builtin-modules/*.json
-!/data/builtin-modules/README.md
+# Built-in modules (cached, updated by fetch-builtin-modules.js)
+# Committed so builds work even if upstream URL is unavailable
 
 .claude
 public/version.json
