@@ -2,9 +2,7 @@
   "takaroVersion": "0.0.0",
   "name": "Referral Program",
   "author": "Takaro",
-  "supportedGames": [
-    "All Games"
-  ],
+  "supportedGames": ["All Games"],
   "versions": [
     {
       "tag": "latest",
