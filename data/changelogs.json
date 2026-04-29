@@ -1,6 +1,88 @@
 {
   "global": [
     {
+      "moduleName": "PlaytimeBuffRewards",
+      "category": "economy",
+      "date": "2026-04-29T05:11:27Z",
+      "title": "New Module: PlaytimeBuffRewards",
+      "description": "Updated to version latest. Added 1 command: `grant-buff`. Added 1 scheduled task: `grant-playtime-rewards`. Added 1 function: `playtime-buff-helpers`. New permission: `PLAYTIME_BUFF_ADMIN`. New configuration options: `buffCommandTemplate`, `announceRewards`, `defaultRewardMessage`, `buffRewards`, `commandRewards`, `currencyRewards`.",
+      "commitHash": "3e43c67e77b70e187a79c3cb22bb7099a0d0264b",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "grant-buff",
+          "description": "Grant a buff to a player. Usage: grantbuff <player> <buffName>"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "grant-playtime-rewards",
+          "schedule": "0 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "playtime-buff-helpers"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "PLAYTIME_BUFF_ADMIN",
+          "description": "Allows manually granting buffs through the playtime buff rewards module."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "buffCommandTemplate",
+          "fieldType": "string",
+          "description": "Console command template used to grant a buff. Supports {playerName}, {playerId}, {gameId}, and {buffName}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "announceRewards",
+          "fieldType": "boolean",
+          "description": "Broadcast a message when a playtime reward is granted."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "defaultRewardMessage",
+          "fieldType": "string",
+          "description": "Fallback message for rewards that do not define their own message."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "buffRewards",
+          "fieldType": "array",
+          "description": "Buff rewards eligible for hourly playtime grants."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commandRewards",
+          "fieldType": "array",
+          "description": "Generic console-command rewards, useful for items such as food, drinks, ammo, or meds."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "currencyRewards",
+          "fieldType": "array",
+          "description": "Takaro currency rewards eligible for hourly playtime grants."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "PlaytimeEarnerAdvanced",
       "category": "economy",
       "date": "2026-03-03T09:14:01+01:00",
@@ -9353,6 +9435,90 @@
     }
   ],
   "byModule": {
+    "PlaytimeBuffRewards": [
+      {
+        "moduleName": "PlaytimeBuffRewards",
+        "category": "economy",
+        "date": "2026-04-29T05:11:27Z",
+        "title": "New Module: PlaytimeBuffRewards",
+        "description": "Updated to version latest. Added 1 command: `grant-buff`. Added 1 scheduled task: `grant-playtime-rewards`. Added 1 function: `playtime-buff-helpers`. New permission: `PLAYTIME_BUFF_ADMIN`. New configuration options: `buffCommandTemplate`, `announceRewards`, `defaultRewardMessage`, `buffRewards`, `commandRewards`, `currencyRewards`.",
+        "commitHash": "3e43c67e77b70e187a79c3cb22bb7099a0d0264b",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "grant-buff",
+            "description": "Grant a buff to a player. Usage: grantbuff <player> <buffName>"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "grant-playtime-rewards",
+            "schedule": "0 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "playtime-buff-helpers"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "PLAYTIME_BUFF_ADMIN",
+            "description": "Allows manually granting buffs through the playtime buff rewards module."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "buffCommandTemplate",
+            "fieldType": "string",
+            "description": "Console command template used to grant a buff. Supports {playerName}, {playerId}, {gameId}, and {buffName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceRewards",
+            "fieldType": "boolean",
+            "description": "Broadcast a message when a playtime reward is granted."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "defaultRewardMessage",
+            "fieldType": "string",
+            "description": "Fallback message for rewards that do not define their own message."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "buffRewards",
+            "fieldType": "array",
+            "description": "Buff rewards eligible for hourly playtime grants."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commandRewards",
+            "fieldType": "array",
+            "description": "Generic console-command rewards, useful for items such as food, drinks, ammo, or meds."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "currencyRewards",
+            "fieldType": "array",
+            "description": "Takaro currency rewards eligible for hourly playtime grants."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "PlaytimeEarnerAdvanced": [
       {
         "moduleName": "PlaytimeEarnerAdvanced",
@@ -18919,5 +19085,5 @@
       }
     ]
   },
-  "generatedAt": "2026-03-15T19:08:23.449Z"
+  "generatedAt": "2026-04-29T05:49:38.815Z"
 }
