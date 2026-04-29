@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#111827"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000" flood-opacity="0.35"/></filter>
+  </defs>
+  <rect width="1280" height="760" fill="url(#bg)"/>
+  <rect x="44" y="34" width="1192" height="692" rx="28" fill="#141b2d" stroke="#2c3650" filter="url(#shadow)"/>
+  <rect x="44" y="34" width="1192" height="104" rx="28" fill="#1e293b"/>
+  <circle cx="96" cy="86" r="23" fill="#38bdf8"/><text x="83" y="96" font-family="Arial" font-size="28" font-weight="800" fill="#052e16">🏁</text>
+
+<text x="134" y="78" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Live betting flow: command + currency path verified</text>
+<text x="134" y="116" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="600" fill="#b7c2d6">Bot1_RaceTester placed a real Takaro bet while online on Paper</text>
+<rect x="76" y="150" width="1128" height="288" rx="18" fill="#0f172a" stroke="#2d3a55"/>
+<text x="104" y="184" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Command flow</text>
+<text x="128" y="224" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• /racebet Comet 50 returned success=true.</text>
+<text x="128" y="255" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• The module wrote zombie_racing_state_v1 with one bet: Bot1_RaceTester → Comet, amount 50,</text>
+<text x="128" y="286" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">  odds 2.</text>
+<text x="128" y="317" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• Takaro deducted 50 currency from the player and sent the private messages: Bet placed, Race</text>
+<text x="128" y="348" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">  #1 now has 1 bet.</text>
+<text x="128" y="379" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• /myracebets and /nextrace both read back the stored bet without runtime errors.</text>
+<rect x="76" y="434" width="1128" height="186" rx="18" fill="#0f172a" stroke="#2d3a55"/>
+<text x="104" y="468" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Why this matters</text>
+<text x="128" y="508" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• This proves the dashboard-imported module can mutate Takaro state, deduct currency, and</text>
+<text x="128" y="539" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">  message a live Paper player.</text>
+<text x="128" y="570" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• The race state variable acts as the source of truth for the next scheduled/admin race.</text>
+<rect x="76" y="642" width="1128" height="54" rx="16" fill="#13251d" stroke="#1f7a4b"/>
+<text x="104" y="676" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#86efac">Result: bet persisted · currency-deducted amount=50 · potential win=100</text>
+</svg>

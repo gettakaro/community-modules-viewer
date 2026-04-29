@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#111827"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000" flood-opacity="0.35"/></filter>
+  </defs>
+  <rect width="1280" height="760" fill="url(#bg)"/>
+  <rect x="44" y="34" width="1192" height="692" rx="28" fill="#141b2d" stroke="#2c3650" filter="url(#shadow)"/>
+  <rect x="44" y="34" width="1192" height="104" rx="28" fill="#1e293b"/>
+  <circle cx="96" cy="86" r="23" fill="#22c55e"/><text x="83" y="96" font-family="Arial" font-size="28" font-weight="800" fill="#052e16">🏁</text>
+
+<text x="134" y="78" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Paper sandbox verification: dynamic race setup</text>
+<text x="134" y="116" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="600" fill="#b7c2d6">koji-paper-1 · Bot1_RaceTester online · issue #43 Zombie Racing</text>
+<rect x="76" y="150" width="1128" height="254" rx="18" fill="#0f172a" stroke="#2d3a55"/>
+<text x="104" y="184" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Live server state</text>
+<text x="128" y="224" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• Spawned Mineflayer player Bot1_RaceTester on koji-paper-1 and confirmed the player was</text>
+<text x="128" y="255" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">  online via RCON and Takaro player search.</text>
+<text x="128" y="286" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• Imported and installed the module as test-zombie-racing-paper on the live sandbox server.</text>
+<text x="128" y="317" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• Configured the module as Paper Horse Derby to prove the racer labels and entrants are</text>
+<text x="128" y="348" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">  dynamic, not hard-coded zombies.</text>
+<rect x="76" y="403" width="1128" height="186" rx="18" fill="#0f172a" stroke="#2d3a55"/>
+<text x="104" y="437" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Configured entrants shown by /racers</text>
+<text x="128" y="477" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• Race name: Paper Horse Derby; labels: horse / horses.</text>
+<text x="128" y="508" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• Entrants: Comet 2:1, Thunder 3:1, Pickle 4:1, Mango 5:1.</text>
+<text x="128" y="539" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#dce3f0">• Bet range: 10-250. The command output used /racebet &lt;horse&gt; &lt;amount&gt;.</text>
+<rect x="76" y="642" width="1128" height="54" rx="16" fill="#13251d" stroke="#1f7a4b"/>
+<text x="104" y="676" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#86efac">Result: dynamic labels and custom entrants verified on live Paper</text>
+</svg>
