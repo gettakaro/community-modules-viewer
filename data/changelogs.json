@@ -83,6 +83,93 @@
       ]
     },
     {
+      "moduleName": "CommunityFund",
+      "category": "community-management",
+      "date": "2026-04-27T17:39:40Z",
+      "title": "New Module: CommunityFund",
+      "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
+      "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "fund-contribute",
+          "description": "Contribute currency to the community fund. Amount must be a positive whole number."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "fund-history",
+          "description": "Shows the number of community fund completions and the last completion details."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "fund-status",
+          "description": "Shows the current community fund total, target, and round count."
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "fund-helpers"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "COMMUNITY_FUND_CONTRIBUTE",
+          "description": "Allows a player to contribute currency to the community fund"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "COMMUNITY_FUND_VIEW_HISTORY",
+          "description": "Allows a player to view the community fund completion history"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "fundThreshold",
+          "fieldType": "number",
+          "description": "Target amount that triggers fund completion and reset"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "minimumContribution",
+          "fieldType": "number",
+          "description": "Minimum amount a player must contribute per command"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "completionMessage",
+          "fieldType": "string",
+          "description": "Broadcast message when threshold is reached. Supports {threshold} placeholder."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "completionCommands",
+          "fieldType": "array",
+          "description": "Raw game server commands executed on fund completion. E.g. Minecraft: 'effect give @a luck 3600'"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "broadcastContributions",
+          "fieldType": "boolean",
+          "description": "Whether to broadcast each contribution to all players"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "PlaytimeEarnerAdvanced",
       "category": "economy",
       "date": "2026-03-03T09:14:01+01:00",
@@ -9435,6 +9522,95 @@
     }
   ],
   "byModule": {
+    "CommunityFund": [
+      {
+        "moduleName": "CommunityFund",
+        "category": "community-management",
+        "date": "2026-04-27T17:39:40Z",
+        "title": "New Module: CommunityFund",
+        "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
+        "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-contribute",
+            "description": "Contribute currency to the community fund. Amount must be a positive whole number."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-history",
+            "description": "Shows the number of community fund completions and the last completion details."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-status",
+            "description": "Shows the current community fund total, target, and round count."
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "fund-helpers"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "COMMUNITY_FUND_CONTRIBUTE",
+            "description": "Allows a player to contribute currency to the community fund"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "COMMUNITY_FUND_VIEW_HISTORY",
+            "description": "Allows a player to view the community fund completion history"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "fundThreshold",
+            "fieldType": "number",
+            "description": "Target amount that triggers fund completion and reset"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "minimumContribution",
+            "fieldType": "number",
+            "description": "Minimum amount a player must contribute per command"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "completionMessage",
+            "fieldType": "string",
+            "description": "Broadcast message when threshold is reached. Supports {threshold} placeholder."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "completionCommands",
+            "fieldType": "array",
+            "description": "Raw game server commands executed on fund completion. E.g. Minecraft: 'effect give @a luck 3600'"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "broadcastContributions",
+            "fieldType": "boolean",
+            "description": "Whether to broadcast each contribution to all players"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "PlaytimeBuffRewards": [
       {
         "moduleName": "PlaytimeBuffRewards",
@@ -19085,5 +19261,5 @@
       }
     ]
   },
-  "generatedAt": "2026-04-29T05:49:38.815Z"
+  "generatedAt": "2026-04-29T06:16:38.333Z"
 }
