@@ -2,11 +2,7 @@
   "takaroVersion": "0.0.0",
   "name": "Playtime Buff Rewards",
   "author": "El-Limon",
-  "supportedGames": [
-    "7 Days to Die",
-    "Minecraft",
-    "all"
-  ],
+  "supportedGames": ["7 Days to Die", "Minecraft", "all"],
   "versions": [
     {
       "tag": "latest",
