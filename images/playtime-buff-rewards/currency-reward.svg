@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#111827"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity="0.35"/></filter>
+  </defs>
+  <rect width="1280" height="760" fill="url(#g)"/>
+  <rect x="44" y="34" width="1192" height="692" rx="28" fill="#151b2d" stroke="#28324a" filter="url(#shadow)"/>
+  <rect x="44" y="34" width="1192" height="104" rx="28" fill="#1d2540"/>
+  <circle cx="95" cy="86" r="22" fill="#7c3aed"/><text x="84" y="95" font-family="Arial" font-size="26" font-weight="700" fill="#fff">✓</text>
+
+<text x="132" y="78" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Second scheduled run: currency reward path verified</text>
+<text x="132" y="116" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="500" fill="#aeb7ca">Random reward pool hit the Takaro currency branch on the next cron execution</text>
+<rect x="76" y="146" width="1128" height="188" rx="18" fill="#0f1526" stroke="#2a3550"/>
+<text x="104" y="180" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Currency reward evidence</text>
+<text x="126" y="218" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• The same online Paper player received the configured Pocket money reward.</text>
+<text x="126" y="248" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• Takaro called /gameserver/.../player/.../add-currency with currency: 25.</text>
+<text x="126" y="278" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• A currency-added event was recorded for Bot1_BuffTester immediately after the cron run.</text>
+<text x="126" y="308" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• Broadcast message: Bot1_BuffTester earned 25 Takaro currency.</text>
+<rect x="76" y="356" width="1128" height="120" rx="18" fill="#0f1526" stroke="#2a3550"/>
+<text x="104" y="390" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Why this matters</text>
+<text x="126" y="428" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• The module does more than run server console commands: it also grants Takaro-native currency</text>
+<text x="126" y="458" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">  rewards.</text>
+<text x="126" y="488" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• The weighted reward pool successfully selected a different reward type without code changes.</text>
+<rect x="76" y="642" width="1128" height="54" rx="16" fill="#13251d" stroke="#1f7a4b"/>
+<text x="104" y="676" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#86efac">Result: success=true · currency-added amount=25</text>
+</svg>

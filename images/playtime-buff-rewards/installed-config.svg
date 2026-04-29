@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#111827"/><stop offset="1" stop-color="#0b1020"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity="0.35"/></filter>
+  </defs>
+  <rect width="1280" height="760" fill="url(#g)"/>
+  <rect x="44" y="34" width="1192" height="692" rx="28" fill="#151b2d" stroke="#28324a" filter="url(#shadow)"/>
+  <rect x="44" y="34" width="1192" height="104" rx="28" fill="#1d2540"/>
+  <circle cx="95" cy="86" r="22" fill="#7c3aed"/><text x="84" y="95" font-family="Arial" font-size="26" font-weight="700" fill="#fff">✓</text>
+
+<text x="132" y="78" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Installed config used for the Paper smoke test</text>
+<text x="132" y="116" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="500" fill="#aeb7ca">7 Days to Die default stays buffplayer; Paper test uses say/give as safe stand-ins</text>
+<rect x="76" y="146" width="1128" height="188" rx="18" fill="#0f1526" stroke="#2a3550"/>
+<text x="104" y="180" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Test config</text>
+<text x="126" y="218" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• buffCommandTemplate: say [PlaytimeBuff] {playerName} received {buffName}</text>
+<text x="126" y="248" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• buffRewards: WellFed with broadcast message {playerName} got the {buffName} buff reward.</text>
+<text x="126" y="278" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• commandRewards: Diamond snack → give {playerName} diamond 1</text>
+<text x="126" y="308" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• currencyRewards: Pocket money → 25 Takaro currency</text>
+<rect x="76" y="356" width="1128" height="120" rx="18" fill="#0f1526" stroke="#2a3550"/>
+<text x="104" y="390" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">Production 7D2D behavior</text>
+<text x="126" y="428" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• The module default remains buffplayer {playerName} {buffName}, matching the customer-provided</text>
+<text x="126" y="458" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">  7 Days to Die console command shape.</text>
+<text x="126" y="488" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">• Paper cannot validate real 7D2D buffs, but it proves Takaro command rendering, execution,</text>
+<text x="126" y="518" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500" fill="#d6dbea">  announcements, and currency grants.</text>
+<rect x="76" y="642" width="1128" height="54" rx="16" fill="#13251d" stroke="#1f7a4b"/>
+<text x="104" y="676" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#86efac">Installed module: test-playtime-buff-rewards · gameserver: koji-paper-1</text>
+</svg>
