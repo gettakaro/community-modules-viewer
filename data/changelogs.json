@@ -414,6 +414,156 @@
       ]
     },
     {
+      "moduleName": "ReferralProgram",
+      "category": "community-management",
+      "date": "2026-04-26T19:36:03Z",
+      "title": "New Module: ReferralProgram",
+      "description": "Updated to version latest. Added 6 commands: `refcode`, `referral`, `refstats`, `reftop`, `reflink`, `refunlink`. Added 1 hook: `on-player-disconnect` (player-disconnected). Added 2 scheduled tasks: `sweep-pending-referrals`, `reset-daily-counters`. Added 1 function: `referral-helpers`. New permissions: `REFERRAL_USE`, `REFERRAL_VIP`, `REFERRAL_ADMIN`. New configuration options: `prizeIsCurrency`, `referrerCurrencyReward`, `refereeCurrencyReward`, `items`, `playtimeThresholdMinutes`, `referralWindowHours`, `maxReferralsPerDay`, `maxReferralsLifetime`.",
+      "commitHash": "953b085d85773c723d08efa21ac17d7841a28cff",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "refcode",
+          "description": "Usage: /refcode — Displays your unique referral code. Share it with new players to earn rewards when they join."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "referral",
+          "description": "Usage: /referral <code> — Enter a referral code from the player who invited you. You must use this within the referral window of your first join (see server config)."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "refstats",
+          "description": "Usage: /refstats — View your referral stats including total referrals, earnings, and who referred you."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "reftop",
+          "description": "Usage: /reftop — Shows the top 10 players by number of successful referrals."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "reflink",
+          "description": "Usage: /reflink <referee> <referrer> — Admin only. Provide the full exact display name of each player (case-sensitive). Force-creates a paid link and pays both rewards."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "refunlink",
+          "description": "Usage: /refunlink <referee> — Admin only. Provide the full exact display name of the referee player (case-sensitive). Removes their referral link."
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "on-player-disconnect",
+          "eventType": "player-disconnected"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "sweep-pending-referrals",
+          "schedule": "*/15 * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "reset-daily-counters",
+          "schedule": "0 0 * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "referral-helpers"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "REFERRAL_USE",
+          "description": "Required for /refcode, /referral, /refstats, /reftop"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "REFERRAL_VIP",
+          "description": "Count = tier; +5% referrer reward per tier, capped at +25%"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "REFERRAL_ADMIN",
+          "description": "Required for /reflink, /refunlink; bypasses caps and window checks"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "prizeIsCurrency",
+          "fieldType": "boolean",
+          "description": "Prize is currency"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "referrerCurrencyReward",
+          "fieldType": "number",
+          "description": "Referrer currency reward"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "refereeCurrencyReward",
+          "fieldType": "number",
+          "description": "Referee welcome bonus (currency)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "items",
+          "fieldType": "array",
+          "description": "Item prize pool (used when prizeIsCurrency is false)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "playtimeThresholdMinutes",
+          "fieldType": "number",
+          "description": "Minutes referee must play before referrer is paid"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "referralWindowHours",
+          "fieldType": "number",
+          "description": "Max hours since first connect to claim a referral"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "maxReferralsPerDay",
+          "fieldType": "number",
+          "description": "Maximum number of successful referrals a player can earn per day"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "maxReferralsLifetime",
+          "fieldType": "number",
+          "description": "Maximum number of paid referrals a player can earn in total (lifetime cap)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "PlaytimeEarnerAdvanced",
       "category": "economy",
       "date": "2026-03-03T09:14:01+01:00",
@@ -9766,6 +9916,158 @@
     }
   ],
   "byModule": {
+    "ReferralProgram": [
+      {
+        "moduleName": "ReferralProgram",
+        "category": "community-management",
+        "date": "2026-04-26T19:36:03Z",
+        "title": "New Module: ReferralProgram",
+        "description": "Updated to version latest. Added 6 commands: `refcode`, `referral`, `refstats`, `reftop`, `reflink`, `refunlink`. Added 1 hook: `on-player-disconnect` (player-disconnected). Added 2 scheduled tasks: `sweep-pending-referrals`, `reset-daily-counters`. Added 1 function: `referral-helpers`. New permissions: `REFERRAL_USE`, `REFERRAL_VIP`, `REFERRAL_ADMIN`. New configuration options: `prizeIsCurrency`, `referrerCurrencyReward`, `refereeCurrencyReward`, `items`, `playtimeThresholdMinutes`, `referralWindowHours`, `maxReferralsPerDay`, `maxReferralsLifetime`.",
+        "commitHash": "953b085d85773c723d08efa21ac17d7841a28cff",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "refcode",
+            "description": "Usage: /refcode — Displays your unique referral code. Share it with new players to earn rewards when they join."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "referral",
+            "description": "Usage: /referral <code> — Enter a referral code from the player who invited you. You must use this within the referral window of your first join (see server config)."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "refstats",
+            "description": "Usage: /refstats — View your referral stats including total referrals, earnings, and who referred you."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reftop",
+            "description": "Usage: /reftop — Shows the top 10 players by number of successful referrals."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reflink",
+            "description": "Usage: /reflink <referee> <referrer> — Admin only. Provide the full exact display name of each player (case-sensitive). Force-creates a paid link and pays both rewards."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "refunlink",
+            "description": "Usage: /refunlink <referee> — Admin only. Provide the full exact display name of the referee player (case-sensitive). Removes their referral link."
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "on-player-disconnect",
+            "eventType": "player-disconnected"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "sweep-pending-referrals",
+            "schedule": "*/15 * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "reset-daily-counters",
+            "schedule": "0 0 * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "referral-helpers"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REFERRAL_USE",
+            "description": "Required for /refcode, /referral, /refstats, /reftop"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REFERRAL_VIP",
+            "description": "Count = tier; +5% referrer reward per tier, capped at +25%"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REFERRAL_ADMIN",
+            "description": "Required for /reflink, /refunlink; bypasses caps and window checks"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "prizeIsCurrency",
+            "fieldType": "boolean",
+            "description": "Prize is currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "referrerCurrencyReward",
+            "fieldType": "number",
+            "description": "Referrer currency reward"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "refereeCurrencyReward",
+            "fieldType": "number",
+            "description": "Referee welcome bonus (currency)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "items",
+            "fieldType": "array",
+            "description": "Item prize pool (used when prizeIsCurrency is false)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playtimeThresholdMinutes",
+            "fieldType": "number",
+            "description": "Minutes referee must play before referrer is paid"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "referralWindowHours",
+            "fieldType": "number",
+            "description": "Max hours since first connect to claim a referral"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maxReferralsPerDay",
+            "fieldType": "number",
+            "description": "Maximum number of successful referrals a player can earn per day"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maxReferralsLifetime",
+            "fieldType": "number",
+            "description": "Maximum number of paid referrals a player can earn in total (lifetime cap)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "dayzRestarts": [
       {
         "moduleName": "dayzRestarts",
@@ -19755,5 +20057,5 @@
       }
     ]
   },
-  "generatedAt": "2026-05-06T18:54:28.854Z"
+  "generatedAt": "2026-05-06T19:13:00.908Z"
 }
