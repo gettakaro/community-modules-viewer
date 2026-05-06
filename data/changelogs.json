@@ -1,6 +1,250 @@
 {
   "global": [
     {
+      "moduleName": "dayzRestarts",
+      "category": "administration",
+      "date": "2026-05-06T05:07:29-05:00",
+      "title": "New Module: dayzRestarts",
+      "description": "Updated to version latest. Added 4 scheduled tasks: `10 minute`, `Restart`, `5 minute`, `1 minute`. New configuration options: `userDiscordChannel`, `shutdownCommand`, `saveCommand`, `supportsInGameMessages`, `message10Minute`, `message5Minute`, `message1Minute`, `messageRestart`.",
+      "commitHash": "8b65103eb5daac95cff98e9b5c1aa10ba61863ca",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "10 minute",
+          "schedule": "00 */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "Restart",
+          "schedule": "10 */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "5 minute",
+          "schedule": "05 */3 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "1 minute",
+          "schedule": "09 */3 * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "userDiscordChannel",
+          "fieldType": "string",
+          "description": "Discord Channel"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "shutdownCommand",
+          "fieldType": "string",
+          "description": "Command that shuts down your server"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "saveCommand",
+          "fieldType": "string",
+          "description": "save command - if supported"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "supportsInGameMessages",
+          "fieldType": "boolean",
+          "description": "Enable in-game messages for restart warnings"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message10Minute",
+          "fieldType": "string",
+          "description": "In-game message for 10 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message5Minute",
+          "fieldType": "string",
+          "description": "In-game message for 5 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "message1Minute",
+          "fieldType": "string",
+          "description": "In-game message for 1 minute warning"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "messageRestart",
+          "fieldType": "string",
+          "description": "In-game message when restart is initiated"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "dayzCommands",
+      "category": "community-management",
+      "date": "2026-05-06T05:07:29-05:00",
+      "title": "New Module: dayzCommands",
+      "description": "Updated to version latest. Added 4 commands: `visit`, `bag`, `sethome`, `home`.",
+      "commitHash": "8b65103eb5daac95cff98e9b5c1aa10ba61863ca",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "visit",
+          "description": "Teleport to a player in your Expansion party. Usage: /visit <name>"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "bag",
+          "description": "Teleport to your most recent death location to recover your loot."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "sethome",
+          "description": "Save your current location as your home. Use /home to teleport back."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "home",
+          "description": "Teleport to your saved home. Use /sethome to set a home first."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "dayzDiscordIntegration",
+      "category": "integration",
+      "date": "2026-05-06T05:07:29-05:00",
+      "title": "New Module: dayzDiscordIntegration",
+      "description": "Updated to version latest. Added 6 hooks: `Online - Offline` (server-status-changed), `PlayerDied` (log), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `GameToDiscord` (chat-message), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `discordChannelIdCustom`, `newPlayerDiscordChannel`, `newPlayerDiscordMessage`.",
+      "commitHash": "8b65103eb5daac95cff98e9b5c1aa10ba61863ca",
+      "isNew": true,
+      "details": [
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "Online - Offline",
+          "eventType": "server-status-changed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "PlayerDied",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "DiscordToGame",
+          "eventType": "discord-message"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "PlayerDisconnected",
+          "eventType": "player-disconnected"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "GameToDiscord",
+          "eventType": "chat-message"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "PlayerConnected",
+          "eventType": "player-connected"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "serverStatus",
+          "schedule": "*/30 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "utils"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "sendPlayerConnected",
+          "fieldType": "boolean",
+          "description": "Send a message when a player connects."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "sendPlayerDisconnected",
+          "fieldType": "boolean",
+          "description": "Send a message when a player disconnects."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "onlyGlobalChat",
+          "fieldType": "boolean",
+          "description": "Only relay messages from global chat. (no team chat or private messages)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelIdCustom",
+          "fieldType": "string",
+          "description": "Custom Discord Channel Id"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "newPlayerDiscordChannel",
+          "fieldType": "string",
+          "description": "Discord channel ID for new player announcements (leave empty to disable)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "newPlayerDiscordMessage",
+          "fieldType": "string",
+          "description": "New player Discord message. Use {player} and {server} as placeholders."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "PlaytimeBuffRewards",
       "category": "economy",
       "date": "2026-04-29T05:11:27Z",
@@ -9522,85 +9766,246 @@
     }
   ],
   "byModule": {
-    "CommunityFund": [
+    "dayzRestarts": [
       {
-        "moduleName": "CommunityFund",
+        "moduleName": "dayzRestarts",
+        "category": "administration",
+        "date": "2026-05-06T05:07:29-05:00",
+        "title": "New Module: dayzRestarts",
+        "description": "Updated to version latest. Added 4 scheduled tasks: `10 minute`, `Restart`, `5 minute`, `1 minute`. New configuration options: `userDiscordChannel`, `shutdownCommand`, `saveCommand`, `supportsInGameMessages`, `message10Minute`, `message5Minute`, `message1Minute`, `messageRestart`.",
+        "commitHash": "8b65103eb5daac95cff98e9b5c1aa10ba61863ca",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "10 minute",
+            "schedule": "00 */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "Restart",
+            "schedule": "10 */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "5 minute",
+            "schedule": "05 */3 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "1 minute",
+            "schedule": "09 */3 * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "userDiscordChannel",
+            "fieldType": "string",
+            "description": "Discord Channel"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "shutdownCommand",
+            "fieldType": "string",
+            "description": "Command that shuts down your server"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "saveCommand",
+            "fieldType": "string",
+            "description": "save command - if supported"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "supportsInGameMessages",
+            "fieldType": "boolean",
+            "description": "Enable in-game messages for restart warnings"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message10Minute",
+            "fieldType": "string",
+            "description": "In-game message for 10 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message5Minute",
+            "fieldType": "string",
+            "description": "In-game message for 5 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "message1Minute",
+            "fieldType": "string",
+            "description": "In-game message for 1 minute warning"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "messageRestart",
+            "fieldType": "string",
+            "description": "In-game message when restart is initiated"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "dayzCommands": [
+      {
+        "moduleName": "dayzCommands",
         "category": "community-management",
-        "date": "2026-04-27T17:39:40Z",
-        "title": "New Module: CommunityFund",
-        "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
-        "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
+        "date": "2026-05-06T05:07:29-05:00",
+        "title": "New Module: dayzCommands",
+        "description": "Updated to version latest. Added 4 commands: `visit`, `bag`, `sethome`, `home`.",
+        "commitHash": "8b65103eb5daac95cff98e9b5c1aa10ba61863ca",
         "isNew": true,
         "details": [
           {
             "type": "command",
             "action": "added",
-            "name": "fund-contribute",
-            "description": "Contribute currency to the community fund. Amount must be a positive whole number."
+            "name": "visit",
+            "description": "Teleport to a player in your Expansion party. Usage: /visit <name>"
           },
           {
             "type": "command",
             "action": "added",
-            "name": "fund-history",
-            "description": "Shows the number of community fund completions and the last completion details."
+            "name": "bag",
+            "description": "Teleport to your most recent death location to recover your loot."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "fund-status",
-            "description": "Shows the current community fund total, target, and round count."
+            "name": "sethome",
+            "description": "Save your current location as your home. Use /home to teleport back."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "home",
+            "description": "Teleport to your saved home. Use /sethome to set a home first."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "dayzDiscordIntegration": [
+      {
+        "moduleName": "dayzDiscordIntegration",
+        "category": "integration",
+        "date": "2026-05-06T05:07:29-05:00",
+        "title": "New Module: dayzDiscordIntegration",
+        "description": "Updated to version latest. Added 6 hooks: `Online - Offline` (server-status-changed), `PlayerDied` (log), `DiscordToGame` (discord-message), `PlayerDisconnected` (player-disconnected), `GameToDiscord` (chat-message), `PlayerConnected` (player-connected). Added 1 scheduled task: `serverStatus`. Added 1 function: `utils`. New configuration options: `sendPlayerConnected`, `sendPlayerDisconnected`, `onlyGlobalChat`, `discordChannelIdCustom`, `newPlayerDiscordChannel`, `newPlayerDiscordMessage`.",
+        "commitHash": "8b65103eb5daac95cff98e9b5c1aa10ba61863ca",
+        "isNew": true,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Online - Offline",
+            "eventType": "server-status-changed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerDied",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "DiscordToGame",
+            "eventType": "discord-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerDisconnected",
+            "eventType": "player-disconnected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "GameToDiscord",
+            "eventType": "chat-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "PlayerConnected",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "serverStatus",
+            "schedule": "*/30 * * * *"
           },
           {
             "type": "function",
             "action": "added",
-            "name": "fund-helpers"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "COMMUNITY_FUND_CONTRIBUTE",
-            "description": "Allows a player to contribute currency to the community fund"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "COMMUNITY_FUND_VIEW_HISTORY",
-            "description": "Allows a player to view the community fund completion history"
+            "name": "utils"
           },
           {
             "type": "config",
             "action": "added",
-            "name": "fundThreshold",
-            "fieldType": "number",
-            "description": "Target amount that triggers fund completion and reset"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "minimumContribution",
-            "fieldType": "number",
-            "description": "Minimum amount a player must contribute per command"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "completionMessage",
-            "fieldType": "string",
-            "description": "Broadcast message when threshold is reached. Supports {threshold} placeholder."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "completionCommands",
-            "fieldType": "array",
-            "description": "Raw game server commands executed on fund completion. E.g. Minecraft: 'effect give @a luck 3600'"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "broadcastContributions",
+            "name": "sendPlayerConnected",
             "fieldType": "boolean",
-            "description": "Whether to broadcast each contribution to all players"
+            "description": "Send a message when a player connects."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "sendPlayerDisconnected",
+            "fieldType": "boolean",
+            "description": "Send a message when a player disconnects."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "onlyGlobalChat",
+            "fieldType": "boolean",
+            "description": "Only relay messages from global chat. (no team chat or private messages)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelIdCustom",
+            "fieldType": "string",
+            "description": "Custom Discord Channel Id"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "newPlayerDiscordChannel",
+            "fieldType": "string",
+            "description": "Discord channel ID for new player announcements (leave empty to disable)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "newPlayerDiscordMessage",
+            "fieldType": "string",
+            "description": "New player Discord message. Use {player} and {server} as placeholders."
           },
           {
             "type": "version",
@@ -9685,6 +10090,95 @@
             "name": "currencyRewards",
             "fieldType": "array",
             "description": "Takaro currency rewards eligible for hourly playtime grants."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "CommunityFund": [
+      {
+        "moduleName": "CommunityFund",
+        "category": "community-management",
+        "date": "2026-04-27T17:39:40Z",
+        "title": "New Module: CommunityFund",
+        "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
+        "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-contribute",
+            "description": "Contribute currency to the community fund. Amount must be a positive whole number."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-history",
+            "description": "Shows the number of community fund completions and the last completion details."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-status",
+            "description": "Shows the current community fund total, target, and round count."
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "fund-helpers"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "COMMUNITY_FUND_CONTRIBUTE",
+            "description": "Allows a player to contribute currency to the community fund"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "COMMUNITY_FUND_VIEW_HISTORY",
+            "description": "Allows a player to view the community fund completion history"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "fundThreshold",
+            "fieldType": "number",
+            "description": "Target amount that triggers fund completion and reset"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "minimumContribution",
+            "fieldType": "number",
+            "description": "Minimum amount a player must contribute per command"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "completionMessage",
+            "fieldType": "string",
+            "description": "Broadcast message when threshold is reached. Supports {threshold} placeholder."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "completionCommands",
+            "fieldType": "array",
+            "description": "Raw game server commands executed on fund completion. E.g. Minecraft: 'effect give @a luck 3600'"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "broadcastContributions",
+            "fieldType": "boolean",
+            "description": "Whether to broadcast each contribution to all players"
           },
           {
             "type": "version",
@@ -19261,5 +19755,5 @@
       }
     ]
   },
-  "generatedAt": "2026-04-29T06:16:38.333Z"
+  "generatedAt": "2026-05-06T18:54:28.854Z"
 }
