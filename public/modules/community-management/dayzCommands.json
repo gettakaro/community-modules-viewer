@@ -1,0 +1,60 @@
+{
+  "name": "dayzCommands",
+  "author": "Mad",
+  "supportedGames": ["other"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "DayZ chat commands. Provides /visit <name> (teleport to a party member) and /bag (teleport to your most recent death location). Requires the @TakaroIntegration mod on the DayZ server.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{},\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nconst targetName = (data.arguments.target || '').trim();\nif (!targetName) {\n  await data.player.pm('Usage: /visit <player name>');\n} else {\n  const search = await takaro.playerOnGameserver.playerOnGameServerControllerSearch({\n    filters: { gameServerId: [data.gameServerId], online: [true] },\n    search: { name: [targetName] },\n    limit: 10,\n  });\n  const matches = (search.data && search.data.data) || [];\n  let match = matches.find((m) => (m.name || '').toLowerCase() === targetName.toLowerCase());\n  if (!match && matches.length === 1) match = matches[0];\n  if (!match) {\n    await data.player.pm(`No unique match for \"${targetName}\".`);\n  } else {\n    const targetRes = await takaro.player.playerControllerGetOne(match.playerId);\n    const cmdRes = await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n      command: `visit ${data.player.platformId} ${targetRes.data.data.platformId}`,\n    });\n    const result = (cmdRes.data && cmdRes.data.data) || {};\n    if (result.success === false) {\n      await data.player.pm(result.rawResult || 'Visit failed.');\n    } else {\n      await data.player.pm(`Teleported to ${match.name}.`);\n    }\n  }\n}\n",
+          "name": "visit",
+          "description": null,
+          "trigger": "visit",
+          "helpText": "Teleport to a player in your Expansion party. Usage: /visit <name>",
+          "arguments": [
+            {
+              "name": "target",
+              "type": "string",
+              "helpText": "Name (or partial name) of the player to visit. Must be in your Expansion party.",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nconst events = await takaro.event.eventControllerSearch({\n  filters: {\n    eventName: ['player-death'],\n    playerId: [data.player.id],\n    gameserverId: [data.gameServerId],\n  },\n  sortBy: 'createdAt',\n  sortDirection: 'desc',\n  limit: 1,\n});\n\nif (events.data.data.length === 0) {\n  await data.player.pm('No death recorded yet.');\n} else {\n  const { x, y, z } = events.data.data[0].meta.position;\n  await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n    command: `tp ${data.player.platformId} ${x} ${y} ${z}`,\n  });\n  await data.player.pm('Teleported to your last death.');\n}\n",
+          "name": "bag",
+          "description": null,
+          "trigger": "bag",
+          "helpText": "Teleport to your most recent death location to recover your loot.",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nconst pog = await takaro.playerOnGameserver.playerOnGameServerControllerGetOne(data.gameServerId, data.player.id);\nconst { positionX, positionY, positionZ } = pog.data.data;\n\nconst existing = await takaro.variable.variableControllerSearch({\n  filters: {\n    key: ['home'],\n    moduleId: [data.module.moduleId],\n    gameServerId: [data.gameServerId],\n    playerId: [data.player.id],\n  },\n});\n\nawait Promise.all(existing.data.data.map(v => takaro.variable.variableControllerDelete(v.id)));\n\nawait takaro.variable.variableControllerCreate({\n  key: 'home',\n  value: JSON.stringify({ x: positionX, y: positionY, z: positionZ }),\n  moduleId: data.module.moduleId,\n  gameServerId: data.gameServerId,\n  playerId: data.player.id,\n});\n\nawait data.player.pm(`Home set at ${Math.round(positionX)}, ${Math.round(positionY)}, ${Math.round(positionZ)}.`);",
+          "name": "sethome",
+          "description": null,
+          "trigger": "sethome",
+          "helpText": "Save your current location as your home. Use /home to teleport back.",
+          "arguments": []
+        },
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nconst existing = await takaro.variable.variableControllerSearch({\n  filters: {\n    key: ['home'],\n    moduleId: [data.module.moduleId],\n    gameServerId: [data.gameServerId],\n    playerId: [data.player.id],\n  },\n});\n\nconst home = existing.data.data[0];\n\nif (!home) {\n  await data.player.pm('No home set. Use /sethome to save your current location.');\n} else {\n  const { x, y, z } = JSON.parse(home.value);\n  const id = data.player.platformId.replace('dayz:', '');\n  await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n    command: `tp ${id} ${x} ${y} ${z}`,\n  });\n  await data.player.pm(`Teleported to your home at ${Math.round(x)}, ${Math.round(y)}, ${Math.round(z)}.`);\n}",
+          "name": "home",
+          "description": null,
+          "trigger": "home",
+          "helpText": "Teleport to your saved home. Use /sethome to set a home first.",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [],
+      "shopActions": []
+    }
+  ],
+  "takaroVersion": "0.7.2"
+}
