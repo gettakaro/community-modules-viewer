@@ -11,6 +11,8 @@ const GAME_NAME_MAP: Record<string, string> = {
   '7days': '7 Days to Die',
   sevendaystodie: '7 Days to Die',
   hytale: 'Hytale',
+  dayz: 'DayZ',
+  'day z': 'DayZ',
   rust: 'Rust',
   minecraft: 'Minecraft',
   other: 'All',
