@@ -1,7 +1,7 @@
 {
   "name": "dayzRestarts",
   "author": "Mad",
-  "supportedGames": ["other"],
+  "supportedGames": ["DayZ"],
   "versions": [
     {
       "tag": "latest",
