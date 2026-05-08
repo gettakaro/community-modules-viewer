@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import fs from 'fs';
+import path from 'path';
 import { normalizeModules } from './moduleLoader';
 import { ModuleWithMeta } from '@/lib/types';
 
@@ -7,6 +9,47 @@ import { ModuleWithMeta } from '@/lib/types';
 // that can be tested in isolation
 
 describe('moduleLoader', () => {
+  describe('module naming conventions', () => {
+    it('keeps community module filenames and names URL lookup safe', () => {
+      const modulesDir = path.join(process.cwd(), 'public', 'modules');
+      const unsafePattern = /[^A-Za-z0-9_-]/;
+      const failures: string[] = [];
+
+      const scanDirectory = (dir: string) => {
+        for (const item of fs.readdirSync(dir, { withFileTypes: true })) {
+          const itemPath = path.join(dir, item.name);
+
+          if (item.isDirectory()) {
+            scanDirectory(itemPath);
+            continue;
+          }
+
+          if (!item.isFile() || !item.name.endsWith('.json')) {
+            continue;
+          }
+
+          const moduleData = JSON.parse(fs.readFileSync(itemPath, 'utf-8'));
+          const relativePath = path.relative(modulesDir, itemPath);
+          const filename = path.basename(item.name, '.json');
+
+          if (unsafePattern.test(filename)) {
+            failures.push(`${relativePath} has an unsafe filename`);
+          }
+
+          if (unsafePattern.test(moduleData.name)) {
+            failures.push(
+              `${relativePath} has unsafe name "${moduleData.name}"`,
+            );
+          }
+        }
+      };
+
+      scanDirectory(modulesDir);
+
+      expect(failures).toEqual([]);
+    });
+  });
+
   describe('normalizeModules', () => {
     it('should normalize modules with missing fields by providing defaults', () => {
       const moduleWithMissingFields: ModuleWithMeta = {
