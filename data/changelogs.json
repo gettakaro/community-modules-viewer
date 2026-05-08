@@ -1,6 +1,26 @@
 {
   "global": [
     {
+      "moduleName": "community-fund",
+      "category": "community-management",
+      "date": "2026-05-08T09:00:45+02:00",
+      "title": "New Module: community-fund",
+      "description": "Added community-fund to the repository",
+      "commitHash": "fc855501d0dd6adad8dddde8a8bea0695f3d7b53",
+      "isNew": false,
+      "details": []
+    },
+    {
+      "moduleName": "referral-program",
+      "category": "community-management",
+      "date": "2026-05-08T09:00:45+02:00",
+      "title": "New Module: referral-program",
+      "description": "Added referral-program to the repository",
+      "commitHash": "fc855501d0dd6adad8dddde8a8bea0695f3d7b53",
+      "isNew": false,
+      "details": []
+    },
+    {
       "moduleName": "dayzRestarts",
       "category": "administration",
       "date": "2026-05-06T05:07:29-05:00",
@@ -20392,6 +20412,30 @@
         "details": []
       }
     ],
+    "community-fund": [
+      {
+        "moduleName": "community-fund",
+        "category": "community-management",
+        "date": "2026-05-08T09:00:45+02:00",
+        "title": "New Module: community-fund",
+        "description": "Added community-fund to the repository",
+        "commitHash": "fc855501d0dd6adad8dddde8a8bea0695f3d7b53",
+        "isNew": false,
+        "details": []
+      }
+    ],
+    "referral-program": [
+      {
+        "moduleName": "referral-program",
+        "category": "community-management",
+        "date": "2026-05-08T09:00:45+02:00",
+        "title": "New Module: referral-program",
+        "description": "Added referral-program to the repository",
+        "commitHash": "fc855501d0dd6adad8dddde8a8bea0695f3d7b53",
+        "isNew": false,
+        "details": []
+      }
+    ],
     "limon_Translator": [
       {
         "moduleName": "limon_Translator",
@@ -20405,5 +20449,5 @@
       }
     ]
   },
-  "generatedAt": "2026-05-08T05:57:19.552Z"
+  "generatedAt": "2026-05-08T07:30:23.032Z"
 }
