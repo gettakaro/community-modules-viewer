@@ -128,7 +128,7 @@ export function ModuleCard({
     return (
       <a
         data-testid="module-link"
-        className={cardClassName}
+        className={`${cardClassName} block no-underline text-inherit`}
         href={href}
         onClick={handleClick}
         aria-label={`Module: ${module.name}`}

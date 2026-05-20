@@ -32,6 +32,7 @@ describe('ModuleCard crawlability', () => {
     const link = screen.getByRole('link', { name: 'Module: test-module' });
 
     expect(link).toHaveAttribute('href', '/module/test-module');
+    expect(link).toHaveClass('block');
   });
 
   it('calls onClick from the crawlable link without losing href', () => {
