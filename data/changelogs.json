@@ -483,10 +483,10 @@
       ]
     },
     {
-      "moduleName": "CommunityFund",
+      "moduleName": "community-fund",
       "category": "community-management",
       "date": "2026-04-27T17:39:40Z",
-      "title": "New Module: CommunityFund",
+      "title": "New Module: community-fund",
       "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
       "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
       "isNew": true,
@@ -570,10 +570,10 @@
       ]
     },
     {
-      "moduleName": "ReferralProgram",
+      "moduleName": "referral-program",
       "category": "community-management",
       "date": "2026-04-26T19:36:03Z",
-      "title": "New Module: ReferralProgram",
+      "title": "New Module: referral-program",
       "description": "Updated to version latest. Added 6 commands: `refcode`, `referral`, `refstats`, `reftop`, `reflink`, `refunlink`. Added 1 hook: `on-player-disconnect` (player-disconnected). Added 2 scheduled tasks: `sweep-pending-referrals`, `reset-daily-counters`. Added 1 function: `referral-helpers`. New permissions: `REFERRAL_USE`, `REFERRAL_VIP`, `REFERRAL_ADMIN`. New configuration options: `prizeIsCurrency`, `referrerCurrencyReward`, `refereeCurrencyReward`, `items`, `playtimeThresholdMinutes`, `referralWindowHours`, `maxReferralsPerDay`, `maxReferralsLifetime`.",
       "commitHash": "953b085d85773c723d08efa21ac17d7841a28cff",
       "isNew": true,
@@ -582,37 +582,37 @@
           "type": "command",
           "action": "added",
           "name": "refcode",
-          "description": "Usage: /refcode — Displays your unique referral code. Share it with new players to earn rewards when they join."
+          "description": "Usage: /refcode \u2014 Displays your unique referral code. Share it with new players to earn rewards when they join."
         },
         {
           "type": "command",
           "action": "added",
           "name": "referral",
-          "description": "Usage: /referral <code> — Enter a referral code from the player who invited you. You must use this within the referral window of your first join (see server config)."
+          "description": "Usage: /referral <code> \u2014 Enter a referral code from the player who invited you. You must use this within the referral window of your first join (see server config)."
         },
         {
           "type": "command",
           "action": "added",
           "name": "refstats",
-          "description": "Usage: /refstats — View your referral stats including total referrals, earnings, and who referred you."
+          "description": "Usage: /refstats \u2014 View your referral stats including total referrals, earnings, and who referred you."
         },
         {
           "type": "command",
           "action": "added",
           "name": "reftop",
-          "description": "Usage: /reftop — Shows the top 10 players by number of successful referrals."
+          "description": "Usage: /reftop \u2014 Shows the top 10 players by number of successful referrals."
         },
         {
           "type": "command",
           "action": "added",
           "name": "reflink",
-          "description": "Usage: /reflink <referee> <referrer> — Admin only. Provide the full exact display name of each player (case-sensitive). Force-creates a paid link and pays both rewards."
+          "description": "Usage: /reflink <referee> <referrer> \u2014 Admin only. Provide the full exact display name of each player (case-sensitive). Force-creates a paid link and pays both rewards."
         },
         {
           "type": "command",
           "action": "added",
           "name": "refunlink",
-          "description": "Usage: /refunlink <referee> — Admin only. Provide the full exact display name of the referee player (case-sensitive). Removes their referral link."
+          "description": "Usage: /refunlink <referee> \u2014 Admin only. Provide the full exact display name of the referee player (case-sensitive). Removes their referral link."
         },
         {
           "type": "hook",
@@ -3044,7 +3044,7 @@
           "action": "added",
           "name": "authorisedPlayer",
           "fieldType": "string",
-          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
+          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
         },
         {
           "type": "config",
@@ -3191,14 +3191,14 @@
           "action": "added",
           "name": "minutesBeforeKick",
           "fieldType": "number",
-          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
+          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
         },
         {
           "type": "config",
           "action": "added",
           "name": "maxAfkChecks",
           "fieldType": "number",
-          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
         },
         {
           "type": "config",
@@ -6858,7 +6858,7 @@
           "action": "added",
           "name": "authorisedPlayer",
           "fieldType": "string",
-          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
+          "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
         },
         {
           "type": "config",
@@ -7934,14 +7934,14 @@
           "action": "added",
           "name": "minutesBeforeKick",
           "fieldType": "number",
-          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
+          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
         },
         {
           "type": "config",
           "action": "added",
           "name": "maxAfkChecks",
           "fieldType": "number",
-          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
         },
         {
           "type": "config",
@@ -8947,14 +8947,14 @@
           "action": "added",
           "name": "minutesBeforeKick",
           "fieldType": "number",
-          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
+          "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
         },
         {
           "type": "config",
           "action": "added",
           "name": "maxAfkChecks",
           "fieldType": "number",
-          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
+          "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
         },
         {
           "type": "config",
@@ -9485,7 +9485,7 @@
           "type": "command",
           "action": "added",
           "name": "kick",
-          "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Linón\" \"Too cool\""
+          "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Lin\u00f3n\" \"Too cool\""
         },
         {
           "type": "command",
@@ -10487,247 +10487,6 @@
             "name": "entrants",
             "fieldType": "array",
             "description": "List of racers. Format: Name; Odds (whole number) - one racer per line."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "CommunityFund": [
-      {
-        "moduleName": "CommunityFund",
-        "category": "community-management",
-        "date": "2026-04-27T17:39:40Z",
-        "title": "New Module: CommunityFund",
-        "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
-        "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "fund-contribute",
-            "description": "Contribute currency to the community fund. Amount must be a positive whole number."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "fund-history",
-            "description": "Shows the number of community fund completions and the last completion details."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "fund-status",
-            "description": "Shows the current community fund total, target, and round count."
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "fund-helpers"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "COMMUNITY_FUND_CONTRIBUTE",
-            "description": "Allows a player to contribute currency to the community fund"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "COMMUNITY_FUND_VIEW_HISTORY",
-            "description": "Allows a player to view the community fund completion history"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "fundThreshold",
-            "fieldType": "number",
-            "description": "Target amount that triggers fund completion and reset"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "minimumContribution",
-            "fieldType": "number",
-            "description": "Minimum amount a player must contribute per command"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "completionMessage",
-            "fieldType": "string",
-            "description": "Broadcast message when threshold is reached. Supports {threshold} placeholder."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "completionCommands",
-            "fieldType": "array",
-            "description": "Raw game server commands executed on fund completion. E.g. Minecraft: 'effect give @a luck 3600'"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "broadcastContributions",
-            "fieldType": "boolean",
-            "description": "Whether to broadcast each contribution to all players"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "ReferralProgram": [
-      {
-        "moduleName": "ReferralProgram",
-        "category": "community-management",
-        "date": "2026-04-26T19:36:03Z",
-        "title": "New Module: ReferralProgram",
-        "description": "Updated to version latest. Added 6 commands: `refcode`, `referral`, `refstats`, `reftop`, `reflink`, `refunlink`. Added 1 hook: `on-player-disconnect` (player-disconnected). Added 2 scheduled tasks: `sweep-pending-referrals`, `reset-daily-counters`. Added 1 function: `referral-helpers`. New permissions: `REFERRAL_USE`, `REFERRAL_VIP`, `REFERRAL_ADMIN`. New configuration options: `prizeIsCurrency`, `referrerCurrencyReward`, `refereeCurrencyReward`, `items`, `playtimeThresholdMinutes`, `referralWindowHours`, `maxReferralsPerDay`, `maxReferralsLifetime`.",
-        "commitHash": "953b085d85773c723d08efa21ac17d7841a28cff",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "refcode",
-            "description": "Usage: /refcode — Displays your unique referral code. Share it with new players to earn rewards when they join."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "referral",
-            "description": "Usage: /referral <code> — Enter a referral code from the player who invited you. You must use this within the referral window of your first join (see server config)."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "refstats",
-            "description": "Usage: /refstats — View your referral stats including total referrals, earnings, and who referred you."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "reftop",
-            "description": "Usage: /reftop — Shows the top 10 players by number of successful referrals."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "reflink",
-            "description": "Usage: /reflink <referee> <referrer> — Admin only. Provide the full exact display name of each player (case-sensitive). Force-creates a paid link and pays both rewards."
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "refunlink",
-            "description": "Usage: /refunlink <referee> — Admin only. Provide the full exact display name of the referee player (case-sensitive). Removes their referral link."
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "on-player-disconnect",
-            "eventType": "player-disconnected"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "sweep-pending-referrals",
-            "schedule": "*/15 * * * *"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "reset-daily-counters",
-            "schedule": "0 0 * * *"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "referral-helpers"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "REFERRAL_USE",
-            "description": "Required for /refcode, /referral, /refstats, /reftop"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "REFERRAL_VIP",
-            "description": "Count = tier; +5% referrer reward per tier, capped at +25%"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "REFERRAL_ADMIN",
-            "description": "Required for /reflink, /refunlink; bypasses caps and window checks"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "prizeIsCurrency",
-            "fieldType": "boolean",
-            "description": "Prize is currency"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "referrerCurrencyReward",
-            "fieldType": "number",
-            "description": "Referrer currency reward"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "refereeCurrencyReward",
-            "fieldType": "number",
-            "description": "Referee welcome bonus (currency)"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "items",
-            "fieldType": "array",
-            "description": "Item prize pool (used when prizeIsCurrency is false)"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "playtimeThresholdMinutes",
-            "fieldType": "number",
-            "description": "Minutes referee must play before referrer is paid"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "referralWindowHours",
-            "fieldType": "number",
-            "description": "Max hours since first connect to claim a referral"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "maxReferralsPerDay",
-            "fieldType": "number",
-            "description": "Maximum number of successful referrals a player can earn per day"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "maxReferralsLifetime",
-            "fieldType": "number",
-            "description": "Maximum number of paid referrals a player can earn in total (lifetime cap)"
           },
           {
             "type": "version",
@@ -13487,7 +13246,7 @@
             "action": "added",
             "name": "authorisedPlayer",
             "fieldType": "string",
-            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
+            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
           },
           {
             "type": "config",
@@ -13570,14 +13329,14 @@
             "action": "added",
             "name": "minutesBeforeKick",
             "fieldType": "number",
-            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
+            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
           },
           {
             "type": "config",
             "action": "added",
             "name": "maxAfkChecks",
             "fieldType": "number",
-            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
           },
           {
             "type": "config",
@@ -17341,7 +17100,7 @@
             "action": "added",
             "name": "authorisedPlayer",
             "fieldType": "string",
-            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like 🆃🆁🅴🆅🅾🆁\n\nNot tested with odd symbols like: ☕ Catalysm"
+            "description": "People authorised to manually execute the hook via the discord debugChannel. Separate with commas. e.g.:  Trevor, Barry, John\n\nTested OK with unicode like \ud83c\udd83\ud83c\udd81\ud83c\udd74\ud83c\udd85\ud83c\udd7e\ud83c\udd81\n\nNot tested with odd symbols like: \u2615 Catalysm"
           },
           {
             "type": "config",
@@ -18597,14 +18356,14 @@
             "action": "added",
             "name": "minutesBeforeKick",
             "fieldType": "number",
-            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
+            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
           },
           {
             "type": "config",
             "action": "added",
             "name": "maxAfkChecks",
             "fieldType": "number",
-            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
+            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and  3 max checks, players will be kicked after 15 minutes of being AFK."
           },
           {
             "type": "config",
@@ -18656,14 +18415,14 @@
             "action": "added",
             "name": "minutesBeforeKick",
             "fieldType": "number",
-            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks × Maximum AFK Checks)."
+            "description": "Time in minutes between each AFK check. This should match your cronjob schedule (for example, if your cronjob runs every 5 minutes, set this to 5). Total AFK time before kick will be (Minutes Between Checks \u00d7 Maximum AFK Checks)."
           },
           {
             "type": "config",
             "action": "added",
             "name": "maxAfkChecks",
             "fieldType": "number",
-            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks × Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
+            "description": "Number of consecutive AFK checks before a player is kicked. Total AFK time will be (Minutes Between Checks \u00d7 Maximum AFK Checks). For example, with 5 minutes between checks and 3 max checks, players will be kicked after 15 minutes of being AFK."
           },
           {
             "type": "config",
@@ -19783,7 +19542,7 @@
             "type": "command",
             "action": "added",
             "name": "kick",
-            "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Linón\" \"Too cool\""
+            "description": "type kick (name, in quotes is they have a space) (reason in quotes). Example kick \"El Lin\u00f3n\" \"Too cool\""
           },
           {
             "type": "command",
@@ -20422,6 +20181,93 @@
         "commitHash": "fc855501d0dd6adad8dddde8a8bea0695f3d7b53",
         "isNew": false,
         "details": []
+      },
+      {
+        "moduleName": "community-fund",
+        "category": "community-management",
+        "date": "2026-04-27T17:39:40Z",
+        "title": "New Module: community-fund",
+        "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
+        "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-contribute",
+            "description": "Contribute currency to the community fund. Amount must be a positive whole number."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-history",
+            "description": "Shows the number of community fund completions and the last completion details."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "fund-status",
+            "description": "Shows the current community fund total, target, and round count."
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "fund-helpers"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "COMMUNITY_FUND_CONTRIBUTE",
+            "description": "Allows a player to contribute currency to the community fund"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "COMMUNITY_FUND_VIEW_HISTORY",
+            "description": "Allows a player to view the community fund completion history"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "fundThreshold",
+            "fieldType": "number",
+            "description": "Target amount that triggers fund completion and reset"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "minimumContribution",
+            "fieldType": "number",
+            "description": "Minimum amount a player must contribute per command"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "completionMessage",
+            "fieldType": "string",
+            "description": "Broadcast message when threshold is reached. Supports {threshold} placeholder."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "completionCommands",
+            "fieldType": "array",
+            "description": "Raw game server commands executed on fund completion. E.g. Minecraft: 'effect give @a luck 3600'"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "broadcastContributions",
+            "fieldType": "boolean",
+            "description": "Whether to broadcast each contribution to all players"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
       }
     ],
     "referral-program": [
@@ -20434,6 +20280,156 @@
         "commitHash": "fc855501d0dd6adad8dddde8a8bea0695f3d7b53",
         "isNew": false,
         "details": []
+      },
+      {
+        "moduleName": "referral-program",
+        "category": "community-management",
+        "date": "2026-04-26T19:36:03Z",
+        "title": "New Module: referral-program",
+        "description": "Updated to version latest. Added 6 commands: `refcode`, `referral`, `refstats`, `reftop`, `reflink`, `refunlink`. Added 1 hook: `on-player-disconnect` (player-disconnected). Added 2 scheduled tasks: `sweep-pending-referrals`, `reset-daily-counters`. Added 1 function: `referral-helpers`. New permissions: `REFERRAL_USE`, `REFERRAL_VIP`, `REFERRAL_ADMIN`. New configuration options: `prizeIsCurrency`, `referrerCurrencyReward`, `refereeCurrencyReward`, `items`, `playtimeThresholdMinutes`, `referralWindowHours`, `maxReferralsPerDay`, `maxReferralsLifetime`.",
+        "commitHash": "953b085d85773c723d08efa21ac17d7841a28cff",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "refcode",
+            "description": "Usage: /refcode \u2014 Displays your unique referral code. Share it with new players to earn rewards when they join."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "referral",
+            "description": "Usage: /referral <code> \u2014 Enter a referral code from the player who invited you. You must use this within the referral window of your first join (see server config)."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "refstats",
+            "description": "Usage: /refstats \u2014 View your referral stats including total referrals, earnings, and who referred you."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reftop",
+            "description": "Usage: /reftop \u2014 Shows the top 10 players by number of successful referrals."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "reflink",
+            "description": "Usage: /reflink <referee> <referrer> \u2014 Admin only. Provide the full exact display name of each player (case-sensitive). Force-creates a paid link and pays both rewards."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "refunlink",
+            "description": "Usage: /refunlink <referee> \u2014 Admin only. Provide the full exact display name of the referee player (case-sensitive). Removes their referral link."
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "on-player-disconnect",
+            "eventType": "player-disconnected"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "sweep-pending-referrals",
+            "schedule": "*/15 * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "reset-daily-counters",
+            "schedule": "0 0 * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "referral-helpers"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REFERRAL_USE",
+            "description": "Required for /refcode, /referral, /refstats, /reftop"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REFERRAL_VIP",
+            "description": "Count = tier; +5% referrer reward per tier, capped at +25%"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "REFERRAL_ADMIN",
+            "description": "Required for /reflink, /refunlink; bypasses caps and window checks"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "prizeIsCurrency",
+            "fieldType": "boolean",
+            "description": "Prize is currency"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "referrerCurrencyReward",
+            "fieldType": "number",
+            "description": "Referrer currency reward"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "refereeCurrencyReward",
+            "fieldType": "number",
+            "description": "Referee welcome bonus (currency)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "items",
+            "fieldType": "array",
+            "description": "Item prize pool (used when prizeIsCurrency is false)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playtimeThresholdMinutes",
+            "fieldType": "number",
+            "description": "Minutes referee must play before referrer is paid"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "referralWindowHours",
+            "fieldType": "number",
+            "description": "Max hours since first connect to claim a referral"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maxReferralsPerDay",
+            "fieldType": "number",
+            "description": "Maximum number of successful referrals a player can earn per day"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maxReferralsLifetime",
+            "fieldType": "number",
+            "description": "Maximum number of paid referrals a player can earn in total (lifetime cap)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
       }
     ],
     "limon_Translator": [
