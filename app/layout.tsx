@@ -4,7 +4,10 @@ import './globals.css';
 import { Footer } from '@/components/Footer';
 import { Toaster } from 'react-hot-toast';
 
+const SITE_URL = 'https://modules.takaro.io';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Community Modules Viewer',
   description: 'Browse and explore Takaro community and built-in modules',
   keywords: ['Takaro', 'modules', 'gaming', 'server management'],
@@ -12,10 +15,13 @@ export const metadata: Metadata = {
   creator: 'Takaro',
   publisher: 'Takaro',
   robots: 'index, follow',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://community-modules.takaro.io',
+    url: SITE_URL,
     siteName: 'Community Modules Viewer',
     title: 'Community Modules Viewer',
     description: 'Browse and explore Takaro community and built-in modules',

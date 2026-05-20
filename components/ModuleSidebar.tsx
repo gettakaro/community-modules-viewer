@@ -316,9 +316,7 @@ export function ModuleSidebar({
     };
   }, [modules, filteredModules]);
 
-  const handleModuleClick = (module: ModuleWithMeta) => {
-    // Navigate to the module page (encode name for URL compatibility)
-    router.push(`/module/${encodeURIComponent(module.name)}`);
+  const handleModuleClick = () => {
     // Close mobile sidebar after navigation
     if (isMobile) {
       setIsMobileOpen(false);
@@ -398,6 +396,14 @@ export function ModuleSidebar({
       .split('-')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
+  };
+
+  const getModuleHref = (module: ModuleWithMeta) => {
+    const latestVersion =
+      module.versions.find((version) => version.tag === 'latest') ||
+      module.versions[0];
+
+    return `/module/${encodeURIComponent(module.name)}/${encodeURIComponent(latestVersion.tag)}`;
   };
 
   return (
@@ -727,6 +733,7 @@ export function ModuleSidebar({
                               <ModuleCard
                                 key={module.name}
                                 module={module}
+                                href={getModuleHref(module)}
                                 onClick={handleModuleClick}
                                 isSelected={selectedModule === module.name}
                                 className="module-card-sidebar"
