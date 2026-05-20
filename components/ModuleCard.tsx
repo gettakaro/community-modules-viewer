@@ -1,3 +1,4 @@
+import type React from 'react';
 import { ModuleWithMeta } from '@/lib/types';
 import { MarkdownRenderer } from './MarkdownRenderer';
 
@@ -6,6 +7,8 @@ export interface ModuleCardProps {
   module: ModuleWithMeta;
   /** Optional click handler for card interaction */
   onClick?: (module: ModuleWithMeta) => void;
+  /** Optional URL that makes the card crawlable and directly navigable */
+  href?: string;
   /** Whether this card is currently selected/active */
   isSelected?: boolean;
   /** Additional CSS classes */
@@ -19,6 +22,7 @@ export interface ModuleCardProps {
 export function ModuleCard({
   module,
   onClick,
+  href,
   isSelected = false,
   className = '',
 }: ModuleCardProps) {
@@ -43,21 +47,15 @@ export function ModuleCard({
   const displayDescription =
     latestVersion?.description || module.versions[0]?.description || '';
 
-  return (
-    <div
-      data-testid="module-link"
-      className={`
+  const cardClassName = `
         card-takaro card-takaro-hover cursor-pointer
         ${isSelected ? 'border-takaro-primary bg-takaro-card-hover' : ''}
         ${onClick ? 'focus:outline-none focus:ring-2 focus:ring-takaro-primary' : ''}
         ${className}
-      `}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={onClick ? 0 : -1}
-      role={onClick ? 'button' : 'article'}
-      aria-label={`Module: ${module.name}`}
-    >
+      `;
+
+  const cardContent = (
+    <>
       {/* Header with name and badges */}
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-base font-semibold text-takaro-text-primary truncate flex-1 mr-2">
@@ -123,6 +121,34 @@ export function ModuleCard({
           Takaro {module.takaroVersion}
         </span>
       </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        data-testid="module-link"
+        className={cardClassName}
+        href={href}
+        onClick={handleClick}
+        aria-label={`Module: ${module.name}`}
+      >
+        {cardContent}
+      </a>
+    );
+  }
+
+  return (
+    <div
+      data-testid="module-link"
+      className={cardClassName}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={onClick ? 0 : -1}
+      role={onClick ? 'button' : 'article'}
+      aria-label={`Module: ${module.name}`}
+    >
+      {cardContent}
     </div>
   );
 }

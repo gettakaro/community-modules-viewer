@@ -8,6 +8,8 @@ import fs from 'fs';
 import path from 'path';
 import { Changelogs, ChangelogsSchema } from '@/lib/types';
 
+const SITE_URL = 'https://modules.takaro.io';
+
 interface ModuleVersionPageProps {
   params: Promise<{
     name: string;
@@ -47,9 +49,25 @@ export async function generateMetadata({ params }: ModuleVersionPageProps) {
   const { name, version } = await params;
   const decodedName = decodeURIComponent(name);
   const decodedVersion = decodeURIComponent(version);
+  const title = `${decodedName} v${decodedVersion} - Community Modules Viewer`;
+  const description = `View details for ${decodedName} module version ${decodedVersion}`;
+  const url = `/module/${encodeURIComponent(decodedName)}/${encodeURIComponent(decodedVersion)}`;
+
   return {
-    title: `${decodedName} v${decodedVersion} - Community Modules Viewer`,
-    description: `View details for ${decodedName} module version ${decodedVersion}`,
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}${url}`,
+    },
+    twitter: {
+      title,
+      description,
+    },
   };
 }
 

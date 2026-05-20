@@ -18,17 +18,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Add module pages
+  // Add module version pages. The module-level route is a static-export
+  // redirect shell, so it should not be advertised as an indexable URL.
   for (const mod of modules) {
-    // Module main page (redirects to latest version)
-    urls.push({
-      url: `${SITE_URL}/module/${encodeURIComponent(mod.name)}`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    });
-
-    // Module version pages
     if (mod.versions && Array.isArray(mod.versions)) {
       for (const version of mod.versions) {
         if (version.tag) {
