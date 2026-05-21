@@ -145,44 +145,48 @@ export function ModuleSidebar({
 
   // Save search state to localStorage
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && isHydrated) {
       localStorage.setItem('module-search', searchTerm);
     }
-  }, [searchTerm]);
+  }, [searchTerm, isHydrated]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !externalCategoryFilter) {
+    if (
+      typeof window !== 'undefined' &&
+      isHydrated &&
+      !externalCategoryFilter
+    ) {
       localStorage.setItem('module-category-filter', categoryFilter);
     }
-  }, [categoryFilter, externalCategoryFilter]);
+  }, [categoryFilter, externalCategoryFilter, isHydrated]);
 
   // Save author and game filter state to localStorage
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && isHydrated) {
       localStorage.setItem('module-author-filter', authorFilter);
     }
-  }, [authorFilter]);
+  }, [authorFilter, isHydrated]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && isHydrated) {
       localStorage.setItem('module-game-filter', gameFilter);
     }
-  }, [gameFilter]);
+  }, [gameFilter, isHydrated]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && isHydrated) {
       localStorage.setItem(
         'collapsed-categories',
         JSON.stringify(Array.from(collapsedCategories)),
       );
     }
-  }, [collapsedCategories]);
+  }, [collapsedCategories, isHydrated]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && isHydrated) {
       localStorage.setItem('sidebar-collapsed', isCollapsed.toString());
     }
-  }, [isCollapsed]);
+  }, [isCollapsed, isHydrated]);
 
   // Filter and search modules
   const filteredModules = useMemo(() => {
@@ -298,6 +302,13 @@ export function ModuleSidebar({
     return sortedGroups;
   }, [filteredModules]);
 
+  const formatCategoryName = (category: string) => {
+    return category
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   // Calculate statistics
   const stats = useMemo(() => {
     // Get unique categories, authors, and games
@@ -315,6 +326,29 @@ export function ModuleSidebar({
       games,
     };
   }, [modules, filteredModules]);
+
+  const sortedFilterCategories = useMemo(
+    () =>
+      [...stats.categories].sort((a, b) =>
+        formatCategoryName(a).localeCompare(formatCategoryName(b)),
+      ),
+    [stats.categories],
+  );
+
+  const hasActiveFilters =
+    searchTerm.trim() ||
+    categoryFilter !== 'all' ||
+    authorFilter !== 'all' ||
+    gameFilter !== 'all';
+
+  const activeFilterLabels = [
+    categoryFilter !== 'all'
+      ? `Category: ${formatCategoryName(categoryFilter)}`
+      : null,
+    authorFilter !== 'all' ? `Author: ${formatAuthorName(authorFilter)}` : null,
+    gameFilter !== 'all' ? `Game: ${gameFilter}` : null,
+    searchTerm.trim() ? `Search: ${searchTerm.trim()}` : null,
+  ].filter(Boolean);
 
   const handleModuleClick = () => {
     // Close mobile sidebar after navigation
@@ -382,20 +416,23 @@ export function ModuleSidebar({
   };
 
   const toggleCategory = (category: string) => {
-    const newCollapsed = new Set(collapsedCategories);
-    if (newCollapsed.has(category)) {
-      newCollapsed.delete(category);
-    } else {
-      newCollapsed.add(category);
-    }
-    setCollapsedCategories(newCollapsed);
-  };
+    setCollapsedCategories((currentCollapsed) => {
+      const newCollapsed = new Set(currentCollapsed);
+      if (newCollapsed.has(category)) {
+        newCollapsed.delete(category);
+      } else {
+        newCollapsed.add(category);
+      }
 
-  const formatCategoryName = (category: string) => {
-    return category
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(
+          'collapsed-categories',
+          JSON.stringify(Array.from(newCollapsed)),
+        );
+      }
+
+      return newCollapsed;
+    });
   };
 
   const getModuleHref = (module: ModuleWithMeta) => {
@@ -427,15 +464,27 @@ export function ModuleSidebar({
         {/* Sidebar Header */}
         <div className="sidebar-header">
           <div className="flex items-center justify-between">
-            <h2
-              className="text-lg font-semibold text-takaro-text-primary cursor-pointer hover:text-takaro-primary transition-colors"
+            <button
+              className="flex min-w-0 items-center gap-2 text-left text-takaro-text-primary transition-colors hover:text-takaro-primary"
               onClick={() => router.push('/')}
             >
-              {isCollapsed ? 'M' : 'Modules'}
-            </h2>
+              <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-takaro-primary text-sm font-black text-white">
+                T
+              </span>
+              {!isCollapsed && (
+                <span className="min-w-0">
+                  <span className="block text-base font-black leading-tight">
+                    takaro
+                  </span>
+                  <span className="block text-xs font-medium text-takaro-text-muted">
+                    Modules
+                  </span>
+                </span>
+              )}
+            </button>
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="btn btn-ghost btn-sm p-1"
+              className="rounded-lg p-1 text-takaro-text-muted transition-colors hover:bg-takaro-card-hover hover:text-takaro-text-primary"
               aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
               <svg
@@ -460,19 +509,7 @@ export function ModuleSidebar({
                 className="text-xs text-takaro-text-muted"
                 data-testid="search-results-count"
               >
-                {stats.filtered} of {stats.total} modules
-                {isHydrated &&
-                  (searchTerm ||
-                    categoryFilter !== 'all' ||
-                    authorFilter !== 'all' ||
-                    gameFilter !== 'all') && (
-                    <button
-                      onClick={clearSearch}
-                      className="ml-2 text-takaro-primary hover:text-takaro-primary-hover"
-                    >
-                      Clear
-                    </button>
-                  )}
+                Showing {stats.filtered} of {stats.total} modules
               </div>
             </div>
           )}
@@ -528,136 +565,125 @@ export function ModuleSidebar({
               </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="sidebar-filter">
-              <div className="mb-2 text-xs font-semibold text-takaro-text-primary">
-                Categories
-              </div>
-              <div
-                className="flex flex-wrap gap-1"
-                data-testid="category-filter-buttons"
-              >
-                <button
-                  onClick={() => {
-                    setCategoryFilter('all');
-                    router.push('/');
-                  }}
-                  className={`btn btn-xs ${
-                    categoryFilter === 'all'
-                      ? 'btn-takaro-primary'
-                      : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                  }`}
-                  data-testid="category-filter-all"
-                >
-                  All
-                </button>
-                {stats.categories.map((category) => {
-                  const count = modules.filter(
-                    (m) => (m.category || 'Uncategorized') === category,
-                  ).length;
-                  return (
-                    <button
-                      key={category}
-                      onClick={() => setCategoryFilter(category)}
-                      className={`btn btn-xs ${
-                        categoryFilter === category
-                          ? 'btn-takaro-primary'
-                          : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                      }`}
-                      data-testid={`category-filter-${category}`}
+            {/* Filter Controls */}
+            <div className="sidebar-filter space-y-3">
+              <div className="space-y-3" data-testid="category-filter-buttons">
+                <label className="block text-xs font-semibold text-takaro-text-primary">
+                  Category
+                  <select
+                    value={categoryFilter}
+                    onChange={(event) => {
+                      setCategoryFilter(event.target.value);
+                      if (event.target.value === 'all') {
+                        router.push('/');
+                      }
+                    }}
+                    className="select-takaro mt-1 w-full text-sm"
+                    data-testid="category-filter-select"
+                  >
+                    <option value="all" data-testid="category-filter-all">
+                      All categories
+                    </option>
+                    {sortedFilterCategories.map((category) => {
+                      const count = modules.filter(
+                        (m) => (m.category || 'Uncategorized') === category,
+                      ).length;
+                      return (
+                        <option
+                          key={category}
+                          value={category}
+                          data-testid={`category-filter-${category}`}
+                        >
+                          {formatCategoryName(category)} ({count})
+                        </option>
+                      );
+                    })}
+                  </select>
+                </label>
+
+                {stats.authors.length > 1 && (
+                  <label className="block text-xs font-semibold text-takaro-text-primary">
+                    Author
+                    <select
+                      value={authorFilter}
+                      onChange={(event) => setAuthorFilter(event.target.value)}
+                      className="select-takaro mt-1 w-full text-sm"
                     >
-                      {formatCategoryName(category)} ({count})
-                    </button>
-                  );
-                })}
+                      <option value="all">All authors</option>
+                      {stats.authors.map((author) => {
+                        const count = modules.filter(
+                          (m) =>
+                            getModuleAuthor(m)?.toLowerCase().trim() ===
+                            author.toLowerCase().trim(),
+                        ).length;
+                        return (
+                          <option key={author} value={author}>
+                            {formatAuthorName(author)} ({count})
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </label>
+                )}
+
+                {stats.games.length > 1 && (
+                  <label className="block text-xs font-semibold text-takaro-text-primary">
+                    Supported game
+                    <select
+                      value={gameFilter}
+                      onChange={(event) => setGameFilter(event.target.value)}
+                      className="select-takaro mt-1 w-full text-sm"
+                    >
+                      <option value="all">All games</option>
+                      {stats.games.map((game) => {
+                        const count = modules.filter((m) => {
+                          // Include universal modules in all game counts
+                          if (moduleSupportsAllGames(m)) return true;
+                          return getModuleSupportedGame(m) === game;
+                        }).length;
+                        return (
+                          <option key={game} value={game}>
+                            {game} ({count})
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </label>
+                )}
+
+                {isHydrated && hasActiveFilters && (
+                  <div className="rounded-lg border border-takaro-border bg-takaro-background p-3">
+                    <div className="mb-2 flex items-center justify-between gap-2">
+                      <span className="text-xs font-semibold text-takaro-text-primary">
+                        Active filters
+                      </span>
+                      <button
+                        onClick={clearSearch}
+                        className="text-xs font-medium text-takaro-primary hover:text-takaro-primary-hover"
+                      >
+                        Clear filters
+                      </button>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {activeFilterLabels.map((label) => (
+                        <span
+                          key={label}
+                          className="rounded-full bg-takaro-card-hover px-2 py-1 text-xs text-takaro-text-secondary"
+                        >
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Author Filter */}
-            {stats.authors.length > 1 && (
-              <div className="sidebar-filter">
-                <div className="mb-2 text-xs font-semibold text-takaro-text-primary">
-                  Authors
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  <button
-                    onClick={() => setAuthorFilter('all')}
-                    className={`btn btn-xs ${
-                      authorFilter === 'all'
-                        ? 'btn-takaro-primary'
-                        : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                    }`}
-                  >
-                    All
-                  </button>
-                  {stats.authors.map((author) => {
-                    const count = modules.filter(
-                      (m) =>
-                        getModuleAuthor(m)?.toLowerCase().trim() ===
-                        author.toLowerCase().trim(),
-                    ).length;
-                    return (
-                      <button
-                        key={author}
-                        onClick={() => setAuthorFilter(author)}
-                        className={`btn btn-xs ${
-                          authorFilter.toLowerCase().trim() ===
-                          author.toLowerCase().trim()
-                            ? 'btn-takaro-primary'
-                            : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                        }`}
-                      >
-                        {formatAuthorName(author)} ({count})
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* Supported Game Filter */}
-            {stats.games.length > 1 && (
-              <div className="sidebar-filter">
-                <div className="mb-2 text-xs font-semibold text-takaro-text-primary">
-                  Supported Games
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  <button
-                    onClick={() => setGameFilter('all')}
-                    className={`btn btn-xs ${
-                      gameFilter === 'all'
-                        ? 'btn-takaro-primary'
-                        : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                    }`}
-                  >
-                    All
-                  </button>
-                  {stats.games.map((game) => {
-                    const count = modules.filter((m) => {
-                      // Include universal modules in all game counts
-                      if (moduleSupportsAllGames(m)) return true;
-                      return getModuleSupportedGame(m) === game;
-                    }).length;
-                    return (
-                      <button
-                        key={game}
-                        onClick={() => setGameFilter(game)}
-                        className={`btn btn-xs ${
-                          gameFilter === game
-                            ? 'btn-takaro-primary'
-                            : 'btn-ghost text-takaro-text-muted hover:text-takaro-text-primary'
-                        }`}
-                      >
-                        {game} ({count})
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
             {/* Module List */}
             <div className="sidebar-modules">
+              <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-takaro-text-muted">
+                Module list
+              </div>
               {Object.keys(modulesByCategory).length === 0 ? (
                 <div className="text-center py-8 text-takaro-text-muted">
                   <svg
@@ -674,11 +700,7 @@ export function ModuleSidebar({
                     />
                   </svg>
                   <div className="text-sm">
-                    {isHydrated &&
-                    (searchTerm ||
-                      categoryFilter !== 'all' ||
-                      authorFilter !== 'all' ||
-                      gameFilter !== 'all')
+                    {isHydrated && hasActiveFilters
                       ? 'No modules match your filters'
                       : 'No modules available'}
                   </div>
@@ -698,6 +720,7 @@ export function ModuleSidebar({
                             onClick={() => toggleCategory(category)}
                             className="flex items-center gap-2 text-sm font-semibold text-takaro-text-primary hover:text-takaro-primary transition-colors"
                             data-testid={`category-toggle-${category}`}
+                            aria-expanded={!collapsedCategories.has(category)}
                           >
                             <svg
                               className={`w-4 h-4 transform transition-transform ${

@@ -91,7 +91,10 @@ Continue using `searchTerm`, `categoryFilter`, `authorFilter`, `gameFilter`, loc
 Render three labeled selects:
 
 ```tsx
-<select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
+<select
+  value={categoryFilter}
+  onChange={(e) => setCategoryFilter(e.target.value)}
+>
   <option value="all">All categories</option>
   ...
 </select>

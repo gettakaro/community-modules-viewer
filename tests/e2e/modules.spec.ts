@@ -1,17 +1,30 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
+
+async function waitForSidebarHydration(page: Page) {
+  await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+  await page.waitForFunction(
+    () => localStorage.getItem('module-category-filter') === 'all',
+  );
+  await expect(
+    page.locator('[data-testid="category-filter-select"]'),
+  ).toBeEnabled();
+}
 
 test.describe('Community Modules Viewer', () => {
   test('homepage loads and displays module statistics', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
     await page.goto('/');
 
     // Check that the page loads and has the expected title
     await expect(page).toHaveTitle(/Community Modules/);
 
     // Check for module statistics display
-    await expect(page.locator('text=Total Modules')).toBeVisible();
+    await expect(page.locator('text=Total modules')).toBeVisible();
 
     // Verify sidebar is present
-    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+    await waitForSidebarHydration(page);
 
     // Check for category section
     await expect(
@@ -33,10 +46,13 @@ test.describe('Community Modules Viewer', () => {
   });
 
   test('module navigation works', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
     await page.goto('/');
 
     // Wait for modules to load in sidebar
-    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+    await waitForSidebarHydration(page);
 
     // Wait for categories to be rendered
     await expect(
@@ -60,10 +76,13 @@ test.describe('Community Modules Viewer', () => {
   });
 
   test('sidebar search functionality', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
     await page.goto('/');
 
     // Wait for sidebar to load
-    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+    await waitForSidebarHydration(page);
 
     // Test search input
     const searchInput = page.locator('[data-testid="search-input"]');
@@ -171,6 +190,9 @@ test.describe('Community Modules Viewer', () => {
   });
 
   test('category cards display on homepage', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
     await page.goto('/');
 
     // Check specific category cards exist
@@ -196,16 +218,19 @@ test.describe('Community Modules Viewer', () => {
 
     // Check that cards show module counts
     const antiCheatCount = await antiCheatCard
-      .locator('.text-xl')
+      .locator('.rounded-full')
       .textContent();
     expect(Number(antiCheatCount)).toBeGreaterThan(0);
   });
 
   test('sidebar shows modules grouped by category', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
     await page.goto('/');
 
     // Wait for sidebar to load
-    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+    await waitForSidebarHydration(page);
 
     // Check for category groups
     const categoryGroups = page.locator('[data-testid^="category-group-"]');
@@ -227,10 +252,13 @@ test.describe('Community Modules Viewer', () => {
   });
 
   test('category collapse/expand functionality works', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
     await page.goto('/');
 
     // Wait for sidebar to load
-    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+    await waitForSidebarHydration(page);
 
     // Find first category toggle button
     const firstCategoryToggle = page
@@ -247,29 +275,37 @@ test.describe('Community Modules Viewer', () => {
       `[data-testid="category-modules-${category}"]`,
     );
     await expect(categoryModules).toBeVisible();
+    await expect(firstCategoryToggle).toHaveAttribute('aria-expanded', 'true');
 
     // Click to collapse
     await firstCategoryToggle.click();
 
     // Modules should now be hidden
+    await expect(firstCategoryToggle).toHaveAttribute('aria-expanded', 'false');
     await expect(categoryModules).not.toBeVisible();
 
     // Click to expand again
     await firstCategoryToggle.click();
 
     // Modules should be visible again
+    await expect(firstCategoryToggle).toHaveAttribute('aria-expanded', 'true');
     await expect(categoryModules).toBeVisible();
   });
 
   test('clicking category cards updates sidebar filter', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.clear();
+    });
     await page.goto('/');
 
     // Wait for page to load
-    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+    await waitForSidebarHydration(page);
 
-    // Verify initial state - "All" filter should be active
-    const allFilterButton = page.locator('[data-testid="category-filter-all"]');
-    await expect(allFilterButton).toHaveClass(/btn-takaro-primary/);
+    // Verify initial state - "All" filter should be selected
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
+    );
+    await expect(categorySelect).toHaveValue('all');
 
     // Click on Anti Cheat category card
     const antiCheatCard = page.locator(
@@ -279,11 +315,7 @@ test.describe('Community Modules Viewer', () => {
     await antiCheatCard.click();
 
     // Verify sidebar filter updated
-    const antiCheatFilterButton = page.locator(
-      '[data-testid="category-filter-anti-cheat"]',
-    );
-    await expect(antiCheatFilterButton).toHaveClass(/btn-takaro-primary/);
-    await expect(allFilterButton).not.toHaveClass(/btn-takaro-primary/);
+    await expect(categorySelect).toHaveValue('anti-cheat');
 
     // Verify only anti-cheat modules are shown
     const visibleCategories = page.locator(
@@ -305,11 +337,7 @@ test.describe('Community Modules Viewer', () => {
     await communityCard.click();
 
     // Verify filter switched to community management
-    const communityFilterButton = page.locator(
-      '[data-testid="category-filter-community-management"]',
-    );
-    await expect(communityFilterButton).toHaveClass(/btn-takaro-primary/);
-    await expect(antiCheatFilterButton).not.toHaveClass(/btn-takaro-primary/);
+    await expect(categorySelect).toHaveValue('community-management');
 
     // Verify only community management modules are shown
     const communityGroup = page.locator(
