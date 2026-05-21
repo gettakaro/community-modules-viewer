@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "1.0.0",
-      "description": "This module lets players wipe their own in-game character data.  It does require confirmation but it is the responsibility of the player to remove all equipment and armor, etc. before activating.",
+      "description": "Let 7 Days to Die players request their own character wipe through a confirmed Takaro command. This module gives admins a controlled way to offer self-service character resets while leaving inventory cleanup responsibility visible to the player.\n\nUse this module to:\n\n- Offer a player-facing character reset command.\n- Require confirmation before destructive character wipe actions.\n- Reduce manual admin work for common reset requests.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [

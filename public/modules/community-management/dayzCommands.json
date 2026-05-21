@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "DayZ chat commands. Provides /visit <name> (teleport to a party member) and /bag (teleport to your most recent death location). Requires the @TakaroIntegration mod on the DayZ server.",
+      "description": "Add DayZ player convenience commands for party visits and death-bag recovery through Takaro. This community module shows how DayZ server owners can expose game-specific workflows as chat commands.\n\nUse this module to:\n\n- Let players use /visit to teleport to a party member.\n- Let players use /bag to return to a recent death location.\n- Demonstrate DayZ command automation with the community-supported integration path.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{},\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [

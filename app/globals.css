@@ -5,18 +5,18 @@
 @layer base {
   :root {
     /* Takaro Dark Theme Variables */
-    --takaro-primary: #8b5cf6;
-    --takaro-primary-hover: #7c3aed;
+    --takaro-primary: #664de5;
+    --takaro-primary-hover: #7a5ef0;
     --takaro-secondary: #6b7280;
     --takaro-secondary-hover: #9ca3af;
     --takaro-success: #10b981;
     --takaro-error: #ef4444;
     --takaro-warning: #fbbd23;
     --takaro-info: #3abff8;
-    --takaro-background: #000000;
-    --takaro-card: #1a1a1a;
-    --takaro-card-hover: #2a2a2a;
-    --takaro-border: #374151;
+    --takaro-background: #080808;
+    --takaro-card: #151515;
+    --takaro-card-hover: #1a1a1a;
+    --takaro-border: #222222;
     --takaro-text-primary: #ffffff;
     --takaro-text-secondary: #d1d5db;
     --takaro-text-muted: #9ca3af;
@@ -108,15 +108,15 @@
 @layer components {
   /* Takaro Button Variants */
   .btn-takaro-primary {
-    @apply bg-takaro-primary hover:bg-takaro-primary-hover text-white font-medium px-4 py-2 rounded-md transition-colors;
+    @apply bg-takaro-primary hover:bg-takaro-primary-hover text-white font-medium px-4 py-2 rounded-lg transition-colors;
   }
 
   .btn-takaro-secondary {
-    @apply bg-takaro-secondary hover:bg-takaro-secondary-hover text-white font-medium px-4 py-2 rounded-md transition-colors;
+    @apply bg-takaro-secondary hover:bg-takaro-secondary-hover text-white font-medium px-4 py-2 rounded-lg transition-colors;
   }
 
   .btn-takaro-outline {
-    @apply border border-takaro-primary text-takaro-primary hover:bg-takaro-primary hover:text-white font-medium px-4 py-2 rounded-md transition-colors;
+    @apply border border-takaro-primary text-takaro-primary hover:bg-takaro-primary hover:text-white font-medium px-4 py-2 rounded-lg transition-colors;
   }
 
   /* Takaro Card Component */
@@ -130,7 +130,11 @@
 
   /* Takaro Input Components */
   .input-takaro {
-    @apply bg-takaro-card border border-takaro-border text-takaro-text-primary placeholder-takaro-text-muted px-3 py-2 rounded-md focus:border-takaro-primary focus:ring-1 focus:ring-takaro-primary transition-colors;
+    @apply bg-takaro-card border border-takaro-border text-takaro-text-primary placeholder-takaro-text-muted px-3 py-2 rounded-lg focus:border-takaro-primary focus:ring-1 focus:ring-takaro-primary transition-colors;
+  }
+
+  .select-takaro {
+    @apply bg-takaro-card border border-takaro-border text-takaro-text-primary px-3 py-2 rounded-lg focus:border-takaro-primary focus:ring-1 focus:ring-takaro-primary transition-colors;
   }
 
   /* Takaro Badge Components */

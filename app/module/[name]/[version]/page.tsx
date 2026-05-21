@@ -4,11 +4,11 @@ import {
   getAllModuleVersionPaths,
 } from '@/utils/moduleLoader';
 import { ModuleDetails } from '@/components/ModuleDetails';
+import { TakaroContextBanner } from '@/components/TakaroContextBanner';
 import fs from 'fs';
 import path from 'path';
 import { Changelogs, ChangelogsSchema } from '@/lib/types';
-
-const SITE_URL = 'https://modules.takaro.io';
+import { buildModuleJsonLd, buildModuleMetadata } from '@/utils/seo';
 
 interface ModuleVersionPageProps {
   params: Promise<{
@@ -49,26 +49,19 @@ export async function generateMetadata({ params }: ModuleVersionPageProps) {
   const { name, version } = await params;
   const decodedName = decodeURIComponent(name);
   const decodedVersion = decodeURIComponent(version);
-  const title = `${decodedName} v${decodedVersion} - Community Modules Viewer`;
-  const description = `View details for ${decodedName} module version ${decodedVersion}`;
-  const url = `/module/${encodeURIComponent(decodedName)}/${encodeURIComponent(decodedVersion)}`;
+  const moduleData = await getModuleByName(decodedName);
+  const moduleVersion = moduleData?.versions.find(
+    (v) => v.tag === decodedVersion,
+  );
 
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: url,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `${SITE_URL}${url}`,
-    },
-    twitter: {
-      title,
-      description,
-    },
-  };
+  if (!moduleData || !moduleVersion) {
+    return {
+      title: `${decodedName} - Takaro Module`,
+      description: 'Explore Takaro community modules for game servers.',
+    };
+  }
+
+  return buildModuleMetadata(moduleData, moduleVersion);
 }
 
 export default async function ModuleVersionPage({
@@ -96,7 +89,14 @@ export default async function ModuleVersionPage({
   const moduleChanges = changelogs?.byModule[decodedName] || [];
 
   return (
-    <div className="container mx-auto p-6 max-w-6xl">
+    <div className="mx-auto max-w-6xl p-4 sm:p-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildModuleJsonLd(moduleData, moduleVersion)),
+        }}
+      />
+      <TakaroContextBanner />
       <ModuleDetails
         module={moduleData}
         selectedVersion={decodedVersion}

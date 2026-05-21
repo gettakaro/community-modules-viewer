@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Tracks and displays leaderboards for zombie kills, player kills, level, and deaths. Updates hourly and posts to Discord.",
+      "description": "Post 7 Days to Die leaderboards for kills, deaths, levels, and player activity through Takaro. Leaderboards gives communities a recurring competition loop with scheduled Discord updates.\n\nUse this module to:\n- Track zombie kills, player kills, levels, and deaths.\n- Update leaderboard data on a schedule.\n- Post leaderboard results to Discord.\n- Keep players competing between wipes, events, or major server updates.\n\nGood fit for 7 Days to Die servers that want automated leaderboards, Discord community updates, and retention-focused competition.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"discordChannelId\":{\"type\":\"string\",\"title\":\"Discord Channel ID\",\"description\":\"The Discord channel ID where leaderboards will be posted (e.g., 1234567890)\",\"minLength\":17,\"maxLength\":20}},\"required\":[\"discordChannelId\"]}",
       "uiSchema": "{\"discordChannelId\":{\"ui:help\":\"Find this by right-clicking a Discord channel and selecting 'Copy Channel ID' (Developer Mode must be enabled)\"}}",
       "commands": [],

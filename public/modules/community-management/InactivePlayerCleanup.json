@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Automatically removes players who haven't connected in a specified number of days. Processes players in batches and logs all activities to Discord.",
+      "description": "Remove players who have not connected within a configured number of days. This module helps community managers keep player data cleaner and automate inactive-player maintenance with Discord logging.\n\nUse this module to:\n\n- Process inactive players in batches.\n- Configure the inactivity threshold.\n- Log cleanup activity for staff visibility.",
       "configSchema": "{\"type\":\"object\",\"properties\":{\"discordChannelId\":{\"type\":\"string\",\"title\":\"Discord Channel ID\",\"description\":\"The Discord channel ID where cleanup logs will be sent\"},\"inactivityDays\":{\"type\":\"number\",\"title\":\"Inactivity Days\",\"description\":\"Number of days of inactivity before a player is considered for deletion\",\"default\":90,\"minimum\":1},\"batchSize\":{\"type\":\"number\",\"title\":\"Batch Size\",\"description\":\"Number of players to process per cronjob execution\",\"default\":10,\"minimum\":1,\"maximum\":100},\"enabled\":{\"type\":\"boolean\",\"title\":\"Enable Cleanup\",\"description\":\"Master switch to enable/disable the cleanup process\",\"default\":false}},\"required\":[\"discordChannelId\"]}",
       "uiSchema": "{\"discordChannelId\":{\"ui:help\":\"Get this from Discord by right-clicking a channel and copying the ID\"}}",
       "commands": [],
@@ -35,7 +35,7 @@
     },
     {
       "tag": "1.0.15",
-      "description": "Automatically removes players who haven't connected in a specified number of days. Processes players in batches and logs all activities to Discord.",
+      "description": "Remove players who have not connected within a configured number of days. This module helps community managers keep player data cleaner and automate inactive-player maintenance with Discord logging.\n\nUse this module to:\n\n- Process inactive players in batches.\n- Configure the inactivity threshold.\n- Log cleanup activity for staff visibility.",
       "configSchema": "{\"type\":\"object\",\"properties\":{\"discordChannelId\":{\"type\":\"string\",\"title\":\"Discord Channel ID\",\"description\":\"The Discord channel ID where cleanup logs will be sent\"},\"inactivityDays\":{\"type\":\"number\",\"title\":\"Inactivity Days\",\"description\":\"Number of days of inactivity before a player is considered for deletion\",\"default\":90,\"minimum\":1},\"batchSize\":{\"type\":\"number\",\"title\":\"Batch Size\",\"description\":\"Number of players to process per cronjob execution\",\"default\":10,\"minimum\":1,\"maximum\":100},\"enabled\":{\"type\":\"boolean\",\"title\":\"Enable Cleanup\",\"description\":\"Master switch to enable/disable the cleanup process\",\"default\":false}},\"required\":[\"discordChannelId\"]}",
       "uiSchema": "{\"discordChannelId\":{\"ui:help\":\"Get this from Discord by right-clicking a channel and copying the ID\"}}",
       "commands": [],

@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Investigates item theft by correlating player location and inventory data to identify suspects and track where stolen items were taken.",
+      "description": "Investigate suspected item theft by correlating player location and inventory data. This module helps staff review incidents, identify likely suspects, and understand where stolen items may have moved.\n\nUse this module to:\n\n- Search player and inventory records around theft reports.\n- Support evidence-based moderation decisions.\n- Reduce manual investigation time for admins.",
       "configSchema": "{}",
       "uiSchema": "{}",
       "commands": [
@@ -19,7 +19,6 @@
             {
               "name": "itemName",
               "type": "string",
-
               "helpText": "Name of the stolen item",
               "position": 0
             },

@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Teleport players to their bed/home location using the !home command",
+      "description": "Let Hytale players teleport back to their bed or home location with a simple chat command. This module shows how Takaro can expose game-specific player convenience commands for community-supported game integrations.\n\nUse this module to:\n\n- Add a /home-style command for Hytale players.\n- Improve player navigation and return workflows.\n- Demonstrate Hytale-specific module automation.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{},\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [

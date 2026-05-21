@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Allows players to bet currency on PvP battles. Players can challenge each other and the winner takes the pot. Must have PrismaCore. ",
+      "description": "Let players bet Takaro currency on PvP battles. PvPBet supports player challenges, accepted duels, and winner-takes-pot rewards for communities that want structured PvP wagering.\n\nUse this module to:\n- Let one player challenge another to a PvP bet.\n- Require the opponent to accept before the wager starts.\n- Pay the pot to the battle winner.\n- Add a currency sink and competitive PvP loop to the server.\n\nGood fit for 7 Days to Die PvP communities that already use the required PrismaCore dependency and want betting around player fights.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[\"xLocation\",\"zLocation\",\"minimumBetAmount\"],\"properties\":{\"minimumBetAmount\":{\"title\":\"minimumBetAmount\",\"description\":\"Minimum currency amount required to create a PvP bet\",\"default\":100,\"type\":\"number\",\"minimum\":1},\"xLocation\":{\"title\":\"xLocation\",\"description\":\"X coordinate for PvP arena center\",\"default\":0,\"type\":\"number\"},\"zLocation\":{\"title\":\"zLocation\",\"description\":\"Z coordinate for PvP arena center\",\"default\":0,\"type\":\"number\"},\"discordChannelId\":{\"title\":\"discordChannelId\",\"description\":\"Discord channel ID for posting leaderboard (optional)\",\"default\":\"\",\"type\":\"string\"}}}",
       "uiSchema": "{}",
       "commands": [
@@ -19,7 +19,6 @@
             {
               "name": "amount",
               "type": "number",
-
               "helpText": "Amount of currency to bet",
               "position": 0
             }

@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Adds /back (single-use: deletes saved location after teleport) and /lobby location set in user config. /lobby saves your previous position so /back works once.",
+      "description": "Add lobby and one-time back teleport commands for game server players. lobbyandback lets admins define a lobby location while giving players a controlled way to return to where they came from.\n\nUse this module to:\n- Let players run /lobby to move to a configured lobby point.\n- Save the previous location before lobby teleporting.\n- Let players use /back once after teleporting to the lobby.\n- Manage lobby and back access with Takaro permissions.\n\nGood fit for hubs, event servers, community spawn areas, and servers that want simple player teleport commands without broad admin access.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"lobbyX\":{\"type\":\"number\",\"title\":\"Lobby X\",\"description\":\"X coordinate for the lobby teleport location.\",\"default\":810},\"lobbyY\":{\"type\":\"number\",\"title\":\"Lobby Y\",\"description\":\"Y coordinate for the lobby teleport location.\",\"default\":28},\"lobbyZ\":{\"type\":\"number\",\"title\":\"Lobby Z\",\"description\":\"Z coordinate for the lobby teleport location.\",\"default\":626}},\"required\":[\"lobbyX\",\"lobbyY\",\"lobbyZ\"],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [

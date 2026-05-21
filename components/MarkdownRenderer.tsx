@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react';
 import ReactMarkdown, { Components } from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import {
   ReactNode,
   AnchorHTMLAttributes,
@@ -282,6 +283,7 @@ export function MarkdownRenderer({
     <div className={`markdown-content ${className}`} style={containerClasses}>
       <ReactMarkdown
         components={components}
+        remarkPlugins={[remarkGfm]}
         // Disable HTML to ensure safety
         skipHtml={true}
         // Only allow safe protocols

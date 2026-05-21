@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "The ServerWipe module provides administrators with a powerful tool to reset server data. It allows selective wiping of player currency, teleport locations, and waypoints with a single command.",
+      "description": "Reset selected server data through configurable Takaro wipe actions. This module helps admins prepare for wipes, seasons, events, or testing by choosing which player and server records should be cleared.\n\nUse this module to:\n\n- Wipe selected player currency, locations, or related server data.\n- Run controlled reset operations from Takaro.\n- Support seasonal or event-based server management workflows.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"wipeCurrency\":{\"title\":\"wipeCurrency\",\"description\":\"Whether to reset all player currency during wipe\",\"default\":false,\"type\":\"boolean\"},\"wipeTeleports\":{\"title\":\"wipeTeleports\",\"description\":\"Whether to delete all teleport locations during wipe.\",\"default\":false,\"type\":\"boolean\"},\"wipeStarterKitClaims\":{\"title\":\"wipeStarterKitClaims\",\"description\":\"wipeStarterKitClaims\",\"default\":false,\"type\":\"boolean\"},\"globalAnnouncement\":{\"title\":\"globalAnnouncement\",\"description\":\"Message to broadcast to all players after the wipe\",\"default\":\"\",\"type\":\"string\"}}}",
       "uiSchema": "{}",
       "commands": [
@@ -76,7 +76,7 @@
     },
     {
       "tag": "0.0.1",
-      "description": "The ServerWipe module provides administrators with a powerful tool to reset server data. It allows selective wiping of player currency, teleport locations, and waypoints with a single command.",
+      "description": "Reset selected server data through configurable Takaro wipe actions. This module helps admins prepare for wipes, seasons, events, or testing by choosing which player and server records should be cleared.\n\nUse this module to:\n\n- Wipe selected player currency, locations, or related server data.\n- Run controlled reset operations from Takaro.\n- Support seasonal or event-based server management workflows.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"wipeCurrency\":{\"title\":\"wipeCurrency\",\"description\":\"Whether to reset all player currency during wipe\",\"default\":false,\"type\":\"boolean\"},\"wipeTeleports\":{\"title\":\"wipeTeleports\",\"description\":\"Whether to delete all teleport locations during wipe.\",\"default\":false,\"type\":\"boolean\"},\"wipeStarterKitClaims\":{\"title\":\"wipeStarterKitClaims\",\"description\":\"wipeStarterKitClaims\",\"default\":false,\"type\":\"boolean\"},\"globalAnnouncement\":{\"title\":\"globalAnnouncement\",\"description\":\"Message to broadcast to all players after the wipe\",\"default\":\"\",\"type\":\"string\"}}}",
       "uiSchema": "{}",
       "commands": [

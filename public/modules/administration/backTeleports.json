@@ -3,7 +3,7 @@
   "versions": [
     {
       "tag": "0.0.1",
-      "description": "look back",
+      "description": "Add a permissioned /back teleport command for game server players. backTeleports lets admins give trusted players a simple way to return to their previous location through Takaro permissions.\n\nUse this module to:\n- Enable a /back command for players with the right permission.\n- Control teleport access through Takaro roles and permissions.\n- Offer convenience teleportation without giving broader admin powers.\n\nGood fit for communities that want a lightweight back teleport command as part of their server admin and player convenience toolkit.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [
@@ -38,7 +38,7 @@
     },
     {
       "tag": "latest",
-      "description": "This command will make it possible for the player when they teleport to home, to save their last location, so that they can do the back command and get teleported back to the previous location.\n\nDo note it  checks for the word HOME to save the coordinates! you can change it in the hook config.",
+      "description": "Add a permissioned /back teleport command for game server players. backTeleports lets admins give trusted players a simple way to return to their previous location through Takaro permissions.\n\nUse this module to:\n- Enable a /back command for players with the right permission.\n- Control teleport access through Takaro roles and permissions.\n- Offer convenience teleportation without giving broader admin powers.\n\nGood fit for communities that want a lightweight back teleport command as part of their server admin and player convenience toolkit.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [

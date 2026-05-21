@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Allows players to use /died command to return to their last death location. Automatically captures death locations and provides teleportation back.",
+      "description": "Let players return to their last death location with a permissioned /died command. DiedTeleport records death positions and gives admins a controlled recovery workflow for communities that allow death-location teleports.\n\nUse this module to:\n- Save a player's death location automatically.\n- Let permitted players run /died to teleport back.\n- Manage access with Takaro roles and permissions.\n- Reduce manual staff help for death recovery requests.\n\nGood fit for PvE, casual, or community servers where death recovery is part of the player experience.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"deathLocationExpiration\":{\"type\":\"number\",\"default\":3600,\"minimum\":60,\"maximum\":86400,\"description\":\"How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours\"}},\"additionalProperties\":false}",
       "uiSchema": "{\"deathLocationExpiration\":{\"ui:help\":\"Prevents abuse by automatically expiring old death locations. Players won't be able to teleport to deaths older than this duration.\"}}",
       "commands": [
@@ -40,7 +40,7 @@
     },
     {
       "tag": "0.0.1",
-      "description": "Allows players to use /died command to return to their last death location. Automatically captures death locations and provides teleportation back.",
+      "description": "Let players return to their last death location with a permissioned /died command. DiedTeleport records death positions and gives admins a controlled recovery workflow for communities that allow death-location teleports.\n\nUse this module to:\n- Save a player's death location automatically.\n- Let permitted players run /died to teleport back.\n- Manage access with Takaro roles and permissions.\n- Reduce manual staff help for death recovery requests.\n\nGood fit for PvE, casual, or community servers where death recovery is part of the player experience.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"deathLocationExpiration\":{\"type\":\"number\",\"default\":3600,\"minimum\":60,\"maximum\":86400,\"description\":\"How long (in seconds) death locations remain valid before expiring. Default: 1 hour (3600 seconds), Min: 1 minute, Max: 24 hours\"}},\"additionalProperties\":false}",
       "uiSchema": "{\"deathLocationExpiration\":{\"ui:help\":\"Prevents abuse by automatically expiring old death locations. Players won't be able to teleport to deaths older than this duration.\"}}",
       "commands": [

@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Drones aren't teleporting to players. Executes CPM - get drone after a teleport. 5 second delay. ",
+      "description": "Recover stuck 7 Days to Die drones after player teleport actions by running a delayed CPM drone command. This module solves a specific quality-of-life issue for servers that use teleport workflows.\n\nUse this module to:\n\n- Run a delayed get-drone command after teleporting.\n- Reduce player support tickets around missing drones.\n- Pair 7 Days to Die command automation with Takaro event workflows.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [

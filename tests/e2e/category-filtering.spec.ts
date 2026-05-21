@@ -2,133 +2,112 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Category Filtering', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to homepage
     await page.goto('/');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
 
-    // Wait for modules to load
     await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
     await expect(
       page.locator('[data-testid^="category-group-"]').first(),
     ).toBeVisible();
+    await page.waitForFunction(
+      () => localStorage.getItem('module-category-filter') === 'all',
+    );
+    await expect(
+      page.locator('[data-testid="category-filter-select"]'),
+    ).toBeEnabled();
   });
 
-  test('category filter buttons are visible and functional', async ({
-    page,
-  }) => {
-    // Check that category filter section exists
+  test('category filter select is visible and functional', async ({ page }) => {
     const categoryFilterSection = page.locator(
       '[data-testid="category-filter-buttons"]',
     );
     await expect(categoryFilterSection).toBeVisible();
 
-    // Check that All button exists and is active by default
-    const allButton = page.locator('[data-testid="category-filter-all"]');
-    await expect(allButton).toBeVisible();
-    await expect(allButton).toHaveClass(/btn-takaro-primary/);
-
-    // Check specific category buttons exist
-    const antiCheatButton = page.locator(
-      '[data-testid="category-filter-anti-cheat"]',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
-    const communityMgmtButton = page.locator(
-      '[data-testid="category-filter-community-management"]',
-    );
-    const minigamesButton = page.locator(
-      '[data-testid="category-filter-minigames"]',
-    );
+    await expect(categorySelect).toBeVisible();
+    await expect(categorySelect).toHaveValue('all');
 
-    await expect(antiCheatButton).toBeVisible();
-    await expect(communityMgmtButton).toBeVisible();
-    await expect(minigamesButton).toBeVisible();
-
-    // Verify they're not active initially
-    await expect(antiCheatButton).not.toHaveClass(/btn-takaro-primary/);
-    await expect(communityMgmtButton).not.toHaveClass(/btn-takaro-primary/);
-    await expect(minigamesButton).not.toHaveClass(/btn-takaro-primary/);
+    await expect(
+      categorySelect.locator('option[value="anti-cheat"]'),
+    ).toHaveCount(1);
+    await expect(
+      categorySelect.locator('option[value="community-management"]'),
+    ).toHaveCount(1);
+    await expect(
+      categorySelect.locator('option[value="minigames"]'),
+    ).toHaveCount(1);
   });
 
   test('category filter shows only modules from selected category', async ({
     page,
   }) => {
-    // Click Anti-cheat category filter
-    const antiCheatButton = page.locator(
-      '[data-testid="category-filter-anti-cheat"]',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
-    await antiCheatButton.click();
 
-    // Wait for filter to apply
-    await expect(antiCheatButton).toHaveClass(/btn-takaro-primary/);
+    await categorySelect.selectOption('anti-cheat');
+    await expect(categorySelect).toHaveValue('anti-cheat');
 
-    // Check that only anti-cheat category group is visible
     const categoryGroups = page.locator('[data-testid^="category-group-"]');
-    const visibleGroups = await categoryGroups.count();
+    await expect(categoryGroups).toHaveCount(1);
 
-    // Should only show one category group
-    expect(visibleGroups).toBe(1);
-
-    // Verify it's the anti-cheat group
     const antiCheatGroup = page.locator(
       '[data-testid="category-group-anti-cheat"]',
     );
     await expect(antiCheatGroup).toBeVisible();
 
-    // Verify modules in this category are visible
     const antiCheatModules = antiCheatGroup.locator(
       '[data-testid="module-link"]',
     );
-    const moduleCount = await antiCheatModules.count();
-    expect(moduleCount).toBeGreaterThan(0);
+    expect(await antiCheatModules.count()).toBeGreaterThan(0);
   });
 
   test('category filter switches correctly between options', async ({
     page,
   }) => {
-    const allButton = page.locator('[data-testid="category-filter-all"]');
-    const antiCheatButton = page.locator(
-      '[data-testid="category-filter-anti-cheat"]',
-    );
-    const minigamesButton = page.locator(
-      '[data-testid="category-filter-minigames"]',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
 
-    // Start with All (default)
-    await expect(allButton).toHaveClass(/btn-takaro-primary/);
+    await expect(categorySelect).toHaveValue('all');
 
-    // Switch to Anti-cheat
-    await antiCheatButton.click();
-    await expect(antiCheatButton).toHaveClass(/btn-takaro-primary/);
-    await expect(allButton).not.toHaveClass(/btn-takaro-primary/);
-    await expect(minigamesButton).not.toHaveClass(/btn-takaro-primary/);
+    await categorySelect.selectOption('anti-cheat');
+    await expect(categorySelect).toHaveValue('anti-cheat');
+    await expect(
+      page.locator('[data-testid="category-group-anti-cheat"]'),
+    ).toBeVisible();
 
-    // Switch to Minigames
-    await minigamesButton.click();
-    await expect(minigamesButton).toHaveClass(/btn-takaro-primary/);
-    await expect(antiCheatButton).not.toHaveClass(/btn-takaro-primary/);
-    await expect(allButton).not.toHaveClass(/btn-takaro-primary/);
+    await categorySelect.selectOption('minigames');
+    await expect(categorySelect).toHaveValue('minigames');
+    await expect(
+      page.locator('[data-testid="category-group-minigames"]'),
+    ).toBeVisible();
+    await expect(
+      page.locator('[data-testid="category-group-anti-cheat"]'),
+    ).toHaveCount(0);
 
-    // Switch back to All
-    await allButton.click();
-    await expect(allButton).toHaveClass(/btn-takaro-primary/);
-    await expect(antiCheatButton).not.toHaveClass(/btn-takaro-primary/);
-    await expect(minigamesButton).not.toHaveClass(/btn-takaro-primary/);
+    await categorySelect.selectOption('all');
+    await expect(categorySelect).toHaveValue('all');
+    expect(
+      await page.locator('[data-testid^="category-group-"]').count(),
+    ).toBeGreaterThan(1);
   });
 
   test('category filter works with search', async ({ page }) => {
-    // Apply minigames category filter
-    const minigamesButton = page.locator(
-      '[data-testid="category-filter-minigames"]',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
-    await minigamesButton.click();
+    await categorySelect.selectOption('minigames');
 
-    // Search for a term
     const searchInput = page.locator('[data-testid="search-input"]');
     await searchInput.fill('black');
 
-    // Should show filtered results within the category
     const resultsCount = page.locator('[data-testid="search-results-count"]');
-    await expect(resultsCount).toBeVisible();
+    await expect(resultsCount).toContainText('Showing');
 
-    // Check that blackjack module is visible (it's in minigames)
     const blackjackModule = page
       .locator('[data-testid="module-link"]')
       .filter({ hasText: 'BlackJack' });
@@ -136,40 +115,20 @@ test.describe('Category Filtering', () => {
   });
 
   test('clear button resets category filter', async ({ page }) => {
-    // Apply category filter
-    const antiCheatButton = page.locator(
-      '[data-testid="category-filter-anti-cheat"]',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
-    await antiCheatButton.click();
-    await expect(antiCheatButton).toHaveClass(/btn-takaro-primary/);
+    await categorySelect.selectOption('anti-cheat');
+    await expect(categorySelect).toHaveValue('anti-cheat');
 
-    // Also add a search term
     const searchInput = page.locator('[data-testid="search-input"]');
     await searchInput.fill('test');
 
-    // Click Clear button - should be in the search results count area
-    const clearButton = page.locator(
-      '[data-testid="search-results-count"] button:has-text("Clear")',
-    );
+    const clearButton = page.locator('button:has-text("Clear filters")');
     await expect(clearButton).toBeVisible();
     await clearButton.click();
 
-    // Category filter should reset to All
-    const allButton = page.locator('[data-testid="category-filter-all"]');
-    await expect(allButton).toHaveClass(/btn-takaro-primary/);
-    await expect(antiCheatButton).not.toHaveClass(/btn-takaro-primary/);
-
-    // Search should be empty - wait for it to clear
-    await page.waitForFunction(
-      () => {
-        const input = document.querySelector(
-          '[data-testid="search-input"]',
-        ) as HTMLInputElement;
-        return input && input.value === '';
-      },
-      { timeout: 5000 },
-    );
-
+    await expect(categorySelect).toHaveValue('all');
     await expect(searchInput).toHaveValue('');
   });
 
@@ -177,119 +136,125 @@ test.describe('Category Filtering', () => {
     page,
     context,
   }) => {
-    // Set filter to Minigames
-    const minigamesButton = page.locator(
-      '[data-testid="category-filter-minigames"]',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
-    await minigamesButton.click();
-    await expect(minigamesButton).toHaveClass(/btn-takaro-primary/);
 
-    // Check localStorage
+    await categorySelect.selectOption('minigames');
+    await expect(categorySelect).toHaveValue('minigames');
+
     const filterValue = await page.evaluate(() => {
       return localStorage.getItem('module-category-filter');
     });
     expect(filterValue).toBe('minigames');
 
-    // Open new page in same context
     const newPage = await context.newPage();
     await newPage.goto('/');
 
-    // Wait for sidebar to load
     await expect(
       newPage.locator('[data-testid="module-sidebar"]'),
     ).toBeVisible();
 
-    // Filter should still be Minigames
-    const newMinigamesButton = newPage.locator(
-      '[data-testid="category-filter-minigames"]',
-    );
-    await expect(newMinigamesButton).toHaveClass(/btn-takaro-primary/);
+    await expect(
+      newPage.locator('[data-testid="category-filter-select"]'),
+    ).toHaveValue('minigames');
 
     await newPage.close();
   });
 
   test('collapsed category state persists', async ({ page }) => {
-    // Find and collapse the first category
+    await page.evaluate(() => localStorage.removeItem('collapsed-categories'));
+    await page.reload();
+    await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
+
     const firstCategoryToggle = page
       .locator('[data-testid^="category-toggle-"]')
       .first();
     const categoryName = await firstCategoryToggle.getAttribute('data-testid');
     const category = categoryName?.replace('category-toggle-', '') || '';
 
-    // Click to collapse
-    await firstCategoryToggle.click();
-
-    // Verify it's collapsed
     const categoryModules = page.locator(
       `[data-testid="category-modules-${category}"]`,
     );
-    await expect(categoryModules).not.toBeVisible();
+    await expect(categoryModules).toBeVisible();
+    await expect(firstCategoryToggle).toHaveAttribute('aria-expanded', 'true');
 
-    // Reload the page
+    await firstCategoryToggle.click();
+
+    await expect(firstCategoryToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(categoryModules).not.toBeVisible();
+    await expect
+      .poll(() =>
+        page.evaluate((collapsedCategory) => {
+          const stored = localStorage.getItem('collapsed-categories');
+          return stored
+            ? JSON.parse(stored).includes(collapsedCategory)
+            : false;
+        }, category),
+      )
+      .toBe(true);
+
     await page.reload();
 
-    // Wait for sidebar to load
     await expect(page.locator('[data-testid="module-sidebar"]')).toBeVisible();
 
-    // Category should still be collapsed
     const reloadedCategoryModules = page.locator(
       `[data-testid="category-modules-${category}"]`,
     );
+    await expect(firstCategoryToggle).toHaveAttribute('aria-expanded', 'false');
     await expect(reloadedCategoryModules).not.toBeVisible();
   });
 
   test('category counts are accurate', async ({ page }) => {
-    // Get all category filter buttons with counts
-    const categoryButtons = page.locator(
-      'button[data-testid^="category-filter-"]:not([data-testid="category-filter-all"])',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
-    const buttonCount = await categoryButtons.count();
+    const options = await categorySelect
+      .locator('option')
+      .evaluateAll((items) =>
+        items
+          .map((item) => ({
+            value: (item as HTMLOptionElement).value,
+            text: item.textContent || '',
+          }))
+          .filter((item) => item.value !== 'all'),
+      );
 
-    for (let i = 0; i < buttonCount; i++) {
-      const button = categoryButtons.nth(i);
-      const buttonText = await button.textContent();
-      const countMatch = buttonText?.match(/\((\d+)\)/);
+    for (const option of options) {
+      const countMatch = option.text.match(/\((\d+)\)/);
+      if (!countMatch) continue;
 
-      if (countMatch) {
-        const expectedCount = parseInt(countMatch[1]);
+      const expectedCount = parseInt(countMatch[1]);
 
-        // Click the button
-        await button.click();
-        await expect(button).toHaveClass(/btn-takaro-primary/);
+      await categorySelect.selectOption(option.value);
+      await expect(categorySelect).toHaveValue(option.value);
 
-        // Count visible modules
-        const visibleModules = page.locator(
-          '[data-testid="module-link"]:visible',
-        );
-        const actualCount = await visibleModules.count();
+      const visibleModules = page.locator(
+        '[data-testid="module-link"]:visible',
+      );
+      const actualCount = await visibleModules.count();
 
-        expect(actualCount).toBe(expectedCount);
+      expect(actualCount).toBe(expectedCount);
 
-        // Reset to All for next iteration
-        const allButton = page.locator('[data-testid="category-filter-all"]');
-        await allButton.click();
-      }
+      await categorySelect.selectOption('all');
     }
   });
 
   test('empty category filter shows appropriate message', async ({ page }) => {
-    // Search for something that won't match any category
     const searchInput = page.locator('[data-testid="search-input"]');
     await searchInput.fill('xyznonexistentcategoryxyz');
 
-    // Then apply a category filter
-    const minigamesButton = page.locator(
-      '[data-testid="category-filter-minigames"]',
+    const categorySelect = page.locator(
+      '[data-testid="category-filter-select"]',
     );
-    await minigamesButton.click();
+    await categorySelect.selectOption('minigames');
 
-    // Should show no results message
     await expect(
       page.locator('text=No modules match your filters'),
     ).toBeVisible();
 
-    // Clear button should be visible
-    const clearButton = page.locator('button:has-text("Clear")').first();
-    await expect(clearButton).toBeVisible();
+    await expect(
+      page.locator('button:has-text("Clear filters")'),
+    ).toBeVisible();
   });
 });

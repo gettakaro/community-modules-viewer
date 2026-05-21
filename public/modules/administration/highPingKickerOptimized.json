@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Optimized version: Automatically kick players with high ping, with warnings and configurable thresholds. Uses efficient queries with time filtering to check only current ping data.",
+      "description": "Automatically warn and remove players with consistently high ping using configurable thresholds. This module helps admins protect server experience by responding to connection quality issues through Takaro automation.\n\nUse this module to:\n\n- Check player ping efficiently over time.\n- Send warnings before kicking players.\n- Tune thresholds for different game server communities.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"pingThreshold\":{\"title\":\"pingThreshold\",\"description\":\"A ping value that is deemed too high and prompts a warning.\",\"default\":200,\"type\":\"number\"},\"warningsBeforeKick\":{\"title\":\"warningsBeforeKick\",\"description\":\"Number of warnings before a player is kicked.\",\"default\":3,\"type\":\"number\"}}}",
       "uiSchema": "{}",
       "commands": [],

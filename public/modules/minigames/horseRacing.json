@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "A virtual horse racing system where players can bet and win currency.\n",
+      "description": "Run virtual horse racing bets for game server players through Takaro. horseRacing lets players bet currency on scheduled or staff-run races, then pays winners based on race results.\n\nUse this module to:\n- Configure horses, odds, and race timing.\n- Let players place racing bets with in-game currency.\n- Show race stats, leaderboards, recent races, and upcoming races.\n- Run betting events on a schedule or through staff control.\n\nGood fit for communities that want race betting, server minigames, economy sinks, and repeatable player events managed through Takaro.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"minBet\":{\"title\":\"minBet\",\"description\":\"Minimum amount required to place a bet\",\"default\":50,\"type\":\"number\",\"minimum\":1},\"maxBet\":{\"title\":\"maxBet\",\"description\":\"Maximum amount allowed for a bet\",\"default\":1000,\"type\":\"number\",\"minimum\":1},\"Horses\":{\"title\":\"Horses\",\"description\":\"List of horses that can race. Format: HorseName; Odds (whole number) - one horse per line\",\"default\":[\"Thunder; 2\",\"Lightning; 3\",\"Shadow; 3\",\"Blaze; 4\",\"Seacove; 5\",\"Arrow; 5\",\"Dark Knight; 6\"],\"type\":\"array\",\"items\":{\"type\":\"string\"}}}}",
       "uiSchema": "{}",
       "commands": [
@@ -136,7 +136,7 @@
     },
     {
       "tag": "0.0.1",
-      "description": "A virtual horse racing system where players can bet and win currency.\n",
+      "description": "Run virtual horse racing bets for game server players through Takaro. horseRacing lets players bet currency on scheduled or staff-run races, then pays winners based on race results.\n\nUse this module to:\n- Configure horses, odds, and race timing.\n- Let players place racing bets with in-game currency.\n- Show race stats, leaderboards, recent races, and upcoming races.\n- Run betting events on a schedule or through staff control.\n\nGood fit for communities that want race betting, server minigames, economy sinks, and repeatable player events managed through Takaro.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false,\"properties\":{\"minBet\":{\"title\":\"minBet\",\"description\":\"Minimum amount required to place a bet\",\"default\":50,\"type\":\"number\",\"minimum\":1},\"maxBet\":{\"title\":\"maxBet\",\"description\":\"Maximum amount allowed for a bet\",\"default\":1000,\"type\":\"number\",\"minimum\":1},\"Horses\":{\"title\":\"Horses\",\"description\":\"List of horses that can race. Format: HorseName; Odds (whole number) - one horse per line\",\"default\":[\"Thunder; 2\",\"Lightning; 3\",\"Shadow; 3\",\"Blaze; 4\",\"Seacove; 5\",\"Arrow; 5\",\"Dark Knight; 6\"],\"type\":\"array\",\"items\":{\"type\":\"string\"}}}}",
       "uiSchema": "{}",
       "commands": [
