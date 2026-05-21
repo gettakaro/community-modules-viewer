@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "A player visit permission system for Hytale allowing players to request permission to visit others and manage visit permissions.",
+      "description": "Let Hytale players request and manage permission to visit other players. This module supports community-friendly travel workflows where players control who can visit them.\n\nUse this module to:\n\n- Add player visit requests and permissions.\n- Help communities manage social travel between players.\n- Show Hytale-specific access workflows through Takaro commands.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"timeout\":{\"title\":\"Timeout\",\"description\":\"The time one has to wait before teleporting again (in milliseconds).\",\"type\":\"number\",\"minimum\":0,\"default\":0}},\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [

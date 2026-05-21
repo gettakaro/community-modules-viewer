@@ -5,7 +5,7 @@
   "versions": [
     {
       "tag": "latest",
-      "description": "Automatically syncs role assignments from users to their linked in-game players. When a Discord user is assigned or removed from a role, this module ensures that the role is also assigned or removed from their connected in-game player profile.",
+      "description": "Sync user role assignments to linked in-game players so Discord or account-level changes can affect server permissions. This module is useful for communities that manage staff, VIP, supporter, or member access through Takaro roles.\n\nUse this module to:\n\n- Apply user role changes to linked player identities.\n- Keep player permissions aligned with community roles.\n- Reduce manual role maintenance across servers.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{},\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [],
@@ -37,7 +37,7 @@
     },
     {
       "tag": "1.1.0",
-      "description": "Automatically syncs role assignments from users to their linked in-game players. When a Discord user is assigned or removed from a role, this module ensures that the role is also assigned or removed from their connected in-game player profile.",
+      "description": "Sync user role assignments to linked in-game players so Discord or account-level changes can affect server permissions. This module is useful for communities that manage staff, VIP, supporter, or member access through Takaro roles.\n\nUse this module to:\n\n- Apply user role changes to linked player identities.\n- Keep player permissions aligned with community roles.\n- Reduce manual role maintenance across servers.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{},\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [],
@@ -69,7 +69,7 @@
     },
     {
       "tag": "1.0.0",
-      "description": "Automatically syncs role assignments from users to their linked in-game players. When a Discord user is assigned or removed from a role, this module ensures that the role is also assigned or removed from their connected in-game player profile.",
+      "description": "Sync user role assignments to linked in-game players so Discord or account-level changes can affect server permissions. This module is useful for communities that manage staff, VIP, supporter, or member access through Takaro roles.\n\nUse this module to:\n\n- Apply user role changes to linked player identities.\n- Keep player permissions aligned with community roles.\n- Reduce manual role maintenance across servers.",
       "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{},\"required\":[],\"additionalProperties\":false}",
       "uiSchema": "{}",
       "commands": [],
