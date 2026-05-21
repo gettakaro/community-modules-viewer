@@ -1,6 +1,128 @@
 {
   "global": [
     {
+      "moduleName": "ZombieRacing",
+      "category": "economy",
+      "date": "2026-05-21T12:45:51+02:00",
+      "title": "Updated 5 Commands",
+      "description": "Added 8 hooks: `raceCommentaryEarlyAfterScheduledStart` (cronjob-executed), `raceCommentaryMiddleAfterScheduledStart` (cronjob-executed), `raceCommentaryLateAfterScheduledStart` (cronjob-executed), `raceCommentaryEarlyAfterManualStart` (command-executed), `raceCommentaryMiddleAfterManualStart` (command-executed), `raceCommentaryLateAfterManualStart` (command-executed), `finishRaceAfterScheduledStart` (cronjob-executed), `finishRaceAfterManualStart` (command-executed). Added 2 scheduled tasks: `startRace`, `recoverRunningRace`. New configuration options: `commentaryEarlyTemplates`, `commentaryMiddleTemplates`, `commentaryLateTemplates`. Updated 5 command implementations.",
+      "commitHash": "ad188258192409aa95ec7fd4965d29210ba19fc2",
+      "isNew": false,
+      "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "racers"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "startrace"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "nextrace"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "myracebets"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "racebet"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryEarlyAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryMiddleAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryLateAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryEarlyAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryMiddleAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryLateAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "finishRaceAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "finishRaceAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "startRace",
+          "schedule": "0 */2 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "recoverRunningRace",
+          "schedule": "* * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "removed",
+          "name": "runRace"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commentaryEarlyTemplates",
+          "fieldType": "array",
+          "description": "Messages used for the first live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commentaryMiddleTemplates",
+          "fieldType": "array",
+          "description": "Messages used for the second live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commentaryLateTemplates",
+          "fieldType": "array",
+          "description": "Messages used for the final live race update before results. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+        }
+      ]
+    },
+    {
       "moduleName": "community-fund",
       "category": "community-management",
       "date": "2026-05-08T09:00:45+02:00",
@@ -10109,6 +10231,266 @@
     }
   ],
   "byModule": {
+    "ZombieRacing": [
+      {
+        "moduleName": "ZombieRacing",
+        "category": "economy",
+        "date": "2026-05-21T12:45:51+02:00",
+        "title": "Updated 5 Commands",
+        "description": "Added 8 hooks: `raceCommentaryEarlyAfterScheduledStart` (cronjob-executed), `raceCommentaryMiddleAfterScheduledStart` (cronjob-executed), `raceCommentaryLateAfterScheduledStart` (cronjob-executed), `raceCommentaryEarlyAfterManualStart` (command-executed), `raceCommentaryMiddleAfterManualStart` (command-executed), `raceCommentaryLateAfterManualStart` (command-executed), `finishRaceAfterScheduledStart` (cronjob-executed), `finishRaceAfterManualStart` (command-executed). Added 2 scheduled tasks: `startRace`, `recoverRunningRace`. New configuration options: `commentaryEarlyTemplates`, `commentaryMiddleTemplates`, `commentaryLateTemplates`. Updated 5 command implementations.",
+        "commitHash": "ad188258192409aa95ec7fd4965d29210ba19fc2",
+        "isNew": false,
+        "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "racers"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "startrace"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "nextrace"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "myracebets"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "racebet"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryEarlyAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryMiddleAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryLateAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryEarlyAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryMiddleAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryLateAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "finishRaceAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "finishRaceAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "startRace",
+            "schedule": "0 */2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "recoverRunningRace",
+            "schedule": "* * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "runRace"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commentaryEarlyTemplates",
+            "fieldType": "array",
+            "description": "Messages used for the first live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commentaryMiddleTemplates",
+            "fieldType": "array",
+            "description": "Messages used for the second live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commentaryLateTemplates",
+            "fieldType": "array",
+            "description": "Messages used for the final live race update before results. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+          }
+        ]
+      },
+      {
+        "moduleName": "ZombieRacing",
+        "category": "economy",
+        "date": "2026-04-29T05:38:52Z",
+        "title": "New Module: ZombieRacing",
+        "description": "Updated to version latest. Added 8 commands: `raceleaderboard`, `racers`, `racestats`, `startrace`, `lastrace`, `nextrace`, `myracebets`, `racebet`. Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `RACING_BET`, `RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `racerTypeLabel`, `racerTypePluralLabel`, `raceName`, `entrants`.",
+        "commitHash": "a48e49bfddfc75199244a1905b778213e5b2f482",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "raceleaderboard",
+            "description": "Usage: /raceleaderboard"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "racers",
+            "description": "Usage: /racers"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "racestats",
+            "description": "Usage: /racestats"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "startrace",
+            "description": "Usage: /startrace"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "lastrace",
+            "description": "Usage: /lastrace"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "nextrace",
+            "description": "Usage: /nextrace"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "myracebets",
+            "description": "Usage: /myracebets"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "racebet",
+            "description": "Usage: /racebet <racer> <amount>"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "announceRace",
+            "schedule": "45 1-23/2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "runRace",
+            "schedule": "0 */2 * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "utils"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RACING_BET",
+            "description": "Allows the player to bet on races"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RACING_ADMIN",
+            "description": "Allows the player to manage races"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "minBet",
+            "fieldType": "number",
+            "description": "Minimum amount required to place a bet"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maxBet",
+            "fieldType": "number",
+            "description": "Maximum amount allowed for a bet"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "racerTypeLabel",
+            "fieldType": "string",
+            "description": "Singular label for racers in command output."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "racerTypePluralLabel",
+            "fieldType": "string",
+            "description": "Plural label for racers in command output."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "raceName",
+            "fieldType": "string",
+            "description": "Display name for races."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "entrants",
+            "fieldType": "array",
+            "description": "List of racers. Format: Name; Odds (whole number) - one racer per line."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "dayzRestarts": [
       {
         "moduleName": "dayzRestarts",
@@ -10349,144 +10731,6 @@
             "name": "newPlayerDiscordMessage",
             "fieldType": "string",
             "description": "New player Discord message. Use {player} and {server} as placeholders."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "ZombieRacing": [
-      {
-        "moduleName": "ZombieRacing",
-        "category": "economy",
-        "date": "2026-04-29T05:38:52Z",
-        "title": "New Module: ZombieRacing",
-        "description": "Updated to version latest. Added 8 commands: `raceleaderboard`, `racers`, `racestats`, `startrace`, `lastrace`, `nextrace`, `myracebets`, `racebet`. Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `RACING_BET`, `RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `racerTypeLabel`, `racerTypePluralLabel`, `raceName`, `entrants`.",
-        "commitHash": "a48e49bfddfc75199244a1905b778213e5b2f482",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "raceleaderboard",
-            "description": "Usage: /raceleaderboard"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "racers",
-            "description": "Usage: /racers"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "racestats",
-            "description": "Usage: /racestats"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "startrace",
-            "description": "Usage: /startrace"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "lastrace",
-            "description": "Usage: /lastrace"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "nextrace",
-            "description": "Usage: /nextrace"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "myracebets",
-            "description": "Usage: /myracebets"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "racebet",
-            "description": "Usage: /racebet <racer> <amount>"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "announceRace",
-            "schedule": "45 1-23/2 * * *"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "runRace",
-            "schedule": "0 */2 * * *"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "utils"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "RACING_BET",
-            "description": "Allows the player to bet on races"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "RACING_ADMIN",
-            "description": "Allows the player to manage races"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "minBet",
-            "fieldType": "number",
-            "description": "Minimum amount required to place a bet"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "maxBet",
-            "fieldType": "number",
-            "description": "Maximum amount allowed for a bet"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "racerTypeLabel",
-            "fieldType": "string",
-            "description": "Singular label for racers in command output."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "racerTypePluralLabel",
-            "fieldType": "string",
-            "description": "Plural label for racers in command output."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "raceName",
-            "fieldType": "string",
-            "description": "Display name for races."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "entrants",
-            "fieldType": "array",
-            "description": "List of racers. Format: Name; Odds (whole number) - one racer per line."
           },
           {
             "type": "version",
@@ -20449,5 +20693,5 @@
       }
     ]
   },
-  "generatedAt": "2026-05-21T10:40:21.231Z"
+  "generatedAt": "2026-05-21T11:12:31.984Z"
 }
