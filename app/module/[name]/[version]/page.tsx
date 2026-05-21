@@ -4,6 +4,7 @@ import {
   getAllModuleVersionPaths,
 } from '@/utils/moduleLoader';
 import { ModuleDetails } from '@/components/ModuleDetails';
+import { TakaroContextBanner } from '@/components/TakaroContextBanner';
 import fs from 'fs';
 import path from 'path';
 import { Changelogs, ChangelogsSchema } from '@/lib/types';
@@ -88,13 +89,14 @@ export default async function ModuleVersionPage({
   const moduleChanges = changelogs?.byModule[decodedName] || [];
 
   return (
-    <div className="container mx-auto p-6 max-w-6xl">
+    <div className="mx-auto max-w-6xl p-4 sm:p-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(buildModuleJsonLd(moduleData, moduleVersion)),
         }}
       />
+      <TakaroContextBanner />
       <ModuleDetails
         module={moduleData}
         selectedVersion={decodedVersion}
