@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function TakaroContextBanner() {
   return (
     <section className="mb-6 rounded-lg border border-takaro-border bg-takaro-card p-4 sm:p-5 lg:p-6">
@@ -29,12 +31,12 @@ export function TakaroContextBanner() {
           >
             Visit takaro.io
           </a>
-          <a
+          <Link
             href="/"
             className="btn-takaro-outline inline-flex w-full items-center justify-center text-sm sm:w-auto"
           >
             Back to module library
-          </a>
+          </Link>
         </div>
       </div>
     </section>
