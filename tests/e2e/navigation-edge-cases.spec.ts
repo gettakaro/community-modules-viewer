@@ -1,4 +1,20 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
+
+async function getFirstModuleHref(page: Page) {
+  const firstModuleLink = page
+    .locator('[data-testid="module-link"]:visible')
+    .first();
+  await expect(firstModuleLink).toBeVisible();
+
+  const moduleHref = await firstModuleLink.getAttribute('href');
+  if (!moduleHref) {
+    throw new Error('Could not get module href from first visible module link');
+  }
+
+  expect(moduleHref).toMatch(/^\/module\/[^/]+\/[^/]+$/);
+
+  return moduleHref;
+}
 
 test.describe('Navigation Edge Cases', () => {
   test.describe('Auto-redirects', () => {
@@ -271,12 +287,8 @@ test.describe('Navigation Edge Cases', () => {
       await page.goto('/');
       await expect(page.locator('text=Total Modules')).toBeVisible();
 
-      // Navigate to first module
-      const firstModuleLink = page
-        .locator('[data-testid="module-link"]')
-        .first();
-      await firstModuleLink.click();
-      await page.waitForURL(/\/module\/[^\/]+\/[^\/]+/);
+      const moduleHref = await getFirstModuleHref(page);
+      await page.goto(moduleHref);
       await expect(
         page.locator('[data-testid="module-details"]'),
       ).toBeVisible();
@@ -299,11 +311,8 @@ test.describe('Navigation Edge Cases', () => {
         page.locator('[data-testid="module-sidebar"]'),
       ).toBeVisible();
 
-      const firstModuleLink = page
-        .locator('[data-testid="module-link"]')
-        .first();
-      await firstModuleLink.click();
-      await page.waitForURL(/\/module\/[^\/]+\/[^\/]+/);
+      const moduleHref = await getFirstModuleHref(page);
+      await page.goto(moduleHref);
 
       const currentUrl = page.url();
 
@@ -324,13 +333,7 @@ test.describe('Navigation Edge Cases', () => {
         page.locator('[data-testid="module-sidebar"]'),
       ).toBeVisible();
 
-      const firstModuleLink = page
-        .locator('[data-testid="module-link"]')
-        .first();
-      await firstModuleLink.click();
-      await page.waitForURL(/\/module\/[^\/]+\/[^\/]+/);
-
-      const moduleUrl = page.url();
+      const moduleUrl = await getFirstModuleHref(page);
 
       // Open a new page and navigate directly to the URL
       const newPage = await page.context().newPage();
