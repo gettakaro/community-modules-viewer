@@ -2,6 +2,505 @@
   "global": [
     {
       "moduleName": "ZombieRacing",
+      "category": "minigames",
+      "date": "2026-05-24T20:56:20+02:00",
+      "title": "New Module: ZombieRacing",
+      "description": "Updated to version latest. Added 8 commands: `raceleaderboard`, `racers`, `racestats`, `startrace`, `lastrace`, `nextrace`, `myracebets`, `racebet`. Added 8 hooks: `raceCommentaryEarlyAfterScheduledStart` (cronjob-executed), `raceCommentaryMiddleAfterScheduledStart` (cronjob-executed), `raceCommentaryLateAfterScheduledStart` (cronjob-executed), `raceCommentaryEarlyAfterManualStart` (command-executed), `raceCommentaryMiddleAfterManualStart` (command-executed), `raceCommentaryLateAfterManualStart` (command-executed), `finishRaceAfterScheduledStart` (cronjob-executed), `finishRaceAfterManualStart` (command-executed). Added 3 scheduled tasks: `announceRace`, `startRace`, `recoverRunningRace`. Added 1 function: `utils`. New permissions: `RACING_BET`, `RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `racerTypeLabel`, `racerTypePluralLabel`, `raceName`, `entrants`, `commentaryEarlyTemplates`, `commentaryMiddleTemplates`, `commentaryLateTemplates`.",
+      "commitHash": "6b42953776f0042bd817da5497b7a9bc9845a3ce",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "raceleaderboard",
+          "description": "Usage: /raceleaderboard"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "racers",
+          "description": "Usage: /racers"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "racestats",
+          "description": "Usage: /racestats"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "startrace",
+          "description": "Usage: /startrace"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "lastrace",
+          "description": "Usage: /lastrace"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "nextrace",
+          "description": "Usage: /nextrace"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "myracebets",
+          "description": "Usage: /myracebets"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "racebet",
+          "description": "Usage: /racebet <racer> <amount>"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryEarlyAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryMiddleAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryLateAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryEarlyAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryMiddleAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "raceCommentaryLateAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "finishRaceAfterScheduledStart",
+          "eventType": "cronjob-executed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "finishRaceAfterManualStart",
+          "eventType": "command-executed"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "announceRace",
+          "schedule": "45 1-23/2 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "startRace",
+          "schedule": "0 */2 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "recoverRunningRace",
+          "schedule": "* * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "utils"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RACING_BET",
+          "description": "Allows the player to bet on races"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "RACING_ADMIN",
+          "description": "Allows the player to manage races"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "minBet",
+          "fieldType": "number",
+          "description": "Minimum amount required to place a bet"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "maxBet",
+          "fieldType": "number",
+          "description": "Maximum amount allowed for a bet"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "racerTypeLabel",
+          "fieldType": "string",
+          "description": "Singular label for racers in command output."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "racerTypePluralLabel",
+          "fieldType": "string",
+          "description": "Plural label for racers in command output."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "raceName",
+          "fieldType": "string",
+          "description": "Display name for races."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "entrants",
+          "fieldType": "array",
+          "description": "List of racers. Format: Name; Odds (whole number) - one racer per line."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commentaryEarlyTemplates",
+          "fieldType": "array",
+          "description": "Messages used for the first live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commentaryMiddleTemplates",
+          "fieldType": "array",
+          "description": "Messages used for the second live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "commentaryLateTemplates",
+          "fieldType": "array",
+          "description": "Messages used for the final live race update before results. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "mini-games",
+      "category": "minigames",
+      "date": "2026-05-24T20:56:20+02:00",
+      "title": "New Module: mini-games",
+      "description": "Updated to version latest. Added 14 commands: `minigames`, `wordle`, `hangman`, `hotcold`, `answer`, `minigamestats`, `minigamestop`, `puzzle`, `minigamesban`, `minigamesunban`, `minigamesresetstats`, `minigamesskiproundnow`, `minigamesfirenow`, `minigamesreport`. Added 2 hooks: `onChatMessage` (chat-message), `onPlayerDisconnect` (player-disconnected). Added 6 scheduled tasks: `rolloverDailyPuzzles`, `fireLiveRound`, `closeLiveRound`, `refreshLeaderboards`, `expireWindows`, `expireBans`. Added 1 function: `mini-games-helpers`. New permissions: `MINIGAMES_PLAY`, `MINIGAMES_BOOST`, `MINIGAMES_MANAGE`. New configuration options: `liveRoundIntervalMinutes`, `minPlayersForLiveRound`, `liveRoundAnswerWindowSec`, `pointsToCurrencyRate`, `dailyPointsCapPerPlayer`, `bigScoreThreshold`, `pointsWordleBase`, `pointsHangmanBase`, `pointsHotColdBase`, `pointsTriviaWin`, `pointsScrambleWin`, `pointsMathRaceWin`, `pointsReactionRaceWin`, `triviaQuestionSource`, `triviaApiCategory`, `triviaApiDifficulty`, `triviaApiType`, `games`.",
+      "commitHash": "6b42953776f0042bd817da5497b7a9bc9845a3ce",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigames",
+          "description": "Usage: /minigames [game] — Show help for all games or a specific game."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "wordle",
+          "description": "Usage: /wordle [guess] — No arg shows today's attempts; with 5-letter guess submits a guess."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "hangman",
+          "description": "Usage: /hangman [letter|word] — No arg shows board; letter guesses a letter; full word attempts solve."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "hotcold",
+          "description": "Usage: /hotcold [number] — No arg shows attempts; number 1-1000 submits a guess."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "answer",
+          "description": "Usage: /answer <response> — Submit your answer to the active live round."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamestats",
+          "description": "Usage: /minigamestats [player] — Show lifetime and current-day stats."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamestop",
+          "description": "Usage: /minigamestop <points|wordle|hangman|streak> — Show leaderboard."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "puzzle",
+          "description": "Usage: /puzzle — Shows which daily puzzles you've played and time until rollover."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamesban",
+          "description": "Usage: /minigamesban <player> [hours] — Ban permanently (no hours) or temporarily."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamesunban",
+          "description": "Usage: /minigamesunban <player> — Remove a mini-games ban."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamesresetstats",
+          "description": "Usage: /minigamesresetstats <player> — Wipe all stats for a player."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamesskiproundnow",
+          "description": "Usage: /minigamesskiproundnow — Cancel the active live round with no winner."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamesfirenow",
+          "description": "Usage: /minigamesfirenow [game] — Start a live round now, optionally picking the game."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "minigamesreport",
+          "description": "Usage: /minigamesreport — Send a lifetime stats report (total rounds, points, top 5, per-game breakdown)."
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "onChatMessage",
+          "eventType": "chat-message"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "onPlayerDisconnect",
+          "eventType": "player-disconnected"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "rolloverDailyPuzzles",
+          "schedule": "0 0 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "fireLiveRound",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "closeLiveRound",
+          "schedule": "* * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "refreshLeaderboards",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "expireWindows",
+          "schedule": "0 0 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "expireBans",
+          "schedule": "0 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "mini-games-helpers"
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "MINIGAMES_PLAY",
+          "description": "Allowed to play mini-games."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "MINIGAMES_BOOST",
+          "description": "+25% points per count (count 1-4, cap = 2.0x)."
+        },
+        {
+          "type": "permission",
+          "action": "added",
+          "name": "MINIGAMES_MANAGE",
+          "description": "Admin commands: ban, reset, skip round, fire round, report."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "liveRoundIntervalMinutes",
+          "fieldType": "number",
+          "description": "Minimum minutes between automatic live rounds."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "minPlayersForLiveRound",
+          "fieldType": "number",
+          "description": "Minimum online players required to fire a live round."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "liveRoundAnswerWindowSec",
+          "fieldType": "number",
+          "description": "How long players have to answer a live round."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsToCurrencyRate",
+          "fieldType": "number",
+          "description": "Currency paid per point. 0 disables currency rewards."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "dailyPointsCapPerPlayer",
+          "fieldType": "number",
+          "description": "Max points per UTC day per player. 0 = unlimited."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bigScoreThreshold",
+          "fieldType": "number",
+          "description": "Scores at/above this emit a chat announcement."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsWordleBase",
+          "fieldType": "number"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsHangmanBase",
+          "fieldType": "number"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsHotColdBase",
+          "fieldType": "number"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsTriviaWin",
+          "fieldType": "number"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsScrambleWin",
+          "fieldType": "number"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsMathRaceWin",
+          "fieldType": "number"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "pointsReactionRaceWin",
+          "fieldType": "number"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "triviaQuestionSource",
+          "fieldType": "string",
+          "description": "Trivia source. 'api' fetches from Open Trivia DB; falls back to custom bank on failure."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "triviaApiCategory",
+          "fieldType": "array",
+          "description": "OpenTDB category keys. ['any'] = no filter. Multiple = random pick per round."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "triviaApiDifficulty",
+          "fieldType": "string"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "triviaApiType",
+          "fieldType": "string"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "games",
+          "fieldType": "object"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "ZombieRacing",
       "category": "economy",
       "date": "2026-05-21T12:45:51+02:00",
       "title": "Updated 5 Commands",
@@ -377,142 +876,6 @@
           "name": "newPlayerDiscordMessage",
           "fieldType": "string",
           "description": "New player Discord message. Use {player} and {server} as placeholders."
-        },
-        {
-          "type": "version",
-          "action": "updated",
-          "name": "latest",
-          "previousVersion": "initial"
-        }
-      ]
-    },
-    {
-      "moduleName": "ZombieRacing",
-      "category": "economy",
-      "date": "2026-04-29T05:38:52Z",
-      "title": "New Module: ZombieRacing",
-      "description": "Updated to version latest. Added 8 commands: `raceleaderboard`, `racers`, `racestats`, `startrace`, `lastrace`, `nextrace`, `myracebets`, `racebet`. Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `RACING_BET`, `RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `racerTypeLabel`, `racerTypePluralLabel`, `raceName`, `entrants`.",
-      "commitHash": "a48e49bfddfc75199244a1905b778213e5b2f482",
-      "isNew": true,
-      "details": [
-        {
-          "type": "command",
-          "action": "added",
-          "name": "raceleaderboard",
-          "description": "Usage: /raceleaderboard"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "racers",
-          "description": "Usage: /racers"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "racestats",
-          "description": "Usage: /racestats"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "startrace",
-          "description": "Usage: /startrace"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "lastrace",
-          "description": "Usage: /lastrace"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "nextrace",
-          "description": "Usage: /nextrace"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "myracebets",
-          "description": "Usage: /myracebets"
-        },
-        {
-          "type": "command",
-          "action": "added",
-          "name": "racebet",
-          "description": "Usage: /racebet <racer> <amount>"
-        },
-        {
-          "type": "cronjob",
-          "action": "added",
-          "name": "announceRace",
-          "schedule": "45 1-23/2 * * *"
-        },
-        {
-          "type": "cronjob",
-          "action": "added",
-          "name": "runRace",
-          "schedule": "0 */2 * * *"
-        },
-        {
-          "type": "function",
-          "action": "added",
-          "name": "utils"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "RACING_BET",
-          "description": "Allows the player to bet on races"
-        },
-        {
-          "type": "permission",
-          "action": "added",
-          "name": "RACING_ADMIN",
-          "description": "Allows the player to manage races"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "minBet",
-          "fieldType": "number",
-          "description": "Minimum amount required to place a bet"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "maxBet",
-          "fieldType": "number",
-          "description": "Maximum amount allowed for a bet"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "racerTypeLabel",
-          "fieldType": "string",
-          "description": "Singular label for racers in command output."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "racerTypePluralLabel",
-          "fieldType": "string",
-          "description": "Plural label for racers in command output."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "raceName",
-          "fieldType": "string",
-          "description": "Display name for races."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "entrants",
-          "fieldType": "array",
-          "description": "List of racers. Format: Name; Odds (whole number) - one racer per line."
         },
         {
           "type": "version",
@@ -10234,6 +10597,217 @@
     "ZombieRacing": [
       {
         "moduleName": "ZombieRacing",
+        "category": "minigames",
+        "date": "2026-05-24T20:56:20+02:00",
+        "title": "New Module: ZombieRacing",
+        "description": "Updated to version latest. Added 8 commands: `raceleaderboard`, `racers`, `racestats`, `startrace`, `lastrace`, `nextrace`, `myracebets`, `racebet`. Added 8 hooks: `raceCommentaryEarlyAfterScheduledStart` (cronjob-executed), `raceCommentaryMiddleAfterScheduledStart` (cronjob-executed), `raceCommentaryLateAfterScheduledStart` (cronjob-executed), `raceCommentaryEarlyAfterManualStart` (command-executed), `raceCommentaryMiddleAfterManualStart` (command-executed), `raceCommentaryLateAfterManualStart` (command-executed), `finishRaceAfterScheduledStart` (cronjob-executed), `finishRaceAfterManualStart` (command-executed). Added 3 scheduled tasks: `announceRace`, `startRace`, `recoverRunningRace`. Added 1 function: `utils`. New permissions: `RACING_BET`, `RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `racerTypeLabel`, `racerTypePluralLabel`, `raceName`, `entrants`, `commentaryEarlyTemplates`, `commentaryMiddleTemplates`, `commentaryLateTemplates`.",
+        "commitHash": "6b42953776f0042bd817da5497b7a9bc9845a3ce",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "raceleaderboard",
+            "description": "Usage: /raceleaderboard"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "racers",
+            "description": "Usage: /racers"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "racestats",
+            "description": "Usage: /racestats"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "startrace",
+            "description": "Usage: /startrace"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "lastrace",
+            "description": "Usage: /lastrace"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "nextrace",
+            "description": "Usage: /nextrace"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "myracebets",
+            "description": "Usage: /myracebets"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "racebet",
+            "description": "Usage: /racebet <racer> <amount>"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryEarlyAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryMiddleAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryLateAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryEarlyAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryMiddleAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "raceCommentaryLateAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "finishRaceAfterScheduledStart",
+            "eventType": "cronjob-executed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "finishRaceAfterManualStart",
+            "eventType": "command-executed"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "announceRace",
+            "schedule": "45 1-23/2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "startRace",
+            "schedule": "0 */2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "recoverRunningRace",
+            "schedule": "* * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "utils"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RACING_BET",
+            "description": "Allows the player to bet on races"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "RACING_ADMIN",
+            "description": "Allows the player to manage races"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "minBet",
+            "fieldType": "number",
+            "description": "Minimum amount required to place a bet"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maxBet",
+            "fieldType": "number",
+            "description": "Maximum amount allowed for a bet"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "racerTypeLabel",
+            "fieldType": "string",
+            "description": "Singular label for racers in command output."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "racerTypePluralLabel",
+            "fieldType": "string",
+            "description": "Plural label for racers in command output."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "raceName",
+            "fieldType": "string",
+            "description": "Display name for races."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "entrants",
+            "fieldType": "array",
+            "description": "List of racers. Format: Name; Odds (whole number) - one racer per line."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commentaryEarlyTemplates",
+            "fieldType": "array",
+            "description": "Messages used for the first live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commentaryMiddleTemplates",
+            "fieldType": "array",
+            "description": "Messages used for the second live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commentaryLateTemplates",
+            "fieldType": "array",
+            "description": "Messages used for the final live race update before results. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      },
+      {
+        "moduleName": "ZombieRacing",
         "category": "economy",
         "date": "2026-05-21T12:45:51+02:00",
         "title": "Updated 5 Commands",
@@ -10353,134 +10927,288 @@
             "description": "Messages used for the final live race update before results. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
           }
         ]
-      },
+      }
+    ],
+    "mini-games": [
       {
-        "moduleName": "ZombieRacing",
-        "category": "economy",
-        "date": "2026-04-29T05:38:52Z",
-        "title": "New Module: ZombieRacing",
-        "description": "Updated to version latest. Added 8 commands: `raceleaderboard`, `racers`, `racestats`, `startrace`, `lastrace`, `nextrace`, `myracebets`, `racebet`. Added 2 scheduled tasks: `announceRace`, `runRace`. Added 1 function: `utils`. New permissions: `RACING_BET`, `RACING_ADMIN`. New configuration options: `minBet`, `maxBet`, `racerTypeLabel`, `racerTypePluralLabel`, `raceName`, `entrants`.",
-        "commitHash": "a48e49bfddfc75199244a1905b778213e5b2f482",
+        "moduleName": "mini-games",
+        "category": "minigames",
+        "date": "2026-05-24T20:56:20+02:00",
+        "title": "New Module: mini-games",
+        "description": "Updated to version latest. Added 14 commands: `minigames`, `wordle`, `hangman`, `hotcold`, `answer`, `minigamestats`, `minigamestop`, `puzzle`, `minigamesban`, `minigamesunban`, `minigamesresetstats`, `minigamesskiproundnow`, `minigamesfirenow`, `minigamesreport`. Added 2 hooks: `onChatMessage` (chat-message), `onPlayerDisconnect` (player-disconnected). Added 6 scheduled tasks: `rolloverDailyPuzzles`, `fireLiveRound`, `closeLiveRound`, `refreshLeaderboards`, `expireWindows`, `expireBans`. Added 1 function: `mini-games-helpers`. New permissions: `MINIGAMES_PLAY`, `MINIGAMES_BOOST`, `MINIGAMES_MANAGE`. New configuration options: `liveRoundIntervalMinutes`, `minPlayersForLiveRound`, `liveRoundAnswerWindowSec`, `pointsToCurrencyRate`, `dailyPointsCapPerPlayer`, `bigScoreThreshold`, `pointsWordleBase`, `pointsHangmanBase`, `pointsHotColdBase`, `pointsTriviaWin`, `pointsScrambleWin`, `pointsMathRaceWin`, `pointsReactionRaceWin`, `triviaQuestionSource`, `triviaApiCategory`, `triviaApiDifficulty`, `triviaApiType`, `games`.",
+        "commitHash": "6b42953776f0042bd817da5497b7a9bc9845a3ce",
         "isNew": true,
         "details": [
           {
             "type": "command",
             "action": "added",
-            "name": "raceleaderboard",
-            "description": "Usage: /raceleaderboard"
+            "name": "minigames",
+            "description": "Usage: /minigames [game] — Show help for all games or a specific game."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "racers",
-            "description": "Usage: /racers"
+            "name": "wordle",
+            "description": "Usage: /wordle [guess] — No arg shows today's attempts; with 5-letter guess submits a guess."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "racestats",
-            "description": "Usage: /racestats"
+            "name": "hangman",
+            "description": "Usage: /hangman [letter|word] — No arg shows board; letter guesses a letter; full word attempts solve."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "startrace",
-            "description": "Usage: /startrace"
+            "name": "hotcold",
+            "description": "Usage: /hotcold [number] — No arg shows attempts; number 1-1000 submits a guess."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "lastrace",
-            "description": "Usage: /lastrace"
+            "name": "answer",
+            "description": "Usage: /answer <response> — Submit your answer to the active live round."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "nextrace",
-            "description": "Usage: /nextrace"
+            "name": "minigamestats",
+            "description": "Usage: /minigamestats [player] — Show lifetime and current-day stats."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "myracebets",
-            "description": "Usage: /myracebets"
+            "name": "minigamestop",
+            "description": "Usage: /minigamestop <points|wordle|hangman|streak> — Show leaderboard."
           },
           {
             "type": "command",
             "action": "added",
-            "name": "racebet",
-            "description": "Usage: /racebet <racer> <amount>"
+            "name": "puzzle",
+            "description": "Usage: /puzzle — Shows which daily puzzles you've played and time until rollover."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minigamesban",
+            "description": "Usage: /minigamesban <player> [hours] — Ban permanently (no hours) or temporarily."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minigamesunban",
+            "description": "Usage: /minigamesunban <player> — Remove a mini-games ban."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minigamesresetstats",
+            "description": "Usage: /minigamesresetstats <player> — Wipe all stats for a player."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minigamesskiproundnow",
+            "description": "Usage: /minigamesskiproundnow — Cancel the active live round with no winner."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minigamesfirenow",
+            "description": "Usage: /minigamesfirenow [game] — Start a live round now, optionally picking the game."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "minigamesreport",
+            "description": "Usage: /minigamesreport — Send a lifetime stats report (total rounds, points, top 5, per-game breakdown)."
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "onChatMessage",
+            "eventType": "chat-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "onPlayerDisconnect",
+            "eventType": "player-disconnected"
           },
           {
             "type": "cronjob",
             "action": "added",
-            "name": "announceRace",
-            "schedule": "45 1-23/2 * * *"
+            "name": "rolloverDailyPuzzles",
+            "schedule": "0 0 * * *"
           },
           {
             "type": "cronjob",
             "action": "added",
-            "name": "runRace",
-            "schedule": "0 */2 * * *"
+            "name": "fireLiveRound",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "closeLiveRound",
+            "schedule": "* * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "refreshLeaderboards",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "expireWindows",
+            "schedule": "0 0 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "expireBans",
+            "schedule": "0 * * * *"
           },
           {
             "type": "function",
             "action": "added",
-            "name": "utils"
+            "name": "mini-games-helpers"
           },
           {
             "type": "permission",
             "action": "added",
-            "name": "RACING_BET",
-            "description": "Allows the player to bet on races"
+            "name": "MINIGAMES_PLAY",
+            "description": "Allowed to play mini-games."
           },
           {
             "type": "permission",
             "action": "added",
-            "name": "RACING_ADMIN",
-            "description": "Allows the player to manage races"
+            "name": "MINIGAMES_BOOST",
+            "description": "+25% points per count (count 1-4, cap = 2.0x)."
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "MINIGAMES_MANAGE",
+            "description": "Admin commands: ban, reset, skip round, fire round, report."
           },
           {
             "type": "config",
             "action": "added",
-            "name": "minBet",
+            "name": "liveRoundIntervalMinutes",
             "fieldType": "number",
-            "description": "Minimum amount required to place a bet"
+            "description": "Minimum minutes between automatic live rounds."
           },
           {
             "type": "config",
             "action": "added",
-            "name": "maxBet",
+            "name": "minPlayersForLiveRound",
             "fieldType": "number",
-            "description": "Maximum amount allowed for a bet"
+            "description": "Minimum online players required to fire a live round."
           },
           {
             "type": "config",
             "action": "added",
-            "name": "racerTypeLabel",
+            "name": "liveRoundAnswerWindowSec",
+            "fieldType": "number",
+            "description": "How long players have to answer a live round."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsToCurrencyRate",
+            "fieldType": "number",
+            "description": "Currency paid per point. 0 disables currency rewards."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "dailyPointsCapPerPlayer",
+            "fieldType": "number",
+            "description": "Max points per UTC day per player. 0 = unlimited."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bigScoreThreshold",
+            "fieldType": "number",
+            "description": "Scores at/above this emit a chat announcement."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsWordleBase",
+            "fieldType": "number"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsHangmanBase",
+            "fieldType": "number"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsHotColdBase",
+            "fieldType": "number"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsTriviaWin",
+            "fieldType": "number"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsScrambleWin",
+            "fieldType": "number"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsMathRaceWin",
+            "fieldType": "number"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "pointsReactionRaceWin",
+            "fieldType": "number"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "triviaQuestionSource",
             "fieldType": "string",
-            "description": "Singular label for racers in command output."
+            "description": "Trivia source. 'api' fetches from Open Trivia DB; falls back to custom bank on failure."
           },
           {
             "type": "config",
             "action": "added",
-            "name": "racerTypePluralLabel",
-            "fieldType": "string",
-            "description": "Plural label for racers in command output."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "raceName",
-            "fieldType": "string",
-            "description": "Display name for races."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "entrants",
+            "name": "triviaApiCategory",
             "fieldType": "array",
-            "description": "List of racers. Format: Name; Odds (whole number) - one racer per line."
+            "description": "OpenTDB category keys. ['any'] = no filter. Multiple = random pick per round."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "triviaApiDifficulty",
+            "fieldType": "string"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "triviaApiType",
+            "fieldType": "string"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "games",
+            "fieldType": "object"
           },
           {
             "type": "version",
@@ -20693,5 +21421,5 @@
       }
     ]
   },
-  "generatedAt": "2026-05-21T11:12:31.984Z"
+  "generatedAt": "2026-05-24T18:56:26.434Z"
 }
