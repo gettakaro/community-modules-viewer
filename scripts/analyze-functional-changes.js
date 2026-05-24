@@ -87,6 +87,16 @@ function analyzeFunctionalChanges(before, after, moduleName) {
       hookChanges.length === 1
         ? `Hook Update: ${hookChanges[0].name}`
         : `Updated ${hookChanges.length} Hooks`;
+  } else if (cronChanges.length > 0) {
+    changes.title =
+      cronChanges.length === 1
+        ? `Scheduled Task Update: ${cronChanges[0].name}`
+        : `Updated ${cronChanges.length} Scheduled Tasks`;
+  } else if (functionChanges.length > 0) {
+    changes.title =
+      functionChanges.length === 1
+        ? `Function Update: ${functionChanges[0].name}`
+        : `Updated ${functionChanges.length} Functions`;
   } else if (configChanges.length > 0) {
     changes.title = 'Configuration Updated';
   } else {
@@ -130,7 +140,10 @@ function analyzeCommands(before, after) {
   // Updated commands (same name, different implementation)
   after.forEach((cmdAfter) => {
     const cmdBefore = before.find((c) => c.name === cmdAfter.name);
-    if (cmdBefore && cmdBefore.function !== cmdAfter.function) {
+    if (
+      cmdBefore &&
+      getExecutableCode(cmdBefore) !== getExecutableCode(cmdAfter)
+    ) {
       changes.push({
         type: 'command',
         action: 'updated',
@@ -173,7 +186,10 @@ function analyzeHooks(before, after) {
   // Updated hooks (same name, different implementation)
   after.forEach((hookAfter) => {
     const hookBefore = before.find((h) => h.name === hookAfter.name);
-    if (hookBefore && hookBefore.function !== hookAfter.function) {
+    if (
+      hookBefore &&
+      getExecutableCode(hookBefore) !== getExecutableCode(hookAfter)
+    ) {
       changes.push({
         type: 'hook',
         action: 'updated',
@@ -213,6 +229,22 @@ function analyzeCronJobs(before, after) {
     }
   });
 
+  // Updated cron jobs (same name, different schedule or implementation)
+  after.forEach((cronAfter) => {
+    const cronBefore = before.find((c) => c.name === cronAfter.name);
+    if (
+      cronBefore &&
+      (cronBefore.temporalValue !== cronAfter.temporalValue ||
+        getExecutableCode(cronBefore) !== getExecutableCode(cronAfter))
+    ) {
+      changes.push({
+        type: 'cronjob',
+        action: 'updated',
+        name: cronAfter.name,
+      });
+    }
+  });
+
   return changes;
 }
 
@@ -243,7 +275,31 @@ function analyzeFunctions(before, after) {
     }
   });
 
+  // Updated functions (same name, different implementation)
+  after.forEach((funcAfter) => {
+    const funcBefore = before.find((f) => f.name === funcAfter.name);
+    if (
+      funcBefore &&
+      getExecutableCode(funcBefore) !== getExecutableCode(funcAfter)
+    ) {
+      changes.push({
+        type: 'function',
+        action: 'updated',
+        name: funcAfter.name,
+      });
+    }
+  });
+
   return changes;
+}
+
+function getExecutableCode(item) {
+  if (!item) return undefined;
+  if (typeof item.function === 'string') return item.function;
+  if (item.function && typeof item.function.code === 'string') {
+    return item.function.code;
+  }
+  return item.function;
 }
 
 function analyzePermissions(before, after) {
@@ -420,6 +476,14 @@ function generateDescription(allChanges) {
       } else if (type === 'hook') {
         parts.push(
           `Updated ${items.length} hook implementation${items.length > 1 ? 's' : ''}`,
+        );
+      } else if (type === 'cronjob') {
+        parts.push(
+          `Updated ${items.length} scheduled task${items.length > 1 ? 's' : ''}`,
+        );
+      } else if (type === 'function') {
+        parts.push(
+          `Updated ${items.length} function${items.length > 1 ? 's' : ''}`,
         );
       }
     });

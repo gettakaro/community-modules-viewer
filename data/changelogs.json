@@ -500,124 +500,18 @@
       ]
     },
     {
-      "moduleName": "ZombieRacing",
-      "category": "economy",
-      "date": "2026-05-21T12:45:51+02:00",
-      "title": "Updated 5 Commands",
-      "description": "Added 8 hooks: `raceCommentaryEarlyAfterScheduledStart` (cronjob-executed), `raceCommentaryMiddleAfterScheduledStart` (cronjob-executed), `raceCommentaryLateAfterScheduledStart` (cronjob-executed), `raceCommentaryEarlyAfterManualStart` (command-executed), `raceCommentaryMiddleAfterManualStart` (command-executed), `raceCommentaryLateAfterManualStart` (command-executed), `finishRaceAfterScheduledStart` (cronjob-executed), `finishRaceAfterManualStart` (command-executed). Added 2 scheduled tasks: `startRace`, `recoverRunningRace`. New configuration options: `commentaryEarlyTemplates`, `commentaryMiddleTemplates`, `commentaryLateTemplates`. Updated 5 command implementations.",
-      "commitHash": "ad188258192409aa95ec7fd4965d29210ba19fc2",
+      "moduleName": "DynamicCronjobs",
+      "category": "community-management",
+      "date": "2026-05-21T19:22:45+02:00",
+      "title": "Scheduled Task Update: cronJobGenerator",
+      "description": "Updated 1 scheduled task.",
+      "commitHash": "99b6c345d9bb7ccaa58b3244505a4379ea7a8c4f",
       "isNew": false,
       "details": [
         {
-          "type": "command",
-          "action": "updated",
-          "name": "racers"
-        },
-        {
-          "type": "command",
-          "action": "updated",
-          "name": "startrace"
-        },
-        {
-          "type": "command",
-          "action": "updated",
-          "name": "nextrace"
-        },
-        {
-          "type": "command",
-          "action": "updated",
-          "name": "myracebets"
-        },
-        {
-          "type": "command",
-          "action": "updated",
-          "name": "racebet"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "raceCommentaryEarlyAfterScheduledStart",
-          "eventType": "cronjob-executed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "raceCommentaryMiddleAfterScheduledStart",
-          "eventType": "cronjob-executed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "raceCommentaryLateAfterScheduledStart",
-          "eventType": "cronjob-executed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "raceCommentaryEarlyAfterManualStart",
-          "eventType": "command-executed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "raceCommentaryMiddleAfterManualStart",
-          "eventType": "command-executed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "raceCommentaryLateAfterManualStart",
-          "eventType": "command-executed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "finishRaceAfterScheduledStart",
-          "eventType": "cronjob-executed"
-        },
-        {
-          "type": "hook",
-          "action": "added",
-          "name": "finishRaceAfterManualStart",
-          "eventType": "command-executed"
-        },
-        {
           "type": "cronjob",
-          "action": "added",
-          "name": "startRace",
-          "schedule": "0 */2 * * *"
-        },
-        {
-          "type": "cronjob",
-          "action": "added",
-          "name": "recoverRunningRace",
-          "schedule": "* * * * *"
-        },
-        {
-          "type": "cronjob",
-          "action": "removed",
-          "name": "runRace"
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "commentaryEarlyTemplates",
-          "fieldType": "array",
-          "description": "Messages used for the first live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "commentaryMiddleTemplates",
-          "fieldType": "array",
-          "description": "Messages used for the second live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "commentaryLateTemplates",
-          "fieldType": "array",
-          "description": "Messages used for the final live race update before results. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
+          "action": "updated",
+          "name": "cronJobGenerator"
         }
       ]
     },
@@ -888,7 +782,7 @@
     {
       "moduleName": "PlaytimeBuffRewards",
       "category": "economy",
-      "date": "2026-04-29T05:11:27Z",
+      "date": "2026-04-29T05:11:27+00:00",
       "title": "New Module: PlaytimeBuffRewards",
       "description": "Updated to version latest. Added 1 command: `grant-buff`. Added 1 scheduled task: `grant-playtime-rewards`. Added 1 function: `playtime-buff-helpers`. New permission: `PLAYTIME_BUFF_ADMIN`. New configuration options: `buffCommandTemplate`, `announceRewards`, `defaultRewardMessage`, `buffRewards`, `commandRewards`, `currencyRewards`.",
       "commitHash": "3e43c67e77b70e187a79c3cb22bb7099a0d0264b",
@@ -970,7 +864,7 @@
     {
       "moduleName": "CommunityFund",
       "category": "community-management",
-      "date": "2026-04-27T17:39:40Z",
+      "date": "2026-04-27T17:39:40+00:00",
       "title": "New Module: CommunityFund",
       "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
       "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
@@ -1057,7 +951,7 @@
     {
       "moduleName": "ReferralProgram",
       "category": "community-management",
-      "date": "2026-04-26T19:36:03Z",
+      "date": "2026-04-26T19:36:03+00:00",
       "title": "New Module: ReferralProgram",
       "description": "Updated to version latest. Added 6 commands: `refcode`, `referral`, `refstats`, `reftop`, `reflink`, `refunlink`. Added 1 hook: `on-player-disconnect` (player-disconnected). Added 2 scheduled tasks: `sweep-pending-referrals`, `reset-daily-counters`. Added 1 function: `referral-helpers`. New permissions: `REFERRAL_USE`, `REFERRAL_VIP`, `REFERRAL_ADMIN`. New configuration options: `prizeIsCurrency`, `referrerCurrencyReward`, `refereeCurrencyReward`, `items`, `playtimeThresholdMinutes`, `referralWindowHours`, `maxReferralsPerDay`, `maxReferralsLifetime`.",
       "commitHash": "953b085d85773c723d08efa21ac17d7841a28cff",
@@ -2843,11 +2737,16 @@
       "moduleName": "DynamicServerMessages",
       "category": "community-management",
       "date": "2025-11-26T15:01:22+01:00",
-      "title": "Module Updated",
-      "description": "Updated to version latest.",
+      "title": "Scheduled Task Update: ServerMessagesGenerator",
+      "description": "Updated to version latest. Updated 1 scheduled task.",
       "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
       "isNew": false,
       "details": [
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "ServerMessagesGenerator"
+        },
         {
           "type": "version",
           "action": "updated",
@@ -2860,7 +2759,7 @@
       "moduleName": "DynamicCronjobs",
       "category": "community-management",
       "date": "2025-11-26T15:01:22+01:00",
-      "title": "Module Updated",
+      "title": "Updated 4 Scheduled Tasks",
       "description": "Module updated with improvements and fixes.",
       "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
       "isNew": false,
@@ -2884,6 +2783,46 @@
           "type": "cronjob",
           "action": "removed",
           "name": "cr-3251bb7f-1-mocktest2"
+        }
+      ]
+    },
+    {
+      "moduleName": "DynamicCronjobs",
+      "category": "community-management",
+      "date": "2025-11-26T12:40:22+01:00",
+      "title": "Updated 5 Scheduled Tasks",
+      "description": "Added 4 scheduled tasks: `cr-2a2b1d73-1-testservera1`, `cr-1a46b457-1-testserverb1`, `cr-1a46b457-2-testserverb2`, `cr-3251bb7f-1-mocktest2`. Updated 1 scheduled task.",
+      "commitHash": "5ee4e2282890d00712042ca12e8af83d8fd14031",
+      "isNew": false,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-2a2b1d73-1-testservera1",
+          "schedule": "5 4 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-1a46b457-1-testserverb1",
+          "schedule": "1 2 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-1a46b457-2-testserverb2",
+          "schedule": "2 2 * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "cr-3251bb7f-1-mocktest2",
+          "schedule": "1 * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "cronJobGenerator"
         }
       ]
     },
@@ -3149,6 +3088,23 @@
           "action": "updated",
           "name": "latest",
           "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "DynamicServerMessages",
+      "category": "community-management",
+      "date": "2025-08-12T21:17:12+02:00",
+      "title": "Module Updated",
+      "description": "Updated to version 0.0.1.",
+      "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+      "isNew": false,
+      "details": [
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "0.0.1",
+          "previousVersion": "latest"
         }
       ]
     },
@@ -6318,7 +6274,7 @@
       "category": "minigames",
       "date": "2025-07-21T09:17:32+02:00",
       "title": "Updated 3 Commands",
-      "description": "Added 2 commands: `triviaboard`, `triviareset`. New permission: `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`. Updated 1 command implementation.",
+      "description": "Added 2 commands: `triviaboard`, `triviareset`. New permission: `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`. Updated 1 command implementation. Updated 1 scheduled task.",
       "commitHash": "a6a7a97affd7c74c5c72abc1ab626ad67a516449",
       "isNew": false,
       "details": [
@@ -6338,6 +6294,11 @@
           "type": "command",
           "action": "updated",
           "name": "playerAnswer"
+        },
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "TriviaTime"
         },
         {
           "type": "permission",
@@ -9654,7 +9615,7 @@
       "moduleName": "Limon_BannedItems",
       "category": "anti-cheat",
       "date": "2025-05-03T15:50:09+02:00",
-      "title": "Configuration Updated",
+      "title": "Updated 2 Scheduled Tasks",
       "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
       "commitHash": "fff5d5aca28bf898295d4a1abe407d0fa3756122",
       "isNew": false,
@@ -9752,11 +9713,27 @@
       ]
     },
     {
+      "moduleName": "Limon_PlaytimeReward",
+      "category": "economy",
+      "date": "2025-05-03T15:50:09+02:00",
+      "title": "Scheduled Task Update: rewardOnlinePlaytime",
+      "description": "Updated 1 scheduled task.",
+      "commitHash": "fff5d5aca28bf898295d4a1abe407d0fa3756122",
+      "isNew": false,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "rewardOnlinePlaytime"
+        }
+      ]
+    },
+    {
       "moduleName": "Limon_7dtd_ChatBridge",
       "category": "integration",
       "date": "2025-05-01T21:09:15+02:00",
       "title": "Updated 6 Hooks",
-      "description": "Updated to version 2.0.6. Added 2 hooks: `resetRegions` (log), `serverStatusChange` (server-status-changed). New configuration options: `showPlayerDetails`, `includePartyChat`, `includeFriendsChat`. Updated 4 hook implementations.",
+      "description": "Updated to version 2.0.6. Added 2 hooks: `resetRegions` (log), `serverStatusChange` (server-status-changed). New configuration options: `showPlayerDetails`, `includePartyChat`, `includeFriendsChat`. Updated 4 hook implementations. Updated 1 scheduled task. Updated 1 function.",
       "commitHash": "e2fe36bc9461b3168458a69ae092a4cb777265a7",
       "isNew": false,
       "details": [
@@ -9793,6 +9770,16 @@
           "name": "PlayerConnected"
         },
         {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "serverStatus"
+        },
+        {
+          "type": "function",
+          "action": "updated",
+          "name": "utils"
+        },
+        {
           "type": "config",
           "action": "added",
           "name": "showPlayerDetails",
@@ -9825,11 +9812,16 @@
       "moduleName": "Trevor_HordeNightWarnings",
       "category": "administration",
       "date": "2025-04-22T19:34:35+02:00",
-      "title": "Configuration Updated",
-      "description": "New configuration option: `enableDebugMessages`.",
+      "title": "Scheduled Task Update: horde_night_warning",
+      "description": "New configuration option: `enableDebugMessages`. Updated 1 scheduled task.",
       "commitHash": "31a8ce49c5ee674137770c42afa9fe1b09fafa2e",
       "isNew": false,
       "details": [
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "horde_night_warning"
+        },
         {
           "type": "config",
           "action": "added",
@@ -9869,6 +9861,89 @@
           "action": "updated",
           "name": "2.0.0",
           "previousVersion": "latest"
+        }
+      ]
+    },
+    {
+      "moduleName": "Limon_BannedItems",
+      "category": "anti-cheat",
+      "date": "2025-04-08T12:55:53+02:00",
+      "title": "Configuration Updated",
+      "description": "Removed configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
+      "commitHash": "453902efbb9e4c96af18d820cdcbdd3dea79b1d7",
+      "isNew": false,
+      "details": [
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "bannedItems "
+        },
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "warningsBeforePunishment"
+        },
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "punishmentType"
+        },
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "banDuration"
+        },
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "kickMessage"
+        },
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "banMessage"
+        },
+        {
+          "type": "config",
+          "action": "removed",
+          "name": "warningMessage"
+        }
+      ]
+    },
+    {
+      "moduleName": "Limon_PlaytimeReward",
+      "category": "economy",
+      "date": "2025-04-08T12:55:53+02:00",
+      "title": "Updated 2 Scheduled Tasks",
+      "description": "Updated 2 scheduled tasks.",
+      "commitHash": "453902efbb9e4c96af18d820cdcbdd3dea79b1d7",
+      "isNew": false,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "rewardOnlinePlaytime"
+        },
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "rewardOnlinePlaytime"
+        }
+      ]
+    },
+    {
+      "moduleName": "Limon_dynamicCronjobs",
+      "category": "community-management",
+      "date": "2025-04-08T12:55:53+02:00",
+      "title": "Scheduled Task Update: cronJobGenerator",
+      "description": "Updated 1 scheduled task.",
+      "commitHash": "453902efbb9e4c96af18d820cdcbdd3dea79b1d7",
+      "isNew": false,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "updated",
+          "name": "cronJobGenerator"
         }
       ]
     },
@@ -10805,128 +10880,6 @@
             "previousVersion": "initial"
           }
         ]
-      },
-      {
-        "moduleName": "ZombieRacing",
-        "category": "economy",
-        "date": "2026-05-21T12:45:51+02:00",
-        "title": "Updated 5 Commands",
-        "description": "Added 8 hooks: `raceCommentaryEarlyAfterScheduledStart` (cronjob-executed), `raceCommentaryMiddleAfterScheduledStart` (cronjob-executed), `raceCommentaryLateAfterScheduledStart` (cronjob-executed), `raceCommentaryEarlyAfterManualStart` (command-executed), `raceCommentaryMiddleAfterManualStart` (command-executed), `raceCommentaryLateAfterManualStart` (command-executed), `finishRaceAfterScheduledStart` (cronjob-executed), `finishRaceAfterManualStart` (command-executed). Added 2 scheduled tasks: `startRace`, `recoverRunningRace`. New configuration options: `commentaryEarlyTemplates`, `commentaryMiddleTemplates`, `commentaryLateTemplates`. Updated 5 command implementations.",
-        "commitHash": "ad188258192409aa95ec7fd4965d29210ba19fc2",
-        "isNew": false,
-        "details": [
-          {
-            "type": "command",
-            "action": "updated",
-            "name": "racers"
-          },
-          {
-            "type": "command",
-            "action": "updated",
-            "name": "startrace"
-          },
-          {
-            "type": "command",
-            "action": "updated",
-            "name": "nextrace"
-          },
-          {
-            "type": "command",
-            "action": "updated",
-            "name": "myracebets"
-          },
-          {
-            "type": "command",
-            "action": "updated",
-            "name": "racebet"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "raceCommentaryEarlyAfterScheduledStart",
-            "eventType": "cronjob-executed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "raceCommentaryMiddleAfterScheduledStart",
-            "eventType": "cronjob-executed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "raceCommentaryLateAfterScheduledStart",
-            "eventType": "cronjob-executed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "raceCommentaryEarlyAfterManualStart",
-            "eventType": "command-executed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "raceCommentaryMiddleAfterManualStart",
-            "eventType": "command-executed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "raceCommentaryLateAfterManualStart",
-            "eventType": "command-executed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "finishRaceAfterScheduledStart",
-            "eventType": "cronjob-executed"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "finishRaceAfterManualStart",
-            "eventType": "command-executed"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "startRace",
-            "schedule": "0 */2 * * *"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "recoverRunningRace",
-            "schedule": "* * * * *"
-          },
-          {
-            "type": "cronjob",
-            "action": "removed",
-            "name": "runRace"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "commentaryEarlyTemplates",
-            "fieldType": "array",
-            "description": "Messages used for the first live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "commentaryMiddleTemplates",
-            "fieldType": "array",
-            "description": "Messages used for the second live race update. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "commentaryLateTemplates",
-            "fieldType": "array",
-            "description": "Messages used for the final live race update before results. Supports {winner}, {leader}, {rival}, {raceName}, {racer}, and {racers}."
-          }
-        ]
       }
     ],
     "mini-games": [
@@ -11219,6 +11172,95 @@
         ]
       }
     ],
+    "DynamicCronjobs": [
+      {
+        "moduleName": "DynamicCronjobs",
+        "category": "community-management",
+        "date": "2026-05-21T19:22:45+02:00",
+        "title": "Scheduled Task Update: cronJobGenerator",
+        "description": "Updated 1 scheduled task.",
+        "commitHash": "99b6c345d9bb7ccaa58b3244505a4379ea7a8c4f",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "cronJobGenerator"
+          }
+        ]
+      },
+      {
+        "moduleName": "DynamicCronjobs",
+        "category": "community-management",
+        "date": "2025-11-26T15:01:22+01:00",
+        "title": "Updated 4 Scheduled Tasks",
+        "description": "Module updated with improvements and fixes.",
+        "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-2a2b1d73-1-testservera1"
+          },
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-1a46b457-1-testserverb1"
+          },
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-1a46b457-2-testserverb2"
+          },
+          {
+            "type": "cronjob",
+            "action": "removed",
+            "name": "cr-3251bb7f-1-mocktest2"
+          }
+        ]
+      },
+      {
+        "moduleName": "DynamicCronjobs",
+        "category": "community-management",
+        "date": "2025-11-26T12:40:22+01:00",
+        "title": "Updated 5 Scheduled Tasks",
+        "description": "Added 4 scheduled tasks: `cr-2a2b1d73-1-testservera1`, `cr-1a46b457-1-testserverb1`, `cr-1a46b457-2-testserverb2`, `cr-3251bb7f-1-mocktest2`. Updated 1 scheduled task.",
+        "commitHash": "5ee4e2282890d00712042ca12e8af83d8fd14031",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-2a2b1d73-1-testservera1",
+            "schedule": "5 4 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-1a46b457-1-testserverb1",
+            "schedule": "1 2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-1a46b457-2-testserverb2",
+            "schedule": "2 2 * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "cr-3251bb7f-1-mocktest2",
+            "schedule": "1 * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "cronJobGenerator"
+          }
+        ]
+      }
+    ],
     "dayzRestarts": [
       {
         "moduleName": "dayzRestarts",
@@ -11469,11 +11511,95 @@
         ]
       }
     ],
+    "PlaytimeBuffRewards": [
+      {
+        "moduleName": "PlaytimeBuffRewards",
+        "category": "economy",
+        "date": "2026-04-29T05:11:27+00:00",
+        "title": "New Module: PlaytimeBuffRewards",
+        "description": "Updated to version latest. Added 1 command: `grant-buff`. Added 1 scheduled task: `grant-playtime-rewards`. Added 1 function: `playtime-buff-helpers`. New permission: `PLAYTIME_BUFF_ADMIN`. New configuration options: `buffCommandTemplate`, `announceRewards`, `defaultRewardMessage`, `buffRewards`, `commandRewards`, `currencyRewards`.",
+        "commitHash": "3e43c67e77b70e187a79c3cb22bb7099a0d0264b",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "grant-buff",
+            "description": "Grant a buff to a player. Usage: grantbuff <player> <buffName>"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "grant-playtime-rewards",
+            "schedule": "0 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "playtime-buff-helpers"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "PLAYTIME_BUFF_ADMIN",
+            "description": "Allows manually granting buffs through the playtime buff rewards module."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "buffCommandTemplate",
+            "fieldType": "string",
+            "description": "Console command template used to grant a buff. Supports {playerName}, {playerId}, {gameId}, and {buffName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "announceRewards",
+            "fieldType": "boolean",
+            "description": "Broadcast a message when a playtime reward is granted."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "defaultRewardMessage",
+            "fieldType": "string",
+            "description": "Fallback message for rewards that do not define their own message."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "buffRewards",
+            "fieldType": "array",
+            "description": "Buff rewards eligible for hourly playtime grants."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "commandRewards",
+            "fieldType": "array",
+            "description": "Generic console-command rewards, useful for items such as food, drinks, ammo, or meds."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "currencyRewards",
+            "fieldType": "array",
+            "description": "Takaro currency rewards eligible for hourly playtime grants."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "CommunityFund": [
       {
         "moduleName": "CommunityFund",
         "category": "community-management",
-        "date": "2026-04-27T17:39:40Z",
+        "date": "2026-04-27T17:39:40+00:00",
         "title": "New Module: CommunityFund",
         "description": "Updated to version latest. Added 3 commands: `fund-contribute`, `fund-history`, `fund-status`. Added 1 function: `fund-helpers`. New permissions: `COMMUNITY_FUND_CONTRIBUTE`, `COMMUNITY_FUND_VIEW_HISTORY`. New configuration options: `fundThreshold`, `minimumContribution`, `completionMessage`, `completionCommands`, `broadcastContributions`.",
         "commitHash": "02434a1b6cd74d0f11b927dbd21a09a869dfe073",
@@ -11562,7 +11688,7 @@
       {
         "moduleName": "ReferralProgram",
         "category": "community-management",
-        "date": "2026-04-26T19:36:03Z",
+        "date": "2026-04-26T19:36:03+00:00",
         "title": "New Module: ReferralProgram",
         "description": "Updated to version latest. Added 6 commands: `refcode`, `referral`, `refstats`, `reftop`, `reflink`, `refunlink`. Added 1 hook: `on-player-disconnect` (player-disconnected). Added 2 scheduled tasks: `sweep-pending-referrals`, `reset-daily-counters`. Added 1 function: `referral-helpers`. New permissions: `REFERRAL_USE`, `REFERRAL_VIP`, `REFERRAL_ADMIN`. New configuration options: `prizeIsCurrency`, `referrerCurrencyReward`, `refereeCurrencyReward`, `items`, `playtimeThresholdMinutes`, `referralWindowHours`, `maxReferralsPerDay`, `maxReferralsLifetime`.",
         "commitHash": "953b085d85773c723d08efa21ac17d7841a28cff",
@@ -11780,90 +11906,6 @@
             "action": "added",
             "name": "LOBBY_TELEPORT_USE",
             "description": "LOBBY_TELEPORT_USE"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "PlaytimeBuffRewards": [
-      {
-        "moduleName": "PlaytimeBuffRewards",
-        "category": "economy",
-        "date": "2026-04-29T05:11:27Z",
-        "title": "New Module: PlaytimeBuffRewards",
-        "description": "Updated to version latest. Added 1 command: `grant-buff`. Added 1 scheduled task: `grant-playtime-rewards`. Added 1 function: `playtime-buff-helpers`. New permission: `PLAYTIME_BUFF_ADMIN`. New configuration options: `buffCommandTemplate`, `announceRewards`, `defaultRewardMessage`, `buffRewards`, `commandRewards`, `currencyRewards`.",
-        "commitHash": "3e43c67e77b70e187a79c3cb22bb7099a0d0264b",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "grant-buff",
-            "description": "Grant a buff to a player. Usage: grantbuff <player> <buffName>"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "grant-playtime-rewards",
-            "schedule": "0 * * * *"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "playtime-buff-helpers"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "PLAYTIME_BUFF_ADMIN",
-            "description": "Allows manually granting buffs through the playtime buff rewards module."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "buffCommandTemplate",
-            "fieldType": "string",
-            "description": "Console command template used to grant a buff. Supports {playerName}, {playerId}, {gameId}, and {buffName}."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "announceRewards",
-            "fieldType": "boolean",
-            "description": "Broadcast a message when a playtime reward is granted."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "defaultRewardMessage",
-            "fieldType": "string",
-            "description": "Fallback message for rewards that do not define their own message."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "buffRewards",
-            "fieldType": "array",
-            "description": "Buff rewards eligible for hourly playtime grants."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "commandRewards",
-            "fieldType": "array",
-            "description": "Generic console-command rewards, useful for items such as food, drinks, ammo, or meds."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "currencyRewards",
-            "fieldType": "array",
-            "description": "Takaro currency rewards eligible for hourly playtime grants."
           },
           {
             "type": "version",
@@ -13653,16 +13695,38 @@
         "moduleName": "DynamicServerMessages",
         "category": "community-management",
         "date": "2025-11-26T15:01:22+01:00",
-        "title": "Module Updated",
-        "description": "Updated to version latest.",
+        "title": "Scheduled Task Update: ServerMessagesGenerator",
+        "description": "Updated to version latest. Updated 1 scheduled task.",
         "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
         "isNew": false,
         "details": [
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "ServerMessagesGenerator"
+          },
           {
             "type": "version",
             "action": "updated",
             "name": "latest",
             "previousVersion": "0.0.1"
+          }
+        ]
+      },
+      {
+        "moduleName": "DynamicServerMessages",
+        "category": "community-management",
+        "date": "2025-08-12T21:17:12+02:00",
+        "title": "Module Updated",
+        "description": "Updated to version 0.0.1.",
+        "commitHash": "0de59c2f8d88051bf7a76382067509b80b661ba1",
+        "isNew": false,
+        "details": [
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "0.0.1",
+            "previousVersion": "latest"
           }
         ]
       },
@@ -13693,39 +13757,6 @@
             "action": "updated",
             "name": "latest",
             "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "DynamicCronjobs": [
-      {
-        "moduleName": "DynamicCronjobs",
-        "category": "community-management",
-        "date": "2025-11-26T15:01:22+01:00",
-        "title": "Module Updated",
-        "description": "Module updated with improvements and fixes.",
-        "commitHash": "ccfad84eeba5e18b265a2777a68eb708356d3527",
-        "isNew": false,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "removed",
-            "name": "cr-2a2b1d73-1-testservera1"
-          },
-          {
-            "type": "cronjob",
-            "action": "removed",
-            "name": "cr-1a46b457-1-testserverb1"
-          },
-          {
-            "type": "cronjob",
-            "action": "removed",
-            "name": "cr-1a46b457-2-testserverb2"
-          },
-          {
-            "type": "cronjob",
-            "action": "removed",
-            "name": "cr-3251bb7f-1-mocktest2"
           }
         ]
       }
@@ -16937,7 +16968,7 @@
         "category": "minigames",
         "date": "2025-07-21T09:17:32+02:00",
         "title": "Updated 3 Commands",
-        "description": "Added 2 commands: `triviaboard`, `triviareset`. New permission: `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`. Updated 1 command implementation.",
+        "description": "Added 2 commands: `triviaboard`, `triviareset`. New permission: `TRIVIA_RESET_LEADERBOARD`. New configuration options: `questionSource`, `apiCategory`, `apiDifficulty`, `apiType`. Updated 1 command implementation. Updated 1 scheduled task.",
         "commitHash": "a6a7a97affd7c74c5c72abc1ab626ad67a516449",
         "isNew": false,
         "details": [
@@ -16957,6 +16988,11 @@
             "type": "command",
             "action": "updated",
             "name": "playerAnswer"
+          },
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "TriviaTime"
           },
           {
             "type": "permission",
@@ -17684,6 +17720,22 @@
             "previousVersion": "initial"
           }
         ]
+      },
+      {
+        "moduleName": "Limon_dynamicCronjobs",
+        "category": "community-management",
+        "date": "2025-04-08T12:55:53+02:00",
+        "title": "Scheduled Task Update: cronJobGenerator",
+        "description": "Updated 1 scheduled task.",
+        "commitHash": "453902efbb9e4c96af18d820cdcbdd3dea79b1d7",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "cronJobGenerator"
+          }
+        ]
       }
     ],
     "Mad_CPMCommands": [
@@ -18257,11 +18309,16 @@
         "moduleName": "Trevor_HordeNightWarnings",
         "category": "administration",
         "date": "2025-04-22T19:34:35+02:00",
-        "title": "Configuration Updated",
-        "description": "New configuration option: `enableDebugMessages`.",
+        "title": "Scheduled Task Update: horde_night_warning",
+        "description": "New configuration option: `enableDebugMessages`. Updated 1 scheduled task.",
         "commitHash": "31a8ce49c5ee674137770c42afa9fe1b09fafa2e",
         "isNew": false,
         "details": [
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "horde_night_warning"
+          },
           {
             "type": "config",
             "action": "added",
@@ -18713,6 +18770,43 @@
             "action": "updated",
             "name": "latest",
             "previousVersion": "initial"
+          }
+        ]
+      },
+      {
+        "moduleName": "Limon_PlaytimeReward",
+        "category": "economy",
+        "date": "2025-05-03T15:50:09+02:00",
+        "title": "Scheduled Task Update: rewardOnlinePlaytime",
+        "description": "Updated 1 scheduled task.",
+        "commitHash": "fff5d5aca28bf898295d4a1abe407d0fa3756122",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "rewardOnlinePlaytime"
+          }
+        ]
+      },
+      {
+        "moduleName": "Limon_PlaytimeReward",
+        "category": "economy",
+        "date": "2025-04-08T12:55:53+02:00",
+        "title": "Updated 2 Scheduled Tasks",
+        "description": "Updated 2 scheduled tasks.",
+        "commitHash": "453902efbb9e4c96af18d820cdcbdd3dea79b1d7",
+        "isNew": false,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "rewardOnlinePlaytime"
+          },
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "rewardOnlinePlaytime"
           }
         ]
       }
@@ -19189,7 +19283,7 @@
         "category": "integration",
         "date": "2025-05-01T21:09:15+02:00",
         "title": "Updated 6 Hooks",
-        "description": "Updated to version 2.0.6. Added 2 hooks: `resetRegions` (log), `serverStatusChange` (server-status-changed). New configuration options: `showPlayerDetails`, `includePartyChat`, `includeFriendsChat`. Updated 4 hook implementations.",
+        "description": "Updated to version 2.0.6. Added 2 hooks: `resetRegions` (log), `serverStatusChange` (server-status-changed). New configuration options: `showPlayerDetails`, `includePartyChat`, `includeFriendsChat`. Updated 4 hook implementations. Updated 1 scheduled task. Updated 1 function.",
         "commitHash": "e2fe36bc9461b3168458a69ae092a4cb777265a7",
         "isNew": false,
         "details": [
@@ -19224,6 +19318,16 @@
             "type": "hook",
             "action": "updated",
             "name": "PlayerConnected"
+          },
+          {
+            "type": "cronjob",
+            "action": "updated",
+            "name": "serverStatus"
+          },
+          {
+            "type": "function",
+            "action": "updated",
+            "name": "utils"
           },
           {
             "type": "config",
@@ -19764,7 +19868,7 @@
         "moduleName": "Limon_BannedItems",
         "category": "anti-cheat",
         "date": "2025-05-03T15:50:09+02:00",
-        "title": "Configuration Updated",
+        "title": "Updated 2 Scheduled Tasks",
         "description": "Updated to version 0.0.9. Added 1 scheduled task: `bannedItems`. New permissions: `BANNED_ITEMS_IMMUNITY`, `ALLOW_ITEMS_TIER`. New configuration options: `bannedItemsWithPermissions`, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `discordChannelId`, `banMessage`, `warningMessage`.",
         "commitHash": "fff5d5aca28bf898295d4a1abe407d0fa3756122",
         "isNew": false,
@@ -19858,6 +19962,52 @@
             "action": "updated",
             "name": "0.0.9",
             "previousVersion": "latest"
+          }
+        ]
+      },
+      {
+        "moduleName": "Limon_BannedItems",
+        "category": "anti-cheat",
+        "date": "2025-04-08T12:55:53+02:00",
+        "title": "Configuration Updated",
+        "description": "Removed configuration options: `bannedItems `, `warningsBeforePunishment`, `punishmentType`, `banDuration`, `kickMessage`, `banMessage`, `warningMessage`.",
+        "commitHash": "453902efbb9e4c96af18d820cdcbdd3dea79b1d7",
+        "isNew": false,
+        "details": [
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "bannedItems "
+          },
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "warningsBeforePunishment"
+          },
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "punishmentType"
+          },
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "banDuration"
+          },
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "kickMessage"
+          },
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "banMessage"
+          },
+          {
+            "type": "config",
+            "action": "removed",
+            "name": "warningMessage"
           }
         ]
       }
@@ -21421,5 +21571,5 @@
       }
     ]
   },
-  "generatedAt": "2026-05-24T18:56:26.434Z"
+  "generatedAt": "2026-05-24T19:15:02.146Z"
 }
