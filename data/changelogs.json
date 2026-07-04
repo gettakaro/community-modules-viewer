@@ -1,6 +1,22 @@
 {
   "global": [
     {
+      "moduleName": "VotingSystem",
+      "category": "community-management",
+      "date": "2026-07-04T21:53:46Z",
+      "title": "Command Update: vote",
+      "description": "Updated 1 command implementation.",
+      "commitHash": "f013d075dea24502ea3b16bea7c5e1fcd87cae31",
+      "isNew": false,
+      "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "vote"
+        }
+      ]
+    },
+    {
       "moduleName": "ZombieRacing",
       "category": "economy",
       "date": "2026-05-21T12:45:51+02:00",
@@ -2242,22 +2258,6 @@
           "action": "updated",
           "name": "latest",
           "previousVersion": "initial"
-        }
-      ]
-    },
-    {
-      "moduleName": "VotingSystem",
-      "category": "community-management",
-      "date": "2025-12-12T17:40:04+01:00",
-      "title": "Command Update: vote",
-      "description": "Updated 1 command implementation.",
-      "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-      "isNew": false,
-      "details": [
-        {
-          "type": "command",
-          "action": "updated",
-          "name": "vote"
         }
       ]
     },
@@ -10231,6 +10231,117 @@
     }
   ],
   "byModule": {
+    "VotingSystem": [
+      {
+        "moduleName": "VotingSystem",
+        "category": "community-management",
+        "date": "2026-07-04T21:53:46Z",
+        "title": "Command Update: vote",
+        "description": "Updated 1 command implementation.",
+        "commitHash": "f013d075dea24502ea3b16bea7c5e1fcd87cae31",
+        "isNew": false,
+        "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "vote"
+          }
+        ]
+      },
+      {
+        "moduleName": "VotingSystem",
+        "category": "community-management",
+        "date": "2025-08-06T21:22:19+02:00",
+        "title": "New Module: VotingSystem",
+        "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
+        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "vote",
+            "description": "Claim rewards for voting for the server"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "votingsite",
+            "fieldType": "string",
+            "description": "Site where players vote. Example: \nhttps://7daystodie-servers.com for 7 Days to Die;\nhttps://rust-servers.net for RUST\n\n"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "votekey",
+            "fieldType": "string",
+            "description": "Vote key provided by the voting site"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "novote",
+            "fieldType": "string",
+            "description": "Message to send to the player when voting site reports no vote was cast. "
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "alreadyclaimed",
+            "fieldType": "string",
+            "description": "Message to send to the player when the voting site reports the vote reward was already claimed."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "privatemessage",
+            "fieldType": "string",
+            "description": "Optional message to send to the player when the voting site reports a vote with no reward claimed yet. \nExample: Thanks for voting.\nLeave it blank if you want nothing to be sent instead."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "publicmessage",
+            "fieldType": "string",
+            "description": "Optional message to broadcast to all players online when vote is successful. Use {name} in the message to refer to the player name.\nExample: [00FF00]{name}[-] voted at 7daystodie-servers.com and was rewarded Takaro Coins!\nLeave it blank if you want nothing to be sent instead.\n"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "currency",
+            "fieldType": "number",
+            "description": "How much currency to add to the player in Takaro, if any.\nMake sure to enable economy for this server."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemnumber",
+            "fieldType": "number",
+            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "randomitemlist",
+            "fieldType": "array",
+            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "fixedrewards",
+            "fieldType": "array",
+            "description": "All the items in this list will be given as a reward for the vote."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "ZombieRacing": [
       {
         "moduleName": "ZombieRacing",
@@ -12543,117 +12654,6 @@
             "name": "warningsBeforeKick",
             "fieldType": "number",
             "description": "Number of warnings before a player is kicked."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "VotingSystem": [
-      {
-        "moduleName": "VotingSystem",
-        "category": "community-management",
-        "date": "2025-12-12T17:40:04+01:00",
-        "title": "Command Update: vote",
-        "description": "Updated 1 command implementation.",
-        "commitHash": "ef5741fb9eebbd257b2d240e9e6c7a54cd2d8bb9",
-        "isNew": false,
-        "details": [
-          {
-            "type": "command",
-            "action": "updated",
-            "name": "vote"
-          }
-        ]
-      },
-      {
-        "moduleName": "VotingSystem",
-        "category": "community-management",
-        "date": "2025-08-06T21:22:19+02:00",
-        "title": "New Module: VotingSystem",
-        "description": "Updated to version latest. Added 1 command: `vote`. New configuration options: `votingsite`, `votekey`, `novote`, `alreadyclaimed`, `privatemessage`, `publicmessage`, `currency`, `randomitemnumber`, `randomitemlist`, `fixedrewards`.",
-        "commitHash": "b8fdcb84cac6524551ad62e3b443e328a0b229b3",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "vote",
-            "description": "Claim rewards for voting for the server"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "votingsite",
-            "fieldType": "string",
-            "description": "Site where players vote. Example: \nhttps://7daystodie-servers.com for 7 Days to Die;\nhttps://rust-servers.net for RUST\n\n"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "votekey",
-            "fieldType": "string",
-            "description": "Vote key provided by the voting site"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "novote",
-            "fieldType": "string",
-            "description": "Message to send to the player when voting site reports no vote was cast. "
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "alreadyclaimed",
-            "fieldType": "string",
-            "description": "Message to send to the player when the voting site reports the vote reward was already claimed."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "privatemessage",
-            "fieldType": "string",
-            "description": "Optional message to send to the player when the voting site reports a vote with no reward claimed yet. \nExample: Thanks for voting.\nLeave it blank if you want nothing to be sent instead."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "publicmessage",
-            "fieldType": "string",
-            "description": "Optional message to broadcast to all players online when vote is successful. Use {name} in the message to refer to the player name.\nExample: [00FF00]{name}[-] voted at 7daystodie-servers.com and was rewarded Takaro Coins!\nLeave it blank if you want nothing to be sent instead.\n"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "currency",
-            "fieldType": "number",
-            "description": "How much currency to add to the player in Takaro, if any.\nMake sure to enable economy for this server."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemnumber",
-            "fieldType": "number",
-            "description": "Defines how many random items will be rewarded to the player, picked from randomitemlist config field.\nThe quantities for each item picked is defined on the mentioned config field."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "randomitemlist",
-            "fieldType": "array",
-            "description": "List of items that will be used to select a random reward for the vote, as many times as defined at randomitemnumber."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "fixedrewards",
-            "fieldType": "array",
-            "description": "All the items in this list will be given as a reward for the vote."
           },
           {
             "type": "version",
@@ -20693,5 +20693,5 @@
       }
     ]
   },
-  "generatedAt": "2026-05-22T06:46:48.357Z"
+  "generatedAt": "2026-07-04T22:18:37.245Z"
 }
