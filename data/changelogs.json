@@ -1,6 +1,93 @@
 {
   "global": [
     {
+      "moduleName": "DamageNumbersPerPlayer",
+      "category": "administration",
+      "date": "2026-07-07T05:53:10Z",
+      "title": "New Module: DamageNumbersPerPlayer",
+      "description": "Updated to version latest. Added 1 command: `dn`. Added 1 hook: `reapply-on-connect` (player-connected).",
+      "commitHash": "e901875c28c0deb7ac992acfe0223daab49dd442",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "dn",
+          "description": "Toggle your floating damage numbers on/off."
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "reapply-on-connect",
+          "eventType": "player-connected"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "FreeUpMemory",
+      "category": "administration",
+      "date": "2026-07-07T05:53:10Z",
+      "title": "New Module: FreeUpMemory",
+      "description": "Updated to version latest. Added 1 scheduled task: `freeUpMemory`.",
+      "commitHash": "e901875c28c0deb7ac992acfe0223daab49dd442",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "freeUpMemory",
+          "schedule": "00 * * * *"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "Bank",
+      "category": "economy",
+      "date": "2026-07-07T05:15:24Z",
+      "title": "New Module: Bank",
+      "description": "Updated to version latest. Added 3 commands: `bank`, `withdraw`, `bankbalance`.",
+      "commitHash": "bad9249060d6d2bc06975291abfb2c57aa5909ea",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "bank",
+          "description": "Deposit dukeCasinoCoins into your bank account"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "withdraw",
+          "description": "Withdraw dukeCasinoCoins from your bank account"
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "bankbalance",
+          "description": "Check your bank balance"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "VotingSystem",
       "category": "community-management",
       "date": "2026-07-04T21:53:46Z",
@@ -10231,6 +10318,99 @@
     }
   ],
   "byModule": {
+    "DamageNumbersPerPlayer": [
+      {
+        "moduleName": "DamageNumbersPerPlayer",
+        "category": "administration",
+        "date": "2026-07-07T05:53:10Z",
+        "title": "New Module: DamageNumbersPerPlayer",
+        "description": "Updated to version latest. Added 1 command: `dn`. Added 1 hook: `reapply-on-connect` (player-connected).",
+        "commitHash": "e901875c28c0deb7ac992acfe0223daab49dd442",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "dn",
+            "description": "Toggle your floating damage numbers on/off."
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "reapply-on-connect",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "FreeUpMemory": [
+      {
+        "moduleName": "FreeUpMemory",
+        "category": "administration",
+        "date": "2026-07-07T05:53:10Z",
+        "title": "New Module: FreeUpMemory",
+        "description": "Updated to version latest. Added 1 scheduled task: `freeUpMemory`.",
+        "commitHash": "e901875c28c0deb7ac992acfe0223daab49dd442",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "freeUpMemory",
+            "schedule": "00 * * * *"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "Bank": [
+      {
+        "moduleName": "Bank",
+        "category": "economy",
+        "date": "2026-07-07T05:15:24Z",
+        "title": "New Module: Bank",
+        "description": "Updated to version latest. Added 3 commands: `bank`, `withdraw`, `bankbalance`.",
+        "commitHash": "bad9249060d6d2bc06975291abfb2c57aa5909ea",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "bank",
+            "description": "Deposit dukeCasinoCoins into your bank account"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "withdraw",
+            "description": "Withdraw dukeCasinoCoins from your bank account"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "bankbalance",
+            "description": "Check your bank balance"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "VotingSystem": [
       {
         "moduleName": "VotingSystem",
@@ -20693,5 +20873,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-04T22:18:37.245Z"
+  "generatedAt": "2026-07-07T06:15:26.240Z"
 }
