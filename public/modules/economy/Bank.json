@@ -1,0 +1,61 @@
+{
+  "name": "Bank",
+  "author": "Unknown",
+  "supportedGames": ["all"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Banking system for dukeCasinoCoins. Players can deposit coins into the bank for safekeeping, withdraw coins back to their inventory, and check their balance.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{},\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, player, pog, arguments: args, module } = data;\n    const amount = parseInt(args.amount);\n\n    if (isNaN(amount) || amount <= 0) {\n        throw new TakaroUserError('Amount must be a positive number.');\n    }\n\n    const playerId = `EOS_${pog.gameId}`;\n\n    // Check player inventory first\n    const inventoryResult = await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `si ${playerId}`\n    });\n\n    const rawResult = inventoryResult.data.data.rawResult;\n    const lines = rawResult.split('\\n');\n    let availableCoins = 0;\n    for (const line of lines) {\n        const match = line.match(/Slot \\d+: (\\d+) \\* casinoCoin/);\n        if (match) {\n            availableCoins += parseInt(match[1]);\n        }\n    }\n\n    if (availableCoins < amount) {\n        throw new TakaroUserError(`You only have ${availableCoins} coins on you. Cannot deposit ${amount}.`);\n    }\n\n    // Remove coins from inventory FIRST\n    await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `rii \"${player.name}\" casinoCoin ${amount}`\n    });\n\n    // THEN update bank balance\n    const moduleId = module.moduleId;\n    const variables = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['bankBalance'],\n            gameServerId: [gameServerId],\n            playerId: [pog.playerId],\n            moduleId: [moduleId]\n        }\n    });\n\n    const currentBalance = variables.data.data.length > 0 ? parseInt(variables.data.data[0].value) : 0;\n    const newBalance = currentBalance + amount;\n\n    if (variables.data.data.length > 0) {\n        await takaro.variable.variableControllerUpdate(variables.data.data[0].id, {\n            value: newBalance.toString()\n        });\n    } else {\n        await takaro.variable.variableControllerCreate({\n            key: 'bankBalance',\n            value: newBalance.toString(),\n            gameServerId,\n            playerId: pog.playerId,\n            moduleId\n        });\n    }\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `[Bank] Deposited ${amount} coins. New balance: ${newBalance} coins.`,\n        opts: { recipient: { gameId: pog.gameId } }\n    });\n}\n\nawait main();\n",
+          "name": "bank",
+          "description": "Removes the specified amount of dukeCasinoCoins from your inventory and deposits them into your bank account for safekeeping.",
+          "trigger": "bank",
+          "helpText": "Deposit dukeCasinoCoins into your bank account",
+          "arguments": [
+            {
+              "name": "amount",
+              "type": "number",
+              "defaultValue": null,
+              "helpText": "Amount of coins to deposit",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, player, pog, arguments: args, module } = data;\n    const amount = parseInt(args.amount);\n\n    if (isNaN(amount) || amount <= 0) {\n        throw new TakaroUserError('Amount must be a positive number.');\n    }\n\n    const moduleId = module.moduleId;\n\n    // Check balance first\n    const variables = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['bankBalance'],\n            gameServerId: [gameServerId],\n            playerId: [pog.playerId],\n            moduleId: [moduleId]\n        }\n    });\n\n    const currentBalance = variables.data.data.length > 0 ? parseInt(variables.data.data[0].value) : 0;\n\n    if (currentBalance < amount) {\n        throw new TakaroUserError(`Insufficient balance. You have ${currentBalance} coins in the bank.`);\n    }\n\n    // Give coins FIRST\n    await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `giveplus \"${player.name}\" casinoCoin ${amount}`\n    });\n\n    // THEN deduct balance\n    const newBalance = currentBalance - amount;\n\n    await takaro.variable.variableControllerUpdate(variables.data.data[0].id, {\n        value: newBalance.toString()\n    });\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `[Bank] Withdrew ${amount} coins. New balance: ${newBalance} coins.`,\n        opts: { recipient: { gameId: pog.gameId } }\n    });\n}\n\nawait main();\n",
+          "name": "withdraw",
+          "description": "Withdraws the specified amount of dukeCasinoCoins from your bank account and places them into your inventory.",
+          "trigger": "withdraw",
+          "helpText": "Withdraw dukeCasinoCoins from your bank account",
+          "arguments": [
+            {
+              "name": "amount",
+              "type": "number",
+              "defaultValue": null,
+              "helpText": "Amount of coins to withdraw",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, pog, module } = data;\n    const moduleId = module.moduleId;\n\n    const variables = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['bankBalance'],\n            gameServerId: [gameServerId],\n            playerId: [pog.playerId],\n            moduleId: [moduleId]\n        }\n    });\n\n    const balance = variables.data.data.length > 0 ? parseInt(variables.data.data[0].value) : 0;\n\n    await takaro.gameserver.gameServerControllerSendMessage(gameServerId, {\n        message: `[Bank] Your balance: ${balance} coins.`,\n        opts: { recipient: { gameId: pog.gameId } }\n    });\n}\n\nawait main();\n",
+          "name": "bankbalance",
+          "description": "Displays your current bank balance.",
+          "trigger": "bankbalance",
+          "helpText": "Check your bank balance",
+          "arguments": []
+        }
+      ],
+      "hooks": [],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [],
+      "shopActions": []
+    }
+  ],
+  "takaroVersion": "0.7.3"
+}

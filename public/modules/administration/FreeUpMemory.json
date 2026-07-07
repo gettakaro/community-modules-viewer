@@ -1,0 +1,27 @@
+{
+  "name": "FreeUpMemory",
+  "author": "Mad",
+  "supportedGames": ["7 days to die"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Use once an hour to free up memory. Note: using more than once an hour can cause lag. ",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [],
+      "hooks": [],
+      "cronJobs": [
+        {
+          "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId } = data;\n\n    //Envoke Garbage Collector to free up memory\n    await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `gc`,\n    });\n}\nawait main();",
+          "name": "freeUpMemory",
+          "description": "Hourly",
+          "temporalValue": "00 * * * *"
+        }
+      ],
+      "functions": [],
+      "permissions": [],
+      "shopActions": []
+    }
+  ],
+  "takaroVersion": "0.7.3"
+}

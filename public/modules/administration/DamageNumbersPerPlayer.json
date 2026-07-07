@@ -1,0 +1,37 @@
+{
+  "name": "DamageNumbersPerPlayer",
+  "author": "Mad",
+  "supportedGames": ["7 days to die"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Per-player toggle for floating damage numbers. Players run /dn to turn their own damage numbers on/off (via PrismaCore eoc + showhits damage). On connect, re-applies for players who have it enabled after a 30s delay. Requires sandbox ShowEnemyDamage set OFF globally.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n  const { pog, gameServerId, module: mod, player } = data;\n\n  const prefix = (await takaro.settings.settingsControllerGetOne('commandPrefix', gameServerId)).data.data.value;\n\n  const existing = await takaro.variable.variableControllerSearch({\n    search: { key: ['dn'] },\n    filters: {\n      gameServerId: [gameServerId],\n      playerId: [pog.playerId],\n      moduleId: [mod.moduleId],\n    },\n  });\n\n  // The client-side command is a toggle; fire it either way.\n  await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n    command: `eoc EOS_${pog.gameId} \"showhits damage\"`,\n  });\n\n  if (existing.data.data.length > 0) {\n    // Was ON -> now OFF: remove the marker variable so it will NOT re-apply on connect.\n    await takaro.variable.variableControllerDelete(existing.data.data[0].id);\n    await player.pm('Damage numbers: OFF');\n  } else {\n    // Was OFF -> now ON: store the marker variable so it re-applies on connect.\n    await takaro.variable.variableControllerCreate({\n      key: 'dn',\n      value: 'on',\n      gameServerId,\n      moduleId: mod.moduleId,\n      playerId: pog.playerId,\n    });\n    await player.pm(`Damage numbers: ON. Run ${prefix}dn again to turn them off.`);\n  }\n}\n\nawait main();\n",
+          "name": "dn",
+          "description": null,
+          "trigger": "dn",
+          "helpText": "Toggle your floating damage numbers on/off.",
+          "arguments": []
+        }
+      ],
+      "hooks": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n  const { pog, gameServerId, module: mod } = data;\n  if (!pog) return;\n\n  // Only re-apply for players who have enabled damage numbers.\n  const existing = await takaro.variable.variableControllerSearch({\n    search: { key: ['dn'] },\n    filters: {\n      gameServerId: [gameServerId],\n      playerId: [pog.playerId],\n      moduleId: [mod.moduleId],\n    },\n  });\n  if (existing.data.data.length === 0) return;\n\n  // Timing is handled by the hook's native 30s delay (set in the install config).\n  await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n    command: `eoc EOS_${pog.gameId} \"showhits damage\"`,\n  });\n}\n\nawait main();\n",
+          "name": "reapply-on-connect",
+          "description": null,
+          "eventType": "player-connected",
+          "regex": ".*"
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [],
+      "shopActions": []
+    }
+  ],
+  "takaroVersion": "0.7.3"
+}
