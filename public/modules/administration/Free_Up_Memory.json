@@ -1,5 +1,5 @@
 {
-  "name": "Free Up Memory",
+  "name": "FreeUpMemory",
   "author": "Mad",
   "supportedGames": ["7 days to die"],
   "versions": [
@@ -13,7 +13,7 @@
       "cronJobs": [
         {
           "function": "import { data, takaro } from '@takaro/helpers';\nasync function main() {\n    const { gameServerId } = data;\n\n    //Envoke Garbage Collector to free up memory\n    await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n        command: `gc`,\n    });\n}\nawait main();",
-          "name": "free up memory",
+          "name": "freeUpMemory",
           "description": "Hourly",
           "temporalValue": "00 * * * *"
         }
