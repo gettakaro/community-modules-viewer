@@ -2,11 +2,11 @@
   "global": [
     {
       "moduleName": "blood-moon-countdown",
-      "category": "administration",
-      "date": "2026-07-08T19:08:21Z",
+      "category": "events",
+      "date": "2026-07-08T21:41:23+02:00",
       "title": "New Module: blood-moon-countdown",
-      "description": "Updated to version latest. Added 2 commands: `bloodmoon`, `day7`. Added 1 function: `blood-moon-helpers`. New configuration options: `hordeIntervalDays`, `firstHordeDay`, `timeConsoleCommand`, `manualCurrentDay`, `allowManualFallbackOnParseFailure`, `parseConsoleTime`, `responseTemplate`, `hordeTodayText`, `daysUntilText`, `parseErrorMessage`, `includeConsoleOutputInLogs`.",
-      "commitHash": "e10ba1f0c310828c6fc8d163f5e6eedd55f0bffd",
+      "description": "Updated to version latest. Added 2 commands: `bloodmoon`, `day7`. Added 1 function: `blood-moon-helpers`. New configuration options: `hordeIntervalDays`, `firstHordeDay`, `timeConsoleCommand`, `responseTemplate`, `hordeTodayText`, `daysUntilText`, `parseErrorMessage`, `includeConsoleOutputInLogs`.",
+      "commitHash": "dda85a0824a523617cba26a92e462aad49fe7ece",
       "isNew": true,
       "details": [
         {
@@ -50,27 +50,6 @@
         {
           "type": "config",
           "action": "added",
-          "name": "manualCurrentDay",
-          "fieldType": "integer",
-          "description": "Manual current day used when parseConsoleTime is disabled, or as fallback when allowManualFallbackOnParseFailure is enabled."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "allowManualFallbackOnParseFailure",
-          "fieldType": "boolean",
-          "description": "When enabled, use manualCurrentDay if the console command fails or cannot be parsed. Leave disabled to avoid stale countdowns when live time lookup breaks."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "parseConsoleTime",
-          "fieldType": "boolean",
-          "description": "When enabled, /bloodmoon and /day7 run the console command and parse the current day. Disable to use manualCurrentDay only."
-        },
-        {
-          "type": "config",
-          "action": "added",
           "name": "responseTemplate",
           "fieldType": "string",
           "description": "Player response template. Supports {currentDay}, {nextHordeDay}, {daysUntil}, {daysUntilText}, {interval}, {firstHordeDay}, and {source}."
@@ -94,7 +73,7 @@
           "action": "added",
           "name": "parseErrorMessage",
           "fieldType": "string",
-          "description": "Player-facing message when console time parsing fails and no manual fallback can be used."
+          "description": "Player-facing message when console time parsing fails."
         },
         {
           "type": "config",
@@ -10432,11 +10411,11 @@
     "blood-moon-countdown": [
       {
         "moduleName": "blood-moon-countdown",
-        "category": "administration",
-        "date": "2026-07-08T19:08:21Z",
+        "category": "events",
+        "date": "2026-07-08T21:41:23+02:00",
         "title": "New Module: blood-moon-countdown",
-        "description": "Updated to version latest. Added 2 commands: `bloodmoon`, `day7`. Added 1 function: `blood-moon-helpers`. New configuration options: `hordeIntervalDays`, `firstHordeDay`, `timeConsoleCommand`, `manualCurrentDay`, `allowManualFallbackOnParseFailure`, `parseConsoleTime`, `responseTemplate`, `hordeTodayText`, `daysUntilText`, `parseErrorMessage`, `includeConsoleOutputInLogs`.",
-        "commitHash": "e10ba1f0c310828c6fc8d163f5e6eedd55f0bffd",
+        "description": "Updated to version latest. Added 2 commands: `bloodmoon`, `day7`. Added 1 function: `blood-moon-helpers`. New configuration options: `hordeIntervalDays`, `firstHordeDay`, `timeConsoleCommand`, `responseTemplate`, `hordeTodayText`, `daysUntilText`, `parseErrorMessage`, `includeConsoleOutputInLogs`.",
+        "commitHash": "dda85a0824a523617cba26a92e462aad49fe7ece",
         "isNew": true,
         "details": [
           {
@@ -10480,27 +10459,6 @@
           {
             "type": "config",
             "action": "added",
-            "name": "manualCurrentDay",
-            "fieldType": "integer",
-            "description": "Manual current day used when parseConsoleTime is disabled, or as fallback when allowManualFallbackOnParseFailure is enabled."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "allowManualFallbackOnParseFailure",
-            "fieldType": "boolean",
-            "description": "When enabled, use manualCurrentDay if the console command fails or cannot be parsed. Leave disabled to avoid stale countdowns when live time lookup breaks."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "parseConsoleTime",
-            "fieldType": "boolean",
-            "description": "When enabled, /bloodmoon and /day7 run the console command and parse the current day. Disable to use manualCurrentDay only."
-          },
-          {
-            "type": "config",
-            "action": "added",
             "name": "responseTemplate",
             "fieldType": "string",
             "description": "Player response template. Supports {currentDay}, {nextHordeDay}, {daysUntil}, {daysUntilText}, {interval}, {firstHordeDay}, and {source}."
@@ -10524,7 +10482,7 @@
             "action": "added",
             "name": "parseErrorMessage",
             "fieldType": "string",
-            "description": "Player-facing message when console time parsing fails and no manual fallback can be used."
+            "description": "Player-facing message when console time parsing fails."
           },
           {
             "type": "config",
@@ -21097,5 +21055,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-08T19:45:46.194Z"
+  "generatedAt": "2026-07-08T20:04:59.865Z"
 }
