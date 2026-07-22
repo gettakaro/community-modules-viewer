@@ -1,6 +1,69 @@
 {
   "global": [
     {
+      "moduleName": "playtime-item-rewards",
+      "category": "economy",
+      "date": "2026-07-22T10:26:06+02:00",
+      "title": "New Module: playtime-item-rewards",
+      "description": "Updated to version latest. Added 1 scheduled task: `grant-playtime-item-rewards`. Added 1 function: `playtime-item-reward-helpers`. New configuration options: `playtimeIntervalMinutes`, `selectionMode`, `rewardMessage`, `items`, `roleOverrides`.",
+      "commitHash": "bcb5ee89a82f7815a2a3b84333460824419ebfbe",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "grant-playtime-item-rewards",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "playtime-item-reward-helpers"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "playtimeIntervalMinutes",
+          "fieldType": "integer",
+          "description": "Accumulated playtime required between reward cycles."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "selectionMode",
+          "fieldType": "string",
+          "description": "Grant at most one passing item or every item whose chance passes."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "rewardMessage",
+          "fieldType": "string",
+          "description": "Broadcast after a successful reward. Supports {playerName}, {playerId}, {gameId}, {items}, {itemCount}, {profileName}, and {intervalMinutes}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "items",
+          "fieldType": "array",
+          "description": "Default item pool."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "roleOverrides",
+          "fieldType": "array",
+          "description": "Reward profile overrides for Takaro roles, including Discord-synced roles."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "discord-7d2d-status-bridge",
       "category": "integration",
       "date": "2026-07-22T10:11:23+02:00",
@@ -10680,6 +10743,71 @@
     }
   ],
   "byModule": {
+    "playtime-item-rewards": [
+      {
+        "moduleName": "playtime-item-rewards",
+        "category": "economy",
+        "date": "2026-07-22T10:26:06+02:00",
+        "title": "New Module: playtime-item-rewards",
+        "description": "Updated to version latest. Added 1 scheduled task: `grant-playtime-item-rewards`. Added 1 function: `playtime-item-reward-helpers`. New configuration options: `playtimeIntervalMinutes`, `selectionMode`, `rewardMessage`, `items`, `roleOverrides`.",
+        "commitHash": "bcb5ee89a82f7815a2a3b84333460824419ebfbe",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "grant-playtime-item-rewards",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "playtime-item-reward-helpers"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playtimeIntervalMinutes",
+            "fieldType": "integer",
+            "description": "Accumulated playtime required between reward cycles."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "selectionMode",
+            "fieldType": "string",
+            "description": "Grant at most one passing item or every item whose chance passes."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "rewardMessage",
+            "fieldType": "string",
+            "description": "Broadcast after a successful reward. Supports {playerName}, {playerId}, {gameId}, {items}, {itemCount}, {profileName}, and {intervalMinutes}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "items",
+            "fieldType": "array",
+            "description": "Default item pool."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "roleOverrides",
+            "fieldType": "array",
+            "description": "Reward profile overrides for Takaro roles, including Discord-synced roles."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "discord-7d2d-status-bridge": [
       {
         "moduleName": "discord-7d2d-status-bridge",
@@ -21601,5 +21729,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-22T08:40:31.713Z"
+  "generatedAt": "2026-07-22T10:47:51.016Z"
 }
