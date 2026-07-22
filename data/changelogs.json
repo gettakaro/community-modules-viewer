@@ -1,6 +1,262 @@
 {
   "global": [
     {
+      "moduleName": "discord-7d2d-status-bridge",
+      "category": "integration",
+      "date": "2026-07-22T10:11:23+02:00",
+      "title": "New Module: discord-7d2d-status-bridge",
+      "description": "Updated to version latest. Added 1 command: `serverstats`. Added 6 hooks: `discordChatRelay` (discord-message), `gameChatRelay` (chat-message), `monitorJoin` (player-connected), `monitorLeave` (player-disconnected), `monitorDeath` (player-death), `monitorServerStatus` (server-status-changed). Added 2 scheduled tasks: `updateStatus`, `bloodMoonMonitor`. Added 1 function: `discord-7d2d-status-helpers`. New configuration options: `language`, `chatChannelId`, `monitoringChannelId`, `relayDiscordToGame`, `relayGameToDiscord`, `monitorJoins`, `monitorLeaves`, `monitorDeaths`, `joinMessageTemplate`, `leaveMessageTemplate`, `deathMessageTemplate`, `deathWithReasonMessageTemplate`, `serverStartingMessageTemplate`, `serverOfflineMessageTemplate`, `emptyPlayerListText`, `unknownPlayerText`, `updateStatusMessage`, `statusTemplate`, `bloodMoonIcon`, `timeConsoleCommand`, `hordeIntervalDays`, `firstHordeDay`, `bloodMoonStartHour`, `bloodMoonEndHour`, `bloodMoonTodayMessage`, `bloodMoonStartingMessage`, `bloodMoonEndingMessage`.",
+      "commitHash": "9ea5021962ec8aae57dede10585046da57ee6904",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "serverstats",
+          "description": "Shows online player count, current day, time, and blood moon indicator."
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "discordChatRelay",
+          "eventType": "discord-message"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "gameChatRelay",
+          "eventType": "chat-message"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorJoin",
+          "eventType": "player-connected"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorLeave",
+          "eventType": "player-disconnected"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorDeath",
+          "eventType": "player-death"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorServerStatus",
+          "eventType": "server-status-changed"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "updateStatus",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "bloodMoonMonitor",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "discord-7d2d-status-helpers"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "language",
+          "fieldType": "string",
+          "description": "Built-in message preset. Any non-empty message override takes precedence."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "chatChannelId",
+          "fieldType": "string",
+          "description": "Discord channel ID for player chat relay."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "monitoringChannelId",
+          "fieldType": "string",
+          "description": "Discord channel ID for system/death/join/leave/blood moon/status messages."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "relayDiscordToGame",
+          "fieldType": "boolean",
+          "description": "Relay messages from the Discord chat channel into game chat."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "relayGameToDiscord",
+          "fieldType": "boolean",
+          "description": "Relay in-game chat messages to the Discord chat channel."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "monitorJoins",
+          "fieldType": "boolean"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "monitorLeaves",
+          "fieldType": "boolean"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "monitorDeaths",
+          "fieldType": "boolean"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "joinMessageTemplate",
+          "fieldType": "string",
+          "description": "Optional join-message override. Placeholder: {player}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "leaveMessageTemplate",
+          "fieldType": "string",
+          "description": "Optional leave-message override. Placeholder: {player}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "deathMessageTemplate",
+          "fieldType": "string",
+          "description": "Optional death-message override. Placeholder: {player}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "deathWithReasonMessageTemplate",
+          "fieldType": "string",
+          "description": "Optional death-message override when a reason is available. Placeholders: {player}, {reason}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "serverStartingMessageTemplate",
+          "fieldType": "string",
+          "description": "Optional server-online message override. Placeholder: {serverName}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "serverOfflineMessageTemplate",
+          "fieldType": "string",
+          "description": "Optional server-offline message override. Placeholder: {serverName}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "emptyPlayerListText",
+          "fieldType": "string",
+          "description": "Optional text shown when no players are online."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "unknownPlayerText",
+          "fieldType": "string",
+          "description": "Optional fallback when an event has no player name."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "updateStatusMessage",
+          "fieldType": "boolean",
+          "description": "Update one persistent bot message with current server status instead of posting a new status every tick."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "statusTemplate",
+          "fieldType": "string",
+          "description": "Optional server-status override. Placeholders: {onlinePlayers}, {playerList}, {day}, {time}, {bloodMoonIcon}, {serverName}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonIcon",
+          "fieldType": "string"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "timeConsoleCommand",
+          "fieldType": "string"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "hordeIntervalDays",
+          "fieldType": "integer"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "firstHordeDay",
+          "fieldType": "integer"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonStartHour",
+          "fieldType": "integer"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonEndHour",
+          "fieldType": "integer"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonTodayMessage",
+          "fieldType": "string",
+          "description": "Optional blood-moon-day message override."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonStartingMessage",
+          "fieldType": "string",
+          "description": "Optional blood-moon-starting message override."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonEndingMessage",
+          "fieldType": "string",
+          "description": "Optional blood-moon-ending message override."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "VotingSystem",
       "category": "community-management",
       "date": "2026-07-08T22:05:38+02:00",
@@ -10424,6 +10680,264 @@
     }
   ],
   "byModule": {
+    "discord-7d2d-status-bridge": [
+      {
+        "moduleName": "discord-7d2d-status-bridge",
+        "category": "integration",
+        "date": "2026-07-22T10:11:23+02:00",
+        "title": "New Module: discord-7d2d-status-bridge",
+        "description": "Updated to version latest. Added 1 command: `serverstats`. Added 6 hooks: `discordChatRelay` (discord-message), `gameChatRelay` (chat-message), `monitorJoin` (player-connected), `monitorLeave` (player-disconnected), `monitorDeath` (player-death), `monitorServerStatus` (server-status-changed). Added 2 scheduled tasks: `updateStatus`, `bloodMoonMonitor`. Added 1 function: `discord-7d2d-status-helpers`. New configuration options: `language`, `chatChannelId`, `monitoringChannelId`, `relayDiscordToGame`, `relayGameToDiscord`, `monitorJoins`, `monitorLeaves`, `monitorDeaths`, `joinMessageTemplate`, `leaveMessageTemplate`, `deathMessageTemplate`, `deathWithReasonMessageTemplate`, `serverStartingMessageTemplate`, `serverOfflineMessageTemplate`, `emptyPlayerListText`, `unknownPlayerText`, `updateStatusMessage`, `statusTemplate`, `bloodMoonIcon`, `timeConsoleCommand`, `hordeIntervalDays`, `firstHordeDay`, `bloodMoonStartHour`, `bloodMoonEndHour`, `bloodMoonTodayMessage`, `bloodMoonStartingMessage`, `bloodMoonEndingMessage`.",
+        "commitHash": "9ea5021962ec8aae57dede10585046da57ee6904",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "serverstats",
+            "description": "Shows online player count, current day, time, and blood moon indicator."
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "discordChatRelay",
+            "eventType": "discord-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "gameChatRelay",
+            "eventType": "chat-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorJoin",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorLeave",
+            "eventType": "player-disconnected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorDeath",
+            "eventType": "player-death"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorServerStatus",
+            "eventType": "server-status-changed"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "updateStatus",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "bloodMoonMonitor",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "discord-7d2d-status-helpers"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "language",
+            "fieldType": "string",
+            "description": "Built-in message preset. Any non-empty message override takes precedence."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "chatChannelId",
+            "fieldType": "string",
+            "description": "Discord channel ID for player chat relay."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitoringChannelId",
+            "fieldType": "string",
+            "description": "Discord channel ID for system/death/join/leave/blood moon/status messages."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "relayDiscordToGame",
+            "fieldType": "boolean",
+            "description": "Relay messages from the Discord chat channel into game chat."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "relayGameToDiscord",
+            "fieldType": "boolean",
+            "description": "Relay in-game chat messages to the Discord chat channel."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitorJoins",
+            "fieldType": "boolean"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitorLeaves",
+            "fieldType": "boolean"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitorDeaths",
+            "fieldType": "boolean"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "joinMessageTemplate",
+            "fieldType": "string",
+            "description": "Optional join-message override. Placeholder: {player}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "leaveMessageTemplate",
+            "fieldType": "string",
+            "description": "Optional leave-message override. Placeholder: {player}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "deathMessageTemplate",
+            "fieldType": "string",
+            "description": "Optional death-message override. Placeholder: {player}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "deathWithReasonMessageTemplate",
+            "fieldType": "string",
+            "description": "Optional death-message override when a reason is available. Placeholders: {player}, {reason}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "serverStartingMessageTemplate",
+            "fieldType": "string",
+            "description": "Optional server-online message override. Placeholder: {serverName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "serverOfflineMessageTemplate",
+            "fieldType": "string",
+            "description": "Optional server-offline message override. Placeholder: {serverName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "emptyPlayerListText",
+            "fieldType": "string",
+            "description": "Optional text shown when no players are online."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "unknownPlayerText",
+            "fieldType": "string",
+            "description": "Optional fallback when an event has no player name."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "updateStatusMessage",
+            "fieldType": "boolean",
+            "description": "Update one persistent bot message with current server status instead of posting a new status every tick."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "statusTemplate",
+            "fieldType": "string",
+            "description": "Optional server-status override. Placeholders: {onlinePlayers}, {playerList}, {day}, {time}, {bloodMoonIcon}, {serverName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonIcon",
+            "fieldType": "string"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "timeConsoleCommand",
+            "fieldType": "string"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "hordeIntervalDays",
+            "fieldType": "integer"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "firstHordeDay",
+            "fieldType": "integer"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonStartHour",
+            "fieldType": "integer"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonEndHour",
+            "fieldType": "integer"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonTodayMessage",
+            "fieldType": "string",
+            "description": "Optional blood-moon-day message override."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonStartingMessage",
+            "fieldType": "string",
+            "description": "Optional blood-moon-starting message override."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonEndingMessage",
+            "fieldType": "string",
+            "description": "Optional blood-moon-ending message override."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "VotingSystem": [
       {
         "moduleName": "VotingSystem",
@@ -21087,5 +21601,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-08T20:33:56.581Z"
+  "generatedAt": "2026-07-22T08:40:31.713Z"
 }
