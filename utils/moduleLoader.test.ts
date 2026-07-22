@@ -10,6 +10,24 @@ import { ModuleWithMeta } from '@/lib/types';
 
 describe('moduleLoader', () => {
   describe('module naming conventions', () => {
+    it('publishes playtime-item-rewards with canonical catalog metadata', () => {
+      const filename = 'playtime-item-rewards';
+      const modulePath = path.join(
+        process.cwd(),
+        'public',
+        'modules',
+        'economy',
+        `${filename}.json`,
+      );
+      const moduleData = JSON.parse(fs.readFileSync(modulePath, 'utf-8'));
+
+      expect(moduleData.name).toBe('playtime-item-rewards');
+      expect(moduleData.name).toBe(
+        path.basename(modulePath, path.extname(modulePath)),
+      );
+      expect(moduleData.versions[0].description.trim()).not.toBe('');
+    });
+
     it('keeps community module filenames and names URL lookup safe', () => {
       const modulesDir = path.join(process.cwd(), 'public', 'modules');
       const unsafePattern = /[^A-Za-z0-9_-]/;
