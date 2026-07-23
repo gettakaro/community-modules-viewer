@@ -26,6 +26,28 @@ describe('moduleLoader', () => {
         path.basename(modulePath, path.extname(modulePath)),
       );
       expect(moduleData.versions[0].description.trim()).not.toBe('');
+
+      const config = JSON.parse(moduleData.versions[0].configSchema);
+      expect(config.properties.playtimeIntervalMaximumMinutes).toMatchObject({
+        type: 'integer',
+        minimum: 1,
+      });
+      expect(
+        config.properties.playtimeIntervalMaximumMinutes.description,
+      ).toMatch(/leave empty.*fixed interval/i);
+      expect(
+        config.properties.roleOverrides.items.properties
+          .playtimeIntervalMaximumMinutes,
+      ).toMatchObject({ type: 'integer', minimum: 1 });
+      expect(config.properties.messageDelivery.enum).toEqual([
+        'broadcast',
+        'private',
+        'both',
+        'off',
+      ]);
+      expect(moduleData.versions[0].functions[0].function).toContain(
+        'eligibleAtPlaytimeSeconds',
+      );
     });
 
     it('keeps community module filenames and names URL lookup safe', () => {
