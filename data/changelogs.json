@@ -1,6 +1,317 @@
 {
   "global": [
     {
+      "moduleName": "playtime-item-rewards",
+      "category": "economy",
+      "date": "2026-07-28T20:53:41Z",
+      "title": "Configuration Updated",
+      "description": "New configuration option: `playtimeRewardDiscordChannelId`.",
+      "commitHash": "a06ceff36a1d92f3c380edc5b072158528f26b57",
+      "isNew": false,
+      "details": [
+        {
+          "type": "config",
+          "action": "added",
+          "name": "playtimeRewardDiscordChannelId",
+          "fieldType": "string",
+          "description": "Optional Discord channel ID where reward notifications will be sent."
+        }
+      ]
+    },
+    {
+      "moduleName": "SVMPersistentStatusAndDiscordBridge",
+      "category": "integration",
+      "date": "2026-07-28T20:53:41Z",
+      "title": "New Module: SVMPersistentStatusAndDiscordBridge",
+      "description": "Updated to version latest. Added 1 command: `serverstats`. Added 6 hooks: `discordChatRelay` (discord-message), `gameChatRelay` (chat-message), `monitorLeave` (player-disconnected), `monitorJoin` (player-connected), `monitorServerStatus` (server-status-changed), `monitorDeath` (player-death). Added 2 scheduled tasks: `bloodMoonMonitor`, `updateStatus`. Added 1 function: `discord-7d2d-status-helpers`. New configuration options: `language`, `discordChannelId`, `chatRelayDiscordChannelId`, `bloodMoonDiscordChannelId`, `relayDiscordToGame`, `relayGameToDiscord`, `playerChatEmoji`, `monitorJoins`, `monitorLeaves`, `monitorDeaths`, `privateBloodMoonNoticeOnFirstJoin`, `timeConsoleCommand`, `firstHordeDay`, `hordeIntervalDays`, `bloodMoonStartHour`, `bloodMoonEndHour`, `bloodMoonIcon`, `statusTemplate`, `joinMessageTemplate`, `leaveMessageTemplate`, `deathMessageTemplate`, `deathWithReasonMessageTemplate`, `bloodMoonTodayMessage`, `privateBloodMoonTodayMessage`, `bloodMoonStartingMessage`, `bloodMoonEndingMessage`, `serverStartingMessageTemplate`, `serverOfflineMessageTemplate`, `emptyPlayerListText`, `unknownPlayerText`, `serverSenderName`.",
+      "commitHash": "a06ceff36a1d92f3c380edc5b072158528f26b57",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "serverstats",
+          "description": "Shows online player count, current day, time, and blood moon indicator."
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "discordChatRelay",
+          "eventType": "discord-message"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "gameChatRelay",
+          "eventType": "chat-message"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorLeave",
+          "eventType": "player-disconnected"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorJoin",
+          "eventType": "player-connected"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorServerStatus",
+          "eventType": "server-status-changed"
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorDeath",
+          "eventType": "player-death"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "bloodMoonMonitor",
+          "schedule": "* * * * *"
+        },
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "updateStatus",
+          "schedule": "* * * * *"
+        },
+        {
+          "type": "function",
+          "action": "added",
+          "name": "discord-7d2d-status-helpers"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "language",
+          "fieldType": "string",
+          "description": "Wybierz domyślny język komunikatów systemowych."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "Numeryczne ID kanału na Discordzie, na którym wyświetlany jest status."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "chatRelayDiscordChannelId",
+          "fieldType": "string",
+          "description": "Numeryczne ID kanału Discord do dwukierunkowego przesyłania czatu z gry."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonDiscordChannelId",
+          "fieldType": "string",
+          "description": "Kanał dla wejść, wyjść, śmierci oraz powiadomień o Krwawym Księżycu."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "relayDiscordToGame",
+          "fieldType": "boolean",
+          "description": "Przesyłaj wiadomości z czatu Discord na czat w grze."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "relayGameToDiscord",
+          "fieldType": "boolean",
+          "description": "Przesyłaj wiadomości z czatu w grze na kanał czatu Discord."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "playerChatEmoji",
+          "fieldType": "string",
+          "description": "Emotka wyświetlana przed nazwą gracza przesyłającego wiadomość z gry."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "monitorJoins",
+          "fieldType": "boolean",
+          "description": "Wysyłaj powiadomienie, gdy gracz dołącza do serwera."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "monitorLeaves",
+          "fieldType": "boolean",
+          "description": "Wysyłaj powiadomienie, gdy gracz opuszcza serwer."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "monitorDeaths",
+          "fieldType": "boolean",
+          "description": "Wysyłaj powiadomienie, gdy gracz zginie."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "privateBloodMoonNoticeOnFirstJoin",
+          "fieldType": "boolean",
+          "description": "Wysyłaj wiadomość prywatną (PM) do pierwszego gracza wchodzącego w dniu hordy."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "timeConsoleCommand",
+          "fieldType": "string",
+          "description": "Komenda konsolowa odczytująca aktualny dzień i godzinę w grze."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "firstHordeDay",
+          "fieldType": "integer",
+          "description": "Numer pierwszego dnia z hordą."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "hordeIntervalDays",
+          "fieldType": "integer",
+          "description": "Odstęp czasowy w dniach między cyklami hord."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonStartHour",
+          "fieldType": "integer",
+          "description": "Godzina w grze (0-23), o której aktywuje się Krwawy Księżyc."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonEndHour",
+          "fieldType": "integer",
+          "description": "Godzina w grze (0-23), o której kończy się noc hordy."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonIcon",
+          "fieldType": "string",
+          "description": "Tekst lub emoji dołączane do statusu podczas aktywnego Krwawego Księżyca."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "statusTemplate",
+          "fieldType": "string",
+          "description": "Szablon wiadomości statusowej. Dostępne znaczniki: {onlinePlayers}, {day}, {time}, {bloodMoonIcon}, {playerList}, {serverName}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "joinMessageTemplate",
+          "fieldType": "string",
+          "description": "Wiadomość wysyłana na kanał monitoringu przy wejściu gracza. Dostępny znacznik: {player}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "leaveMessageTemplate",
+          "fieldType": "string",
+          "description": "Wiadomość wysyłana na kanał monitoringu przy wyjściu gracza. Dostępny znacznik: {player}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "deathMessageTemplate",
+          "fieldType": "string",
+          "description": "Komunikat o śmierci bez podanej przyczyny. Dostępny znacznik: {player}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "deathWithReasonMessageTemplate",
+          "fieldType": "string",
+          "description": "Komunikat o śmierci z podaną przyczyną. Dostępne znaczniki: {player}, {reason}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonTodayMessage",
+          "fieldType": "string",
+          "description": "Ogłoszenie wysyłane w dniu hordy. Dostępny znacznik: {day}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "privateBloodMoonTodayMessage",
+          "fieldType": "string",
+          "description": "Wiadomość PM wysyłana do pierwszego gracza w dniu hordy. Dostępny znacznik: {day}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonStartingMessage",
+          "fieldType": "string",
+          "description": "Powiadomienie w momencie startu hordy."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "bloodMoonEndingMessage",
+          "fieldType": "string",
+          "description": "Powiadomienie po zakończeniu nocy hordy."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "serverStartingMessageTemplate",
+          "fieldType": "string",
+          "description": "Komunikat o uruchamianiu serwera. Dostępny znacznik: {serverName}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "serverOfflineMessageTemplate",
+          "fieldType": "string",
+          "description": "Komunikat o przejściu serwera w stan offline. Dostępny znacznik: {serverName}."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "emptyPlayerListText",
+          "fieldType": "string",
+          "description": "Tekst wyświetlany, gdy nikt nie gra."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "unknownPlayerText",
+          "fieldType": "string",
+          "description": "Zastępcza nazwa gracza."
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "serverSenderName",
+          "fieldType": "string",
+          "description": "Podpis wiadomości systemowych."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "discord-7d2d-status-bridge",
       "category": "integration",
       "date": "2026-07-24T08:30:26+02:00",
@@ -27,31 +338,6 @@
           "name": "privateBloodMoonTodayMessage",
           "fieldType": "string",
           "description": "Optional private first-player Blood Moon notice override. The selected language preset is used when empty."
-        }
-      ]
-    },
-    {
-      "moduleName": "playtime-item-rewards",
-      "category": "economy",
-      "date": "2026-07-23T21:23:18+02:00",
-      "title": "Configuration Updated",
-      "description": "New configuration options: `playtimeIntervalMaximumMinutes`, `messageDelivery`.",
-      "commitHash": "e1f402c827f6d706287d9422dae115a5922930d4",
-      "isNew": false,
-      "details": [
-        {
-          "type": "config",
-          "action": "added",
-          "name": "playtimeIntervalMaximumMinutes",
-          "fieldType": "integer",
-          "description": "Optional maximum reward interval in accumulated playtime minutes. Leave empty or set equal to playtimeIntervalMinutes for a fixed interval; set it higher to choose a random interval per player and reward cycle."
-        },
-        {
-          "type": "config",
-          "action": "added",
-          "name": "messageDelivery",
-          "fieldType": "string",
-          "description": "Where successful reward messages are sent: broadcast to the server, private message only to the rewarded player, both, or off."
         }
       ]
     },
@@ -10798,6 +11084,384 @@
     }
   ],
   "byModule": {
+    "playtime-item-rewards": [
+      {
+        "moduleName": "playtime-item-rewards",
+        "category": "economy",
+        "date": "2026-07-28T20:53:41Z",
+        "title": "Configuration Updated",
+        "description": "New configuration option: `playtimeRewardDiscordChannelId`.",
+        "commitHash": "a06ceff36a1d92f3c380edc5b072158528f26b57",
+        "isNew": false,
+        "details": [
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playtimeRewardDiscordChannelId",
+            "fieldType": "string",
+            "description": "Optional Discord channel ID where reward notifications will be sent."
+          }
+        ]
+      },
+      {
+        "moduleName": "playtime-item-rewards",
+        "category": "economy",
+        "date": "2026-07-22T10:26:06+02:00",
+        "title": "New Module: playtime-item-rewards",
+        "description": "Updated to version latest. Added 1 scheduled task: `grant-playtime-item-rewards`. Added 1 function: `playtime-item-reward-helpers`. New configuration options: `playtimeIntervalMinutes`, `selectionMode`, `rewardMessage`, `items`, `roleOverrides`.",
+        "commitHash": "bcb5ee89a82f7815a2a3b84333460824419ebfbe",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "grant-playtime-item-rewards",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "playtime-item-reward-helpers"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playtimeIntervalMinutes",
+            "fieldType": "integer",
+            "description": "Accumulated playtime required between reward cycles."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "selectionMode",
+            "fieldType": "string",
+            "description": "Grant at most one passing item or every item whose chance passes."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "rewardMessage",
+            "fieldType": "string",
+            "description": "Broadcast after a successful reward. Supports {playerName}, {playerId}, {gameId}, {items}, {itemCount}, {profileName}, and {intervalMinutes}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "items",
+            "fieldType": "array",
+            "description": "Default item pool."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "roleOverrides",
+            "fieldType": "array",
+            "description": "Reward profile overrides for Takaro roles, including Discord-synced roles."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "SVMPersistentStatusAndDiscordBridge": [
+      {
+        "moduleName": "SVMPersistentStatusAndDiscordBridge",
+        "category": "integration",
+        "date": "2026-07-28T20:53:41Z",
+        "title": "New Module: SVMPersistentStatusAndDiscordBridge",
+        "description": "Updated to version latest. Added 1 command: `serverstats`. Added 6 hooks: `discordChatRelay` (discord-message), `gameChatRelay` (chat-message), `monitorLeave` (player-disconnected), `monitorJoin` (player-connected), `monitorServerStatus` (server-status-changed), `monitorDeath` (player-death). Added 2 scheduled tasks: `bloodMoonMonitor`, `updateStatus`. Added 1 function: `discord-7d2d-status-helpers`. New configuration options: `language`, `discordChannelId`, `chatRelayDiscordChannelId`, `bloodMoonDiscordChannelId`, `relayDiscordToGame`, `relayGameToDiscord`, `playerChatEmoji`, `monitorJoins`, `monitorLeaves`, `monitorDeaths`, `privateBloodMoonNoticeOnFirstJoin`, `timeConsoleCommand`, `firstHordeDay`, `hordeIntervalDays`, `bloodMoonStartHour`, `bloodMoonEndHour`, `bloodMoonIcon`, `statusTemplate`, `joinMessageTemplate`, `leaveMessageTemplate`, `deathMessageTemplate`, `deathWithReasonMessageTemplate`, `bloodMoonTodayMessage`, `privateBloodMoonTodayMessage`, `bloodMoonStartingMessage`, `bloodMoonEndingMessage`, `serverStartingMessageTemplate`, `serverOfflineMessageTemplate`, `emptyPlayerListText`, `unknownPlayerText`, `serverSenderName`.",
+        "commitHash": "a06ceff36a1d92f3c380edc5b072158528f26b57",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "serverstats",
+            "description": "Shows online player count, current day, time, and blood moon indicator."
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "discordChatRelay",
+            "eventType": "discord-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "gameChatRelay",
+            "eventType": "chat-message"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorLeave",
+            "eventType": "player-disconnected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorJoin",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorServerStatus",
+            "eventType": "server-status-changed"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorDeath",
+            "eventType": "player-death"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "bloodMoonMonitor",
+            "schedule": "* * * * *"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "updateStatus",
+            "schedule": "* * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "discord-7d2d-status-helpers"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "language",
+            "fieldType": "string",
+            "description": "Wybierz domyślny język komunikatów systemowych."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "Numeryczne ID kanału na Discordzie, na którym wyświetlany jest status."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "chatRelayDiscordChannelId",
+            "fieldType": "string",
+            "description": "Numeryczne ID kanału Discord do dwukierunkowego przesyłania czatu z gry."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonDiscordChannelId",
+            "fieldType": "string",
+            "description": "Kanał dla wejść, wyjść, śmierci oraz powiadomień o Krwawym Księżycu."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "relayDiscordToGame",
+            "fieldType": "boolean",
+            "description": "Przesyłaj wiadomości z czatu Discord na czat w grze."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "relayGameToDiscord",
+            "fieldType": "boolean",
+            "description": "Przesyłaj wiadomości z czatu w grze na kanał czatu Discord."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playerChatEmoji",
+            "fieldType": "string",
+            "description": "Emotka wyświetlana przed nazwą gracza przesyłającego wiadomość z gry."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitorJoins",
+            "fieldType": "boolean",
+            "description": "Wysyłaj powiadomienie, gdy gracz dołącza do serwera."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitorLeaves",
+            "fieldType": "boolean",
+            "description": "Wysyłaj powiadomienie, gdy gracz opuszcza serwer."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "monitorDeaths",
+            "fieldType": "boolean",
+            "description": "Wysyłaj powiadomienie, gdy gracz zginie."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "privateBloodMoonNoticeOnFirstJoin",
+            "fieldType": "boolean",
+            "description": "Wysyłaj wiadomość prywatną (PM) do pierwszego gracza wchodzącego w dniu hordy."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "timeConsoleCommand",
+            "fieldType": "string",
+            "description": "Komenda konsolowa odczytująca aktualny dzień i godzinę w grze."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "firstHordeDay",
+            "fieldType": "integer",
+            "description": "Numer pierwszego dnia z hordą."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "hordeIntervalDays",
+            "fieldType": "integer",
+            "description": "Odstęp czasowy w dniach między cyklami hord."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonStartHour",
+            "fieldType": "integer",
+            "description": "Godzina w grze (0-23), o której aktywuje się Krwawy Księżyc."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonEndHour",
+            "fieldType": "integer",
+            "description": "Godzina w grze (0-23), o której kończy się noc hordy."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonIcon",
+            "fieldType": "string",
+            "description": "Tekst lub emoji dołączane do statusu podczas aktywnego Krwawego Księżyca."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "statusTemplate",
+            "fieldType": "string",
+            "description": "Szablon wiadomości statusowej. Dostępne znaczniki: {onlinePlayers}, {day}, {time}, {bloodMoonIcon}, {playerList}, {serverName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "joinMessageTemplate",
+            "fieldType": "string",
+            "description": "Wiadomość wysyłana na kanał monitoringu przy wejściu gracza. Dostępny znacznik: {player}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "leaveMessageTemplate",
+            "fieldType": "string",
+            "description": "Wiadomość wysyłana na kanał monitoringu przy wyjściu gracza. Dostępny znacznik: {player}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "deathMessageTemplate",
+            "fieldType": "string",
+            "description": "Komunikat o śmierci bez podanej przyczyny. Dostępny znacznik: {player}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "deathWithReasonMessageTemplate",
+            "fieldType": "string",
+            "description": "Komunikat o śmierci z podaną przyczyną. Dostępne znaczniki: {player}, {reason}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonTodayMessage",
+            "fieldType": "string",
+            "description": "Ogłoszenie wysyłane w dniu hordy. Dostępny znacznik: {day}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "privateBloodMoonTodayMessage",
+            "fieldType": "string",
+            "description": "Wiadomość PM wysyłana do pierwszego gracza w dniu hordy. Dostępny znacznik: {day}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonStartingMessage",
+            "fieldType": "string",
+            "description": "Powiadomienie w momencie startu hordy."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "bloodMoonEndingMessage",
+            "fieldType": "string",
+            "description": "Powiadomienie po zakończeniu nocy hordy."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "serverStartingMessageTemplate",
+            "fieldType": "string",
+            "description": "Komunikat o uruchamianiu serwera. Dostępny znacznik: {serverName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "serverOfflineMessageTemplate",
+            "fieldType": "string",
+            "description": "Komunikat o przejściu serwera w stan offline. Dostępny znacznik: {serverName}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "emptyPlayerListText",
+            "fieldType": "string",
+            "description": "Tekst wyświetlany, gdy nikt nie gra."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "unknownPlayerText",
+            "fieldType": "string",
+            "description": "Zastępcza nazwa gracza."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "serverSenderName",
+            "fieldType": "string",
+            "description": "Podpis wiadomości systemowych."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "discord-7d2d-status-bridge": [
       {
         "moduleName": "discord-7d2d-status-bridge",
@@ -11076,96 +11740,6 @@
             "name": "bloodMoonEndingMessage",
             "fieldType": "string",
             "description": "Optional blood-moon-ending message override."
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
-          }
-        ]
-      }
-    ],
-    "playtime-item-rewards": [
-      {
-        "moduleName": "playtime-item-rewards",
-        "category": "economy",
-        "date": "2026-07-23T21:23:18+02:00",
-        "title": "Configuration Updated",
-        "description": "New configuration options: `playtimeIntervalMaximumMinutes`, `messageDelivery`.",
-        "commitHash": "e1f402c827f6d706287d9422dae115a5922930d4",
-        "isNew": false,
-        "details": [
-          {
-            "type": "config",
-            "action": "added",
-            "name": "playtimeIntervalMaximumMinutes",
-            "fieldType": "integer",
-            "description": "Optional maximum reward interval in accumulated playtime minutes. Leave empty or set equal to playtimeIntervalMinutes for a fixed interval; set it higher to choose a random interval per player and reward cycle."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "messageDelivery",
-            "fieldType": "string",
-            "description": "Where successful reward messages are sent: broadcast to the server, private message only to the rewarded player, both, or off."
-          }
-        ]
-      },
-      {
-        "moduleName": "playtime-item-rewards",
-        "category": "economy",
-        "date": "2026-07-22T10:26:06+02:00",
-        "title": "New Module: playtime-item-rewards",
-        "description": "Updated to version latest. Added 1 scheduled task: `grant-playtime-item-rewards`. Added 1 function: `playtime-item-reward-helpers`. New configuration options: `playtimeIntervalMinutes`, `selectionMode`, `rewardMessage`, `items`, `roleOverrides`.",
-        "commitHash": "bcb5ee89a82f7815a2a3b84333460824419ebfbe",
-        "isNew": true,
-        "details": [
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "grant-playtime-item-rewards",
-            "schedule": "*/5 * * * *"
-          },
-          {
-            "type": "function",
-            "action": "added",
-            "name": "playtime-item-reward-helpers"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "playtimeIntervalMinutes",
-            "fieldType": "integer",
-            "description": "Accumulated playtime required between reward cycles."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "selectionMode",
-            "fieldType": "string",
-            "description": "Grant at most one passing item or every item whose chance passes."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "rewardMessage",
-            "fieldType": "string",
-            "description": "Broadcast after a successful reward. Supports {playerName}, {playerId}, {gameId}, {items}, {itemCount}, {profileName}, and {intervalMinutes}."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "items",
-            "fieldType": "array",
-            "description": "Default item pool."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "roleOverrides",
-            "fieldType": "array",
-            "description": "Reward profile overrides for Takaro roles, including Discord-synced roles."
           },
           {
             "type": "version",
@@ -21839,5 +22413,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-24T06:54:52.236Z"
+  "generatedAt": "2026-07-28T20:53:54.576Z"
 }
