@@ -1,7 +1,7 @@
 {
   "takaroVersion": "0.0.0",
   "name": "SVMPersistentStatusAndDiscordBridge",
-  "author": "Unknown",
+  "author": "SVMOTNIK",
   "supportedGames": ["all"],
   "versions": [
     {
