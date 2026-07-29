@@ -1,6 +1,43 @@
 {
   "global": [
     {
+      "moduleName": "Ranking_Sezonowy",
+      "category": "events",
+      "date": "2026-07-29T06:11:21Z",
+      "title": "New Module: Ranking_Sezonowy",
+      "description": "Updated to version latest. Added 1 scheduled task: `updateLeaderboards`. New configuration options: `discordChannelId`, `cronIntervalMinutes`.",
+      "commitHash": "c206a09343e755636bc9d7d7aa3b6f0f9834c064",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "updateLeaderboards",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "cronIntervalMinutes",
+          "fieldType": "integer",
+          "description": "How many playtime minutes to add per leaderboard cron tick. Keep this aligned with the cron schedule."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "SVMPersistentStatusAndDiscordBridge",
       "category": "integration",
       "date": "2026-07-29T05:59:30Z",
@@ -11106,6 +11143,45 @@
     }
   ],
   "byModule": {
+    "Ranking_Sezonowy": [
+      {
+        "moduleName": "Ranking_Sezonowy",
+        "category": "events",
+        "date": "2026-07-29T06:11:21Z",
+        "title": "New Module: Ranking_Sezonowy",
+        "description": "Updated to version latest. Added 1 scheduled task: `updateLeaderboards`. New configuration options: `discordChannelId`, `cronIntervalMinutes`.",
+        "commitHash": "c206a09343e755636bc9d7d7aa3b6f0f9834c064",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "updateLeaderboards",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "cronIntervalMinutes",
+            "fieldType": "integer",
+            "description": "How many playtime minutes to add per leaderboard cron tick. Keep this aligned with the cron schedule."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "SVMPersistentStatusAndDiscordBridge": [
       {
         "moduleName": "SVMPersistentStatusAndDiscordBridge",
@@ -22457,5 +22533,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-29T05:59:31.263Z"
+  "generatedAt": "2026-07-29T06:11:31.396Z"
 }
