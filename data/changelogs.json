@@ -1,6 +1,36 @@
 {
   "global": [
     {
+      "moduleName": "Wykres_Aktywnosci",
+      "category": "events",
+      "date": "2026-07-30T20:56:11Z",
+      "title": "New Module: Wykres_Aktywnosci",
+      "description": "Updated to version latest. Added 1 scheduled task: `uaktualnijWykres`. New configuration option: `discordChannelId`.",
+      "commitHash": "b079ff5c1a3c75a61807dfeec349beec4a67c026",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "uaktualnijWykres",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "Ranking_Sezonowy",
       "category": "events",
       "date": "2026-07-29T06:11:21Z",
@@ -11143,6 +11173,38 @@
     }
   ],
   "byModule": {
+    "Wykres_Aktywnosci": [
+      {
+        "moduleName": "Wykres_Aktywnosci",
+        "category": "events",
+        "date": "2026-07-30T20:56:11Z",
+        "title": "New Module: Wykres_Aktywnosci",
+        "description": "Updated to version latest. Added 1 scheduled task: `uaktualnijWykres`. New configuration option: `discordChannelId`.",
+        "commitHash": "b079ff5c1a3c75a61807dfeec349beec4a67c026",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "uaktualnijWykres",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "Ranking_Sezonowy": [
       {
         "moduleName": "Ranking_Sezonowy",
@@ -22533,5 +22595,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-30T20:46:36.837Z"
+  "generatedAt": "2026-07-30T20:56:12.481Z"
 }
