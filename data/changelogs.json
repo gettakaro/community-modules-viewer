@@ -1,6 +1,65 @@
 {
   "global": [
     {
+      "moduleName": "Ranking_Sezonowy",
+      "category": "events",
+      "date": "2026-07-29T06:11:21Z",
+      "title": "New Module: Ranking_Sezonowy",
+      "description": "Updated to version latest. Added 1 scheduled task: `updateLeaderboards`. New configuration options: `discordChannelId`, `cronIntervalMinutes`.",
+      "commitHash": "c206a09343e755636bc9d7d7aa3b6f0f9834c064",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "updateLeaderboards",
+          "schedule": "*/5 * * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "discordChannelId",
+          "fieldType": "string",
+          "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "cronIntervalMinutes",
+          "fieldType": "integer",
+          "description": "How many playtime minutes to add per leaderboard cron tick. Keep this aligned with the cron schedule."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
+      "moduleName": "SVMPersistentStatusAndDiscordBridge",
+      "category": "integration",
+      "date": "2026-07-29T05:59:30Z",
+      "title": "Updated 2 Hooks",
+      "description": "Added 1 hook: `monitorDeathLog` (log). Updated 1 hook implementation.",
+      "commitHash": "d932e38943a07369a8feb3bdd7c8425d075beb1e",
+      "isNew": false,
+      "details": [
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "monitorDeathLog",
+          "eventType": "log"
+        },
+        {
+          "type": "hook",
+          "action": "updated",
+          "name": "monitorDeath"
+        }
+      ]
+    },
+    {
       "moduleName": "playtime-item-rewards",
       "category": "economy",
       "date": "2026-07-28T20:53:41Z",
@@ -11084,79 +11143,35 @@
     }
   ],
   "byModule": {
-    "playtime-item-rewards": [
+    "Ranking_Sezonowy": [
       {
-        "moduleName": "playtime-item-rewards",
-        "category": "economy",
-        "date": "2026-07-28T20:53:41Z",
-        "title": "Configuration Updated",
-        "description": "New configuration option: `playtimeRewardDiscordChannelId`.",
-        "commitHash": "a06ceff36a1d92f3c380edc5b072158528f26b57",
-        "isNew": false,
-        "details": [
-          {
-            "type": "config",
-            "action": "added",
-            "name": "playtimeRewardDiscordChannelId",
-            "fieldType": "string",
-            "description": "Optional Discord channel ID where reward notifications will be sent."
-          }
-        ]
-      },
-      {
-        "moduleName": "playtime-item-rewards",
-        "category": "economy",
-        "date": "2026-07-22T10:26:06+02:00",
-        "title": "New Module: playtime-item-rewards",
-        "description": "Updated to version latest. Added 1 scheduled task: `grant-playtime-item-rewards`. Added 1 function: `playtime-item-reward-helpers`. New configuration options: `playtimeIntervalMinutes`, `selectionMode`, `rewardMessage`, `items`, `roleOverrides`.",
-        "commitHash": "bcb5ee89a82f7815a2a3b84333460824419ebfbe",
+        "moduleName": "Ranking_Sezonowy",
+        "category": "events",
+        "date": "2026-07-29T06:11:21Z",
+        "title": "New Module: Ranking_Sezonowy",
+        "description": "Updated to version latest. Added 1 scheduled task: `updateLeaderboards`. New configuration options: `discordChannelId`, `cronIntervalMinutes`.",
+        "commitHash": "c206a09343e755636bc9d7d7aa3b6f0f9834c064",
         "isNew": true,
         "details": [
           {
             "type": "cronjob",
             "action": "added",
-            "name": "grant-playtime-item-rewards",
+            "name": "updateLeaderboards",
             "schedule": "*/5 * * * *"
           },
           {
-            "type": "function",
+            "type": "config",
             "action": "added",
-            "name": "playtime-item-reward-helpers"
+            "name": "discordChannelId",
+            "fieldType": "string",
+            "description": "The Discord channel ID where leaderboards will be posted (e.g., 1234567890)"
           },
           {
             "type": "config",
             "action": "added",
-            "name": "playtimeIntervalMinutes",
+            "name": "cronIntervalMinutes",
             "fieldType": "integer",
-            "description": "Accumulated playtime required between reward cycles."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "selectionMode",
-            "fieldType": "string",
-            "description": "Grant at most one passing item or every item whose chance passes."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "rewardMessage",
-            "fieldType": "string",
-            "description": "Broadcast after a successful reward. Supports {playerName}, {playerId}, {gameId}, {items}, {itemCount}, {profileName}, and {intervalMinutes}."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "items",
-            "fieldType": "array",
-            "description": "Default item pool."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "roleOverrides",
-            "fieldType": "array",
-            "description": "Reward profile overrides for Takaro roles, including Discord-synced roles."
+            "description": "How many playtime minutes to add per leaderboard cron tick. Keep this aligned with the cron schedule."
           },
           {
             "type": "version",
@@ -11168,6 +11183,28 @@
       }
     ],
     "SVMPersistentStatusAndDiscordBridge": [
+      {
+        "moduleName": "SVMPersistentStatusAndDiscordBridge",
+        "category": "integration",
+        "date": "2026-07-29T05:59:30Z",
+        "title": "Updated 2 Hooks",
+        "description": "Added 1 hook: `monitorDeathLog` (log). Updated 1 hook implementation.",
+        "commitHash": "d932e38943a07369a8feb3bdd7c8425d075beb1e",
+        "isNew": false,
+        "details": [
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "monitorDeathLog",
+            "eventType": "log"
+          },
+          {
+            "type": "hook",
+            "action": "updated",
+            "name": "monitorDeath"
+          }
+        ]
+      },
       {
         "moduleName": "SVMPersistentStatusAndDiscordBridge",
         "category": "integration",
@@ -11452,6 +11489,89 @@
             "name": "serverSenderName",
             "fieldType": "string",
             "description": "Podpis wiadomości systemowych."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
+    "playtime-item-rewards": [
+      {
+        "moduleName": "playtime-item-rewards",
+        "category": "economy",
+        "date": "2026-07-28T20:53:41Z",
+        "title": "Configuration Updated",
+        "description": "New configuration option: `playtimeRewardDiscordChannelId`.",
+        "commitHash": "a06ceff36a1d92f3c380edc5b072158528f26b57",
+        "isNew": false,
+        "details": [
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playtimeRewardDiscordChannelId",
+            "fieldType": "string",
+            "description": "Optional Discord channel ID where reward notifications will be sent."
+          }
+        ]
+      },
+      {
+        "moduleName": "playtime-item-rewards",
+        "category": "economy",
+        "date": "2026-07-22T10:26:06+02:00",
+        "title": "New Module: playtime-item-rewards",
+        "description": "Updated to version latest. Added 1 scheduled task: `grant-playtime-item-rewards`. Added 1 function: `playtime-item-reward-helpers`. New configuration options: `playtimeIntervalMinutes`, `selectionMode`, `rewardMessage`, `items`, `roleOverrides`.",
+        "commitHash": "bcb5ee89a82f7815a2a3b84333460824419ebfbe",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "grant-playtime-item-rewards",
+            "schedule": "*/5 * * * *"
+          },
+          {
+            "type": "function",
+            "action": "added",
+            "name": "playtime-item-reward-helpers"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "playtimeIntervalMinutes",
+            "fieldType": "integer",
+            "description": "Accumulated playtime required between reward cycles."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "selectionMode",
+            "fieldType": "string",
+            "description": "Grant at most one passing item or every item whose chance passes."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "rewardMessage",
+            "fieldType": "string",
+            "description": "Broadcast after a successful reward. Supports {playerName}, {playerId}, {gameId}, {items}, {itemCount}, {profileName}, and {intervalMinutes}."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "items",
+            "fieldType": "array",
+            "description": "Default item pool."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "roleOverrides",
+            "fieldType": "array",
+            "description": "Reward profile overrides for Takaro roles, including Discord-synced roles."
           },
           {
             "type": "version",
@@ -22413,5 +22533,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-29T05:59:10.986Z"
+  "generatedAt": "2026-07-29T06:21:24.293Z"
 }
