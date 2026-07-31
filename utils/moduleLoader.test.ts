@@ -10,8 +10,8 @@ import { ModuleWithMeta } from '@/lib/types';
 
 describe('moduleLoader', () => {
   describe('module naming conventions', () => {
-    it('publishes playtime-item-rewards with canonical catalog metadata', () => {
-      const filename = 'playtime-item-rewards';
+    it('publishes SVMPlaytimeRewards with canonical catalog metadata', () => {
+      const filename = 'SVMPlaytimeRewards';
       const modulePath = path.join(
         process.cwd(),
         'public',
@@ -21,7 +21,7 @@ describe('moduleLoader', () => {
       );
       const moduleData = JSON.parse(fs.readFileSync(modulePath, 'utf-8'));
 
-      expect(moduleData.name).toBe('playtime-item-rewards');
+      expect(moduleData.name).toBe('SVMPlaytimeRewards');
       expect(moduleData.name).toBe(
         path.basename(modulePath, path.extname(modulePath)),
       );
