@@ -1,6 +1,36 @@
 {
   "global": [
     {
+      "moduleName": "SimpleAFK",
+      "category": "anti-cheat",
+      "date": "2026-08-22T19:39:46Z",
+      "title": "New Module: SimpleAFK",
+      "description": "Updated to version 1.0.1. Added 1 scheduled task: `my-cronjob`. New configuration option: `MinutesAfkBeforeKick`.",
+      "commitHash": "18088dd72d0dbe3bba6f5ed5419b1482814f888d",
+      "isNew": true,
+      "details": [
+        {
+          "type": "cronjob",
+          "action": "added",
+          "name": "my-cronjob",
+          "schedule": "*/2 * * * *"
+        },
+        {
+          "type": "config",
+          "action": "added",
+          "name": "MinutesAfkBeforeKick",
+          "fieldType": "number",
+          "description": "The module will kick a player who does not move (goes idle/afk) for this number of minutes. This is based on real world time, not game time. The default time is 10 minutes, and the minimum that can be set is 2 minutes."
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "1.0.1",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "SVMPlaytimeRewards",
       "category": "economy",
       "date": "2026-07-31T15:50:42Z",
@@ -11340,6 +11370,38 @@
     }
   ],
   "byModule": {
+    "SimpleAFK": [
+      {
+        "moduleName": "SimpleAFK",
+        "category": "anti-cheat",
+        "date": "2026-08-22T19:39:46Z",
+        "title": "New Module: SimpleAFK",
+        "description": "Updated to version 1.0.1. Added 1 scheduled task: `my-cronjob`. New configuration option: `MinutesAfkBeforeKick`.",
+        "commitHash": "18088dd72d0dbe3bba6f5ed5419b1482814f888d",
+        "isNew": true,
+        "details": [
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "my-cronjob",
+            "schedule": "*/2 * * * *"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "MinutesAfkBeforeKick",
+            "fieldType": "number",
+            "description": "The module will kick a player who does not move (goes idle/afk) for this number of minutes. This is based on real world time, not game time. The default time is 10 minutes, and the minimum that can be set is 2 minutes."
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "1.0.1",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "SVMPlaytimeRewards": [
       {
         "moduleName": "SVMPlaytimeRewards",
@@ -22935,5 +22997,5 @@
       }
     ]
   },
-  "generatedAt": "2026-07-31T20:08:49.504Z"
+  "generatedAt": "2026-08-22T19:39:55.950Z"
 }
