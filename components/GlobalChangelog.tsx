@@ -2,7 +2,6 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { ChangelogEntry } from '@/lib/types';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 
@@ -160,7 +159,6 @@ export default function GlobalChangelog({ changes }: GlobalChangelogProps) {
  * Individual changelog card for a single module change
  */
 function ChangelogCard({ change }: { change: ChangelogEntry }) {
-  const router = useRouter();
   const modulePath = `/module/${encodeURIComponent(change.moduleName)}/latest`;
   const formattedDate = new Date(change.date).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -168,48 +166,19 @@ function ChangelogCard({ change }: { change: ChangelogEntry }) {
     day: 'numeric',
   });
 
-  const navigateToModule = () => {
-    router.push(modulePath);
-  };
-
-  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLElement;
-
-    if (target.closest('a, button, input, select, textarea')) {
-      return;
-    }
-
-    navigateToModule();
-  };
-
-  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Enter' && event.key !== ' ') {
-      return;
-    }
-
-    event.preventDefault();
-    navigateToModule();
-  };
-
   return (
-    <div
-      className="card bg-base-200 shadow-sm transition-shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-base-100"
-      onClick={handleCardClick}
-      onKeyDown={handleCardKeyDown}
-      role="link"
-      tabIndex={0}
+    <Link
+      href={modulePath}
+      className="card bg-base-200 text-base-content no-underline shadow-sm transition-shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-base-100"
       aria-label={`View ${change.moduleName} module`}
     >
       <div className="card-body min-w-0 cursor-pointer p-4">
         <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0 flex-1">
             <div className="mb-2 flex min-w-0 flex-wrap items-center gap-2">
-              <Link
-                href={modulePath}
-                className="break-words text-lg font-semibold transition-colors hover:text-primary"
-              >
+              <span className="break-words text-lg font-semibold transition-colors hover:text-primary">
                 {change.moduleName}
-              </Link>
+              </span>
               {change.isNew && (
                 <span className="badge badge-success badge-sm shrink-0">
                   NEW
@@ -231,6 +200,6 @@ function ChangelogCard({ change }: { change: ChangelogEntry }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

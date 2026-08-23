@@ -1,11 +1,8 @@
 import React from 'react';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { useRouter } from 'next/navigation';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import GlobalChangelog from './GlobalChangelog';
 import type { ChangelogEntry } from '@/lib/types';
-
-const push = vi.fn();
 
 const changes: ChangelogEntry[] = [
   {
@@ -21,33 +18,17 @@ const changes: ChangelogEntry[] = [
 ];
 
 describe('GlobalChangelog', () => {
-  beforeEach(() => {
-    push.mockClear();
-    vi.mocked(useRouter).mockReturnValue({
-      push,
-      back: vi.fn(),
-      forward: vi.fn(),
-      refresh: vi.fn(),
-      replace: vi.fn(),
-      prefetch: vi.fn(),
-    });
-  });
-
-  it('makes the full changelog card navigate to the module detail page', () => {
-    render(<GlobalChangelog changes={changes} />);
-
-    fireEvent.click(
-      screen.getByRole('link', { name: 'View Ranking_Sezonowy module' }),
-    );
-
-    expect(push).toHaveBeenCalledWith('/module/Ranking_Sezonowy/latest');
-  });
-
-  it('keeps the module title as a direct link', () => {
+  it('renders each full changelog card as a real module link', () => {
     render(<GlobalChangelog changes={changes} />);
 
     expect(
-      screen.getByRole('link', { name: 'Ranking_Sezonowy' }),
+      screen.getByRole('link', { name: 'View Ranking_Sezonowy module' }),
     ).toHaveAttribute('href', '/module/Ranking_Sezonowy/latest');
+  });
+
+  it('keeps the module title visible inside the linked card', () => {
+    render(<GlobalChangelog changes={changes} />);
+
+    expect(screen.getByText('Ranking_Sezonowy')).toBeInTheDocument();
   });
 });
