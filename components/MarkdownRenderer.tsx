@@ -142,7 +142,7 @@ export function MarkdownRenderer({
           return (
             <code
               {...props}
-              className="px-1.5 py-0.5 rounded bg-takaro-card-hover text-takaro-primary text-sm font-mono"
+              className="break-words px-1.5 py-0.5 rounded bg-takaro-card-hover text-takaro-primary text-sm font-mono"
             >
               {children}
             </code>

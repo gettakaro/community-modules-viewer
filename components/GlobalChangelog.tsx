@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ChangelogEntry } from '@/lib/types';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 
@@ -159,39 +160,73 @@ export default function GlobalChangelog({ changes }: GlobalChangelogProps) {
  * Individual changelog card for a single module change
  */
 function ChangelogCard({ change }: { change: ChangelogEntry }) {
+  const router = useRouter();
+  const modulePath = `/module/${encodeURIComponent(change.moduleName)}/latest`;
   const formattedDate = new Date(change.date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   });
 
+  const navigateToModule = () => {
+    router.push(modulePath);
+  };
+
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+
+    if (target.closest('a, button, input, select, textarea')) {
+      return;
+    }
+
+    navigateToModule();
+  };
+
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    event.preventDefault();
+    navigateToModule();
+  };
+
   return (
-    <div className="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
-      <div className="card-body p-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
+    <div
+      className="card bg-base-200 shadow-sm transition-shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-base-100"
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      role="link"
+      tabIndex={0}
+      aria-label={`View ${change.moduleName} module`}
+    >
+      <div className="card-body min-w-0 cursor-pointer p-4">
+        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0 flex-1">
+            <div className="mb-2 flex min-w-0 flex-wrap items-center gap-2">
               <Link
-                href={`/module/${encodeURIComponent(change.moduleName)}/latest`}
-                className="font-semibold text-lg hover:text-primary transition-colors"
+                href={modulePath}
+                className="break-words text-lg font-semibold transition-colors hover:text-primary"
               >
                 {change.moduleName}
               </Link>
               {change.isNew && (
-                <span className="badge badge-success badge-sm">NEW</span>
+                <span className="badge badge-success badge-sm shrink-0">
+                  NEW
+                </span>
               )}
-              <span className="badge badge-outline badge-sm">
+              <span className="badge badge-outline badge-sm shrink-0">
                 {change.category}
               </span>
             </div>
 
-            <h3 className="font-medium mb-2">{change.title}</h3>
-            <div className="text-sm text-base-content/80">
+            <h3 className="mb-2 break-words font-medium">{change.title}</h3>
+            <div className="min-w-0 overflow-hidden text-sm text-base-content/80">
               <MarkdownRenderer content={change.description} />
             </div>
           </div>
 
-          <div className="text-sm text-base-content/60 whitespace-nowrap">
+          <div className="shrink-0 text-sm text-base-content/60 sm:whitespace-nowrap">
             {formattedDate}
           </div>
         </div>
