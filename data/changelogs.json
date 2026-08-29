@@ -1,6 +1,32 @@
 {
   "global": [
     {
+      "moduleName": "BuffManager",
+      "category": "economy",
+      "date": "2026-08-29T09:53:43Z",
+      "title": "Updated 2 Commands",
+      "description": "Updated 2 command implementations. Updated 1 hook implementation.",
+      "commitHash": "793447a50d59b29f458107aba32592075149fb68",
+      "isNew": false,
+      "details": [
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "buffplayer"
+        },
+        {
+          "type": "command",
+          "action": "updated",
+          "name": "getbuff"
+        },
+        {
+          "type": "hook",
+          "action": "updated",
+          "name": "Auto-Apply Buff Packages"
+        }
+      ]
+    },
+    {
       "moduleName": "SimpleAFK",
       "category": "anti-cheat",
       "date": "2026-08-22T19:39:46Z",
@@ -11370,6 +11396,108 @@
     }
   ],
   "byModule": {
+    "BuffManager": [
+      {
+        "moduleName": "BuffManager",
+        "category": "economy",
+        "date": "2026-08-29T09:53:43Z",
+        "title": "Updated 2 Commands",
+        "description": "Updated 2 command implementations. Updated 1 hook implementation.",
+        "commitHash": "793447a50d59b29f458107aba32592075149fb68",
+        "isNew": false,
+        "details": [
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "buffplayer"
+          },
+          {
+            "type": "command",
+            "action": "updated",
+            "name": "getbuff"
+          },
+          {
+            "type": "hook",
+            "action": "updated",
+            "name": "Auto-Apply Buff Packages"
+          }
+        ]
+      },
+      {
+        "moduleName": "BuffManager",
+        "category": "economy",
+        "date": "2025-10-16T08:45:43+02:00",
+        "title": "New Module: BuffManager",
+        "description": "Updated to version latest. Added 3 commands: `buffplayer`, `debuffplayer`, `getbuff`. Added 1 hook: `Auto-Apply Buff Packages` (player-connected). Added 1 scheduled task: `check Buff Packages`. New permission: `BUFF_ADMIN`. New configuration options: `buffPackages`, `maintenanceEnabled`, `maintenanceInterval`.",
+        "commitHash": "04b689656755a6613de145c38ee76dd736bb5e1a",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "buffplayer",
+            "description": "Admin command to apply a buff package to any player"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "debuffplayer",
+            "description": "Remove buff tracking from a player. If packageName is not specified, removes all buffs. Usage: /debuffplayer <playerName> [packageName]"
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "getbuff",
+            "description": "Apply a buff package to yourself. Use /getbuff <packageName> or just /getbuff to see available packages"
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "Auto-Apply Buff Packages",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "cronjob",
+            "action": "added",
+            "name": "check Buff Packages",
+            "schedule": "* * * * *"
+          },
+          {
+            "type": "permission",
+            "action": "added",
+            "name": "BUFF_ADMIN",
+            "description": "Can manage and apply any buff package"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "buffPackages",
+            "fieldType": "array",
+            "description": "Define unlimited buff packages. Each package can have its own role requirements, duration, and cost."
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maintenanceEnabled",
+            "fieldType": "boolean",
+            "description": "Periodically re-apply active (non-expired) buffs to keep them running"
+          },
+          {
+            "type": "config",
+            "action": "added",
+            "name": "maintenanceInterval",
+            "fieldType": "string",
+            "description": "Cron expression for maintenance frequency (default: every 15 minutes)"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "SimpleAFK": [
       {
         "moduleName": "SimpleAFK",
@@ -15366,82 +15494,6 @@
             "action": "updated",
             "name": "1.0.1",
             "previousVersion": "1.0.0"
-          }
-        ]
-      }
-    ],
-    "BuffManager": [
-      {
-        "moduleName": "BuffManager",
-        "category": "economy",
-        "date": "2025-10-16T08:45:43+02:00",
-        "title": "New Module: BuffManager",
-        "description": "Updated to version latest. Added 3 commands: `buffplayer`, `debuffplayer`, `getbuff`. Added 1 hook: `Auto-Apply Buff Packages` (player-connected). Added 1 scheduled task: `check Buff Packages`. New permission: `BUFF_ADMIN`. New configuration options: `buffPackages`, `maintenanceEnabled`, `maintenanceInterval`.",
-        "commitHash": "04b689656755a6613de145c38ee76dd736bb5e1a",
-        "isNew": true,
-        "details": [
-          {
-            "type": "command",
-            "action": "added",
-            "name": "buffplayer",
-            "description": "Admin command to apply a buff package to any player"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "debuffplayer",
-            "description": "Remove buff tracking from a player. If packageName is not specified, removes all buffs. Usage: /debuffplayer <playerName> [packageName]"
-          },
-          {
-            "type": "command",
-            "action": "added",
-            "name": "getbuff",
-            "description": "Apply a buff package to yourself. Use /getbuff <packageName> or just /getbuff to see available packages"
-          },
-          {
-            "type": "hook",
-            "action": "added",
-            "name": "Auto-Apply Buff Packages",
-            "eventType": "player-connected"
-          },
-          {
-            "type": "cronjob",
-            "action": "added",
-            "name": "check Buff Packages",
-            "schedule": "* * * * *"
-          },
-          {
-            "type": "permission",
-            "action": "added",
-            "name": "BUFF_ADMIN",
-            "description": "Can manage and apply any buff package"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "buffPackages",
-            "fieldType": "array",
-            "description": "Define unlimited buff packages. Each package can have its own role requirements, duration, and cost."
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "maintenanceEnabled",
-            "fieldType": "boolean",
-            "description": "Periodically re-apply active (non-expired) buffs to keep them running"
-          },
-          {
-            "type": "config",
-            "action": "added",
-            "name": "maintenanceInterval",
-            "fieldType": "string",
-            "description": "Cron expression for maintenance frequency (default: every 15 minutes)"
-          },
-          {
-            "type": "version",
-            "action": "updated",
-            "name": "latest",
-            "previousVersion": "initial"
           }
         ]
       }
@@ -22997,5 +23049,5 @@
       }
     ]
   },
-  "generatedAt": "2026-08-22T20:07:00.482Z"
+  "generatedAt": "2026-08-29T09:54:49.944Z"
 }
