@@ -3,10 +3,10 @@
     {
       "moduleName": "BuffManager",
       "category": "economy",
-      "date": "2026-08-29T09:53:43Z",
+      "date": "2026-08-29T19:21:12Z",
       "title": "Updated 2 Commands",
       "description": "Updated 2 command implementations. Updated 1 hook implementation.",
-      "commitHash": "793447a50d59b29f458107aba32592075149fb68",
+      "commitHash": "562945bfcbdaa0f81bc12d6cffb1fe1b2c79cdab",
       "isNew": false,
       "details": [
         {
@@ -11400,10 +11400,10 @@
       {
         "moduleName": "BuffManager",
         "category": "economy",
-        "date": "2026-08-29T09:53:43Z",
+        "date": "2026-08-29T19:21:12Z",
         "title": "Updated 2 Commands",
         "description": "Updated 2 command implementations. Updated 1 hook implementation.",
-        "commitHash": "793447a50d59b29f458107aba32592075149fb68",
+        "commitHash": "562945bfcbdaa0f81bc12d6cffb1fe1b2c79cdab",
         "isNew": false,
         "details": [
           {
@@ -23049,5 +23049,5 @@
       }
     ]
   },
-  "generatedAt": "2026-08-29T12:44:56.870Z"
+  "generatedAt": "2026-08-30T06:00:52.754Z"
 }
