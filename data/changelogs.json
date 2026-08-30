@@ -1,6 +1,41 @@
 {
   "global": [
     {
+      "moduleName": "NameColorAndGradient",
+      "category": "community-management",
+      "date": "2026-08-30T06:55:38Z",
+      "title": "New Module: NameColorAndGradient",
+      "description": "Updated to version latest. Added 2 commands: `setColor`, `setGradient`. Added 1 hook: `loadSavedNameColor` (player-connected).",
+      "commitHash": "9b811d76d0643ceef0f7bc8e2c88f462ad739bb9",
+      "isNew": true,
+      "details": [
+        {
+          "type": "command",
+          "action": "added",
+          "name": "setColor",
+          "description": "Usage: /setcolor <hex>. Example: /setcolor C827F5. Requires a 7D2D server/mod that supports the ocn console command."
+        },
+        {
+          "type": "command",
+          "action": "added",
+          "name": "setGradient",
+          "description": "Usage: /setgradient <hex1> <hex2>. Example: /setgradient C827F5 27F5EE. Requires a 7D2D server/mod that supports the ocn console command."
+        },
+        {
+          "type": "hook",
+          "action": "added",
+          "name": "loadSavedNameColor",
+          "eventType": "player-connected"
+        },
+        {
+          "type": "version",
+          "action": "updated",
+          "name": "latest",
+          "previousVersion": "initial"
+        }
+      ]
+    },
+    {
       "moduleName": "BuffManager",
       "category": "economy",
       "date": "2026-08-29T19:21:12Z",
@@ -11396,6 +11431,43 @@
     }
   ],
   "byModule": {
+    "NameColorAndGradient": [
+      {
+        "moduleName": "NameColorAndGradient",
+        "category": "community-management",
+        "date": "2026-08-30T06:55:38Z",
+        "title": "New Module: NameColorAndGradient",
+        "description": "Updated to version latest. Added 2 commands: `setColor`, `setGradient`. Added 1 hook: `loadSavedNameColor` (player-connected).",
+        "commitHash": "9b811d76d0643ceef0f7bc8e2c88f462ad739bb9",
+        "isNew": true,
+        "details": [
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setColor",
+            "description": "Usage: /setcolor <hex>. Example: /setcolor C827F5. Requires a 7D2D server/mod that supports the ocn console command."
+          },
+          {
+            "type": "command",
+            "action": "added",
+            "name": "setGradient",
+            "description": "Usage: /setgradient <hex1> <hex2>. Example: /setgradient C827F5 27F5EE. Requires a 7D2D server/mod that supports the ocn console command."
+          },
+          {
+            "type": "hook",
+            "action": "added",
+            "name": "loadSavedNameColor",
+            "eventType": "player-connected"
+          },
+          {
+            "type": "version",
+            "action": "updated",
+            "name": "latest",
+            "previousVersion": "initial"
+          }
+        ]
+      }
+    ],
     "BuffManager": [
       {
         "moduleName": "BuffManager",
@@ -23049,5 +23121,5 @@
       }
     ]
   },
-  "generatedAt": "2026-08-30T06:00:52.754Z"
+  "generatedAt": "2026-08-30T06:55:38.994Z"
 }
