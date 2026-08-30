@@ -3,6 +3,22 @@
     {
       "moduleName": "NameColorAndGradient",
       "category": "community-management",
+      "date": "2026-08-30T07:10:40Z",
+      "title": "Hook Update: loadSavedNameColor",
+      "description": "Updated 1 hook implementation.",
+      "commitHash": "6376cd1d38eac0794bd28ea3912902eb24fd57f4",
+      "isNew": false,
+      "details": [
+        {
+          "type": "hook",
+          "action": "updated",
+          "name": "loadSavedNameColor"
+        }
+      ]
+    },
+    {
+      "moduleName": "NameColorAndGradient",
+      "category": "community-management",
       "date": "2026-08-30T06:55:38Z",
       "title": "New Module: NameColorAndGradient",
       "description": "Updated to version latest. Added 2 commands: `setColor`, `setGradient`. Added 1 hook: `loadSavedNameColor` (player-connected).",
@@ -11432,6 +11448,22 @@
   ],
   "byModule": {
     "NameColorAndGradient": [
+      {
+        "moduleName": "NameColorAndGradient",
+        "category": "community-management",
+        "date": "2026-08-30T07:10:40Z",
+        "title": "Hook Update: loadSavedNameColor",
+        "description": "Updated 1 hook implementation.",
+        "commitHash": "6376cd1d38eac0794bd28ea3912902eb24fd57f4",
+        "isNew": false,
+        "details": [
+          {
+            "type": "hook",
+            "action": "updated",
+            "name": "loadSavedNameColor"
+          }
+        ]
+      },
       {
         "moduleName": "NameColorAndGradient",
         "category": "community-management",
@@ -23121,5 +23153,5 @@
       }
     ]
   },
-  "generatedAt": "2026-08-30T06:55:38.994Z"
+  "generatedAt": "2026-08-30T07:10:47.681Z"
 }
