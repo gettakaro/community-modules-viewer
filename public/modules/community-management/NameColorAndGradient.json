@@ -1,0 +1,67 @@
+{
+  "name": "NameColorAndGradient",
+  "author": "Millie",
+  "supportedGames": ["7 days to die"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "# Name Color and Gradient\n\nLets players style their in-game name with a solid hex color or a two-color gradient.\n\nCommands:\n\n- `/setcolor <hex>` applies one solid color, for example `/setcolor C827F5`.\n- `/setgradient <hex1> <hex2>` applies a gradient, for example `/setgradient C827F5 27F5EE`.\n\nChoices are saved per player and reapplied when the player reconnects.\n\n## Compatibility note\n\nThis module sends the `ocn` console command and uses 7 Days to Die color tags. It only works on servers where that command/mod support is available. If the game server rejects `ocn`, the connector misses the reconnect event, or the server strips rich text in a specific context, the color may not apply every time and the player may need to run the command again.\n\n## Screenshots\n\n![Colored player name in chat](/images/millie/name-color-system-chat.webp)\n\n![Gradient applied confirmation](/images/millie/name-color-system-gradient-applied.webp)\n\n![Set gradient command example](/images/millie/name-color-system-setgradient-command.webp)",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\n\nasync function main() {\n    const rawColor = data.arguments.color?.trim();\n\n    if (!rawColor) {\n        throw new TakaroUserError('Usage: /setcolor ff00ff');\n    }\n\n    const color = rawColor.replace(/^#/, '').toUpperCase();\n\n    if (!/^[0-9A-F]{6}$/.test(color)) {\n        throw new TakaroUserError('Invalid color. Use a 6-digit hex code like ff00ff.');\n    }\n\n    const existingVar = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['nameColor'],\n            gameServerId: [data.gameServerId],\n            playerId: [data.player.id],\n            moduleId: [data.module.moduleId]\n        }\n    });\n\n    if (existingVar.data.data.length > 0) {\n        await takaro.variable.variableControllerUpdate(existingVar.data.data[0].id, {\n            value: color\n        });\n    } else {\n        await takaro.variable.variableControllerCreate({\n            key: 'nameColor',\n            value: color,\n            gameServerId: data.gameServerId,\n            playerId: data.player.id,\n            moduleId: data.module.moduleId\n        });\n    }\n\n    // Remove any existing gradient\n    const gradientResult = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['nameGradient'],\n            gameServerId: [data.gameServerId],\n            playerId: [data.player.id],\n            moduleId: [data.module.moduleId]\n        }\n    });\n\n    if (gradientResult.data.data.length > 0) {\n        await takaro.variable.variableControllerUpdate(gradientResult.data.data[0].id, {\n            value: ''\n        });\n    }\n\n    const coloredName = '[' + color + ']' + data.player.name + '[-]';\n\n    // FIX FOR NAMES WITH SPACES\n    const safePlayerName = '\"' + data.player.name.replace(/\"/g, '\\\\\"') + '\"';\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: 'ocn ' + safePlayerName + ' ' + coloredName\n    });\n\n    await data.player.pm(\n        '[FE0288]Color Applied![-]\\n' +\n        '[FFFFFF]#' + color + '[-]\\n' +\n        '[D8B4FE]Your name now stands out.[-]'\n    );\n}\n\nawait main();",
+          "name": "setColor",
+          "description": "Set your in-game name to a solid hex color.",
+          "trigger": "setcolor",
+          "helpText": "Usage: /setcolor <hex>. Example: /setcolor C827F5. Requires a 7D2D server/mod that supports the ocn console command.",
+          "arguments": [
+            {
+              "name": "color",
+              "type": "string",
+              "defaultValue": "",
+              "helpText": "Six-digit hex color, with or without #. Example: C827F5",
+              "position": 0
+            }
+          ]
+        },
+        {
+          "function": "import { takaro, data, TakaroUserError } from '@takaro/helpers';\n\nfunction hexToRgb(hex) {\n    const clean = hex.replace(/^#/, '');\n    return {\n        r: parseInt(clean.substring(0, 2), 16),\n        g: parseInt(clean.substring(2, 4), 16),\n        b: parseInt(clean.substring(4, 6), 16)\n    };\n}\n\nfunction rgbToHex(r, g, b) {\n    return [r, g, b]\n        .map(function (v) {\n            return Math.max(0, Math.min(255, Math.round(v)))\n                .toString(16)\n                .padStart(2, '0');\n        })\n        .join('')\n        .toUpperCase();\n}\n\nfunction interpolateColor(start, end, factor) {\n    const s = hexToRgb(start);\n    const e = hexToRgb(end);\n\n    const r = s.r + (e.r - s.r) * factor;\n    const g = s.g + (e.g - s.g) * factor;\n    const b = s.b + (e.b - s.b) * factor;\n\n    return rgbToHex(r, g, b);\n}\n\nfunction buildGradientName(name, color1, color2) {\n    const chars = name.split('');\n    let result = '';\n\n    if (chars.length === 1) {\n        return '[' + color1 + ']' + chars[0] + '[-]';\n    }\n\n    for (let i = 0; i < chars.length; i++) {\n        const factor = i / (chars.length - 1);\n        const color = interpolateColor(color1, color2, factor);\n\n        // Keep spaces but don't color them\n        if (chars[i] === ' ') {\n            result += ' ';\n        } else {\n            result += '[' + color + ']' + chars[i] + '[-]';\n        }\n    }\n\n    return result;\n}\n\nasync function main() {\n    const rawColor1 = data.arguments.color1 && data.arguments.color1.trim();\n    const rawColor2 = data.arguments.color2 && data.arguments.color2.trim();\n\n    if (!rawColor1 || !rawColor2) {\n        throw new TakaroUserError('Usage: /setgradient ff00ff 00ffff');\n    }\n\n    const color1 = rawColor1.replace(/^#/, '').toUpperCase();\n    const color2 = rawColor2.replace(/^#/, '').toUpperCase();\n\n    if (!/^[0-9A-F]{6}$/.test(color1) || !/^[0-9A-F]{6}$/.test(color2)) {\n        throw new TakaroUserError('Both colors must be 6-digit hex codes like ff00ff');\n    }\n\n    const gradientValue = color1 + ',' + color2;\n\n    const existingVar = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['nameGradient'],\n            gameServerId: [data.gameServerId],\n            playerId: [data.player.id],\n            moduleId: [data.module.moduleId]\n        }\n    });\n\n    if (existingVar.data.data.length > 0) {\n        await takaro.variable.variableControllerUpdate(existingVar.data.data[0].id, {\n            value: gradientValue\n        });\n    } else {\n        await takaro.variable.variableControllerCreate({\n            key: 'nameGradient',\n            value: gradientValue,\n            gameServerId: data.gameServerId,\n            playerId: data.player.id,\n            moduleId: data.module.moduleId\n        });\n    }\n\n    // Clear any solid color if one exists\n    const solidResult = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['nameColor'],\n            gameServerId: [data.gameServerId],\n            playerId: [data.player.id],\n            moduleId: [data.module.moduleId]\n        }\n    });\n\n    if (solidResult.data.data.length > 0) {\n        await takaro.variable.variableControllerUpdate(solidResult.data.data[0].id, {\n            value: ''\n        });\n    }\n\n    const gradientName = buildGradientName(data.player.name, color1, color2);\n\n    // FIX FOR NAMES WITH SPACES\n    const safePlayerName = '\"' + data.player.name.replace(/\"/g, '\\\\\"') + '\"';\n\n    await takaro.gameserver.gameServerControllerExecuteCommand(data.gameServerId, {\n        command: 'ocn ' + safePlayerName + ' ' + gradientName\n    });\n\n    await data.player.pm(\n        '[FE0288]Gradient Applied![-]\\n' +\n        '[FFFFFF]#' + color1 + ' [C77DFF]->[-] #' + color2 + '[-]\\n' +\n        '[D8B4FE]Your name now stands out.[-]'\n    );\n}\n\nawait main();",
+          "name": "setGradient",
+          "description": "Set your in-game name to a two-color gradient.",
+          "trigger": "setgradient",
+          "helpText": "Usage: /setgradient <hex1> <hex2>. Example: /setgradient C827F5 27F5EE. Requires a 7D2D server/mod that supports the ocn console command.",
+          "arguments": [
+            {
+              "name": "color1",
+              "type": "string",
+              "defaultValue": "",
+              "helpText": "Starting six-digit hex color, with or without #.",
+              "position": 0
+            },
+            {
+              "name": "color2",
+              "type": "string",
+              "defaultValue": "",
+              "helpText": "Ending six-digit hex color, with or without #.",
+              "position": 1
+            }
+          ]
+        }
+      ],
+      "hooks": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nfunction hexToRgb(hex) {\n    const clean = hex.replace(/^#/, '');\n    return {\n        r: parseInt(clean.substring(0, 2), 16),\n        g: parseInt(clean.substring(2, 4), 16),\n        b: parseInt(clean.substring(4, 6), 16)\n    };\n}\n\nfunction rgbToHex(r, g, b) {\n    return [r, g, b]\n        .map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0'))\n        .join('')\n        .toUpperCase();\n}\n\nfunction interpolateColor(start, end, factor) {\n    const s = hexToRgb(start);\n    const e = hexToRgb(end);\n\n    const r = s.r + (e.r - s.r) * factor;\n    const g = s.g + (e.g - s.g) * factor;\n    const b = s.b + (e.b - s.b) * factor;\n\n    return rgbToHex(r, g, b);\n}\n\nfunction buildGradientName(name, color1, color2) {\n    const chars = name.split('');\n    let result = '';\n\n    if (chars.length === 1) {\n        return `[${color1}]${chars[0]}[-]`;\n    }\n\n    for (let i = 0; i < chars.length; i++) {\n        const factor = i / (chars.length - 1);\n        const color = interpolateColor(color1, color2, factor);\n        result += `[${color}]${chars[i]}[-]`;\n    }\n\n    return result;\n}\n\nfunction quotePlayerName(name) {\n    return '\"' + String(name).replace(/\"/g, '\\\"') + '\"';\n}\n\nasync function main() {\n    const { gameServerId, player, module: mod } = data;\n\n    const gradientResult = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['nameGradient'],\n            gameServerId: [gameServerId],\n            playerId: [player.id],\n            moduleId: [mod.moduleId]\n        }\n    });\n\n    const savedGradient = gradientResult.data.data[0];\n\n    if (savedGradient && savedGradient.value) {\n        const [color1, color2] = savedGradient.value.split(',');\n\n        if (color1 && color2) {\n            const gradientName = buildGradientName(player.name, color1, color2);\n\n            await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n                command: 'ocn ' + quotePlayerName(player.name) + ' ' + gradientName\n            });\n\n            return;\n        }\n    }\n\n    const colorResult = await takaro.variable.variableControllerSearch({\n        filters: {\n            key: ['nameColor'],\n            gameServerId: [gameServerId],\n            playerId: [player.id],\n            moduleId: [mod.moduleId]\n        }\n    });\n\n    const savedColor = colorResult.data.data[0];\n\n    if (savedColor && savedColor.value) {\n        const coloredName = `[${savedColor.value}]${player.name}[-]`;\n\n        await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, {\n            command: `ocn ${player.name} ${coloredName}`\n        });\n    }\n}\n\nawait main();",
+          "name": "loadSavedNameColor",
+          "description": "Reapplies a saved solid color or gradient when the player connects.",
+          "eventType": "player-connected"
+        }
+      ],
+      "cronJobs": [],
+      "functions": [],
+      "permissions": [],
+      "shopActions": []
+    }
+  ],
+  "takaroVersion": "0.7.4"
+}
