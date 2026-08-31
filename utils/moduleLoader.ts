@@ -462,10 +462,26 @@ export async function getAllModuleVersionPaths(): Promise<
   const paths: Array<{ name: string; version: string }> = [];
 
   for (const module of modules) {
+    let hasLatestAlias = false;
+
     for (const version of module.versions) {
+      if (version.tag === 'latest') {
+        hasLatestAlias = true;
+      }
+
       paths.push({
         name: module.name,
         version: version.tag,
+      });
+    }
+
+    // The public changelog and old external links commonly use /latest.
+    // Export that alias for semantic-versioned modules too, then resolve it
+    // in the route to the first/current version.
+    if (module.versions.length > 0 && !hasLatestAlias) {
+      paths.push({
+        name: module.name,
+        version: 'latest',
       });
     }
   }

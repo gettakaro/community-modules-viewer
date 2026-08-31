@@ -7,7 +7,7 @@ import { ModuleDetails } from '@/components/ModuleDetails';
 import { TakaroContextBanner } from '@/components/TakaroContextBanner';
 import fs from 'fs';
 import path from 'path';
-import { Changelogs, ChangelogsSchema } from '@/lib/types';
+import { Changelogs, ChangelogsSchema, ModuleVersion } from '@/lib/types';
 import { buildModuleJsonLd, buildModuleMetadata } from '@/utils/seo';
 
 interface ModuleVersionPageProps {
@@ -50,9 +50,9 @@ export async function generateMetadata({ params }: ModuleVersionPageProps) {
   const decodedName = decodeURIComponent(name);
   const decodedVersion = decodeURIComponent(version);
   const moduleData = await getModuleByName(decodedName);
-  const moduleVersion = moduleData?.versions.find(
-    (v) => v.tag === decodedVersion,
-  );
+  const moduleVersion = moduleData
+    ? resolveModuleVersion(moduleData.versions, decodedVersion)
+    : null;
 
   if (!moduleData || !moduleVersion) {
     return {
@@ -76,8 +76,10 @@ export default async function ModuleVersionPage({
     notFound();
   }
 
-  const moduleVersion = moduleData.versions.find(
-    (v) => v.tag === decodedVersion,
+  const resolvedModuleData = moduleData;
+  const moduleVersion = resolveModuleVersion(
+    resolvedModuleData.versions,
+    decodedVersion,
   );
 
   if (!moduleVersion) {
@@ -93,15 +95,40 @@ export default async function ModuleVersionPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildModuleJsonLd(moduleData, moduleVersion)),
+          __html: JSON.stringify(
+            buildModuleJsonLd(resolvedModuleData, moduleVersion),
+          ),
         }}
       />
       <TakaroContextBanner />
       <ModuleDetails
-        module={moduleData}
-        selectedVersion={decodedVersion}
+        module={resolvedModuleData}
+        selectedVersion={moduleVersion.tag}
         moduleChanges={moduleChanges}
       />
     </div>
   );
+}
+
+function resolveModuleVersion(
+  versions: ModuleVersion[],
+  requestedVersion: string,
+): ModuleVersion | null {
+  const exactVersion = versions.find(
+    (candidate) => candidate.tag === requestedVersion,
+  );
+
+  if (exactVersion) {
+    return exactVersion;
+  }
+
+  if (requestedVersion === 'latest') {
+    return (
+      versions.find((candidate) => candidate.tag === 'latest') ||
+      versions[0] ||
+      null
+    );
+  }
+
+  return null;
 }
