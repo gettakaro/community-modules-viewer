@@ -272,7 +272,7 @@ export function HomeContent({ modules, changelogs }: HomeContentProps) {
 
           {/* Global Changelog Section */}
           {changelogs && changelogs.global.length > 0 && (
-            <GlobalChangelog changes={changelogs.global} />
+            <GlobalChangelog changes={changelogs.global} modules={modules} />
           )}
         </div>
       </main>
