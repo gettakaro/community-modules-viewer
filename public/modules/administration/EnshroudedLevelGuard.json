@@ -1,0 +1,59 @@
+{
+  "name": "EnshroudedLevelGuard",
+  "author": "Mad",
+  "supportedGames": ["generic"],
+  "versions": [
+    {
+      "tag": "latest",
+      "description": "Kicks players who join the server for the first time with a character above a level limit, and can ping a Discord role about it. Every hour it saves the level of each online regular player; the limit is the average of the three highest saved levels, never below the configured level. Players it kicks, and players an admin lets in, never count toward the limit. Kicked players are kicked again on each join until they come back with a character within the limit or an admin runs levelallow. Needs the Takaro Enshrouded connector with character levels (console commands 'level' and 'levels'). Tip: set the CheckLevelOnJoin hook delay to 15 seconds so the character has loaded.",
+      "configSchema": "{\"$schema\":\"http://json-schema.org/draft-07/schema#\",\"type\":\"object\",\"properties\":{\"autoLimit\":{\"type\":\"boolean\",\"title\":\"Automatic limit\",\"description\":\"The limit is the average of the three highest levels saved from your regular players (updated hourly). Turn off to always use the level below.\",\"default\":true},\"maxLevel\":{\"type\":\"number\",\"title\":\"Minimum level limit\",\"description\":\"The automatic limit never goes below this. With the automatic limit off, this is the limit.\",\"default\":25,\"minimum\":1},\"newPlayerMinutes\":{\"type\":\"number\",\"title\":\"New player window (minutes)\",\"description\":\"A player counts as new while their first join on this server is less than this many minutes ago.\",\"default\":60,\"minimum\":1},\"discordChannelId\":{\"type\":\"string\",\"title\":\"Discord channel\",\"description\":\"Channel ID for the kick notice. Leave empty for no Discord message.\",\"default\":\"\"},\"discordRoleId\":{\"type\":\"string\",\"title\":\"Discord role to ping\",\"description\":\"Role ID mentioned in the kick notice. Leave empty for no ping.\",\"default\":\"\"},\"kickReason\":{\"type\":\"string\",\"title\":\"Kick reason\",\"description\":\"Shown to the kicked player. {max} is the limit.\",\"default\":\"New players are limited to level {max}. Join with a character at or below that level, or ask an admin on Discord.\"}},\"required\":[],\"additionalProperties\":false}",
+      "uiSchema": "{}",
+      "commands": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { pog, gameServerId, module: mod, arguments: args } = data;\n    const target = args.player;\n    const moduleId = mod.moduleId;\n    const name = (await takaro.player.playerControllerGetOne(target.playerId)).data.data.name;\n    const filters = { key: ['levelGuardBlocked'], gameServerId: [gameServerId], playerId: [target.playerId], moduleId: [moduleId] };\n\n    for (const v of (await takaro.variable.variableControllerSearch({ filters })).data.data) {\n        await takaro.variable.variableControllerDelete(v.id);\n    }\n    const allowed = await takaro.variable.variableControllerSearch({ filters: { ...filters, key: ['levelGuardAllowed'] } });\n    if (!allowed.data.data.length) {\n        await takaro.variable.variableControllerCreate({\n            key: 'levelGuardAllowed',\n            value: JSON.stringify({ by: pog.playerId, at: new Date().toISOString() }),\n            gameServerId,\n            playerId: target.playerId,\n            moduleId,\n        });\n    }\n    await pog.pm(`${name} can join now; the level guard skips them from here on.`);\n}\n\nawait main();",
+          "name": "levelallow",
+          "description": null,
+          "trigger": "levelallow",
+          "helpText": "Let a player in that the level guard blocked.",
+          "arguments": [
+            {
+              "name": "player",
+              "type": "player",
+              "defaultValue": null,
+              "helpText": "The blocked player",
+              "position": 0
+            }
+          ]
+        }
+      ],
+      "hooks": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { player, pog, gameServerId, module: mod } = data;\n    const cfg = mod.userConfig;\n    const moduleId = mod.moduleId;\n    const byKey = (key) => ({ filters: { key: [key], gameServerId: [gameServerId], playerId: [player.id], moduleId: [moduleId] } });\n\n    // An admin let this player in with levelallow\n    if ((await takaro.variable.variableControllerSearch(byKey('levelGuardAllowed'))).data.data.length) return;\n\n    const blocked = (await takaro.variable.variableControllerSearch(byKey('levelGuardBlocked'))).data.data[0];\n    const isNew = Date.now() - new Date(pog.createdAt).getTime() < (cfg.newPlayerMinutes ?? 60) * 60000;\n    if (!blocked && !isNew) return;\n\n    // Limit: average of the 3 highest regular-player levels saved by UpdateLevelLimit, else the configured level\n    let maxLevel = cfg.maxLevel ?? 25;\n    let source = 'configured';\n    if (cfg.autoLimit !== false) {\n        const auto = (\n            await takaro.variable.variableControllerSearch({ filters: { key: ['levelGuardLimit'], gameServerId: [gameServerId], moduleId: [moduleId] } })\n        ).data.data.find((v) => !v.playerId);\n        if (auto) {\n            const a = JSON.parse(auto.value);\n            maxLevel = a.limit;\n            source = `average of the top regulars ${a.top.join('/')}`;\n        }\n    }\n\n    // The connector reads the level once the character has spawned; this hook runs after the hook delay (15 s)\n    let level = null;\n    for (let i = 0; i < 6 && level === null; i++) {\n        const res = (await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, { command: `level ${pog.gameId}` })).data.data;\n        const raw = res.rawResult || '';\n        const m = /: level (\\d+)/.exec(raw);\n        if (m) level = Number(m[1]);\n        else if (/not online/.test(raw)) return;\n        else await new Promise((r) => setTimeout(r, 5000));\n    }\n\n    if (level === null && !blocked) {\n        console.log(`level of ${player.name} could not be read; not checked`);\n        return;\n    }\n    if (level !== null && level <= maxLevel) {\n        // A blocked player who comes back with a character within the limit gets in, and the block ends\n        if (blocked) {\n            await takaro.variable.variableControllerDelete(blocked.id);\n            console.log(`${player.name} was blocked and joined with a level ${level} character (limit ${maxLevel}); block removed`);\n        } else {\n            console.log(`${player.name} level ${level} is within ${maxLevel} (${source})`);\n        }\n        return;\n    }\n\n    const reason = (cfg.kickReason || 'New players are limited to level {max}.').replace('{max}', String(maxLevel));\n    await takaro.gameserver.gameServerControllerKickPlayer(gameServerId, player.id, { reason });\n\n    if (blocked) {\n        console.log(`${player.name} is blocked by the level guard and was kicked again`);\n        return;\n    }\n    await takaro.variable.variableControllerCreate({\n        key: 'levelGuardBlocked',\n        value: JSON.stringify({ level, maxLevel, source, at: new Date().toISOString() }),\n        gameServerId,\n        playerId: player.id,\n        moduleId,\n    });\n\n    if (cfg.discordChannelId) {\n        const prefix = (await takaro.settings.settingsControllerGetOne('commandPrefix', gameServerId)).data.data.value;\n        const ping = cfg.discordRoleId ? `<@&${cfg.discordRoleId}> ` : '';\n        await takaro.discord.discordControllerSendMessage(cfg.discordChannelId, {\n            message: `${ping}**${player.name}** was kicked: first time on the server with a level ${level} character (limit ${maxLevel}, ${source}). They get in with a character at or below the limit, or use \\`${prefix}levelallow ${player.name}\\` in game to let them in.`,\n        });\n    }\n}\n\nawait main();",
+          "name": "CheckLevelOnJoin",
+          "description": "Kicks a player new to this server whose character is above the level limit. A kicked player gets in again with a character within the limit, or after levelallow.",
+          "eventType": "player-connected",
+          "regex": ""
+        }
+      ],
+      "cronJobs": [
+        {
+          "function": "import { takaro, data } from '@takaro/helpers';\n\nasync function main() {\n    const { gameServerId, module: mod } = data;\n    const cfg = mod.userConfig;\n    if (cfg.autoLimit === false) return;\n    const moduleId = mod.moduleId;\n    const floor = cfg.maxLevel ?? 25;\n    const newMs = (cfg.newPlayerMinutes ?? 60) * 60000;\n    const vars = async (key, playerId) =>\n        (\n            await takaro.variable.variableControllerSearch({\n                filters: { key: [key], gameServerId: [gameServerId], moduleId: [moduleId], ...(playerId ? { playerId: [playerId] } : {}) },\n                limit: 1000,\n            })\n        ).data.data;\n\n    // 1. Remember the highest level seen of every regular online. Not counted: new players, players the guard\n    //    kicked (blocked), and players an admin let in above the limit with levelallow.\n    const raw = (await takaro.gameserver.gameServerControllerExecuteCommand(gameServerId, { command: 'levels' })).data.data.rawResult || '';\n    for (const m of raw.matchAll(/\\((\\d+)\\): level (\\d+)/g)) {\n        const gameId = m[1];\n        const level = Number(m[2]);\n        const pog = (await takaro.playerOnGameserver.playerOnGameServerControllerSearch({ filters: { gameId: [gameId], gameServerId: [gameServerId] } })).data.data[0];\n        if (!pog || Date.now() - new Date(pog.createdAt).getTime() < newMs) continue;\n        if ((await vars('levelGuardBlocked', pog.playerId)).length) continue;\n        if ((await vars('levelGuardAllowed', pog.playerId)).length) continue;\n        const seen = (await vars('levelGuardLevel', pog.playerId))[0];\n        if (!seen) {\n            await takaro.variable.variableControllerCreate({ key: 'levelGuardLevel', value: String(level), gameServerId, playerId: pog.playerId, moduleId });\n        } else if (level > Number(seen.value)) {\n            await takaro.variable.variableControllerUpdate(seen.id, { value: String(level) });\n        }\n    }\n\n    // 2. Limit = average of the three highest levels saved, never below the configured level\n    const saved = (await vars('levelGuardLevel')).map((v) => Number(v.value)).filter((l) => l > 0).sort((a, b) => b - a);\n    if (!saved.length) {\n        console.log('no regular player levels saved yet; limit unchanged');\n        return;\n    }\n    const top = saved.slice(0, 3);\n    const limit = Math.max(floor, Math.round(top.reduce((s, l) => s + l, 0) / top.length));\n    const value = JSON.stringify({ limit, top, at: new Date().toISOString() });\n    const existing = (await vars('levelGuardLimit')).find((v) => !v.playerId);\n    if (existing) await takaro.variable.variableControllerUpdate(existing.id, { value });\n    else await takaro.variable.variableControllerCreate({ key: 'levelGuardLimit', value, gameServerId, moduleId });\n    console.log(`level limit for new players: ${limit} (top saved levels ${top.join(', ')}, floor ${floor})`);\n}\n\nawait main();",
+          "name": "UpdateLevelLimit",
+          "description": "Every hour: saves the level of each online regular player, then sets the limit for new players to the average of the three highest saved levels (never below the configured level).",
+          "temporalValue": "0 * * * *"
+        }
+      ],
+      "functions": [],
+      "permissions": [
+        {
+          "canHaveCount": false,
+          "description": "Can let a blocked high-level player in with levelallow.",
+          "permission": "LEVEL_GUARD_MANAGE",
+          "friendlyName": "Level Guard admin"
+        }
+      ],
+      "shopActions": []
+    }
+  ],
+  "takaroVersion": "0.7.5"
+}
